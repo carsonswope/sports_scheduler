@@ -11,6 +11,8 @@
 
 class Team < ActiveRecord::Base
 
+  include Available
+
   belongs_to :owner,
     class_name: 'User',
     dependent: :destroy
@@ -27,8 +29,5 @@ class Team < ActiveRecord::Base
   has_many :events_as_t_2,
     foreign_key: :t_2_id,
     class_name: 'Team'
-
-  has_many :specific_availabilities, as: :specific_available
-  has_many :general_availabilities,  as: :general_available
 
 end

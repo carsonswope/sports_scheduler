@@ -8,10 +8,10 @@
 #  t_1_id             :integer
 #  t_2_id             :integer
 #  facility_id        :integer          not null
-#  date               :date
-#  start_time         :json
-#  duration           :json
 #  owner_id           :integer          not null
+#  date               :string
+#  start_time         :string
+#  duration           :string
 #
 
 class Event < ActiveRecord::Base
@@ -28,5 +28,16 @@ class Event < ActiveRecord::Base
   belongs_to :t_2,
     foreign_key: :t_2_id,
     class_name: 'Team'
+
+
+  def participating_teams
+    Team.find_by_sql(<<-SQL)
+      SELECT *
+      FROM teams
+      WHERE
+        teams.id = #{self.t_2_id} OR
+        teams.id = #{self.t_1_id}
+    SQL
+  end
 
 end

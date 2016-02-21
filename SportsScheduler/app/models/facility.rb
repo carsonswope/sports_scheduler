@@ -11,6 +11,8 @@
 
 class Facility < ActiveRecord::Base
 
+  include Available
+
   belongs_to :owner,
     class_name: 'User',
     dependent: :destroy
@@ -21,8 +23,5 @@ class Facility < ActiveRecord::Base
     source: :league
 
   has_many :events
-
-  has_many :specific_availabilities, as: :specific_available
-  has_many :general_availabilities,  as: :general_available
 
 end

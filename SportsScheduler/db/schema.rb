@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221195015) do
+ActiveRecord::Schema.define(version: 20160221213719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20160221195015) do
   create_table "general_availabilities", force: :cascade do |t|
     t.text     "notes"
     t.boolean  "positive"
-    t.string   "day_of_week",            null: false
     t.string   "first_date",             null: false
     t.string   "last_date",              null: false
     t.string   "time_start",             null: false
@@ -55,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160221195015) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "general_available_type"
+    t.integer  "day_of_week"
   end
 
   add_index "general_availabilities", ["general_available_id"], name: "index_general_availabilities_on_general_available_id", using: :btree
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 20160221195015) do
     t.string   "time_start",              null: false
     t.string   "time_end",                null: false
     t.integer  "specific_available_id",   null: false
-    t.integer  "specific_available_type", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "specific_available_type"
   end
 
   add_index "specific_availabilities", ["specific_available_id"], name: "index_specific_availabilities_on_specific_available_id", using: :btree
