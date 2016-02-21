@@ -72,7 +72,7 @@
 
 .day-view-end-time{
   position: absolute;
-  bottom: -7px;
+  bottom: -8px;
   width: 70px;
   text-align: right;
   right: 0px;
@@ -89,14 +89,14 @@
   text-align: center;
   white-space: nowrap;
   box-sizing: border-box;
-  font-style: italic;
 }
 
 .day-view-event{
   background-color: #F0F8FF;
   box-sizing: border-box;
-  border: 2px solid #777;
+  border: 2px solid #9DB198;
   border-radius: 6px;
+  z-index: -1;
 }
 
 .day-view-event-mouseover-detail{
@@ -104,15 +104,16 @@
   padding: 0;
   width: 70px;
   text-align: right;
+  z-index: 2;
 }
 
 .day-view-event:hover {
-  background-color: #B0E0E6;
+  background-color: #E7D8BB;
 }
 
 .day-view-event:hover .day-view-event-mouseover-detail{
   display: block;
-  color: #999;
+  color: #9DB198;
 }
 
 .block-beneath {
@@ -124,6 +125,6 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 2px solid #777;
+  border-top: 3px solid #9DB198;
   padding: 0;
 }

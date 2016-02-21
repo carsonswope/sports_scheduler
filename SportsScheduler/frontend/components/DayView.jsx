@@ -65,7 +65,8 @@ var DayView = React.createClass({
           position: 'absolute',
           top: (startPosOfEvent*100).toString() + "%",
           height: (heightOfEvent*100).toString() + "%",
-          width:'100%'
+          width:'100%',
+          zIndex: 0
         };
 
         var timeMarkers = [];
@@ -84,7 +85,7 @@ var DayView = React.createClass({
               <div className="day-view-event-mouseover-detail block-beneath"
                 style={{
                   position: 'absolute',
-                  top: -12,
+                  top: -14,
                   left: -(bubbleIn + (width*i)),
                 }} key={2}>
                 {DateHelper.timeAsString(event.startTime)}
@@ -99,7 +100,7 @@ var DayView = React.createClass({
             <hr className='day-view-event-mouseover-detail'
               style={{
                 width: ((width) * this.props.viewInfo.facilities.length) + 8,
-                bottom: -3,
+                bottom: -4,
                 left: -(6 + width*i)
               }}
               key={3} />);
@@ -108,7 +109,7 @@ var DayView = React.createClass({
               <div className="day-view-event-mouseover-detail block-beneath"
                 style={{
                   position: 'absolute',
-                  bottom: -10,
+                  bottom: -8,
                   left: -(bubbleIn + (width*i)),
                 }}
                 key={4}>
@@ -176,14 +177,17 @@ var DayView = React.createClass({
               <hr style={{
                   bottom: '35%',
                   width: outerDims.width - (bubbleIn + 8),
-                  left: bubbleIn}} key={1}/>
+                  left: bubbleIn,
+                  zIndex: 1 }}
+                key={1}/>
                 {bubbleIn > 10 ? DateHelper.timeAsString(this.props.viewInfo.startTime) : "-"}
             </div>
             <div className='day-view-end-time'>
               <hr style={{
                   bottom: '35%',
                   width: outerDims.width - (bubbleIn + 8),
-                  left: (bubbleIn)}} key={2}/>
+                  left: (bubbleIn),
+                  zIndex: 1 }} key={2}/>
               {bubbleIn > 10 ? DateHelper.timeAsString(this.props.viewInfo.endTime) : "-"}
             </div>
             {fieldInfo}

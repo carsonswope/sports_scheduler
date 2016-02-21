@@ -11,33 +11,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220235246) do
+ActiveRecord::Schema.define(version: 20160221183346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "events", force: :cascade do |t|
+    t.integer "league_id",          null: false
+    t.integer "num_teams_involved", null: false
+    t.integer "t_1_id"
+    t.integer "t_2_id"
+    t.integer "facility_id",        null: false
+    t.date    "date"
+    t.json    "start_time"
+    t.json    "duration"
+    t.integer "owner_id",           null: false
+  end
+
+  add_index "events", ["date"], name: "index_events_on_date", using: :btree
+  add_index "events", ["facility_id"], name: "index_events_on_facility_id", using: :btree
+  add_index "events", ["league_id"], name: "index_events_on_league_id", using: :btree
+  add_index "events", ["owner_id"], name: "index_events_on_owner_id", using: :btree
+  add_index "events", ["t_1_id"], name: "index_events_on_t_1_id", using: :btree
+  add_index "events", ["t_2_id"], name: "index_events_on_t_2_id", using: :btree
+
   create_table "facilities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id",   null: false
+    t.string   "name",       null: false
   end
+
+  add_index "facilities", ["owner_id"], name: "index_facilities_on_owner_id", using: :btree
+
+  create_table "league_facility_memberships", force: :cascade do |t|
+    t.integer  "facility_id", null: false
+    t.integer  "league_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "league_facility_memberships", ["facility_id"], name: "index_league_facility_memberships_on_facility_id", using: :btree
+  add_index "league_facility_memberships", ["league_id", "facility_id"], name: "index_league_facility_memberships_on_league_id_and_facility_id", unique: true, using: :btree
 
   create_table "league_team_memberships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "league_id",  null: false
+    t.integer  "team_id",    null: false
   end
+
+  add_index "league_team_memberships", ["league_id"], name: "index_league_team_memberships_on_league_id", using: :btree
+  add_index "league_team_memberships", ["team_id", "league_id"], name: "index_league_team_memberships_on_team_id_and_league_id", unique: true, using: :btree
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id",   null: false
   end
 
   add_index "leagues", ["name"], name: "index_leagues_on_name", unique: true, using: :btree
+  add_index "leagues", ["owner_id"], name: "index_leagues_on_owner_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id",   null: false
+    t.string   "name",       null: false
   end
+
+  add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
+  add_index "teams", ["owner_id"], name: "index_teams_on_owner_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
