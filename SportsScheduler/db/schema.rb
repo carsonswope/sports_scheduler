@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221185940) do
+ActiveRecord::Schema.define(version: 20160221195015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,22 @@ ActiveRecord::Schema.define(version: 20160221185940) do
 
   add_index "facilities", ["owner_id"], name: "index_facilities_on_owner_id", using: :btree
 
+  create_table "general_availabilities", force: :cascade do |t|
+    t.text     "notes"
+    t.boolean  "positive"
+    t.string   "day_of_week",            null: false
+    t.string   "first_date",             null: false
+    t.string   "last_date",              null: false
+    t.string   "time_start",             null: false
+    t.string   "time_end",               null: false
+    t.integer  "general_available_id",   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "general_available_type"
+  end
+
+  add_index "general_availabilities", ["general_available_id"], name: "index_general_availabilities_on_general_available_id", using: :btree
+
   create_table "league_facility_memberships", force: :cascade do |t|
     t.integer  "facility_id", null: false
     t.integer  "league_id",   null: false
@@ -72,6 +88,20 @@ ActiveRecord::Schema.define(version: 20160221185940) do
 
   add_index "leagues", ["name"], name: "index_leagues_on_name", unique: true, using: :btree
   add_index "leagues", ["owner_id"], name: "index_leagues_on_owner_id", using: :btree
+
+  create_table "specific_availabilities", force: :cascade do |t|
+    t.text     "notes"
+    t.boolean  "positive"
+    t.string   "date",                    null: false
+    t.string   "time_start",              null: false
+    t.string   "time_end",                null: false
+    t.integer  "specific_available_id",   null: false
+    t.integer  "specific_available_type", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "specific_availabilities", ["specific_available_id"], name: "index_specific_availabilities_on_specific_available_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false
