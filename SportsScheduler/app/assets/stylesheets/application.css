@@ -13,3 +13,117 @@
  *= require_tree .
  *= require_self
  */
+
+ * {
+   font-size: 400;
+   font-family: 'Lato', sans-serif;
+   padding: 0;
+   margin: 0;
+ }
+
+.day-view {
+
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+
+}
+
+.day-view-header {
+
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  height: 15px;
+}
+
+.day-view-main {
+  /*margin: 5px;*/
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.day-view-footer{
+  display: block;
+  margin: 5px;
+  height: 10px;
+}
+
+.day-view-main-time{
+  position: relative;
+  width: 70px;
+  height: 100%;
+  font-size: 15px;
+  white-space: nowrap;
+  background-color: white;
+  /*margin-right: 10px;*/
+}
+
+.day-view-start-time{
+  position: absolute;
+  top: -9px;
+  width: 70px;
+  text-align: right;
+}
+
+.day-view-end-time{
+  position: absolute;
+  bottom: -7px;
+  width: 70px;
+  text-align: right;
+  right: 0px;
+}
+
+.day-view-field{
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.day-view-field-label{
+  position: absolute;
+  font-size: 15px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  font-style: italic;
+}
+
+.day-view-event{
+  background-color: #F0F8FF;
+  box-sizing: border-box;
+  border: 2px solid #777;
+  border-radius: 6px;
+}
+
+.day-view-event-mouseover-detail{
+  display: none;
+  padding: 0;
+  width: 70px;
+  text-align: right;
+}
+
+.day-view-event:hover {
+  background-color: #B0E0E6;
+}
+
+.day-view-event:hover .day-view-event-mouseover-detail{
+  display: block;
+  color: #999;
+}
+
+.block-beneath {
+  background-color: white;
+}
+
+hr {
+  position: absolute;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 2px solid #777;
+  padding: 0;
+}
