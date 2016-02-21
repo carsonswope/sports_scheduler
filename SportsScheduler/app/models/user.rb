@@ -12,6 +12,11 @@
 
 class User < ActiveRecord::Base
 
+  has_many :teams,       foreign_key: :owner_id
+  has_many :events,      foreign_key: :owner_id
+  has_many :leagues,     foreign_key: :owner_id
+  has_many :facilities,  foreign_key: :owner_id
+
   attr_reader :password
 
   validates :username, :password_digest, :session_token, presence: true

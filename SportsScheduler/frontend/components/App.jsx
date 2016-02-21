@@ -106,7 +106,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <DayView viewInfo={viewInfo} w={100} h={200}/>
+        <DayView viewInfo={viewInfo} w={100} h={150}/>
         <DayView viewInfo={viewInfo} w={250} h={300}/>
         <DayView viewInfo={viewInfo} w={400} h={300}/>
       </div>

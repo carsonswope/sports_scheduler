@@ -12,8 +12,8 @@
 class Team < ActiveRecord::Base
 
   belongs_to :owner,
-    foreign_key: :owner_id,
-    class_name: 'User'
+    class_name: 'User',
+    dependent: :destroy
 
   has_many :league_team_memberships
   has_many :leagues,

@@ -11,9 +11,13 @@
 #  date               :date
 #  start_time         :json
 #  duration           :json
+#  owner_id           :integer          not null
 #
 
 class Event < ActiveRecord::Base
+
+  belongs_to :owner,
+    class_name: 'User'
 
   belongs_to :facility
   belongs_to :league

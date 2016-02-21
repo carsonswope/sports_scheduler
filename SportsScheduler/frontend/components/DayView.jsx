@@ -26,7 +26,13 @@ var DayView = React.createClass({
       height: this.props.h
     };
 
-    var mainDims = { height: this.props.h - 80 };
+    if (fieldLabeling) {
+      var mainDims = { height: this.props.h - 80 };
+    } else {
+      var mainDims = { height: this.props.h - 50 };
+    }
+
+
 
     var startMinuteOfWindow =
       ((this.props.viewInfo.startTime.hrs * 60) + (this.props.viewInfo.startTime.mns));
