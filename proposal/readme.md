@@ -14,6 +14,8 @@ SportsScheduler is a web application built using Ruby on Rails and React. Users 
 - [ ] schedule events which belong to a league, involve at most 2 teams, and take place on a facility(field)
 - [ ] export schedules (fetched by facilily, league, team, etc) as json (to feed a 3rd party front end), as excel, or as a simple dedicated html page
 
+## Documents
+
 [views]: ./wireframes
 [components]: ./react-components.md
 [stores]: ./flux-stores.md
@@ -77,4 +79,4 @@ SportsScheduler is a web application built using Ruby on Rails and React. Users 
 
 ### Bonus features
 
-- [ ] automatically generate schedules
+- [ ] automatically generate schedules  
