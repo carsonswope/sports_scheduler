@@ -1,3 +1,5 @@
+```ruby
+
 create_table "events" do |t|
   t.integer "league_id",          null: false,  indexed
   t.integer "num_teams_involved", null: false,  indexed
@@ -207,3 +209,5 @@ module Available
     has_many :general_availabilities, as: :general_available
   end
 end
+
+```
