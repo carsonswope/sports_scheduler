@@ -1,5 +1,9 @@
 var React = require('react');
 var DayView = require('./DayView');
+var Calendar = require('./Calendar');
+
+var FacilityStore = require('../stores/FacilityStore.js')
+var FacilityActions = require('../actions/FacilityActions.js')
 
 var viewInfo = {
 
@@ -103,12 +107,31 @@ var viewInfo = {
 
 var App = React.createClass({
 
+  getInitialState: function() {
+    return {
+      facilities: FacilityStore.all()
+    }
+  },
+
+  componentDidMount: function() {
+    this.facilityListener = FacilityStore.addListener(
+      this.facilityChange
+    );
+    FacilityActions.fetch();
+  },
+
+  facilityChange: function() {
+    this.setState({
+      facilities: FacilityStore.all()
+    });
+
+    this.forceUpdate();
+  },
+
   render: function() {
     return (
       <div>
-        <DayView viewInfo={viewInfo} w={100} h={150}/>
-        <DayView viewInfo={viewInfo} w={250} h={300}/>
-        <DayView viewInfo={viewInfo} w={400} h={300}/>
+        <Calendar facilities={this.state.facilities}/>
       </div>
     );
   }

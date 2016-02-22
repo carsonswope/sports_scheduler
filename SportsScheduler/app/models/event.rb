@@ -47,6 +47,14 @@ class Event < ActiveRecord::Base
     start_time_plus_duration(self.start_time, self.duration)
   end
 
+  def time_start_j
+    to_time(self.start_time)
+  end
+
+  def time_end_j
+    to_time(time_end)
+  end
+
 
 
 end

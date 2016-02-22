@@ -1,13 +1,14 @@
 var React = require('react');
 var DateHelper = require('../util/DateHelper');
+var DateConstants = require('../constants/DateConstants');
+
 
 var DayView = React.createClass({
 
     render: function() {
 
-
-    var minTimeRange = (this.props.viewInfo.facilities.length) * 100;
-    var minFieldLabelRange = (this.props.viewInfo.facilities.length) * 80;
+    var minTimeRange = (this.props.facilities.length) * 100;
+    var minFieldLabelRange = (this.props.facilities.length) * 60;
 
     if (this.props.w < minTimeRange) {
       bubbleIn = 5;
@@ -42,9 +43,9 @@ var DayView = React.createClass({
       startMinuteOfWindow
 
     var width = (this.props.w - (bubbleIn+10))/
-      (this.props.viewInfo.facilities.length);
+      (this.props.facilities.length);
 
-    var fieldInfo = this.props.viewInfo.facilities.map(function(field, i){
+    var fieldInfo = this.props.facilities.map(function(field, i){
 
       var fieldWidth ={
         width: width,
@@ -52,7 +53,9 @@ var DayView = React.createClass({
         height: '100%'
       }
 
-      var events = field.events.map(function(event, j){
+      var events = field.events.filter(function(event){
+        return DateHelper.sameDate(event.date, this.props.date);
+      }, this).map(function(event, j){
 
         var startMinuteOfEvent =
           ((event.startTime.hrs * 60) + (event.startTime.mns));
@@ -81,7 +84,7 @@ var DayView = React.createClass({
           timeMarkers.push(
             <hr className='day-view-event-mouseover-detail'
               style={{
-                width: ((width) * this.props.viewInfo.facilities.length) + 8,
+                width: ((width) * this.props.facilities.length) + 8,
                 top: -4   ,
                 left: -(6 + width*i)
               }}
@@ -105,7 +108,7 @@ var DayView = React.createClass({
           timeMarkers.push(
             <hr className='day-view-event-mouseover-detail'
               style={{
-                width: ((width) * this.props.viewInfo.facilities.length) + 8,
+                width: ((width) * this.props.facilities.length) + 8,
                 bottom: -4,
                 left: -(6 + width*i)
               }}
@@ -131,7 +134,7 @@ var DayView = React.createClass({
           </div>
         )
 
-      }, this)
+      }, this);
 
       return(
 
@@ -143,7 +146,7 @@ var DayView = React.createClass({
 
     }, this);
 
-    var fieldLabels = this.props.viewInfo.facilities.map(function(field, i){
+    var fieldLabels = this.props.facilities.map(function(field, i){
 
       var positionInfo = {
         width: width,
@@ -160,13 +163,13 @@ var DayView = React.createClass({
 
     var dateString;
 
-    if (fieldLabeling) {
-      dateString = this.props.viewInfo.date.toDateString();
+    if (!fieldLabeling) {
+      dateString = (this.props.date.getUTCMonth() + 1) + "/" +
+      this.props.date.getDate();
     } else {
-      dateString = "" +
-        (this.props.viewInfo.date.getUTCMonth() + 1).toString() + "/" +
-        (this.props.viewInfo.date.getDate()) + "/" +
-        this.props.viewInfo.date.getFullYear().toString().substring(2,4);
+      dateString = DateConstants.DAYS_OF_WEEK[this.props.date.getDay()]+ " " +
+        (this.props.date.getUTCMonth() + 1).toString() + "/" +
+        (this.props.date.getDate());
     }
 
 

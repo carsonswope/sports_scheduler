@@ -67,3 +67,15 @@ Event.create(
   start_time: '1915',
   duration: '50'
 )
+
+Event.create(
+  owner_id: u.id,
+  league_id: l.id,
+  num_teams_involved: 2,
+  t_1_id: t1.id,
+  t_2_id: t2.id,
+  facility_id: f1.id,
+  date: '7/5/2016',
+  start_time: '2005',
+  duration: '50'
+)

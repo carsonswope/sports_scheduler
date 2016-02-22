@@ -12,3 +12,12 @@ exports.timeAsString = function(time){
   return hours + ":" + minutes + type;
 
 }
+
+exports.sameDate = function(dateString, jsDate) {
+  var d1 = new Date(Date.parse(dateString));
+  return (
+    d1.getDate() === jsDate.getDate() &&
+    d1.getMonth() === jsDate.getMonth() &&
+    d1.getYear() === jsDate.getYear()
+  );
+}
