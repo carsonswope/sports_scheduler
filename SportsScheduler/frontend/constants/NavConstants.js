@@ -1,6 +1,10 @@
 exports.tabs = {
   HOME: 'HOME',
-  TEAMS: 'TEAMS'
+  WEBPAGE: 'WEBPAGE',
+  TEAMS: 'TEAMS',
+  LEAGUES: 'LEAGUES',
+  FACILITIES: 'FACILITIES',
+  SCHEDULES: 'SCHEDULES'
 };
 
 exports.actions = {
