@@ -1,0 +1,36 @@
+.header-main {
+  border: 4px solid green;
+  border-radius: 5px;
+  height: 100px;
+  margin: 2px;
+}
+
+.header-component {
+  border: 4px solid blue;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 10px;
+  height: 80px;
+}
+
+.header-logo {
+  width: 200px;
+  position: relative;
+  float: left;
+}
+
+.header-user {
+  margin: 10px;
+  width: 200px;
+  border: 4px solid blue;
+  position: relative;
+  float: right;
+}
+
+.header-center {
+  margin: 0 auto;
+  top: 10px;
+  width: 200px;
+  position: relative;
+  text-align: center;
+}

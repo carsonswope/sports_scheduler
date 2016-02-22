@@ -1,31 +1,32 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var Store = require('flux/utils').Store;
 var FacilityConstants = require('../constants/FacilityConstants');
+var UserConstants = require('../constants/UserConstants');
 
 var FacilityStore = new Store(AppDispatcher);
 
 var _facilities = {};
 
 FacilityStore.all = function() {
-
-
   return Object.keys(_facilities).map(function(i){
     return _facilities[i];
   });
-
 }
 
 FacilityStore.find = function(id) {
   return _facilities[id];
 }
 
-
 FacilityStore.resetFacilitiesList = function(facilities){
-
   _facilities = {};
-  facilities.forEach(function(facility){
-    _facilities[facility.id] = facility;
-  });
+
+  if (facilities[0]){
+    facilities.forEach(function(facility){
+      _facilities[facility.id] = facility;
+    });
+  } else {
+    _facilities = {};
+  }
 
   FacilityStore.__emitChange();
 }

@@ -1,0 +1,20 @@
+.navbar-main {
+  border: 4px solid red;
+  border-radius: 5px;
+  margin: 2px;
+  width: 216px;
+  height: 100px;
+  display: inline-block;
+  position: relative;
+  float: left;
+}
+
+.navbar-option {
+
+  border: 4px solid purple;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  height: 35px;
+
+}
