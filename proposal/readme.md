@@ -16,10 +16,15 @@ SportsScheduler is a web application built using Ruby on Rails and React. Users 
 
 ## Documents
 
+[Views][views]
 [views]: ./wireframes
+[Components][components]
 [components]: ./react-components.md
+[Stores][stores]
 [stores]: ./flux-stores.md
+[API endpoints][API endpoints]
 [API endpoints]: ./api-endpoints.md
+[DB Schema][DB Schema]
 [DB Schema]: ./db-schema.md
 
 ## Implementation Timeline
