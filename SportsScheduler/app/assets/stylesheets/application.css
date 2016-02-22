@@ -24,8 +24,9 @@
 .day-view {
 
   display: inline-block;
-  border: 2px solid #9DB198;
+  border: 3px solid #9DB198;
   border-radius: 4px;
+  margin: -1px;
   box-sizing: border-box;
   position: relative;
 

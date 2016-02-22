@@ -9,9 +9,9 @@
 #  time_start              :string           not null
 #  time_end                :string           not null
 #  specific_available_id   :integer          not null
-#  specific_available_type :integer          not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  specific_available_type :string
 #
 
 class SpecificAvailability < ActiveRecord::Base

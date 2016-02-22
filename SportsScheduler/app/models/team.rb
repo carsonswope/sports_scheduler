@@ -30,4 +30,29 @@ class Team < ActiveRecord::Base
     foreign_key: :t_2_id,
     class_name: 'Team'
 
+  def events
+    Event.find_by_sql(<<-SQL)
+      SELECT *
+      FROM events
+      WHERE
+        events.t_1_id = #{self.id} OR
+        events.t_2_id = #{self.id}
+    SQL
+  end
+
+  def save_league_memberships(league_ids)
+    memberships = league_ids.map do |league_id|
+      LeagueTeamMembership.new(
+        team_id: self.id,
+        league_id: league_id
+      )
+    end
+
+    LeagueTeamMembership.transaction do
+      memberships.each do |m|
+        m.save
+      end
+    end
+  end
+
 end

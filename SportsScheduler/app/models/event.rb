@@ -14,7 +14,10 @@
 #  duration           :string
 #
 
+
 class Event < ActiveRecord::Base
+
+  include TimeTools
 
   belongs_to :owner,
     class_name: 'User'
@@ -39,5 +42,11 @@ class Event < ActiveRecord::Base
         teams.id = #{self.t_1_id}
     SQL
   end
+
+  def time_end
+    start_time_plus_duration(self.start_time, self.duration)
+  end
+
+
 
 end

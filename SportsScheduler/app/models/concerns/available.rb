@@ -1,6 +1,7 @@
 module Available
 
   extend ActiveSupport::Concern
+  include TimeTools
 
   included do
     has_many :specific_availabilities, as: :specific_available
@@ -10,7 +11,6 @@ module Available
   def save_availabilities(specific, general)
 
     to_save = []
-    debugger
 
     specific.each do |specific_availability|
       a = SpecificAvailability.new(specific_availability)
@@ -95,49 +95,16 @@ module Available
         new_end = time_spaceship(minus_start_time, orig_end_time) > 0 ?
            orig_end_time : minus_start_time
 
-        segments.push(
-          {
-            date: otherwise_available_slot[:date],
-            time_start: to_string(orig_start_time),
-            time_end: to_string(new_end)
-          }
-        )
+        segments.push({
+          date: otherwise_available_slot[:date],
+          time_start: to_string(orig_start_time),
+          time_end: to_string(new_end)
+        })
       end
 
       segments
     else
       otherwise_available_slot
-    end
-
-  end
-
-  def to_time(time_string)
-    {
-      hrs: time_string[0..1].to_i,
-      mns: time_string[2..3].to_i
-    }
-  end
-
-  def to_string(time_obj)
-
-    new_end = time_obj[:mns].to_s
-    while new_end.length < 2
-      new_end = "0" + new_end
-    end
-
-    time_obj[:hrs].to_s + new_end
-
-  end
-
-  def time_spaceship(time_1, time_2)
-
-    case time_1[:hrs] <=> time_2[:hrs]
-    when -1
-      return -1
-    when 0
-      return time_1[:mns] <=> time_2[:mns]
-    when 1
-      return 1
     end
 
   end

@@ -29,5 +29,34 @@ class League < ActiveRecord::Base
     through: :league_team_memberships,
     source: :team
 
+  def save_facility_memberships(facility_ids)
+    memberships = facility_ids.map do |facility_id|
+      LeagueFacilityMembership.new(
+        league_id: self.id,
+        facility_id: facility_id
+      )
+    end
+
+    LeagueFacilityMembership.transaction do
+      memberships.each do |m|
+        m.save
+      end
+    end
+  end
+
+  def save_team_memberships(team_ids)
+    memberships = team_ids.map do |team_id|
+      LeagueTeamMembership.new(
+        league_id: self.id,
+        team_id: team_id
+      )
+    end
+
+    LeagueTeamMembership.transaction do
+      memberships.each do |m|
+        m.save
+      end
+    end
+  end
 
 end
