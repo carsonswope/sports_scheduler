@@ -28,6 +28,7 @@ var NavTab = React.createClass({
     }
 
     var expandButton = null;
+
     if (this.props.selectedTab === this.props.name && this.props.tabOptions) {
       var text = this.state.expanded ? '-' : '+';
       expandButton =(
@@ -37,6 +38,9 @@ var NavTab = React.createClass({
       )
     }
 
+    options = this.state.expanded ? <this.props.tabOptions /> : null
+
+
     var name=(
       <div className="navbar-tab-title">
         {this.props.screenName}
@@ -45,10 +49,12 @@ var NavTab = React.createClass({
 
 
     return (
-
-      <div className={className} onClick={this.handleClick}>
-        {expandButton}
-        {name}
+      <div>
+        <div className={className} onClick={this.handleClick}>
+          {expandButton}
+          {name}
+        </div>
+        {options}
       </div>
     );
   }

@@ -3,10 +3,10 @@ var TeamsOptions = require('../components/navigation/TeamsOptions.jsx');
 exports.tabs = {
   HOME: 'HOME',
   WEBPAGE: 'WEBPAGE',
+  SCHEDULES: 'SCHEDULES',
   TEAMS: 'TEAMS',
   LEAGUES: 'LEAGUES',
-  FACILITIES: 'FACILITIES',
-  SCHEDULES: 'SCHEDULES'
+  FACILITIES: 'FACILITIES'
 };
 
 exports.actions = {
