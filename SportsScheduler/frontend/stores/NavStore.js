@@ -6,12 +6,14 @@ var NavStore = new Store(AppDispatcher);
 
 var _currentTab = NavConstants.tabs.HOME;
 
+var _options = NavConstants.DEFAULT_OPTIONS;
+
 NavStore.currentTab = function() {
   return _currentTab;
 }
 
 NavStore.setTab = function(tab) {
-  _currentTab = tab;
+    _currentTab = tab;
   NavStore.__emitChange();
 }
 

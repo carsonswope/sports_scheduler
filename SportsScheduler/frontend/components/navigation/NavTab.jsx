@@ -1,11 +1,30 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var ExpandButton = require('./ExpandButton');
+var OptionsTab = require('./OptionsTab');
+var NavStore = require('../../stores/NavStore');
 
 var NavTab = React.createClass({
 
   getInitialState: function(){
     return {expanded: false};
+  },
+
+  componentDidMount: function(){
+    this.navListener = NavStore.addListener(this.changeNav)
+  },
+
+  componentWillUnmount: function(){
+    this.navListener.remove();
+  },
+
+  changeNav: function(){
+    if (NavStore.currentTab() !== this.props.name){
+      this.setState({expanded: false});
+    } else if (this.props.tabOptions) {
+
+      this.setState({expanded: true});
+    }
   },
 
   handleClick: function(e){
@@ -38,7 +57,7 @@ var NavTab = React.createClass({
       )
     }
 
-    options = this.state.expanded ? <this.props.tabOptions /> : null
+    options = this.state.expanded ? <OptionsTab name={this.props.name} /> : null
 
 
     var name=(

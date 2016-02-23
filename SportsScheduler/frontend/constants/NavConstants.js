@@ -1,4 +1,8 @@
 var TeamsOptions = require('../components/navigation/TeamsOptions.jsx');
+var LeaguesOptions = require('../components/navigation/LeaguesOptions.jsx');
+var SchedulesOptions = require('../components/navigation/SchedulesOptions.jsx');
+var FacilitiesOptions = require('../components/navigation/FacilitiesOptions.jsx');
+
 
 exports.tabs = {
   HOME: 'HOME',
@@ -17,9 +21,9 @@ exports.TAB_OPTIONS = {
   HOME: undefined,
   WEBPAGE: undefined,
   TEAMS: TeamsOptions,
-  LEAGUES: undefined,
-  FACILITIES: undefined,
-  SCHEDULES: undefined
+  LEAGUES: LeaguesOptions,
+  FACILITIES: FacilitiesOptions,
+  SCHEDULES: SchedulesOptions
 };
 
 exports.SCREEN_NAMES = {
@@ -29,4 +33,47 @@ exports.SCREEN_NAMES = {
   LEAGUES: 'Leagues',
   FACILITIES: 'Facilities',
   SCHEDULES: 'Schedules'
+}
+
+exports.DEFAULT_OPTIONS = {
+  HOME: {
+
+
+  },
+
+  WEBPAGE: {
+
+
+  },
+
+  TEAMS: {
+    teamsList: 'ALL',
+    nameSearch: '',
+    adding: false
+  },
+
+  LEAGUES: {
+    leaguesList: 'ALL',
+    nameSearch: '',
+    adding: false,
+    dateStart: null,
+    dateEnd: null
+  },
+
+  FACILITIES: {
+    facilitiesList: 'ALL',
+    nameSearch: '',
+    adding: false
+  },
+
+  SCHEDULES: {
+    eventsList: 'ALL',
+    nameSearch: '',
+    adding: false,
+    dateStart: null,
+    dateEnd: null,
+    teamsList: 'ALL',
+    leaguesList: 'ALL',
+    facilitiesList: 'ALL'
+  }
 }

@@ -1,11 +1,16 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 
 var OptionsTab = React.createClass({
 
   render: function() {
+
+    this.props.name
+
     return (
-      <div />
+      <div className="navbar-expanded"
+        style={{height: 135}}>
+        <div onClick={this.clicked}> options {this.props.name}</div>
+      </div>
     );
   }
 
