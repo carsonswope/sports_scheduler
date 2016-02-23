@@ -19,7 +19,7 @@ NavStore.options = function(tab){
 NavStore.setTabOption = function(option){
   _options[option.tab][option.category] = option.newValue;
   NavStore.__emitChange();
-}
+};
 
 NavStore.reset = function() {
   _currentTab = NavConstants.tabs.HOME;

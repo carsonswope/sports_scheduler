@@ -1,0 +1,26 @@
+.new-page-header{
+  border-bottom: 4px solid #aaa;
+  margin-right: 25px;
+  margin-left: 25px;
+  height: 45px;
+}
+
+.new-page-title{
+  font-size: 25px;
+  position: relative;
+  top: 18px;
+}
+
+.new-page-cancel-button{
+  position: absolute;
+  font-size: 25px;
+  right: 25px;
+  top: 18px;
+  text-align: center;
+  width: 30px;
+}
+
+.new-page-cancel-button:hover{
+  color: #aaa;
+  z-index: 4;
+}

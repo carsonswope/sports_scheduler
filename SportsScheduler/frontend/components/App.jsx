@@ -8,6 +8,9 @@ var Content = require('./Content');
 var NavStore = require('../stores/NavStore');
 
 var UserStore = require('../stores/UserStore');
+
+var LeagueTeamStore = require('../stores/LeagueTeamStore');
+
 var UserActions = require('../actions/UserActions');
 
 var App = React.createClass({
