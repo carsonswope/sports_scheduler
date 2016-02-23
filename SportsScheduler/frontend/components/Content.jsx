@@ -28,7 +28,7 @@ var Content = React.createClass({
 
   },
 
-  componentDidDismount: function() {
+  componentWillUnmount: function() {
     this.navListener.remove();
   },
 

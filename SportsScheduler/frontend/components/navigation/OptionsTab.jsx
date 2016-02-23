@@ -1,16 +1,18 @@
 var React = require('react');
+var NavConstants = require('../../constants/NavConstants');
 
 var OptionsTab = React.createClass({
 
+  getInitialState: function(){
+    return { toRender: NavConstants.TAB_OPTIONS[this.props.name] };
+  },
+
   render: function() {
 
-    this.props.name
+    var ToRender = this.state.toRender;
 
     return (
-      <div className="navbar-expanded"
-        style={{height: 135}}>
-        <div onClick={this.clicked}> options {this.props.name}</div>
-      </div>
+      <ToRender />
     );
   }
 

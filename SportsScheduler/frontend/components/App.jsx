@@ -1,12 +1,11 @@
 var React = require('react');
-var DayView = require('./DayView');
-var Calendar = require('./Calendar');
+// var DayView = require('./DayView');
+// var Calendar = require('./Calendar');
 var Header = require('./Header');
 var NavBar = require('./NavBar');
 var Content = require('./Content');
 
-var FacilityStore = require('../stores/FacilityStore.js');
-var FacilityActions = require('../actions/FacilityActions.js');
+var NavStore = require('../stores/NavStore');
 
 var UserStore = require('../stores/UserStore');
 var UserActions = require('../actions/UserActions');
@@ -15,7 +14,6 @@ var App = React.createClass({
 
   getInitialState: function() {
     return {
-      facilities: [],
 
       dimensions: {
         width: window.innerWidth,
@@ -24,23 +22,17 @@ var App = React.createClass({
 
       user: UserStore.currentUser()
 
-    }
+    };
   },
 
   componentDidMount: function() {
-
     $(window).on('resize', this.resizeWindow);
 
-    this.facilityListener =
-      FacilityStore.addListener( this.facilityChange );
-
     this.userListener = UserStore.addListener(this.userChange);
-
     UserActions.getCurrentUser();
   },
 
   componentWillUnmount: function() {
-    this.facilityListener.remove();
     this.userListener.remove();
   },
 
@@ -53,18 +45,14 @@ var App = React.createClass({
     });
   },
 
-  facilityChange: function() {
-    this.setState({
-      facilities: FacilityStore.all()
-    });
-  },
-
   userChange: function() {
     this.setState({ user: UserStore.currentUser() });
+    if (!this.state.user) { NavStore.reset(); }
   },
 
   render: function() {
 
+    var header = <Header dims={this.state.dimensions} user={this.state.user} />;
     var navbar = this.state.user ?
       <NavBar dims={this.state.dimensions} /> : null;
     var content = this.state.user ?
@@ -72,7 +60,7 @@ var App = React.createClass({
 
     return (
       <div>
-        <Header dims={this.state.dimensions} user={this.state.user} />
+        {header}
         {navbar}
         {content}
     </div>

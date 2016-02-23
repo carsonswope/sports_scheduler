@@ -42,6 +42,7 @@
   top: 7px;
   position: absolute;
   left: 35px;
+  font-size: 18px;
   /* http://stackoverflow.com/questions/6900124/how-to-make-certain-text-not-selectable-with-css */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -58,4 +59,45 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.navbar-options-search-icon{
+  position: absolute;
+  width: 22px;
+  height: 20px;
+  margin: 5px;
+  margin-top: 10px;
+}
+
+.navbar-options-search-box{
+  position: absolute;
+  left: 32px;
+  top: 7px;
+  margin: auto;
+  border: 0px;
+  outline: none;
+  font-size: 17px;
+  width: 125px;
+  border-bottom: 3px solid black;
+  z-index: 4;
+}
+
+.navbar-options-search-box :hover{
+
+}
+
+.navbar-options-clear-icon{
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  font-size: 22px;
+  color: #777;
+}
+
+.navbar-options-clear-icon:hover{
+  color: black;
+}
+
+.navbar-options-search-bar{
+  position: relative;
 }
