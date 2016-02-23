@@ -14,6 +14,7 @@
 
   border: 4px solid #D8BFD8;
   border-radius: 5px;
+  position: relative;
   margin: 10px;
   text-align: center;
   height: 35px;
@@ -22,4 +23,25 @@
 
 .navbar-current {
   border: 4px solid black;
+}
+
+.navbar-expanded {
+  height: 135px;
+}
+
+.navbar-tab-title {
+  margin: auto;
+  top: 7px;
+  position: absolute;
+  left: 35px;
+
+
+}
+
+.navbar-expand-button {
+  position: absolute;
+  right: 5px;
+  top: -2px;
+  font-size: 30px;
+  color: #777;
 }

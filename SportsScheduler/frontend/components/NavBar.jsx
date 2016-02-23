@@ -5,12 +5,6 @@ var NavStore = require('../stores/NavStore');
 var NavConstants = require('../constants/NavConstants');
 
 
-var Home = require('./navigation/Home');
-var Facilities = require('./navigation/Facilities');
-var Schedules = require('./navigation/Schedules');
-var Leagues = require('./navigation/Leagues');
-var Teams = require('./navigation/Teams');
-var Webpage = require('./navigation/Webpage');
 var NavTab = require('./navigation/NavTab');
 
 var NavBar = React.createClass({
