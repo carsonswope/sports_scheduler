@@ -2,6 +2,7 @@ var React = require('react');
 
 var NavActions = require('../actions/NavActions');
 var NavStore = require('../stores/NavStore');
+var NavConstants = require('../constants/NavConstants');
 
 
 var Home = require('./navigation/Home');
@@ -10,6 +11,7 @@ var Schedules = require('./navigation/Schedules');
 var Leagues = require('./navigation/Leagues');
 var Teams = require('./navigation/Teams');
 var Webpage = require('./navigation/Webpage');
+var NavTab = require('./navigation/NavTab');
 
 var NavBar = React.createClass({
 
@@ -36,19 +38,29 @@ var NavBar = React.createClass({
   },
 
   render: function() {
+
+    var tabs = Object.keys(NavConstants.tabs).map(function(tab, i){
+      return(
+
+        <NavTab
+          screenName={NavConstants.SCREEN_NAMES[tab]}
+          name={NavConstants.tabs[tab]}
+          key={i}
+          setTab={this.setTab}
+          selectedTab={this.state.tab}
+          tabOptions={NavConstants.TAB_OPTIONS[tab]} />
+
+      );
+    }, this);
+
     return (
       <div className="navbar-main"
         style={{
           height: this.props.dims.height - 130
         }}>
-        <Home         setTab={this.setTab} />
-        <Webpage      setTab={this.setTab} />
-        <Schedules    setTab={this.setTab} />
-        <Leagues      setTab={this.setTab} />
-        <Teams        setTab={this.setTab} />
-        <Facilities   setTab={this.setTab} />
 
-        {this.state.tab}
+        {tabs}
+
       </div>
     );
   }
