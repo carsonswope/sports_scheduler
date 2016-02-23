@@ -34,3 +34,10 @@
   position: relative;
   text-align: center;
 }
+
+h1 {
+  top: 25px;
+  position: relative;
+  text-align: center;
+  z-index: -1;
+}

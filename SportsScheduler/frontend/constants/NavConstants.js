@@ -3,6 +3,14 @@ var LeaguesOptions = require('../components/navigation/LeaguesOptions.jsx');
 var SchedulesOptions = require('../components/navigation/SchedulesOptions.jsx');
 var FacilitiesOptions = require('../components/navigation/FacilitiesOptions.jsx');
 
+var HomePage = require('../components/mainPages/HomePage');
+var WebpagePage = require('../components/mainPages/WebpagePage');
+var FacilitiesPage = require('../components/mainPages/FacilitiesPage');
+var SchedulesPage = require('../components/mainPages/SchedulesPage');
+var LeaguesPage = require('../components/mainPages/LeaguesPage');
+var TeamsPage = require('../components/mainPages/TeamsPage');
+
+
 
 exports.tabs = {
   HOME: 'HOME',
@@ -35,16 +43,18 @@ exports.SCREEN_NAMES = {
   SCHEDULES: 'Schedules'
 }
 
+exports.PAGES = {
+  HOME: HomePage,
+  WEBPAGE: WebpagePage,
+  FACILITIES: FacilitiesPage,
+  SCHEDULES: SchedulesPage,
+  LEAGUES: LeaguesPage,
+  TEAMS: TeamsPage
+}
+
 exports.DEFAULT_OPTIONS = {
-  HOME: {
-
-
-  },
-
-  WEBPAGE: {
-
-
-  },
+  HOME: {},
+  WEBPAGE: {},
 
   TEAMS: {
     teamsList: 'ALL',
@@ -77,3 +87,7 @@ exports.DEFAULT_OPTIONS = {
     facilitiesList: 'ALL'
   }
 }
+
+exports.OPTIONS_HEIGHT = 130;
+exports.HEADER_HEIGHT_LOGGED_IN = 96;
+exports.HEADER_HEIGHT_LOGGED_OUT = 220;

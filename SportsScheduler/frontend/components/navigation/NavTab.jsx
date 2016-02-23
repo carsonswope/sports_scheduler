@@ -69,7 +69,9 @@ var NavTab = React.createClass({
 
     return (
       <div>
-        <div className={className} onClick={this.handleClick}>
+        <div className={className}
+          onClick={this.handleClick}
+          style={{height: this.props.height}}>
           {expandButton}
           {name}
         </div>

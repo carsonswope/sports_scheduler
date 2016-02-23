@@ -10,7 +10,8 @@ var UserHeader = React.createClass({
 
   render: function() {
 
-    var contents = (this.props.user) ?
+    // debugger;
+    var contents = (UserStore.currentUser()) ?
       <UserInfo /> : <UserLoginForm />;
 
     return (

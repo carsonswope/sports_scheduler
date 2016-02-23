@@ -33,6 +33,8 @@ var NavBar = React.createClass({
 
   render: function() {
 
+    var divHeight = ((this.props.dims.height-(130+NavConstants.OPTIONS_HEIGHT))/6)-14
+
     var tabs = Object.keys(NavConstants.tabs).map(function(tab, i){
       return(
 
@@ -40,6 +42,7 @@ var NavBar = React.createClass({
           screenName={NavConstants.SCREEN_NAMES[tab]}
           name={NavConstants.tabs[tab]}
           key={i}
+          height={divHeight}
           setTab={this.setTab}
           selectedTab={this.state.tab}
           tabOptions={NavConstants.TAB_OPTIONS[tab]} />
