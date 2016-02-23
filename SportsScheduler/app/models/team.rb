@@ -22,21 +22,25 @@ class Team < ActiveRecord::Base
     through: :league_team_memberships,
     source: :league
 
-  has_many :events_as_t_1,
-    foreign_key: :t_1_id,
+  has_many :events_as_team_1,
+    foreign_key: :team_1_id,
     class_name: 'Team'
 
-  has_many :events_as_t_2,
-    foreign_key: :t_2_id,
+  has_many :events_as_team_2,
+    foreign_key: :team_2_id,
     class_name: 'Team'
+
+  def self.find_by_owner(owner_id)
+    Team.where(owner_id: owner_id)
+  end
 
   def events
     Event.find_by_sql(<<-SQL)
       SELECT *
       FROM events
       WHERE
-        events.t_1_id = #{self.id} OR
-        events.t_2_id = #{self.id}
+        events.team_1_id = #{self.id} OR
+        events.team_2_id = #{self.id}
     SQL
   end
 
@@ -45,7 +49,7 @@ class Team < ActiveRecord::Base
       LeagueTeamMembership.new(
         team_id: self.id,
         league_id: league_id
-      )
+      );
     end
 
     LeagueTeamMembership.transaction do

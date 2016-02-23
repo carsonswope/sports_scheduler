@@ -8,7 +8,6 @@ exports.fetch = function() {
     success: function(response){
       FacilityActions.receiveFetch(response);
     }
-  })
+  });
 
-
-}
+};

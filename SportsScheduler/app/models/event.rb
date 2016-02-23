@@ -32,6 +32,9 @@ class Event < ActiveRecord::Base
     foreign_key: :t_2_id,
     class_name: 'Team'
 
+  def self.find_by_owner(owner_id)
+    Event.where(owner_id: owner_id)
+  end
 
   def participating_teams
     Team.find_by_sql(<<-SQL)

@@ -21,10 +21,6 @@
 
 }
 
-.navbar-option:hover {
-  border: 4px solid green;
-}
-
 .navbar-current {
   border: 4px solid black;
   border-right: 5px solid white;

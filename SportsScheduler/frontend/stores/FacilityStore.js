@@ -3,19 +3,20 @@ var Store = require('flux/utils').Store;
 var FacilityConstants = require('../constants/FacilityConstants');
 var UserConstants = require('../constants/UserConstants');
 
-var FacilityStore = new Store(AppDispatcher);
 
 var _facilities = {};
+
+var FacilityStore = new Store(AppDispatcher);
 
 FacilityStore.all = function() {
   return Object.keys(_facilities).map(function(i){
     return _facilities[i];
   });
-}
+};
 
 FacilityStore.find = function(id) {
   return _facilities[id];
-}
+};
 
 FacilityStore.resetFacilitiesList = function(facilities){
   _facilities = {};
@@ -29,16 +30,16 @@ FacilityStore.resetFacilitiesList = function(facilities){
   }
 
   FacilityStore.__emitChange();
-}
+};
 
 FacilityStore.__onDispatch = function(payload){
 
   switch (payload.actionType) {
-    case FacilityConstants.RESET_FACILITIES_LIST:
+    case FacilityConstants.actions.RESET_FACILITIES_LIST:
       FacilityStore.resetFacilitiesList(payload.facilities);
       break;
   }
 
-}
+};
 
 module.exports = FacilityStore;

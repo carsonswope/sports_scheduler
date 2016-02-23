@@ -29,6 +29,10 @@ class League < ActiveRecord::Base
     through: :league_team_memberships,
     source: :team
 
+  def self.find_by_owner(owner_id)
+    League.where(owner_id: owner_id)
+  end
+
   def save_facility_memberships(facility_ids)
     memberships = facility_ids.map do |facility_id|
       LeagueFacilityMembership.new(

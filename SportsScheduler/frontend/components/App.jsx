@@ -61,7 +61,6 @@ var App = React.createClass({
 
   userChange: function() {
     this.setState({ user: UserStore.currentUser() });
-    FacilityActions.fetch();
   },
 
   render: function() {

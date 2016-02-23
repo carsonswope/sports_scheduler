@@ -3,6 +3,8 @@
   margin: 5px;
   border-radius: 5px;
   display: inline-block;
-  position: relative;
-  float: left;
+  position: absolute;
+  left: 217px;
+  margin-right: 0px;
+  margin-bottom: 0px;
 }

@@ -41,7 +41,7 @@ exports.SCREEN_NAMES = {
   LEAGUES: 'Leagues',
   FACILITIES: 'Facilities',
   SCHEDULES: 'Schedules'
-}
+};
 
 exports.PAGES = {
   HOME: HomePage,
@@ -50,7 +50,7 @@ exports.PAGES = {
   SCHEDULES: SchedulesPage,
   LEAGUES: LeaguesPage,
   TEAMS: TeamsPage
-}
+};
 
 exports.DEFAULT_OPTIONS = {
   HOME: {},
@@ -86,8 +86,10 @@ exports.DEFAULT_OPTIONS = {
     leaguesList: 'ALL',
     facilitiesList: 'ALL'
   }
-}
+};
 
 exports.OPTIONS_HEIGHT = 130;
+exports.MAX_NAVBAR_TAB_HEIGHT = 40;
+exports.MIN_NAVBAR_TAB_HEIGHT = 27;
 exports.HEADER_HEIGHT_LOGGED_IN = 96;
 exports.HEADER_HEIGHT_LOGGED_OUT = 220;

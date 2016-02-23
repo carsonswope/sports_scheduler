@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221233531) do
+ActiveRecord::Schema.define(version: 20160223175313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,20 +19,20 @@ ActiveRecord::Schema.define(version: 20160221233531) do
   create_table "events", force: :cascade do |t|
     t.integer "league_id",          null: false
     t.integer "num_teams_involved", null: false
-    t.integer "t_1_id"
-    t.integer "t_2_id"
     t.integer "facility_id",        null: false
     t.integer "owner_id",           null: false
     t.string  "date"
     t.string  "start_time"
     t.string  "duration"
+    t.integer "team_1_id"
+    t.integer "team_2_id"
   end
 
   add_index "events", ["facility_id"], name: "index_events_on_facility_id", using: :btree
   add_index "events", ["league_id"], name: "index_events_on_league_id", using: :btree
   add_index "events", ["owner_id"], name: "index_events_on_owner_id", using: :btree
-  add_index "events", ["t_1_id"], name: "index_events_on_t_1_id", using: :btree
-  add_index "events", ["t_2_id"], name: "index_events_on_t_2_id", using: :btree
+  add_index "events", ["team_1_id"], name: "index_events_on_team_1_id", using: :btree
+  add_index "events", ["team_2_id"], name: "index_events_on_team_2_id", using: :btree
 
   create_table "facilities", force: :cascade do |t|
     t.datetime "created_at", null: false

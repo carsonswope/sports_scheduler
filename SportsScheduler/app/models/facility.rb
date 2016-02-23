@@ -25,14 +25,7 @@ class Facility < ActiveRecord::Base
   has_many :events
 
   def self.find_by_owner(owner_id)
-    # Facility.find_by_sql(<<-SQL)
-    #   SELECT *
-    #   FROM facilities
-    #   WHERE facilities.owner_id = #{owner_id}
-    # SQL
-
-    Facility.where(owner_id: owner_id).includes(:events)
-
+    Facility.where(owner_id: owner_id)
   end
 
 end
