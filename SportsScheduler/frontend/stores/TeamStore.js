@@ -27,6 +27,23 @@ TeamStore.resetTeamsList = function(teams){
   TeamStore.__emitChange();
 };
 
+TeamStore.getMatching = function(searchString){
+  var string = searchString.toLowerCase();
+  var keys = Object.keys(_teams).filter(function(i){
+    return (
+      _teams[i].name.toLowerCase().indexOf(string) > -1  ||
+      _teams[i].email.toLowerCase().indexOf(string) > -1 ||
+      _teams[i].contactName.toLowerCase().indexOf(string) > -1 ||
+      _teams[i].phone.toLowerCase().indexOf(string) > -1
+    );
+  });
+
+  // debugger;
+
+  return keys.map(function(i){ return _teams[i]; });
+
+};
+
 TeamStore.addTeam = function(team) {
   _teams[team.id] = team;
   TeamStore.__emitChange();

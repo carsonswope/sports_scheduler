@@ -3,14 +3,18 @@ var PropTypes = React.PropTypes;
 var TeamStore = require('../../stores/TeamStore');
 var NavStore = require('../../stores/NavStore');
 
+var TeamShow = require('../showPages/TeamShow');
 var NewTeam = require('../newPages/NewTeam');
 
 var TeamsPage = React.createClass({
 
   getInitialState: function(){
+
+    var options = NavStore.options('TEAMS');
+
     return {
-      teams: TeamStore.all(),
-      options: NavStore.options('TEAMS')
+      teams: TeamStore.getMatching(options.nameSearch),
+      options: options
     };
   },
 
@@ -26,7 +30,7 @@ var TeamsPage = React.createClass({
 
   teamChange: function(){
     this.setState({
-      teams: TeamStore.all()
+      teams: TeamStore.getMatching(this.state.options.nameSearch)
     });
   },
 
@@ -34,35 +38,29 @@ var TeamsPage = React.createClass({
     this.setState({
       options: NavStore.options('TEAMS')
     });
+    this.setState({
+      teams: TeamStore.getMatching(this.state.options.nameSearch)
+    });
   },
 
   render: function() {
+
+    var teams = this.state.teams.map(function(team){
+      return(
+        <TeamShow key={team.id} team={team} />
+      );
+    });
 
     var content;
 
     if (this.state.options.adding) {
       content = <NewTeam />;
     } else {
-      content = <div>index dix</div>;
+      content = teams;
     }
-
-    var teams = this.state.teams.map(function(team){
-      return(
-        <div key={team.id}> Id: {team.id} - Name: {team.name} </div>
-      );
-    });
-
-    // return (
-    //   <div>
-    //     {this.state.options.nameSearch}
-    //     teams page
-    //     {teams}
-    //   </div>
-    // );
 
     return (
       <div>{content} </div>
-
     );
   }
 

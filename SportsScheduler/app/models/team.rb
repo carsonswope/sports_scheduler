@@ -25,12 +25,12 @@ class Team < ActiveRecord::Base
 
   has_many :events_as_team_1,
     foreign_key: :team_1_id,
-    class_name: 'Team',
+    class_name: 'Event',
     dependent: :destroy
 
   has_many :events_as_team_2,
     foreign_key: :team_2_id,
-    class_name: 'Team',
+    class_name: 'Event',
     dependent: :destroy
 
   def self.find_by_owner(owner_id)

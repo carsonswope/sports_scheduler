@@ -7,4 +7,24 @@
   left: 217px;
   margin-right: 0px;
   margin-bottom: 0px;
+  padding: 0px;
+  overflow: scroll;
+}
+
+.team-show-main {
+  border: 4px solid #ddd;
+  margin: 10px;
+  height: 42px;
+  padding-left: 55px;
+  border-radius: 5px;
+}
+
+.team-show-detail {
+  display: inline-block;
+  top: 15px;
+  font-size: 18px;
+  margin-right: 20px;
+  position: relative;
+  width: 160px;
+  /*border-right: 3px solid green;*/
 }

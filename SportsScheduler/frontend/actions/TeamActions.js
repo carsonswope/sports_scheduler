@@ -21,10 +21,10 @@ exports.createTeam = function(team) {
 
 exports.receiveCreateResponse = function(team) {
 
-  debugger;
-
   AppDispatcher.dispatch({
     actionType: TeamConstants.actions.ADD_TEAM,
     team: team
   });
+
+
 };

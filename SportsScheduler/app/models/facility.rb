@@ -16,7 +16,7 @@ class Facility < ActiveRecord::Base
   belongs_to :owner,
     class_name: 'User'
 
-  has_many :leage_facility_memberships,
+  has_many :league_facility_memberships,
     dependent: :destroy
 
   has_many :leagues,

@@ -50,8 +50,8 @@ general = [
 
 l.save_availabilities(specific, general)
 
-t1 = Team.create(owner_id: u.id, name: 'goons')
-t2 = Team.create(owner_id: u.id, name: 'borbs')
+t1 = Team.create(owner_id: u.id, name: 'goons', contact_name: 'bill', email: 'bill@gmail.com', phone: '503-555-5555')
+t2 = Team.create(owner_id: u.id, name: 'borbs', contact_name: 'bob', email: 'bob@gmail.com', phone: '503-999-9999')
 
 l.save_team_memberships([t1.id, t2.id])
 l.save_facility_memberships([f1.id, f2.id])

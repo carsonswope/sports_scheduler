@@ -34,7 +34,9 @@ NavStore.setTab = function(tab) {
 };
 
 NavStore.setFocusOnTeam = function(team) {
+
   _currentTab = 'TEAMS';
+  _options.TEAMS.adding = false;
   _options.TEAMS.nameSearch = team.name;
   NavStore.__emitChange();
 };
@@ -45,11 +47,11 @@ NavStore.__onDispatch = function(payload) {
       NavStore.setTab(payload.tab);
       break;
     case NavConstants.actions.SET_TAB_OPTION:
-      NavStore.setTabOption(payload.option)
+      NavStore.setTabOption(payload.option);
       break;
 
-    case TeamConstants.ADD_TEAM:
-      NavStore.setFocusOnTeam(payload.team)
+    case TeamConstants.actions.ADD_TEAM:
+      NavStore.setFocusOnTeam(payload.team);
       break;
   }
 

@@ -16,6 +16,20 @@ var SearchBar = React.createClass({
     };
   },
 
+  componentDidMount: function(){
+    this.navListener = NavStore.addListener(this.changeSearchValue);
+  },
+
+  componentWillUnmount: function(){
+    this.navListener.remove();
+  },
+
+  changeSearchValue: function(){
+    this.setState({
+      searchValue: NavStore.options(this.props.tab)[this.props.option]
+    });
+  },
+
   changeSearch: function(e) {
     NavActions.setTabOption(this.props.tab, this.props.option, e.target.value);
     this.setState({searchValue: e.target.value});
