@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :facilities, only: [:index]
-    resources :teams, only: [:index]
+    resources :teams, only: [:index, :create]
     resources :leagues, only: [:index]
     resources :events, only: [:index]
     resource :session, only: [:show, :create, :destroy]

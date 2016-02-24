@@ -14,21 +14,24 @@ class Team < ActiveRecord::Base
   include Available
 
   belongs_to :owner,
-    class_name: 'User',
+    class_name: 'User'
+
+  has_many :league_team_memberships,
     dependent: :destroy
 
-  has_many :league_team_memberships
   has_many :leagues,
     through: :league_team_memberships,
     source: :league
 
   has_many :events_as_team_1,
     foreign_key: :team_1_id,
-    class_name: 'Team'
+    class_name: 'Team',
+    dependent: :destroy
 
   has_many :events_as_team_2,
     foreign_key: :team_2_id,
-    class_name: 'Team'
+    class_name: 'Team',
+    dependent: :destroy
 
   def self.find_by_owner(owner_id)
     Team.where(owner_id: owner_id)

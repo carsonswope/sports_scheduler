@@ -14,17 +14,21 @@ class League < ActiveRecord::Base
   include Available
 
   belongs_to :owner,
-    class_name: 'User',
+    class_name: 'User'
+
+  has_many :league_facility_memberships,
     dependent: :destroy
 
-  has_many :league_facility_memberships
   has_many :facilities,
     through: :league_facility_memberships,
     source: :facility
 
-  has_many :events
+  has_many :events,
+    dependent: :destroy
 
-  has_many :league_team_memberships
+  has_many :league_team_memberships,
+    dependent: :destroy
+
   has_many :teams,
     through: :league_team_memberships,
     source: :team

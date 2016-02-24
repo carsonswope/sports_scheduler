@@ -11,7 +11,7 @@
 
 class LeagueFacilityMembership < ActiveRecord::Base
 
-  belongs_to :facility, dependent: :destroy
-  belongs_to :league,   dependent: :destroy
+  belongs_to :facility
+  belongs_to :league
 
 end

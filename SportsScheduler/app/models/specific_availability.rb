@@ -19,7 +19,7 @@ class SpecificAvailability < ActiveRecord::Base
   validates :date, :time_start, :time_end, presence: true
 
   belongs_to :specific_available,
-    polymorphic: true, dependent: :destroy
+    polymorphic: true
 
   def time_slot
     return [{

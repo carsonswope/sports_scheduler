@@ -1,8 +1,10 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var Store = require('flux/utils').Store;
 var NavConstants = require('../constants/NavConstants');
+var TeamConstants = require('../constants/TeamConstants');
 
 var NavStore = new Store(AppDispatcher);
+
 
 var _currentTab = NavConstants.tabs.HOME;
 var _options = NavConstants.DEFAULT_OPTIONS;
@@ -31,6 +33,12 @@ NavStore.setTab = function(tab) {
   NavStore.__emitChange();
 };
 
+NavStore.setFocusOnTeam = function(team) {
+  _currentTab = 'TEAMS';
+  _options.TEAMS.nameSearch = team.name;
+  NavStore.__emitChange();
+};
+
 NavStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case NavConstants.actions.SET_TAB:
@@ -38,6 +46,10 @@ NavStore.__onDispatch = function(payload) {
       break;
     case NavConstants.actions.SET_TAB_OPTION:
       NavStore.setTabOption(payload.option)
+      break;
+
+    case TeamConstants.ADD_TEAM:
+      NavStore.setFocusOnTeam(payload.team)
       break;
   }
 

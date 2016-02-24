@@ -22,7 +22,7 @@ class GeneralAvailability < ActiveRecord::Base
     :time_end, :day_of_week, presence: true
 
   belongs_to :general_available,
-    polymorphic: true, dependent: :destroy
+    polymorphic: true
 
   def time_slots
     slots = [];

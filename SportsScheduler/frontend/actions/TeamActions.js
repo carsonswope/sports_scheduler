@@ -14,3 +14,17 @@ exports.receiveFetch = function(teams) {
     teams: teams
   });
 };
+
+exports.createTeam = function(team) {
+  TeamApi.attemptCreateTeam(team);
+};
+
+exports.receiveCreateResponse = function(team) {
+
+  debugger;
+
+  AppDispatcher.dispatch({
+    actionType: TeamConstants.actions.ADD_TEAM,
+    team: team
+  });
+};

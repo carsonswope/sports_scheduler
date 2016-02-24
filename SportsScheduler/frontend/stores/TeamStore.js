@@ -27,11 +27,19 @@ TeamStore.resetTeamsList = function(teams){
   TeamStore.__emitChange();
 };
 
+TeamStore.addTeam = function(team) {
+  _teams[team.id] = team;
+  TeamStore.__emitChange();
+};
+
 TeamStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case TeamConstants.actions.RESET_TEAMS_LIST:
-    TeamStore.resetTeamsList(payload.teams);
-    break;
+      TeamStore.resetTeamsList(payload.teams);
+      break;
+    case TeamConstants.actions.ADD_TEAM:
+      TeamStore.addTeam(payload.team);
+      break;
   }
 };
 

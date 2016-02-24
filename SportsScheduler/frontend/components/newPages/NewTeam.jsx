@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var NavActions = require('../../actions/NavActions');
 var NewHeader = require('./NewHeader');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var TeamActions = require('../../actions/TeamActions');
 
 
 var NewTeam = React.createClass({
@@ -18,8 +19,9 @@ var NewTeam = React.createClass({
     };
   },
 
-  submitForm: function() {
-    debugger;
+  submitForm: function(e) {
+    e.preventDefault();
+    TeamActions.createTeam({team: this.state});
   },
 
   render: function() {
@@ -56,7 +58,8 @@ var NewTeam = React.createClass({
               valueLink={this.linkState('phone')} />
           </div>
 
-          <input type="submit" value="create team" />
+          <input className="new-submit-button"
+            type="submit" value="create team" />
         </form>
       </div>
     );
