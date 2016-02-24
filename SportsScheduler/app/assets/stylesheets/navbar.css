@@ -69,17 +69,20 @@
   margin-top: 10px;
 }
 
-.navbar-options-search-box{
-  position: absolute;
-  left: 32px;
-  top: 7px;
-  margin: auto;
+.text-entry-box{
   border: 0px;
   outline: none;
   font-size: 17px;
   text-align: right 2px;
-  width: 125px;
   border-bottom: 3px solid black;
+}
+
+.navbar-options-search-box{
+  position: absolute;
+  left: 32px;
+  top: 7px;
+  /*margin: auto;*/
+  width: 125px;
   z-index: 4;
 }
 

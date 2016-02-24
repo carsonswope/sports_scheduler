@@ -5,7 +5,6 @@ var NavActions = require('../../actions/NavActions');
 var NewButton = React.createClass({
 
   followButton: function(){
-    console.log('aug');
     NavActions.setTabOption(this.props.tab, 'adding', true);
   },
 

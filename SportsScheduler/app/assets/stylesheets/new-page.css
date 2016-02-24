@@ -24,3 +24,26 @@
   color: #aaa;
   z-index: 4;
 }
+
+.new-page-text-field{
+  margin: 15px;
+  /*border: 1px solid black;*/
+}
+
+.new-page-label{
+  width: 100px;
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  font-size: 17px;
+  border-bottom: 3px solid black;
+  text-align: left 20px
+  top: 60px;
+  left: 50px;
+}
+
+.new-page-entry-box{
+  position: relative;
+  left: 25px;
+  display: inline-block;
+}

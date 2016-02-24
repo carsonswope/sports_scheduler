@@ -31,7 +31,7 @@ var SearchBar = React.createClass({
         <div className="navbar-options-search-bar">
           <SearchIcon />
           <input
-            className="navbar-options-search-box"
+            className="text-entry-box navbar-options-search-box"
             type="text"
             id="search"
             value={this.state.searchValue}
