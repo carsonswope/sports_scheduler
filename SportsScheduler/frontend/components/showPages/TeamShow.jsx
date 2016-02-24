@@ -1,4 +1,5 @@
 var React = require('react');
+var NavStore = require('../../stores/NavStore');
 
 var TeamShow = React.createClass({
 

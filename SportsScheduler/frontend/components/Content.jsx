@@ -9,9 +9,6 @@ var TeamActions = require('../actions/TeamActions');
 
 var NavConstants = require('../constants/NavConstants');
 
-var TeamsPage = require('./mainPages/TeamsPage');
-
-
 var Content = React.createClass({
 
   getInitialState: function() {
@@ -38,7 +35,8 @@ var Content = React.createClass({
 
   render: function() {
 
-    var ToRender = NavConstants.PAGES[this.state.tab];
+    var ToRender = NavConstants.MAIN_PAGES[this.state.tab]
+    ToRender = <ToRender resourceType={this.state.tab} />
 
     return (
 
@@ -48,7 +46,7 @@ var Content = React.createClass({
           width: this.props.dims.width - 240
         }}>
 
-        <ToRender />
+        {ToRender}
 
       </div>
     );

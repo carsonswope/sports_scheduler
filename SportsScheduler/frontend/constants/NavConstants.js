@@ -38,18 +38,65 @@ exports.SCREEN_NAMES = {
 
 var HomePage = require('../components/mainPages/HomePage');
 var WebpagePage = require('../components/mainPages/WebpagePage');
-var FacilitiesPage = require('../components/mainPages/FacilitiesPage');
-var SchedulesPage = require('../components/mainPages/SchedulesPage');
-var LeaguesPage = require('../components/mainPages/LeaguesPage');
-var TeamsPage = require('../components/mainPages/TeamsPage');
+var IndexPage = require('../components/mainPages/IndexPage');
 
-exports.PAGES = {
+exports.MAIN_PAGES = {
   HOME: HomePage,
   WEBPAGE: WebpagePage,
-  FACILITIES: FacilitiesPage,
-  SCHEDULES: SchedulesPage,
-  LEAGUES: LeaguesPage,
-  TEAMS: TeamsPage
+  FACILITIES: IndexPage,
+  SCHEDULES: IndexPage,
+  LEAGUES: IndexPage,
+  TEAMS: IndexPage
+};
+
+var TeamShowDetail = require('../components/showPages/details/TeamShowDetail');
+var LeagueShowDetail = require('../components/showPages/details/LeagueShowDetail');
+var FacilityShowDetail = require('../components/showPages/details/FacilityShowDetail');
+var ScheduleShowDetail = require('../components/showPages/details/ScheduleShowDetail.jsx');
+
+exports.SHOW_DETAILS = {
+  HOME: undefined,
+  WEBPAGE: undefined,
+  FACILITIES: FacilityShowDetail,
+  SCHEDULES: ScheduleShowDetail,
+  LEAGUES: LeagueShowDetail,
+  TEAMS: TeamShowDetail
+};
+
+var TeamShowHeader = require('../components/showPages/headers/TeamShowHeader.jsx');
+var LeagueShowHeader = require('../components/showPages/headers/LeagueShowHeader.jsx');
+var FacilityShowHeader = require('../components/showPages/headers/FacilityShowHeader.jsx');
+var ScheduleShowHeader = require('../components/showPages/headers/ScheduleShowHeader.jsx');
+
+exports.SHOW_HEADERS = {
+  HOME: undefined,
+  WEBPAGE: undefined,
+  FACILITIES: FacilityShowHeader,
+  SCHEDULES: ScheduleShowHeader,
+  LEAGUES: LeagueShowHeader,
+  TEAMS: TeamShowHeader
+};
+
+var EventStore = require('../stores/EventStore');
+var LeagueStore = require('../stores/LeagueStore');
+var TeamStore = require('../stores/TeamStore');
+var FacilityStore = require('../stores/FacilityStore');
+
+exports.STORES = {
+  SCHEDULES: EventStore,
+  LEAGUES: LeagueStore,
+  TEAMS: TeamStore,
+  FACILITIES: FacilityStore
+};
+
+var NewLeague = require('../components/newPages/NewLeague');
+var NewFacility = require('../components/newPages/NewFacility');
+var NewTeam = require('../components/newPages/NewTeam');
+
+exports.ADD_PAGES = {
+  LEAGUES: NewLeague,
+  TEAMS: NewTeam,
+  FACILITES: NewFacility
 };
 
 exports.DEFAULT_OPTIONS = {
@@ -58,19 +105,22 @@ exports.DEFAULT_OPTIONS = {
 
   TEAMS: {
     nameSearch: '',
-    adding: false
+    adding: false,
+    focused: null
   },
 
   LEAGUES: {
     nameSearch: '',
     adding: false,
+    focused: null,
     dateStart: null,
     dateEnd: null
   },
 
   FACILITIES: {
     nameSearch: '',
-    adding: false
+    adding: false,
+    focused: null
   },
 
   SCHEDULES: {

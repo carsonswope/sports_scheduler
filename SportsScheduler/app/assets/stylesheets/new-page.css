@@ -16,12 +16,13 @@
   font-size: 25px;
   right: 25px;
   top: 18px;
+  color: #aaa;
   text-align: center;
   width: 30px;
 }
 
 .new-page-cancel-button:hover{
-  color: #aaa;
+  color: black;
   z-index: 4;
 }
 

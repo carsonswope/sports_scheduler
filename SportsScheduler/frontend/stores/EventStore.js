@@ -11,6 +11,11 @@ EventStore.all = function() {
   });
 };
 
+EventStore.getMatching = function(criteria) {
+  // temp method...
+  return EventStore.all();
+}
+
 EventStore.find = function(id) {
   return _events[id];
 };
