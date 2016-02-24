@@ -11,3 +11,21 @@ exports.fetch = function() {
   });
 
 };
+
+exports.attemptCreateFacility = function(facility) {
+
+  var facilityParams = {
+    name: facility.facility.name
+  };
+
+  $.ajax({
+    url: 'api/facilities',
+    type: 'POST',
+    dataType: 'json',
+    data: {facility: facilityParams},
+    success: function(response){
+      FacilityActions.receiveCreateResponse(response);
+    }
+  });
+
+};

@@ -2,13 +2,18 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var LeagueStore = require('../../stores/LeagueStore');
 var NavStore = require('../../stores/NavStore');
+var NewLeague = require('../newPages/NewLeague');
+var LeagueShow = require('../showPages/LeagueShow');
 
 var LeaguesPage = React.createClass({
 
   getInitialState: function(){
+
+    var options = NavStore.options('LEAGUES');
+
     return {
-      leagues: LeagueStore.all(),
-      options: NavStore.options('LEAGUES')
+      leagues: LeagueStore.getMatching(options.nameSearch),
+      options: options
     };
   },
 
@@ -24,31 +29,38 @@ var LeaguesPage = React.createClass({
 
   leagueChange: function(){
     this.setState({
-      leagues: LeagueStore.all()
+      leagues: LeagueStore.getMatching(this.state.options.nameSearch)
     });
   },
 
   navChange: function(){
+
+    var options = NavStore.options('LEAGUES');
+
     this.setState({
-      options: NavStore.options('LEAGUES')
+      options: options,
+      leagues: LeagueStore.getMatching(options.nameSearch)
     });
+
   },
 
   render: function() {
 
     var leagues = this.state.leagues.map(function(league){
       return(
-        <div key={league.id}> id: {league.id} name: {league.name} </div>
+        <LeagueShow key={league.id} league={league} />
       );
     });
 
-    return (
-      <div>
-        {this.state.options.nameSearch}
-        leaguesPage
-        {leagues}
-      </div>
-    );
+    var content;
+
+    if (this.state.options.adding) {
+      content = <NewLeague />;
+    } else {
+      content = leagues;
+    }
+
+    return ( <div> {content} </div> );
   }
 
 });

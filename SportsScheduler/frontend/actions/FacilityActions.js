@@ -12,3 +12,14 @@ exports.receiveFetch = function(facilities) {
     facilities: facilities
   });
 };
+
+exports.createFacility = function(facility) {
+  FacilityApi.attemptCreateFacility(facility);
+};
+
+exports.receiveCreateResponse = function(facility) {
+  AppDispatcher.dispatch({
+    actionType: FacilityConstants.actions.ADD_FACILITY,
+    facility: facility
+  });
+};

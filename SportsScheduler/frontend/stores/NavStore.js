@@ -2,6 +2,8 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var Store = require('flux/utils').Store;
 var NavConstants = require('../constants/NavConstants');
 var TeamConstants = require('../constants/TeamConstants');
+var LeagueConstants = require('../constants/LeagueConstants');
+var FacilityConstants = require('../constants/FacilityConstants');
 
 var NavStore = new Store(AppDispatcher);
 
@@ -33,11 +35,10 @@ NavStore.setTab = function(tab) {
   NavStore.__emitChange();
 };
 
-NavStore.setFocusOnTeam = function(team) {
-
-  _currentTab = 'TEAMS';
-  _options.TEAMS.adding = false;
-  _options.TEAMS.nameSearch = team.name;
+NavStore.setFocusOnElement = function(tab, element) {
+  _currentTab = tab;
+  _options[tab].adding = false;
+  _options[tab].nameSearch = element.name;
   NavStore.__emitChange();
 };
 
@@ -49,9 +50,14 @@ NavStore.__onDispatch = function(payload) {
     case NavConstants.actions.SET_TAB_OPTION:
       NavStore.setTabOption(payload.option);
       break;
-
     case TeamConstants.actions.ADD_TEAM:
-      NavStore.setFocusOnTeam(payload.team);
+      NavStore.setFocusOnElement('TEAMS', payload.team);
+      break;
+    case LeagueConstants.actions.ADD_LEAGUE:
+      NavStore.setFocusOnElement('LEAGUES', payload.league);
+      break;
+    case FacilityConstants.actions.ADD_FACILITY:
+      NavStore.setFocusOnElement('FACILITIES', payload.facility);
       break;
   }
 

@@ -14,3 +14,14 @@ exports.receiveFetch = function(leagues) {
     leagues: leagues
   });
 };
+
+exports.createLeague = function(league) {
+  LeagueApi.attemptCreateLeague(league);
+};
+
+exports.receiveCreateResponse = function(league) {
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.ADD_LEAGUE,
+    league: league
+  });
+};

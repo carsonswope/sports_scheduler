@@ -35,12 +35,13 @@ var TeamsPage = React.createClass({
   },
 
   navChange: function(){
+
+    var options = NavStore.options('TEAMS')
     this.setState({
-      options: NavStore.options('TEAMS')
+      teams: TeamStore.getMatching(options.nameSearch),
+      options: options
     });
-    this.setState({
-      teams: TeamStore.getMatching(this.state.options.nameSearch)
-    });
+
   },
 
   render: function() {

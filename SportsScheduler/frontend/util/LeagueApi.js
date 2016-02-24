@@ -10,3 +10,20 @@ exports.fetch = function() {
     }
   });
 };
+
+exports.attemptCreateLeague = function(league) {
+
+  var leagueParams = {
+    name: league.league.name
+  };
+
+  $.ajax({
+    url: 'api/leagues',
+    type: 'POST',
+    dataType: 'json',
+    data: {league: leagueParams},
+    success: function(response){
+      LeagueActions.receiveCreateResponse(response);
+    }
+  });
+};

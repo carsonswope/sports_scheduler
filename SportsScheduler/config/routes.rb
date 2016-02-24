@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   namespace :api, defaults: { format: :json } do
-    resources :facilities, only: [:index]
+    resources :facilities, only: [:index, :create]
     resources :teams, only: [:index, :create]
-    resources :leagues, only: [:index]
+    resources :leagues, only: [:index, :create]
     resources :events, only: [:index]
     resource :session, only: [:show, :create, :destroy]
   end
