@@ -24,7 +24,6 @@ exports.attemptCreateLeague = function(league) {
   });
 };
 
-
 exports.attemptDestroy = function(id) {
   $.ajax({
     url: 'api/leagues/' + id,

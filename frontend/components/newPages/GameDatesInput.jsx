@@ -19,7 +19,6 @@ var GameDatesInput = React.createClass({
     while (day.length < 2 ) {day = "0" + day; }
     this.today = "" + year + "-" + month + "-" + day;
 
-
     return {  adding: false,
               startDate: this.today,
               endDate: this.today,
@@ -31,35 +30,25 @@ var GameDatesInput = React.createClass({
 
   },
 
-  startAddingWeekly: function(){
-    this.setState({adding: 'WEEKLY'})
-  },
-
-  startAddingSpecific: function(){
-    this.setState({adding: 'SPECIFIC'})
+  setAddingState: function(availType, positive) {
+    this.setState({adding: availType, positive: positive});
   },
 
   submit: function(){
+
+    params = {
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      availType: this.state.adding,
+      positive: this.state.positive
+    }
+
     if (this.state.adding === 'SPECIFIC') {
-
-      var params = {
-        availType: 'SPECIFIC',
-        date: this.state.startDate,
-        startTime: this.state.startTime,
-        endTime: this.state.endTime
-      };
-
+      params['date'] = this.state.startDate;
     } else {
-
-      var params = {
-        availType: 'GENERAL',
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
-        startTime: this.state.startTime,
-        endTime: this.state.endTime,
-        dayOfWeek: this.state.dayOfWeek
-      };
-
+      params['startDate'] = this.state.startDate;
+      params['endDate'] = this.state.endDate;
+      params['dayOfWeek'] = this.state.dayOfWeek;
     }
 
     this.setState({  adding: false,
@@ -70,6 +59,7 @@ var GameDatesInput = React.createClass({
               dayOfWeek: 0
 
     });
+
     this.props.update(params);
 
   },
@@ -81,7 +71,8 @@ var GameDatesInput = React.createClass({
 
   render: function() {
 
-    var weeklyDatesList = this.props.dates.general.map(function(date, i){
+    var weeklyDatesPlusList = this.props.dates.general.map(function(date, i){
+      if(!date.positive){return null;}
       return(
         <div key={i}>
           {DateConstants.DAYS_OF_WEEK[date.dayOfWeek]} --
@@ -94,8 +85,23 @@ var GameDatesInput = React.createClass({
       );
     }, this);
 
+      var weeklyDatesMinusList = this.props.dates.general.map(function(date, i){
+        if(date.positive){return null;}
+        return(
+          <div key={i}>
+            {DateConstants.DAYS_OF_WEEK[date.dayOfWeek]} --
+            {date.startDate} -- {date.endDate} --
+            {date.startTime} -- {date.endTime}
+            <span onClick={this.remove.bind(this, 'GENERAL', i)}>
+              remove
+            </span>
+          </div>
+        );
+      }, this);
 
-    var specificDatesList = this.props.dates.specific.map(function(date, i){
+
+    var specificDatesPlusList = this.props.dates.specific.map(function(date, i){
+      if(!date.positive){return null;}
       return(
         <div key={i}>
           {date.date} --
@@ -108,13 +114,33 @@ var GameDatesInput = React.createClass({
       );
     }, this);
 
-    var weeklyDatesAdder = <div onClick={this.startAddingWeekly}
+    var specificDatesMinusList = this.props.dates.specific.map(function(date, i){
+      if(date.positive){return null;}
+      return(
+        <div key={i}>
+          {date.date} --
+          {date.startTime} --
+          {date.endTime}
+          <span onClick={this.remove.bind(this, 'SPECIFIC', i)}>
+            remove
+          </span>
+        </div>
+      );
+    }, this);
+
+    var weeklyDatesPlusAdder = <div onClick={this.setAddingState.bind(this, 'GENERAL', true)}
       className="begin-add-to-button"> add a weekly gamedate </div>;
 
-    var specificDatesAdder = <div onClick={this.startAddingSpecific}
+    var weeklyDatesMinusAdder = <div onClick={this.setAddingState.bind(this, 'GENERAL', false)}
+
+      className="begin-add-to-button"> add a weekly exception to the gamedate </div>;
+    var specificDatesPlusAdder = <div onClick={this.setAddingState.bind(this, 'SPECIFIC', true)}
       className="begin-add-to-button"> add a specific gamedate </div>;
 
-    if (this.state.adding === 'WEEKLY') {
+    var specificDatesMinusAdder = <div onClick={this.setAddingState.bind(this, 'SPECIFIC', false)}
+      className="begin-add-to-button"> add a specific exception to the gamedates list </div>;
+
+    if (this.state.adding === 'GENERAL') {
 
       var daysOfWeekOptions = Object.keys(DateConstants.DAYS_OF_WEEK).map(function(i){
         return(
@@ -164,6 +190,12 @@ var GameDatesInput = React.createClass({
 
         </div>
 
+        if (this.state.positive) {
+          weeklyDatesPlusAdder = weeklyDatesAdder;
+        } else {
+          weeklyDatesMinusAdder = weeklyDatesAdder;
+        }
+
     } else if (this.state.adding === 'SPECIFIC') {
 
       specificDatesAdder =
@@ -192,21 +224,72 @@ var GameDatesInput = React.createClass({
           </span>
         </div>
 
+        if (this.state.positive) {
+          specificDatesPlusAdder = specificDatesAdder;
+        } else {
+          specificDatesMinusAdder = specificDatesAdder;
+        }
+
     }
+
+    var weeklyPlus;
+    var weeklyMinus;
+    var specificPlus;
+    var specificMinus;
+
+    if (this.props.weeklyPlus) {
+      weeklyPlus =
+        <div className="availability-form-one-half">
+          <div className="availability-form-category-title">
+            {this.props.specificPlus}
+          </div>
+          {weeklyDatesPlusList}
+          {weeklyDatesPlusAdder}
+        </div>;
+    }
+
+    if (this.props.weeklyMinus) {
+      weeklyMinus =
+        <div className="availability-form-one-half">
+          <div className="availability-form-category-title">
+            {this.props.weeklyMinus}
+          </div>
+          {weeklyDatesMinusList}
+          {weeklyDatesMinusAdder}
+        </div>;
+    }
+
+    if (this.props.specificPlus) {
+      specificPlus =
+        <div className="availability-form-one-half">
+          <div className="availability-form-category-title">
+            {this.props.specificPlus}
+          </div>
+          {specificDatesPlusList}
+          {specificDatesPlusAdder}
+        </div>;
+    }
+
+    if (this.props.specificMinus) {
+      specificMinus =
+        <div className="availability-form-one-half">
+          <div className="availability-form-category-title">
+            {this.props.specificMinus}
+          </div>
+          {specificDatesMinusList}
+          {specificDatesMinusAdder}
+        </div>;
+    }
+
+
 
     return (
       <div className="availability-form-main clear">
         <div className="availability-form-title">GameDates:</div>
-        <div className="availability-form-one-half">
-          Weekly Dates:
-          {weeklyDatesList}
-          {weeklyDatesAdder}
-        </div>
-        <div className="availability-form-one-half">
-          Specific Dates:
-          {specificDatesList}
-          {specificDatesAdder}
-        </div>
+        {weeklyPlus}
+        {weeklyMinus}
+        {specificPlus}
+        {specificMinus}
       </div>
     );
   }

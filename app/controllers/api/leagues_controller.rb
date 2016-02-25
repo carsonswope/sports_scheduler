@@ -5,7 +5,9 @@ class Api::LeaguesController < ApplicationController
   def index
     @leagues = League.includes(
       :league_team_memberships,
-      :league_facility_memberships
+      :league_facility_memberships,
+      :general_availabilities,
+      :specific_availabilities
       ).find_by_owner(current_user.id)
   end
 

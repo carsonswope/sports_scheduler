@@ -15,18 +15,11 @@ exports.fetch = function() {
 
 exports.attemptCreateTeam = function(team) {
 
-  var teamParams = {
-    name:         team.team.name,
-    contact_name: team.team.contactName,
-    email:        team.team.email,
-    phone:        team.team.phone
-  };
-
   $.ajax({
     url: 'api/teams',
     type: 'POST',
     dataType: 'json',
-    data: {team: teamParams},
+    data: {team: team},
     success: function(response){
       TeamActions.receiveCreateResponse(response);
     }

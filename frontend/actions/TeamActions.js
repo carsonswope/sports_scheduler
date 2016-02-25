@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var TeamApi = require('../util/TeamApi');
 var TeamConstants = require('../constants/TeamConstants');
+var AvailabilityHelper = require('../util/AvailabilityHelper');
 
 //TeamActions
 
@@ -16,7 +17,33 @@ exports.receiveFetch = function(teams) {
 };
 
 exports.createTeam = function(team) {
-  TeamApi.attemptCreateTeam(team);
+
+  var t = team['team'];
+
+  var teamParams = {
+    name: t.name,
+    contact_name: t.contactName,
+    email: t.email,
+    phone: t.phone,
+    game_dates: {
+      general: [],
+      specific: []
+    }
+  }
+
+  if (t.gameDates.general) {
+    teamParams.game_dates['general'] =
+      AvailabilityHelper.generalDatesMap(t.gameDates.general);
+  }
+
+  if (t.gameDates.specific) {
+    teamParams.game_dates['specific'] =
+      AvailabilityHelper.specificDatesMap(t.gameDates.specific);
+  }
+
+  debugger;
+
+  TeamApi.attemptCreateTeam(teamParams);
 };
 
 exports.receiveCreateResponse = function(team) {

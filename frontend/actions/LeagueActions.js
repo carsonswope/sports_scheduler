@@ -18,6 +18,9 @@ exports.receiveFetch = function(leagues) {
 };
 
 exports.createLeague = function(league) {
+
+  debugger;
+
   var l = league['league']
 
   var leagueParams = {

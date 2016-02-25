@@ -4,6 +4,7 @@ var NavActions = require('../../actions/NavActions');
 var NewHeader = require('./NewHeader');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var TeamActions = require('../../actions/TeamActions');
+var GameDatesInput = require('./GameDatesInput');
 
 
 var NewTeam = React.createClass({
@@ -15,13 +16,44 @@ var NewTeam = React.createClass({
       name: '',
       contactName: '',
       email: '',
-      phone: ''
+      phone: '',
+      gameDates: {
+        general: [],
+        specific: []
+      }
     };
   },
 
   submitForm: function(e) {
     e.preventDefault();
     TeamActions.createTeam({team: this.state});
+  },
+
+  updateGameDatesInput: function(newGameDate){
+
+
+    var gameDates = this.state.gameDates;
+
+    if (newGameDate.availType === 'SPECIFIC') {
+      gameDates.specific.push(newGameDate);
+    } else {
+      gameDates.general.push(newGameDate);
+    }
+    this.setState({gameDates: gameDates});
+
+  },
+
+  removeGameDates: function(dateType, index){
+
+    var gameDates = this.state.gameDates;
+    if (dateType === 'SPECIFIC') {
+      gameDates.specific.splice(index, 1);
+        } else{
+      gameDates.general.splice(index, 1);
+    }
+
+    this.setState({gameDates: gameDates});
+
   },
 
   render: function() {
@@ -57,6 +89,14 @@ var NewTeam = React.createClass({
               type="text"
               valueLink={this.linkState('phone')} />
           </div>
+
+          <GameDatesInput
+            dates={this.state.gameDates}
+            update={this.updateGameDatesInput}
+            remove={this.removeGameDates}
+            weeklyPlus={'Weekly game dates'}
+            specificPlus={'Specific additions'}
+            specificMinus={'Specific exceptions'}/>
 
           <input className="new-submit-button"
             type="submit" value="create team" />

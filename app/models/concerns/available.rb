@@ -15,8 +15,6 @@ module Available
     if specific
       specific.each do |specific_availability|
 
-        debugger;
-
         params = {
           positive: specific_availability[1][:positive],
           date: specific_availability[1][:date],

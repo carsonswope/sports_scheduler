@@ -6,9 +6,9 @@ exports.generalDatesMap = function(genDates) {
       last_date: genDate.endDate,
       time_start: genDate.startTime,
       time_end: genDate.endTime,
-      positive: true,
-      // positive: genDate.positive,
-      day_of_week: (genDate.dayOfWeek || 0)
+      // positive: true,
+      positive: genDate.positive,
+      day_of_week: genDate.dayOfWeek
     });
   });
 
@@ -21,8 +21,8 @@ exports.specificDatesMap = function(specificDates) {
       date: spcDate.date,
       time_start: spcDate.startTime,
       time_end: spcDate.endTime,
-      positive: true
-      // positive: spcDate.positive
+      // positive: true
+      positive: spcDate.positive
     });
   });
 };

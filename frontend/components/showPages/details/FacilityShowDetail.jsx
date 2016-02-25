@@ -6,7 +6,6 @@ var LeagueStore = require('../../../stores/LeagueStore');
 var LeagueFacilityStore = require('../../../stores/LeagueFacilityStore');
 var LeagueActions = require('../../../actions/LeagueActions');
 
-
 var FacilityShowDetail = React.createClass({
 
 

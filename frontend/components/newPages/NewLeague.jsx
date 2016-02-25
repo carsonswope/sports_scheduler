@@ -42,21 +42,20 @@ var NewLeague = React.createClass({
 
   submitForm: function(e) {
     e.preventDefault();
-    debugger;
     LeagueActions.createLeague({league: this.state});
   },
 
   removeGameDates: function(dateType, index){
 
     var gameDates = this.state.gameDates;
-
     if (dateType === 'SPECIFIC') {
       gameDates.specific.splice(index, 1);
-    } else {
+        } else{
       gameDates.general.splice(index, 1);
     }
 
     this.setState({gameDates: gameDates});
+
   },
 
   updateFacilitiesInput: function(newFacility){
@@ -109,7 +108,10 @@ var NewLeague = React.createClass({
           <GameDatesInput
             dates={this.state.gameDates}
             update={this.updateGameDatesInput}
-            remove={this.removeGameDates}/>
+            remove={this.removeGameDates}
+            weeklyPlus={'Weekly game dates'}
+            specificPlus={'Specific additions'}
+            specificMinus={'Specific exceptions'}/>
 
           <FacilitiesInput
             fields={this.state.facilities}

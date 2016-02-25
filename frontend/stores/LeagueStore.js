@@ -31,6 +31,9 @@ LeagueStore.getMatching = function(searchString){
 };
 
 LeagueStore.resetLeaguesList = function(leagues){
+
+  debugger;
+
   _leagues = {};
 
   if (leagues[0]){
