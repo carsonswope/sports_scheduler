@@ -103,8 +103,10 @@ var LeagueShowDetail = React.createClass({
         return FacilityStore.find(facilityId);
       });
 
+      debugger;
 
     return (
+
       <div className="show-detail clear">
 
         <div className="show-basic-info">

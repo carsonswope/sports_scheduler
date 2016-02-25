@@ -32,18 +32,12 @@ LeagueStore.getMatching = function(searchString){
 
 LeagueStore.resetLeaguesList = function(leagues){
 
-  debugger;
-
   _leagues = {};
 
   if (leagues[0]){
     leagues.forEach(function(league){
-      _leagues[league.id] = {
-        id: league.id,
-        ownerId: league.ownerId,
-        name: league.name
-      };
-    });
+      _leagues[league.id] = league;
+    })
   }
 
   LeagueStore.__emitChange();
