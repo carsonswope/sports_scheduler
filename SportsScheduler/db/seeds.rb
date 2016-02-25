@@ -48,7 +48,7 @@ general = [
   }
 ]
 
-l.save_availabilities(specific, general)
+# l.save_availabilities(specific, general)
 
 t1 = Team.create(owner_id: u.id, name: 'goons', contact_name: 'bill', email: 'bill@gmail.com', phone: '503-555-5555')
 t2 = Team.create(owner_id: u.id, name: 'borbs', contact_name: 'bob', email: 'bob@gmail.com', phone: '503-999-9999')
