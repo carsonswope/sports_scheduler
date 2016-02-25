@@ -1,0 +1,131 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ * {
+   font-size: 400;
+   font-family: 'Lato', sans-serif;
+   padding: 0;
+   margin: 0;
+ }
+
+.day-view {
+
+  display: inline-block;
+  border: 3px solid #9DB198;
+  border-radius: 4px;
+  margin: -1px;
+  box-sizing: border-box;
+  position: relative;
+
+}
+
+.day-view-header {
+
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  height: 15px;
+}
+
+.day-view-main {
+  /*margin: 5px;*/
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.day-view-footer{
+  display: block;
+  margin: 5px;
+  height: 10px;
+}
+
+.day-view-main-time{
+  position: relative;
+  width: 70px;
+  height: 100%;
+  font-size: 15px;
+  white-space: nowrap;
+  background-color: white;
+  /*margin-right: 10px;*/
+}
+
+.day-view-start-time{
+  position: absolute;
+  top: -9px;
+  width: 70px;
+  text-align: right;
+}
+
+.day-view-end-time{
+  position: absolute;
+  bottom: -8px;
+  width: 70px;
+  text-align: right;
+  right: 0px;
+}
+
+.day-view-field{
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.day-view-field-label{
+  position: absolute;
+  font-size: 15px;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.day-view-event{
+  background-color: #F0F8FF;
+  box-sizing: border-box;
+  border: 2px solid #9DB198;
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.day-view-event-mouseover-detail{
+  display: none;
+  padding: 0;
+  width: 70px;
+  text-align: right;
+  z-index: 2;
+}
+
+.day-view-event:hover {
+  background-color: #E7D8BB;
+}
+
+.day-view-event:hover .day-view-event-mouseover-detail{
+  display: block;
+  color: #9DB198;
+}
+
+.block-beneath {
+  background-color: white;
+}
+
+hr {
+  position: absolute;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 3px solid #9DB198;
+  padding: 0;
+}
