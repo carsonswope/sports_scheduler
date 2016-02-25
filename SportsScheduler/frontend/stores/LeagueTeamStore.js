@@ -45,10 +45,49 @@ LeagueTeamStore.resetListFromLeagues = function(newList) {
   LeagueTeamStore.__emitChange();
 };
 
+LeagueTeamStore.addLeagueTeam = function(pair) {
+  if (!_memberships.some(function(membership){
+      return (membership.leagueId === pair.leagueId &&
+              membership.teamId === pair.teamId);
+      })) {
+
+        _memberships.push({
+          leagueId: pair.leagueId,
+          teamId: pair.teamId
+        });
+
+  }
+
+  LeagueTeamStore.__emitChange();
+}
+
+LeagueTeamStore.removeLeagueTeam = function(pair) {
+  var index = -1;
+  for (var i = 0; i < _memberships.length; i++) {
+    if (_memberships[i].leagueId === pair.leagueId &&
+        _memberships[i].teamId === pair.teamId) {
+      index = i;
+      break;
+    }
+  }
+
+  _memberships.splice(i, 1);
+  
+  LeagueTeamStore.__emitChange();
+
+}
+
 LeagueTeamStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case LeagueConstants.actions.RESET_LEAGUES_LIST:
-    LeagueTeamStore.resetListFromLeagues(payload.leagues);
+      LeagueTeamStore.resetListFromLeagues(payload.leagues);
+      break;
+    case LeagueConstants.actions.ADD_LEAGUE_TEAM:
+      LeagueTeamStore.addLeagueTeam(payload.pair);
+      break;
+    case LeagueConstants.actions.REMOVE_LEAGUE_TEAM:
+      LeagueTeamStore.removeLeagueTeam(payload.pair);
+      break;
   }
 };
 

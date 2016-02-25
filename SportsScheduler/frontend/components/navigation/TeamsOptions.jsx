@@ -20,7 +20,7 @@ var TeamsOptions = React.createClass({
     return (
       <div className="navbar-expanded"
         style={{height: NavConstants.OPTIONS_HEIGHT}}>
-        <SearchBar tab={'TEAMS'} option={'nameSearch'} />
+        <SearchBar takeFocus={true} tab={'TEAMS'} option={'nameSearch'} />
         <NewButton tab={'TEAMS'} name={'Add a team'} />
       </div>
     );

@@ -30,6 +30,7 @@ var IndexPage = React.createClass({
   },
 
   componentDidMount: function(){
+
     this.resourceListener = this.state.store.addListener(this.resourceChange);
     this.navListener = NavStore.addListener(this.navChange);
   },
@@ -41,6 +42,7 @@ var IndexPage = React.createClass({
   },
 
   resourceChange: function(){
+
     var items = this.state.store.getMatching(this.state.options.nameSearch);
     var focused = items.length === 1 ?
       items[0].id : this.state.focused;
@@ -53,11 +55,19 @@ var IndexPage = React.createClass({
   },
 
   navChange: function(){
-    if (NavStore.currentTab() !== this.state.resource) {
+
+    // debugger;
+
+    if (NavConstants.MAIN_PAGES[NavStore.currentTab()] !== IndexPage) {
+
+    } else if (NavStore.currentTab() !== this.state.resource) {
 
       var resource = NavStore.currentTab();
       var options = NavStore.options(resource);
       var store = NavConstants.STORES[resource];
+
+      this.resourceListener.remove();
+      this.resourceListener = store.addListener(this.resourceChange);
 
       var items = store.getMatching(options.nameSearch);
       var focused = items.length === 1 ?
@@ -70,6 +80,7 @@ var IndexPage = React.createClass({
         options: options,
         focused: focused
       });
+
     } else {
 
       var options = NavStore.options(

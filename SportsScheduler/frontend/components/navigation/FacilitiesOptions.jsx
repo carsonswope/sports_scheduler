@@ -14,7 +14,7 @@ var FaciltiesOptions = React.createClass({
     return (
       <div className="navbar-expanded"
         style={{height: NavConstants.OPTIONS_HEIGHT}}>
-        <SearchBar tab={'FACILITIES'} option={'nameSearch'} />
+        <SearchBar takeFocus={true} tab={'FACILITIES'} option={'nameSearch'} />
         <NewButton tab={'FACILITIES'} name={'Add a facility'} />
       </div>
     );

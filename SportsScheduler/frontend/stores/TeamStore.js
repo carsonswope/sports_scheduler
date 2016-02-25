@@ -11,6 +11,14 @@ TeamStore.all = function() {
   });
 };
 
+TeamStore.opposite = function(ids) {
+
+  return Object.keys(_teams).filter(function(i){
+    return ids.indexOf(parseInt(i)) === -1
+  });
+
+};
+
 TeamStore.find = function(id) {
   return _teams[id];
 };

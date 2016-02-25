@@ -11,6 +11,14 @@ LeagueStore.all = function() {
   });
 };
 
+LeagueStore.opposite = function(ids) {
+
+  return Object.keys(_leagues).filter(function(i){
+    return ids.indexOf(parseInt(i)) === -1
+  });
+
+};
+
 LeagueStore.find = function(id) {
   return _leagues[id];
 };
@@ -45,7 +53,10 @@ LeagueStore.resetLeaguesList = function(leagues){
 
 LeagueStore.addLeague = function(league) {
 
+  debugger;
+
   _leagues[league.id] = league;
+
   LeagueStore.__emitChange();
 }
 

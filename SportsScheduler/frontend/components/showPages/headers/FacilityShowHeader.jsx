@@ -7,9 +7,7 @@ var FacilityShowHeader = React.createClass({
   render: function() {
     return (
       <div >
-        {this.props.item.id}
-        {this.props.item.name}
-        hello from facility showheader
+        {this.props.item.id} - {this.props.item.name}
       </div>
     );
   }

@@ -53,7 +53,7 @@ var SearchBar = React.createClass({
             type="text"
             id="search"
             value={this.state.searchValue}
-            onChange={this.changeSearch} />
+            onChange={this.changeSearch}/>
           <div className="navbar-options-clear-icon"
             onClick={this.clearSearch}> X </div>
         </div>

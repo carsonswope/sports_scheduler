@@ -62,15 +62,17 @@
 }
 
 .navbar-options-search-icon{
-  position: absolute;
+  position: relative;
   width: 22px;
   height: 20px;
   margin: 5px;
   margin-top: 10px;
+  display: inline-block;
 }
 
 .text-entry-box{
   border: 0px;
+  position: absolute;
   outline: none;
   font-size: 17px;
   text-align: right 2px;
@@ -78,20 +80,22 @@
 }
 
 .navbar-options-search-box{
-  position: absolute;
-  left: 32px;
-  top: 7px;
+  position: relative;
+  top: -12px;
   /*margin: auto;*/
   width: 125px;
   z-index: 4;
+  display: inline-block;
 }
 
 .navbar-options-clear-icon{
-  position: absolute;
-  top: 7px;
-  right: 9px;
+  position: relative;
+  top: -7px;
+  left: 5px;
   font-size: 22px;
   color: #777;
+  z-index: 5;
+  display: inline-block;
 }
 
 .navbar-options-clear-icon:hover{
@@ -104,7 +108,7 @@
 
 .navbar-options-new-button{
   position: relative;
-  top: 70px;
+  top: 20px;
   left: 19px;
   border-radius: 9px;
   text-align: center;

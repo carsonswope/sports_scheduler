@@ -7,9 +7,7 @@ var LeagueShowHeader = React.createClass({
   render: function() {
     return (
       <div >
-        {this.props.item.id}
-        {this.props.item.name}
-        hello from league showheader
+        {this.props.item.id} - {this.props.item.name}
       </div>
     );
   }

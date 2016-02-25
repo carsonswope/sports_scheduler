@@ -7,9 +7,8 @@ var TeamShowHeader = React.createClass({
   render: function() {
     return (
       <div >
-        {this.props.item.id}
+        {this.props.item.id} - 
         {this.props.item.name}
-        hello from header
       </div>
     );
   }

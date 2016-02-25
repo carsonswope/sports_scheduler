@@ -96,7 +96,7 @@ var NewTeam = require('../components/newPages/NewTeam');
 exports.ADD_PAGES = {
   LEAGUES: NewLeague,
   TEAMS: NewTeam,
-  FACILITES: NewFacility
+  FACILITIES: NewFacility
 };
 
 exports.DEFAULT_OPTIONS = {
@@ -131,6 +131,12 @@ exports.DEFAULT_OPTIONS = {
     teamsList: 'ALL',
     leaguesList: 'ALL',
     facilitiesList: 'ALL'
+  },
+
+  //options more publically accessible
+
+  ADD_TO_LEAGUE: {
+    nameSearch: ''
   }
 };
 

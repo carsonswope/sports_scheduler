@@ -18,9 +18,10 @@ var NewLeague = React.createClass({
     };
   },
 
-  updateGameDatesInput: function(newGameDates){
-    this.setState({gameDates: newGameDates });
-
+  updateGameDatesInput: function(newGameDate){
+    // var newGameDates = this.state.gameDates.concat([newGameDate])
+    // this.setState({gameDates: newGameDates });
+    console.log(newGameDate);
   },
 
   submitForm: function(e) {
@@ -41,7 +42,7 @@ var NewLeague = React.createClass({
               valueLink={this.linkState('name')} />
           </div>
 
-          <GameDatesInput update={this.updateGameDatesInput} />
+          <GameDatesInput dates={this.state.gameDates} update={this.updateGameDatesInput} />
 
           <input className="new-submit-button"
             type="submit" value="create league" />

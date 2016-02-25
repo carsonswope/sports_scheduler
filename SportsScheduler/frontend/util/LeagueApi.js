@@ -27,3 +27,31 @@ exports.attemptCreateLeague = function(league) {
     }
   });
 };
+
+exports.attemptCreateLeagueTeam = function(leagueId, teamId) {
+
+  $.ajax({
+    url: 'api/league_teams',
+    type: 'POST',
+    dataType: 'json',
+    data: {league_team: {league_id: leagueId, team_id: teamId}},
+    success: function(response){
+      LeagueActions.receiveLeagueTeam(response);
+    }
+  });
+
+};
+
+exports.attemptDestroyLeagueTeam = function(leagueId, teamId) {
+
+  $.ajax({
+    url: 'api/league_teams/0',
+    type: 'DELETE',
+    dataType: 'json',
+    data: {league_team: {league_id: leagueId, team_id: teamId}},
+    success: function(response){
+      LeagueActions.receiveDestroyedLeagueTeam(response);
+    }
+  });
+
+};

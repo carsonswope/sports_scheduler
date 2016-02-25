@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :facilities, only: [:index, :create]
     resources :teams, only: [:index, :create]
     resources :leagues, only: [:index, :create]
+    resources :league_teams, only: [:create, :destroy]
     resources :events, only: [:index]
     resource :session, only: [:show, :create, :destroy]
   end

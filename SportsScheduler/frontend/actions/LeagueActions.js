@@ -25,3 +25,26 @@ exports.receiveCreateResponse = function(league) {
     league: league
   });
 };
+
+exports.createLeagueTeam = function(leagueId, teamId) {
+  LeagueApi.attemptCreateLeagueTeam(leagueId, teamId);
+};
+
+exports.receiveLeagueTeam = function(response) {
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.ADD_LEAGUE_TEAM,
+    pair: response
+  });
+}
+
+exports.destroyLeagueTeam = function(leagueId, teamId) {
+  LeagueApi.attemptDestroyLeagueTeam(leagueId, teamId);
+};
+
+exports.receiveDestroyedLeagueTeam = function(response) {
+
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.REMOVE_LEAGUE_TEAM,
+    pair: response
+  });
+}
