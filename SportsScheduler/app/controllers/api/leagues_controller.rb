@@ -10,18 +10,29 @@ class Api::LeaguesController < ApplicationController
   end
 
   def create
-    @league = League.new(league_params)
+
+    debugger
+
+    @league = League.new(
+      name: params.require(:league)[:name],
+      num_games: params.require(:league)[:num_games],
+      event_duration: params.require(:league)[:event_duration]
+    )
     @league.owner_id = current_user.id
+
     @league.save
+
+    @league.save_availabilities(
+      params[:league][:game_dates][:specific],
+      params[:league][:game_dates][:general]
+    )
+
+    @league.save_facility_memberships(
+      params[:league][:facilities]
+    )
+
     render :show
   end
 
-  private
-
-  def league_params
-    params.require(:league).permit(:name)
-  end
-
-  
 
 end

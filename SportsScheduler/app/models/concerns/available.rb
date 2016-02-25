@@ -12,19 +12,45 @@ module Available
 
     to_save = []
 
-    specific.each do |specific_availability|
-      a = SpecificAvailability.new(specific_availability)
-      a.specific_available_id = self.id
-      a.specific_available_type = self.class.to_s
-      to_save.push( a )
+    if specific
+      specific.each do |specific_availability|
+
+        debugger;
+
+        params = {
+          positive: specific_availability[1][:positive],
+          date: specific_availability[1][:date],
+          time_start: specific_availability[1][:time_start],
+          time_end: specific_availability[1][:time_end]
+        }
+
+        a = SpecificAvailability.new(params)
+        a.specific_available_id = self.id
+        a.specific_available_type = self.class.to_s
+        to_save.push( a )
+      end
     end
 
-    general.each do |general_availability|
-      a = GeneralAvailability.new(general_availability)
-      a.general_available_id = self.id
-      a.general_available_type = self.class.to_s
-      to_save.push( a )
+    if general
+      general.each do |general_availability|
+
+        params = {
+          positive: general_availability[1][:positive],
+          first_date: general_availability[1][:first_date],
+          last_date: general_availability[1][:last_date],
+          time_start: general_availability[1][:time_start],
+          time_end: general_availability[1][:time_end],
+          day_of_week: general_availability[1][:day_of_week]
+        }
+
+        a = GeneralAvailability.new(params)
+        a.general_available_id = self.id
+        a.general_available_type = self.class.to_s
+        to_save.push( a )
+      end
     end
+
+    debugger;
 
     SpecificAvailability.transaction do
       GeneralAvailability.transaction do

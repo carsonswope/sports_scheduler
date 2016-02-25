@@ -34,10 +34,8 @@ var FacilitiesInput = React.createClass({
 
       checkedBool = this.props.fields.indexOf(parseInt(field.id)) !== -1;
 
-      debugger;
-
       return(
-        <div>
+        <div key={i}>
           <input type='checkbox' onChange={this.registerCheck.bind(this, field.id)} checked={checkedBool}/>
 
           {field.name}

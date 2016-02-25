@@ -10,6 +10,7 @@ var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var LeagueActions = require('../../actions/LeagueActions');
 
 
+
 var NewLeague = React.createClass({
 
   mixins: [LinkedStateMixin],
@@ -17,7 +18,7 @@ var NewLeague = React.createClass({
   getInitialState: function(){
     return {
       name: '',
-      numTeams: '',
+      numGames: '',
       facilities: [],
       gameDuration: '',
       gameDates: {
@@ -41,6 +42,7 @@ var NewLeague = React.createClass({
 
   submitForm: function(e) {
     e.preventDefault();
+    debugger;
     LeagueActions.createLeague({league: this.state});
   },
 
@@ -79,7 +81,6 @@ var NewLeague = React.createClass({
 
   checkAllFacilities: function(list) {
 
-    debugger;
     this.setState({facilities: list});
   },
 

@@ -41,8 +41,8 @@ class League < ActiveRecord::Base
     memberships = facility_ids.map do |facility_id|
       LeagueFacilityMembership.new(
         league_id: self.id,
-        facility_id: facility_id
-      )
+        facility_id: facility_id.to_i
+      );
     end
 
     LeagueFacilityMembership.transaction do
