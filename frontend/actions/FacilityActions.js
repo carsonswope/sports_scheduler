@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/Dispatcher');
 var FacilityApi = require('../util/FacilityApi');
 var FacilityConstants = require('../constants/FacilityConstants');
 

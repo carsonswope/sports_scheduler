@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
 var TeamConstants = require('../constants/TeamConstants');
 

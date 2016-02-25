@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/Dispatcher');
 var TeamApi = require('../util/TeamApi');
 var TeamConstants = require('../constants/TeamConstants');
 

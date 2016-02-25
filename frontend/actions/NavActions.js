@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/Dispatcher');
 var NavConstants = require('../constants/NavConstants');
 
 exports.setTab = function(tab) {

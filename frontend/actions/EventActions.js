@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/Dispatcher');
 var EventApi = require('../util/EventApi');
 var EventConstants = require('../constants/EventConstants');
 
