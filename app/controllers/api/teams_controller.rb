@@ -13,6 +13,14 @@ class Api::TeamsController < ApplicationController
     render :show
   end
 
+  def destroy
+
+    @team = Team.find_by_id(params[:id])
+    @team.destroy if @team
+
+    render :destroy
+  end
+
   private
 
   def team_params

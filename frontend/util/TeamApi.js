@@ -32,3 +32,14 @@ exports.attemptCreateTeam = function(team) {
     }
   });
 };
+
+exports.attemptDestroy = function(id) {
+  $.ajax({
+    url: 'api/teams/' + id,
+    type: 'DELETE',
+    dataType: 'json',
+    success: function(response){
+      TeamActions.receiveDestroyedTeam(response);
+    }
+  });
+};

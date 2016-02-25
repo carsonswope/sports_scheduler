@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var LeagueApi = require('../util/LeagueApi');
 var LeagueConstants = require('../constants/LeagueConstants');
+var AvailabilityHelper = require('../util/AvailabilityHelper');
 
 // League Actions
 
@@ -9,6 +10,7 @@ exports.fetch = function() {
 };
 
 exports.receiveFetch = function(leagues) {
+
   AppDispatcher.dispatch({
     actionType: LeagueConstants.actions.RESET_LEAGUES_LIST,
     leagues: leagues
@@ -30,34 +32,13 @@ exports.createLeague = function(league) {
   }
 
   if (l.gameDates.general) {
-
     leagueParams.game_dates['general'] =
-      l.gameDates.general.map(function(genDate){
-        return({
-          first_date: genDate.startDate,
-          last_date: genDate.endDate,
-          time_start: genDate.startTime,
-          time_end: genDate.endTime,
-          positive: true,
-          day_of_week: genDate.dayOfWeek
-        });
-    });
-
-    debugger;
+      AvailabilityHelper.generalDatesMap(l.gameDates.general);
   }
 
   if (l.gameDates.specific) {
-
     leagueParams.game_dates['specific'] =
-      l.gameDates.specific.map(function(spcDate){
-        return({
-          date: spcDate.date,
-          time_start: spcDate.startTime,
-          time_end: spcDate.endTime,
-          positive: true,
-        });
-    });
-
+      AvailabilityHelper.specificDatesMap(l.gameDates.specific);
   }
 
   debugger;
@@ -92,5 +73,41 @@ exports.receiveDestroyedLeagueTeam = function(response) {
   AppDispatcher.dispatch({
     actionType: LeagueConstants.actions.REMOVE_LEAGUE_TEAM,
     pair: response
+  });
+}
+
+exports.createLeagueFacility = function(leagueId, facilityId) {
+  LeagueApi.attemptCreateLeagueFacility(leagueId, facilityId);
+};
+
+exports.receiveLeagueFacility = function(response) {
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.ADD_LEAGUE_FACILITY,
+    pair: response
+  });
+}
+
+exports.destroyLeagueFacility = function(leagueId, facilityId) {
+  LeagueApi.attemptDestroyLeagueFacility(leagueId, facilityId);
+};
+exports.receiveDestroyedLeagueFacility = function(response) {
+
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.REMOVE_LEAGUE_FACILITY,
+    pair: response
+  });
+};
+
+
+
+exports.attemptDestroyLeague = function(leagueId) {
+  LeagueApi.attemptDestroy(leagueId);
+};
+
+exports.receiveDestroyedLeague = function(league) {
+
+  AppDispatcher.dispatch({
+    actionType: LeagueConstants.actions.REMOVE_LEAGUE,
+    league: league
   });
 }

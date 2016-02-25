@@ -5,6 +5,7 @@ var NavActions = require('../../actions/NavActions');
 var Header = React.createClass({
 
   cancel: function() {
+    debugger;
     NavActions.setTabOption(this.props.tab, 'adding', false);
   },
 

@@ -24,7 +24,7 @@ var NewFacility = React.createClass({
   render: function() {
     return (
       <div>
-        <NewHeader tab={'LEAGUES'} title={'Add a facility:'} />
+        <NewHeader tab={'FACILITIES'} title={'Add a facility:'} />
 
         <form onSubmit={this.submitForm} >
           <div className="new-page-text-field">

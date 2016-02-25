@@ -1,22 +1,17 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
 var LeagueConstants = require('../constants/LeagueConstants');
+var StoreHelper = require('../util/StoreHelper');
 
 var _leagues = {};
 var LeagueStore = new Store(AppDispatcher);
 
 LeagueStore.all = function() {
-  return Object.keys(_leagues).map(function(i){
-    return _leagues[i];
-  });
+  return StoreHelper.all(_leagues);
 };
 
 LeagueStore.opposite = function(ids) {
-
-  return Object.keys(_leagues).filter(function(i){
-    return ids.indexOf(parseInt(i)) === -1
-  });
-
+  return StoreHelper.opposite(_leagues, ids);
 };
 
 LeagueStore.find = function(id) {
@@ -52,13 +47,14 @@ LeagueStore.resetLeaguesList = function(leagues){
 };
 
 LeagueStore.addLeague = function(league) {
-
-  debugger;
-
   _leagues[league.id] = league;
-
   LeagueStore.__emitChange();
-}
+};
+
+LeagueStore.removeLeague = function(league) {
+  delete _leagues[league.id];
+  LeagueStore.__emitChange();
+};
 
 LeagueStore.__onDispatch = function(payload){
   switch (payload.actionType) {
@@ -67,6 +63,9 @@ LeagueStore.__onDispatch = function(payload){
       break;
     case LeagueConstants.actions.ADD_LEAGUE:
       LeagueStore.addLeague(payload.league);
+      break;
+    case LeagueConstants.actions.REMOVE_LEAGUE:
+      LeagueStore.removeLeague(payload.league);
       break;
 
   }

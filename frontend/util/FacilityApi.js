@@ -29,3 +29,15 @@ exports.attemptCreateFacility = function(facility) {
   });
 
 };
+
+
+exports.attemptDestroy = function(id) {
+  $.ajax({
+    url: 'api/facilities/' + id,
+    type: 'DELETE',
+    dataType: 'json',
+    success: function(response){
+      FacilityActions.receiveDestroyedFacility(response);
+    }
+  });
+};

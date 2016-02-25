@@ -34,5 +34,13 @@ class Api::LeaguesController < ApplicationController
     render :show
   end
 
+  def destroy
+
+    @league = League.find_by_id(params[:id])
+    @league.destroy if @league
+
+    render :destroy
+  end
+
 
 end

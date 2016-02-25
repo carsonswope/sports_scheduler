@@ -10,6 +10,7 @@ var NavStore = require('../stores/NavStore');
 var UserStore = require('../stores/UserStore');
 
 var LeagueTeamStore = require('../stores/LeagueTeamStore');
+var LeagueFacilityStore = require('../stores/LeagueFacilityStore');
 
 var UserActions = require('../actions/UserActions');
 

@@ -2,16 +2,18 @@ var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
 var FacilityConstants = require('../constants/FacilityConstants');
 var UserConstants = require('../constants/UserConstants');
-
+var StoreHelper = require('../util/StoreHelper');
 
 var _facilities = {};
 
 var FacilityStore = new Store(AppDispatcher);
 
 FacilityStore.all = function() {
-  return Object.keys(_facilities).map(function(i){
-    return _facilities[i];
-  });
+  return StoreHelper.all(_facilities);
+};
+
+FacilityStore.opposite = function(ids) {
+  return StoreHelper.opposite(_facilities, ids);
 };
 
 FacilityStore.find = function(id) {
@@ -46,11 +48,19 @@ FacilityStore.resetFacilitiesList = function(facilities){
 
 
 FacilityStore.addFacility = function(facility) {
-
   _facilities[facility.id] = facility;
   FacilityStore.__emitChange();
-
 };
+
+
+FacilityStore.removeFacility = function(facility) {
+
+  debugger;
+
+  delete _facilities[facility.id];
+  FacilityStore.__emitChange();
+};
+
 
 FacilityStore.__onDispatch = function(payload){
 
@@ -60,6 +70,9 @@ FacilityStore.__onDispatch = function(payload){
       break;
     case FacilityConstants.actions.ADD_FACILITY:
       FacilityStore.addFacility(payload.facility);
+      break;
+    case FacilityConstants.actions.REMOVE_FACILITY:
+      FacilityStore.removeFacility(payload.facility);
       break;
   }
 

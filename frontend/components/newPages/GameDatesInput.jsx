@@ -11,12 +11,21 @@ var GameDatesInput = React.createClass({
 
   getInitialState: function(){
 
+    var today = new Date();
+    var year = today.getYear()+1900;
+    var month = (today.getMonth()+1).toString();
+    var day = today.getDate();
+    while (month.length < 2) { month = "0" + month;}
+    while (day.length < 2 ) {day = "0" + day; }
+    this.today = "" + year + "-" + month + "-" + day;
+
+
     return {  adding: false,
-              startDate: null,
-              endDate: null,
-              startTime: null,
-              endTime: null,
-              dayOfWeek: null
+              startDate: this.today,
+              endDate: this.today,
+              startTime: '00:00',
+              endTime: '23:59',
+              dayOfWeek: 0
 
     };
 
@@ -54,11 +63,11 @@ var GameDatesInput = React.createClass({
     }
 
     this.setState({  adding: false,
-              startDate: null,
-              endDate: null,
-              startTime: null,
-              endTime: null,
-              dayOfWeek: null
+              startDate: this.today,
+              endDate: this.today,
+              startTime: '00:00',
+              endTime: '23:59',
+              dayOfWeek: 0
 
     });
     this.props.update(params);

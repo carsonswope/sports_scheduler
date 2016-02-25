@@ -13,6 +13,14 @@ class Api::FacilitiesController < ApplicationController
     render :show
   end
 
+  def destroy
+
+    @facility = Facility.find_by_id(params[:id])
+    @facility.destroy if @facility
+
+    render :destroy
+  end
+
   private
 
   def facility_params

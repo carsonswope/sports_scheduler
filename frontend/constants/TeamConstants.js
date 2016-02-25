@@ -1,4 +1,5 @@
 exports.actions = {
   RESET_TEAMS_LIST: 'RESET_TEAMS_LIST',
+  REMOVE_TEAM: 'REMOVE_TEAM',
   ADD_TEAM: 'ADD_TEAM'
 };

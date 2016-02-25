@@ -25,6 +25,16 @@ exports.receiveCreateResponse = function(team) {
     actionType: TeamConstants.actions.ADD_TEAM,
     team: team
   });
-
-
 };
+
+exports.attemptDestroyTeam = function(teamId) {
+  TeamApi.attemptDestroy(teamId);
+};
+
+exports.receiveDestroyedTeam = function(team) {
+
+  AppDispatcher.dispatch({
+    actionType: TeamConstants.actions.REMOVE_TEAM,
+    team: team
+  });
+}

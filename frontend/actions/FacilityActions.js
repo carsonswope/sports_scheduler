@@ -23,3 +23,17 @@ exports.receiveCreateResponse = function(facility) {
     facility: facility
   });
 };
+
+exports.attemptDestroyFacility = function(facilityId) {
+  FacilityApi.attemptDestroy(facilityId);
+};
+
+exports.receiveDestroyedFacility = function(facility) {
+
+  debugger;
+
+  AppDispatcher.dispatch({
+    actionType: FacilityConstants.actions.REMOVE_FACILITY,
+    facility: facility
+  });
+};
