@@ -33,7 +33,6 @@
 }
 
 .day-view-header {
-
   display: block;
   text-align: center;
   margin-top: 5px;
@@ -48,13 +47,13 @@
   margin-bottom: 10px;
 }
 
-.day-view-footer{
+.day-view-footer {
   display: block;
   margin: 5px;
   height: 10px;
 }
 
-.day-view-main-time{
+.day-view-main-time {
   position: relative;
   width: 70px;
   height: 100%;
