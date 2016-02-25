@@ -6,7 +6,7 @@ json.array! @teams do |t|
   json.phone t.phone
   json.email t.email
 
-  json.specific_availabilites t.specific_availabilities do |spc_a|
+  json.specificAvailabilities t.specific_availabilities do |spc_a|
 
     json.id             spc_a.id
     json.positive       spc_a.positive
@@ -17,7 +17,7 @@ json.array! @teams do |t|
 
   end
 
-  json.general_availabilities t.general_availabilities do |gen_a|
+  json.generalAvailabilities t.general_availabilities do |gen_a|
 
     json.id             gen_a.id
     json.positive       gen_a.positive

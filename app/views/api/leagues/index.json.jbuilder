@@ -5,7 +5,7 @@ json.array! @leagues do |league|
   json.teams league.league_team_memberships.map { |t| t.team_id }
   json.facilities league.league_facility_memberships.map { |f| f.facility_id }
 
-  json.specific_availabilites league.specific_availabilities do |spc_a|
+  json.specificAvailabilities league.specific_availabilities do |spc_a|
 
     json.id             spc_a.id
     json.positive       spc_a.positive
@@ -16,7 +16,7 @@ json.array! @leagues do |league|
 
   end
 
-  json.general_availabilities league.general_availabilities do |gen_a|
+  json.generalAvailabilities league.general_availabilities do |gen_a|
 
     json.id             gen_a.id
     json.positive       gen_a.positive

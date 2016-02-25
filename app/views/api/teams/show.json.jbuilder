@@ -6,7 +6,7 @@ if @team.persisted?
   json.phone @team.phone
   json.email @team.email
 
-  json.specific_availabilites @team.specific_availabilities do |spc_a|
+  json.specificAvailabilities @team.specific_availabilities do |spc_a|
 
     json.id             spc_a.id
     json.positive       spc_a.positive
@@ -17,7 +17,7 @@ if @team.persisted?
 
   end
 
-  json.general_availabilities @team.general_availabilities do |gen_a|
+  json.generalAvailabilities @team.general_availabilities do |gen_a|
 
     json.id             gen_a.id
     json.positive       gen_a.positive

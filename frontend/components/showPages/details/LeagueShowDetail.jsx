@@ -9,6 +9,7 @@ var FacilityStore = require('../../../stores/FacilityStore');
 var LeagueActions = require('../../../actions/LeagueActions');
 
 var AddToComponent = require('../../navigation/AddToComponent');
+var GameDatesInput = require('../../newPages/GameDatesInput');
 
 var LeagueShowDetail = React.createClass({
 
@@ -16,7 +17,11 @@ var LeagueShowDetail = React.createClass({
 
     return {
       teams: LeagueTeamStore.teams(this.props.item.id),
-      facilities: LeagueFacilityStore.facilities(this.props.item.id)
+      facilities: LeagueFacilityStore.facilities(this.props.item.id),
+      gameDates: {
+        specific: this.props.item.specificAvailabilities,
+        general:  this.props.item.generalAvailabilities
+      }
     };
   },
 
@@ -60,6 +65,9 @@ var LeagueShowDetail = React.createClass({
   },
 
   render: function() {
+
+    debugger;
+
     var league = this.props.item;
 
     var teams = this.state.teams.map(function(teamId){

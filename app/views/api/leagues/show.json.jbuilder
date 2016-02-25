@@ -3,7 +3,7 @@ if @league.persisted?
   json.ownerId @league.owner_id
   json.name @league.name
 
-  json.specific_availabilites @league.specific_availabilities do |spc_a|
+  json.specificAvailabilities @league.specific_availabilities do |spc_a|
 
     json.id             spc_a.id
     json.positive       spc_a.positive
@@ -14,7 +14,7 @@ if @league.persisted?
 
   end
 
-  json.general_availabilities @league.general_availabilities do |gen_a|
+  json.generalAvailabilities @league.general_availabilities do |gen_a|
 
     json.id             gen_a.id
     json.positive       gen_a.positive
