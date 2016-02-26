@@ -1,6 +1,6 @@
 if @availability.persisted?
 
-  json.availId @availability.id
+  json.id @availability.id
   json.startTime @availability.time_start
   json.endTime @availability.time_end
   json.positive @availability.positive

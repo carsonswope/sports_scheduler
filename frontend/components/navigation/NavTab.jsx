@@ -19,7 +19,7 @@ var NavTab = React.createClass({
   },
 
   changeNav: function(){
-    if (NavStore.currentTab() !== this.props.name){
+    if (NavStore.currentTab() !== this.props.name) {
       this.setState({expanded: false});
     } else if (this.props.tabOptions) {
 
@@ -30,7 +30,7 @@ var NavTab = React.createClass({
   handleClick: function(e){
     e.preventDefault();
 
-    if (this.props.selectedTab !== this.props.name){
+    if (this.props.selectedTab !== this.props.name) {
       this.props.setTab(this.props.name);
     } else {
       if (this.props.tabOptions) {

@@ -7,7 +7,6 @@ var TeamShowHeader = React.createClass({
 
   deleteTeam: function(){
     TeamActions.attemptDestroyTeam(this.props.item.id);
-
   },
 
   render: function() {

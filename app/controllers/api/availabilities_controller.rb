@@ -2,7 +2,29 @@ class Api::AvailabilitiesController < ApplicationController
 
   def create
 
-    debugger;
+    if params[:date][:availType] == 'GENERAL'
+      @availability = GeneralAvailability.new(
+        first_date: params[:date][:first_date],
+        last_date: params[:date][:last_date],
+        day_of_week: params[:date][:day_of_week],
+        general_available_id: params[:date][:general_available_id],
+        general_available_type: params[:date][:general_available_type]
+      )
+    elsif params[:date][:availType] == 'SPECIFIC'
+      @availability = SpecificAvailability.new(
+        date: params[:date][:date],
+        specific_available_id: params[:date][:specific_available_id],
+        specific_available_type: params[:date][:specific_available_type]
+      )
+    end
+
+    @availability.positive = params[:date][:positive]
+    @availability.time_start = params[:date][:time_start]
+    @availability.time_end = params[:date][:time_end]
+
+    @availability.save
+
+    render :create
 
   end
 

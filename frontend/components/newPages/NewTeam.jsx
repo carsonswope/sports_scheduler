@@ -30,8 +30,6 @@ var NewTeam = React.createClass({
   },
 
   updateGameDatesInput: function(newGameDate){
-
-
     var gameDates = this.state.gameDates;
 
     if (newGameDate.availType === 'SPECIFIC') {
@@ -44,8 +42,8 @@ var NewTeam = React.createClass({
   },
 
   removeGameDates: function(dateType, index){
-
     var gameDates = this.state.gameDates;
+
     if (dateType === 'SPECIFIC') {
       gameDates.specific.splice(index, 1);
         } else{

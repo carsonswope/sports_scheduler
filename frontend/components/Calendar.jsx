@@ -29,7 +29,7 @@ var Calendar = React.createClass({
 
     var days = [];
     var startDay = new Date(Date.parse('7/2/2016'));
-    var day =0;
+    var day = 0;
 
     while (day < 7) {
       days.push(

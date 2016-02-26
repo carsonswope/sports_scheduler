@@ -12,14 +12,12 @@ class Api::LeaguesController < ApplicationController
   end
 
   def create
-
     @league = League.new(
       name: params.require(:league)[:name],
       num_games: params.require(:league)[:num_games],
       event_duration: params.require(:league)[:event_duration]
     )
     @league.owner_id = current_user.id
-
     @league.save
 
     @league.save_availabilities(

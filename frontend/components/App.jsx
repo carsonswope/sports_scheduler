@@ -6,9 +6,7 @@ var NavBar = require('./NavBar');
 var Content = require('./Content');
 
 var NavStore = require('../stores/NavStore');
-
 var UserStore = require('../stores/UserStore');
-
 var LeagueTeamStore = require('../stores/LeagueTeamStore');
 var LeagueFacilityStore = require('../stores/LeagueFacilityStore');
 
@@ -18,7 +16,6 @@ var App = React.createClass({
 
   getInitialState: function() {
     return {
-
       dimensions: {
         width: window.innerWidth,
         height: window.innerHeight

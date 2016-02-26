@@ -40,7 +40,6 @@ var FacilityShowDetail = React.createClass({
   },
 
   render: function() {
-
     var facility = this.props.item;
 
     var leagues = this.state.leagues.map(function(leagueId){

@@ -79,7 +79,6 @@ var NewLeague = React.createClass({
   },
 
   checkAllFacilities: function(list) {
-
     this.setState({facilities: list});
   },
 

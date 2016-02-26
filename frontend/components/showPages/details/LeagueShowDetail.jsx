@@ -96,6 +96,8 @@ var LeagueShowDetail = React.createClass({
 
   removeGameDate: function(dateType, index){
 
+    debugger;
+
     var gameDates = this.state.gameDates;
     var dateToRemove;
 
@@ -109,7 +111,6 @@ var LeagueShowDetail = React.createClass({
   },
 
   render: function() {
-
     var league = this.props.item;
 
     var teams = this.state.teams.map(function(teamId){

@@ -65,7 +65,6 @@ var GameDatesInput = React.createClass({
   },
 
   remove: function(dateType, index) {
-
     this.props.remove(dateType, index);
   },
 

@@ -55,6 +55,27 @@ LeagueStore.removeLeague = function(league) {
   LeagueStore.__emitChange();
 };
 
+LeagueStore.addAvailability = function(a) {
+  if (a.resourceType === 'League') {
+
+    var league = _leagues[a.resourceId];
+
+    delete a['resourceType']
+    delete a['resourceId']
+
+    if (a.availType === 'GENERAL') {
+      delete a['availType']
+      league.generalAvailabilities.push(a);
+
+    } else {
+      delete a['availType']
+      league.specificAvailabilities.push(a);
+    }
+
+    LeagueStore.__emitChange();
+  }
+};
+
 LeagueStore.removeAvailability = function(a) {
   if (a.resourceType === 'League') {
 
@@ -90,6 +111,9 @@ LeagueStore.__onDispatch = function(payload){
       break;
     case AvailabilityConstants.actions.REMOVE_AVAILABILITY:
       LeagueStore.removeAvailability(payload.availability);
+      break;
+    case AvailabilityConstants.actions.ADD_AVAILABILITY:
+      LeagueStore.addAvailability(payload.availability);
       break;
 
   }

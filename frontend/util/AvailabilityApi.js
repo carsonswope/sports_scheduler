@@ -20,9 +20,14 @@ exports.attemptDestroy = function(availType, id){
 
 exports.attemptCreate = function(date){
 
-  debugger;
-
   $.ajax({
+    url: 'api/availability',
+    method: 'POST',
+    dataType: 'json',
+    data: { date },
+    success: function(response){
+      AvailabilityActions.receiveCreatedAvailability(response);
+    }
 
 
   });

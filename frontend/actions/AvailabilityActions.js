@@ -14,7 +14,6 @@ exports.receiveDestroyedAvailability = function(response){
     actionType: AvailabilityConstants.actions.REMOVE_AVAILABILITY,
     availability: response
   });
-  debugger;
 
 };
 
@@ -22,10 +21,12 @@ exports.attemptCreateAvailability = function(availabilityParams, availType, avai
 
   if (availabilityParams.availType === 'GENERAL') {
     var date = AvailabilityHelper.generalDate(availabilityParams)
+    date['availType'] = 'GENERAL';
     date['general_available_id'] = availId;
     date['general_available_type'] = availType;
   } else {
     var date = AvailabilityHelper.specificDate(availabilityParams)
+    date['availType'] = 'SPECIFIC';
     date['specific_available_id'] = availId;
     date['specific_available_type'] = availType;
   }
@@ -34,7 +35,11 @@ exports.attemptCreateAvailability = function(availabilityParams, availType, avai
 
 };
 
-exports.receiveCreatedAvailability = function(){
+exports.receiveCreatedAvailability = function(response){
 
+  AppDispatcher.dispatch({
+    actionType: AvailabilityConstants.actions.ADD_AVAILABILITY,
+    availability: response
+  });
 
 };

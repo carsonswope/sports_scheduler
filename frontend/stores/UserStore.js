@@ -1,10 +1,8 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
-
 var UserConstants = require('../constants/UserConstants');
 
 var UserStore = new Store(AppDispatcher);
-
 var _currentUser = null;
 
 UserStore.currentUser = function() {

@@ -10,6 +10,7 @@ class Api::FacilitiesController < ApplicationController
     @facility = Facility.new(facility_params)
     @facility.owner_id = current_user.id
     @facility.save
+
     render :show
   end
 

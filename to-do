@@ -14,3 +14,4 @@
 - Make a Header component (showPages/headers)
 
 - Look into renaming t_1 in the models
+- Look into jbuilder partials
