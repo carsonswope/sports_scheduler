@@ -140,6 +140,16 @@ exports.DEFAULT_OPTIONS = {
   }
 };
 
+var FacilityActions = require('../actions/FacilityActions');
+var LeagueActions = require('../actions/LeagueActions');
+var TeamActions = require('../actions/TeamActions');
+
+exports.destroyActions = {
+  FACILITIES: FacilityActions.attemptDestroyFacility,
+  LEAGUES: LeagueActions.attemptDestroyLeague,
+  TEAMS: TeamActions.attemptDestroyTeam,
+}
+
 exports.OPTIONS_HEIGHT = 110;
 exports.MAX_NAVBAR_TAB_HEIGHT = 40;
 exports.MIN_NAVBAR_TAB_HEIGHT = 27;

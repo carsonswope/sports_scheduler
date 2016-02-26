@@ -12,6 +12,9 @@ class Api::LeaguesController < ApplicationController
   end
 
   def create
+
+    # logic here for if it cant be created...
+
     @league = League.new(
       name: params.require(:league)[:name],
       num_games: params.require(:league)[:num_games],
@@ -20,10 +23,17 @@ class Api::LeaguesController < ApplicationController
     @league.owner_id = current_user.id
     @league.save
 
-    @league.save_availabilities(
-      params[:league][:game_dates][:specific],
-      params[:league][:game_dates][:general]
-    )
+    if params[:league].has_key?(:game_dates)
+      dates = params[:league][:game_dates]
+
+      specific = dates.has_key?(:specific) ? params[:league][:game_dates][:specific] : []
+      general = dates.has_key?(:general) ? params[:league][:game_dates][:general] : []
+
+      @league.save_availabilities(
+        specific, general
+      )
+
+    end
 
     @league.save_facility_memberships(
       params[:league][:facilities]

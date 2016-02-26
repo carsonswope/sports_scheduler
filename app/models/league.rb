@@ -38,16 +38,18 @@ class League < ActiveRecord::Base
   end
 
   def save_facility_memberships(facility_ids)
-    memberships = facility_ids.map do |facility_id|
-      LeagueFacilityMembership.new(
-        league_id: self.id,
-        facility_id: facility_id.to_i
-      );
-    end
+    if facility_ids
+      memberships = facility_ids.map do |facility_id|
+        LeagueFacilityMembership.new(
+          league_id: self.id,
+          facility_id: facility_id.to_i
+        );
+      end
 
-    LeagueFacilityMembership.transaction do
-      memberships.each do |m|
-        m.save
+      LeagueFacilityMembership.transaction do
+        memberships.each do |m|
+          m.save
+        end
       end
     end
   end

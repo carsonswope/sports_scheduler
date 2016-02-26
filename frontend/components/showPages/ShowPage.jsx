@@ -2,6 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var NavStore = require('../../stores/NavStore');
 var NavConstants = require('../../constants/NavConstants');
+var Header = require('./headers/Header');
 
 var ShowPage = React.createClass({
 
@@ -27,10 +28,14 @@ var ShowPage = React.createClass({
     var HeaderPage = NavConstants.SHOW_HEADERS[this.props.tabName];
     header = <HeaderPage item={this.props.item} toggleFocus={this.props.toggleFocus}/>
 
+    var BetterHeader = <Header item={this.props.item}
+      itemType={this.props.tabName}
+      toggleFocus={this.props.toggleFocus} />
+
     return (
       <div>
         <div className="show-main" onClick={this.callToggle}>
-          {header}
+          {BetterHeader}
         </div>
         {detail}
       </ div>

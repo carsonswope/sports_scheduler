@@ -1,5 +1,3 @@
-- Index page --> navChange
-  - Refactor this into helper methods, maybe break it into separate modules if you can.
 - Take logic out of render methods in every file, move it to helper methods.
 
 - Start styling once you're done with whatever feature you're on
