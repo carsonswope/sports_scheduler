@@ -41,6 +41,11 @@ var IndexPage = React.createClass({
     this.navListener.remove();
   },
 
+  changeListener: function(store){
+    this.resourceListener.remove();
+    this.resourceListener = store.addListener(this.resourceChange);
+  },
+
   resourceChange: function(){
 
     var items = this.state.store.getMatching(this.state.options.nameSearch);
@@ -54,59 +59,70 @@ var IndexPage = React.createClass({
 
   },
 
+  getMatchingItems: function(store, search){
+    return store.getMatching(search);
+  },
+
+  changePage: function(){
+
+    var resource = NavStore.currentTab();
+    var options = NavStore.options(resource);
+    var store = NavConstants.STORES[resource];
+
+    this.changeListener(store);
+
+    // var items = store.getMatching(options.nameSearch);
+    var items = this.getMatchingItems(store, options.nameSearch);
+    var focused = items.length === 1 ?
+      items[0].id : null;
+
+    this.setState({
+      resource: resource,
+      store: store,
+      items: items,
+      options: options,
+      focused: focused
+    });
+
+  },
+
+  updatePage: function(){
+
+    var options = NavStore.options( this.state.resource );
+    var items = this.getMatchingItems(
+      this.state.store,
+      this.state.options.nameSearch
+    );
+    var focused;
+
+    if (items.length === 1) {
+      focused = items[0].id;
+    } else if (items.length > this.state.items.length) {
+      focused = null;
+    } else {
+      focused = this.state.focused;
+    }
+
+    this.setState({
+      items: items,
+      options: options,
+      focused: focused
+    });
+
+  },
+
   navChange: function(){
 
-    // debugger;
-
     if (NavConstants.MAIN_PAGES[NavStore.currentTab()] !== IndexPage) {
-
+      //will be dismounted shortly....
+      return;
     } else if (NavStore.currentTab() !== this.state.resource) {
-
-      var resource = NavStore.currentTab();
-      var options = NavStore.options(resource);
-      var store = NavConstants.STORES[resource];
-
-      this.resourceListener.remove();
-      this.resourceListener = store.addListener(this.resourceChange);
-
-      var items = store.getMatching(options.nameSearch);
-      var focused = items.length === 1 ?
-        items[0].id : null;
-
-      this.setState({
-        resource: resource,
-        store: store,
-        items: items,
-        options: options,
-        focused: focused
-      });
-
+      this.changePage();
     } else {
-
-      var options = NavStore.options(
-        this.state.resource
-      );
-      var items = this.state.store.getMatching(
-        this.state.options.nameSearch
-      );
-      var focused;
-
-      if (items.length === 1) {
-        focused = items[0].id;
-      } else if (items.length > this.state.items.length){
-        focused = null;
-      } else {
-        focused = this.state.focused;
-      }
-
-      this.setState({
-        items: items,
-        options: options,
-        focused: focused
-      });
-
+      this.updatePage();
     }
   },
+
 
   toggleFocus: function(id){
     if (this.state.focused === id) {
@@ -116,9 +132,8 @@ var IndexPage = React.createClass({
     }
   },
 
-  render: function() {
-
-    var items = this.state.items.map(function(item){
+  itemsInIndex: function(){
+    return this.state.items.map(function(item){
 
       return(
         <ShowPage key={item.id}
@@ -128,6 +143,9 @@ var IndexPage = React.createClass({
           toggleFocus={this.toggleFocus} />
       );
     }, this);
+  },
+
+  render: function() {
 
     var content;
 
@@ -135,7 +153,7 @@ var IndexPage = React.createClass({
       var AddPage = NavConstants.ADD_PAGES[this.state.resource];
       content = <AddPage />;
     } else {
-      content = items;
+      content = this.itemsInIndex();
     }
 
     return (
