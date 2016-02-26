@@ -41,9 +41,11 @@ var NavTab = React.createClass({
 
   render: function() {
 
+    var mainName = (this.props.selectedTab === this.props.name) ? 'navbar-tab-main navbar-tab-main-selected' : 'navbar-tab-main';
+
     var className = "navbar-option";
     if (this.props.selectedTab === this.props.name) {
-      className += " navbar-current";
+      className = "navbar-option navbar-option-selected";
     }
 
     var expandButton = null;
@@ -61,20 +63,20 @@ var NavTab = React.createClass({
 
 
     var name=(
-      <div className="navbar-tab-title">
+      <div className={this.props.selectedTab === this.props.name ? 'navbar-tab-title-selected' : 'navbar-tab-title'}>
         {this.props.screenName}
       </div>
     );
 
 
     return (
-      <div>
+      <div className={mainName}>
         <div className={className}
-          onClick={this.handleClick}
-          style={{height: this.props.height}}>
-          {expandButton}
+          onClick={this.handleClick}>
           {name}
+          {expandButton}
         </div>
+
         {options}
       </div>
     );

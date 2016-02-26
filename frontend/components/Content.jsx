@@ -40,7 +40,7 @@ var Content = React.createClass({
 
     return (
 
-      <div className="content-main"
+      <div className="content-body"
         style={{
           height: this.props.dims.height - 130,
           width: this.props.dims.width - 240

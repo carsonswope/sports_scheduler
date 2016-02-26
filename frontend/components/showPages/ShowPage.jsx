@@ -24,10 +24,7 @@ var ShowPage = React.createClass({
       var DetailPage = NavConstants.SHOW_DETAILS[this.props.tabName];
       detail = <DetailPage item={this.props.item} />
     }
-
-    var HeaderPage = NavConstants.SHOW_HEADERS[this.props.tabName];
-    header = <HeaderPage item={this.props.item} toggleFocus={this.props.toggleFocus}/>
-
+    
     var BetterHeader = <Header item={this.props.item}
       itemType={this.props.tabName}
       toggleFocus={this.props.toggleFocus} />

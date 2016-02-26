@@ -1,8 +1,8 @@
 .header-main {
-  border: 4px solid green;
-  border-radius: 5px;
+  border-bottom: 2px solid green;
   height: 100px;
   margin: 2px;
+  display: block;
 }
 
 .header-component {

@@ -33,7 +33,7 @@ var Header = React.createClass({
 
     if (this.state.user) {
       estilo = {
-        width: w,
+        width: 1000,
         height: NavConstants.HEADER_HEIGHT_LOGGED_IN
       }
       middleElement =(
@@ -61,11 +61,6 @@ var Header = React.createClass({
     return (
       <div className="header-main"
         style={estilo} >
-
-        <div className="header-component header-logo">
-          Logo here
-        </div>
-
 
         <UserHeader user={this.props.user}/>
 

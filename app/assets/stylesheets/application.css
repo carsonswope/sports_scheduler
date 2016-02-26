@@ -17,9 +17,11 @@
  * {
    font-size: 400;
    font-family: 'Lato', sans-serif;
-   padding: 0;
+   padding: 0px;
    margin: 0;
+   background-color: #f6f1ed;
  }
+
 
 .day-view {
 

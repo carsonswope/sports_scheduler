@@ -20,8 +20,6 @@ class Api::TeamsController < ApplicationController
 
     @team.save
 
-    debugger
-
     @team.save_availabilities(
       params[:team][:game_dates][:specific],
       params[:team][:game_dates][:general]

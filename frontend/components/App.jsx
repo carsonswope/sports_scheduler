@@ -61,9 +61,12 @@ var App = React.createClass({
 
     return (
       <div>
-        {header}
         {navbar}
+
+        <div className='content-main'>
+        {header}
         {content}
+        </div>
     </div>
     );
   }

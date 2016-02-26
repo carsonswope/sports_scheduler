@@ -33,9 +33,13 @@ var NavBar = React.createClass({
 
   render: function() {
 
-    var divHeight = ((this.props.dims.height-(NavConstants.OPTIONS_HEIGHT + NavConstants.HEADER_HEIGHT_LOGGED_IN + 28))/6)-14;
-    if (divHeight > NavConstants.MAX_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MAX_NAVBAR_TAB_HEIGHT; }
-    if (divHeight < NavConstants.MIN_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MIN_NAVBAR_TAB_HEIGHT; }
+    // var divHeight = ((this.props.dims.height-(NavConstants.OPTIONS_HEIGHT + NavConstants.HEADER_HEIGHT_LOGGED_IN + 28))/6)-14;
+    // if (divHeight > NavConstants.MAX_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MAX_NAVBAR_TAB_HEIGHT; }
+    // if (divHeight < NavConstants.MIN_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MIN_NAVBAR_TAB_HEIGHT; }
+    // divHeight = 100;
+
+    var totalHeight = (this.props.dims.height-NavConstants.HEADER_HEIGHT_LOGGED_IN);
+    var eachTabHeight = ((totalHeight - NavConstants.OPTIONS_HEIGHT[this.state.tab]) / 6)-5;
 
     var tabs = Object.keys(NavConstants.tabs).map(function(tab, i){
       return(
@@ -44,7 +48,7 @@ var NavBar = React.createClass({
           screenName={NavConstants.SCREEN_NAMES[tab]}
           name={NavConstants.tabs[tab]}
           key={i}
-          height={divHeight}
+          height={50}
           setTab={this.setTab}
           selectedTab={this.state.tab}
           tabOptions={NavConstants.TAB_OPTIONS[tab]} />
@@ -57,6 +61,10 @@ var NavBar = React.createClass({
         style={{
           height: this.props.dims.height - 130
         }}>
+
+        <div className='logo-bar'>
+          logo here
+        </div>
 
         {tabs}
 

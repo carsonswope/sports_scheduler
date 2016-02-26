@@ -62,7 +62,7 @@ exports.SHOW_DETAILS = {
   LEAGUES: LeagueShowDetail,
   TEAMS: TeamShowDetail
 };
-  
+
 var EventStore = require('../stores/EventStore');
 var LeagueStore = require('../stores/LeagueStore');
 var TeamStore = require('../stores/TeamStore');
@@ -136,8 +136,17 @@ exports.destroyActions = {
   TEAMS: TeamActions.attemptDestroyTeam,
 }
 
-exports.OPTIONS_HEIGHT = 110;
+// exports.OPTIONS_HEIGHT = 110;
 exports.MAX_NAVBAR_TAB_HEIGHT = 40;
 exports.MIN_NAVBAR_TAB_HEIGHT = 27;
 exports.HEADER_HEIGHT_LOGGED_IN = 96;
 exports.HEADER_HEIGHT_LOGGED_OUT = 220;
+
+exports.OPTIONS_HEIGHT = {
+  HOME: 0,
+  WEBPAGE: 0,
+  TEAMS: 100,
+  LEAGUES: 100,
+  FACILITIES: 100,
+  SCHEDULES: 100
+};
