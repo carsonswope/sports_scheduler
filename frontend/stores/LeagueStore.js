@@ -56,46 +56,13 @@ LeagueStore.removeLeague = function(league) {
 };
 
 LeagueStore.addAvailability = function(a) {
-  if (a.resourceType === 'League') {
-
-    var league = _leagues[a.resourceId];
-
-    delete a['resourceType']
-    delete a['resourceId']
-
-    if (a.availType === 'GENERAL') {
-      delete a['availType']
-      league.generalAvailabilities.push(a);
-
-    } else {
-      delete a['availType']
-      league.specificAvailabilities.push(a);
-    }
-
-    LeagueStore.__emitChange();
-  }
+  StoreHelper.addAvailability(a, 'League', _leagues);
+  LeagueStore.__emitChange();
 };
 
 LeagueStore.removeAvailability = function(a) {
-  if (a.resourceType === 'League') {
-
-    var league = _leagues[a.resourceId];
-    if (a.availType === 'GENERAL'){
-      var list = league.generalAvailabilities;
-    } else {
-      var list = league.specificAvailabilities;
-    }
-
-    for (var i = 0; i < list.length; i++) {
-      if (list[i].id === a.availId) {
-        list.splice(i, 1);
-        break;
-      }
-    }
-
-    LeagueStore.__emitChange();
-
-  }
+  StoreHelper.removeAvailability(a, 'League', _leagues);
+  LeagueStore.__emitChange();
 };
 
 LeagueStore.__onDispatch = function(payload){

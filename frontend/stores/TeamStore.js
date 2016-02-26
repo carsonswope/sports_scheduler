@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
 var TeamConstants = require('../constants/TeamConstants');
+var AvailabilityConstants = require('../constants/AvailabilityConstants');
 var StoreHelper = require('../util/StoreHelper');
 
 
@@ -58,6 +59,16 @@ TeamStore.removeTeam = function(team) {
   TeamStore.__emitChange();
 };
 
+TeamStore.addAvailability = function(a) {
+  StoreHelper.addAvailability(a, 'Team', _teams);
+  TeamStore.__emitChange();
+};
+
+TeamStore.removeAvailability = function(a) {
+  StoreHelper.removeAvailability(a, 'Team', _teams);
+  TeamStore.__emitChange();
+};
+
 TeamStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case TeamConstants.actions.RESET_TEAMS_LIST:
@@ -68,6 +79,12 @@ TeamStore.__onDispatch = function(payload){
       break;
     case TeamConstants.actions.REMOVE_TEAM:
       TeamStore.removeTeam(payload.team);
+      break;
+    case AvailabilityConstants.actions.REMOVE_AVAILABILITY:
+      TeamStore.removeAvailability(payload.availability);
+      break;
+    case AvailabilityConstants.actions.ADD_AVAILABILITY:
+      TeamStore.addAvailability(payload.availability);
       break;
   }
 };

@@ -95,9 +95,7 @@ var LeagueShowDetail = React.createClass({
   },
 
   removeGameDate: function(dateType, index){
-
-    debugger;
-
+    
     var gameDates = this.state.gameDates;
     var dateToRemove;
 
