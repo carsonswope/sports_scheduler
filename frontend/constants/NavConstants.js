@@ -62,7 +62,7 @@ exports.SHOW_DETAILS = {
   LEAGUES: LeagueShowDetail,
   TEAMS: TeamShowDetail
 };
-
+  
 var EventStore = require('../stores/EventStore');
 var LeagueStore = require('../stores/LeagueStore');
 var TeamStore = require('../stores/TeamStore');
