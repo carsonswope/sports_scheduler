@@ -63,20 +63,6 @@ exports.SHOW_DETAILS = {
   TEAMS: TeamShowDetail
 };
 
-var TeamShowHeader = require('../components/showPages/headers/TeamShowHeader.jsx');
-var LeagueShowHeader = require('../components/showPages/headers/LeagueShowHeader.jsx');
-var FacilityShowHeader = require('../components/showPages/headers/FacilityShowHeader.jsx');
-var ScheduleShowHeader = require('../components/showPages/headers/ScheduleShowHeader.jsx');
-
-exports.SHOW_HEADERS = {
-  HOME: undefined,
-  WEBPAGE: undefined,
-  FACILITIES: FacilityShowHeader,
-  SCHEDULES: ScheduleShowHeader,
-  LEAGUES: LeagueShowHeader,
-  TEAMS: TeamShowHeader
-};
-
 var EventStore = require('../stores/EventStore');
 var LeagueStore = require('../stores/LeagueStore');
 var TeamStore = require('../stores/TeamStore');
