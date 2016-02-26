@@ -7,8 +7,6 @@
 - Refactor out the NavConstants.Details, headers, etc. into their own files
   - Come up with a better name for them than I have
 
-- GameDatesInput: move this.today logic into a helper
-
 - rename LeagueFacilityStore.leagues to leaguesForFacility(facilityId)
 
 - Make a Header component (showPages/headers)
