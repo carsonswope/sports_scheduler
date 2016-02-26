@@ -6,10 +6,10 @@ class Api::LeagueFacilitiesController < ApplicationController
   end
 
   def destroy
-
     @league_facility_membership = LeagueFacilityMembership.find_from_league_and_facility(league_facility_params)[0]
 
     @league_facility_membership.destroy if @league_facility_membership
+
     render :show
   end
 

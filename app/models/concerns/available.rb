@@ -48,8 +48,6 @@ module Available
       end
     end
 
-    debugger;
-
     SpecificAvailability.transaction do
       GeneralAvailability.transaction do
         to_save.each { |available| available.save }

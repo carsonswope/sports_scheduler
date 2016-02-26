@@ -13,8 +13,6 @@ class Api::LeaguesController < ApplicationController
 
   def create
 
-    debugger
-
     @league = League.new(
       name: params.require(:league)[:name],
       num_games: params.require(:league)[:num_games],

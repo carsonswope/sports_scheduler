@@ -1,0 +1,16 @@
+- Index page --> navChange
+  - Refactor this into helper methods, maybe break it into separate modules if you can.
+- Take logic out of render methods in every file, move it to helper methods.
+
+- Start styling once you're done with whatever feature you're on
+
+- Refactor out the NavConstants.Details, headers, etc. into their own files
+  - Come up with a better name for them than I have
+
+- GameDatesInput: move this.today logic into a helper
+
+- rename LeagueFacilityStore.leagues to leaguesForFacility(facilityId)
+
+- Make a Header component (showPages/headers)
+
+- Look into renaming t_1 in the models

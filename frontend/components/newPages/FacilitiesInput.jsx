@@ -9,27 +9,20 @@ var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var FacilitiesInput = React.createClass({
 
   getInitialState: function(){
-
     return {facilityOptions: FacilityStore.all()};
-
   },
 
   registerCheck: function(facilityId){
-
     this.props.update(facilityId);
-
   },
 
   checkAll: function(){
-
     this.props.checkAll(this.state.facilityOptions.map(function(f){return f.id}));
   },
 
 
   render: function() {
-
     var checked;
-
     var facilityOptions = this.state.facilityOptions.map(function(field, i){
 
       checkedBool = this.props.fields.indexOf(parseInt(field.id)) !== -1;

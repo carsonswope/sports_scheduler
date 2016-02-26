@@ -241,7 +241,7 @@ var GameDatesInput = React.createClass({
       weeklyPlus =
         <div className="availability-form-one-half">
           <div className="availability-form-category-title">
-            {this.props.specificPlus}
+            {this.props.weeklyPlus}
           </div>
           {weeklyDatesPlusList}
           {weeklyDatesPlusAdder}

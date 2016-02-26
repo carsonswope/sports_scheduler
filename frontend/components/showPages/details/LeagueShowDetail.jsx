@@ -4,9 +4,15 @@ var PropTypes = React.PropTypes;
 var LeagueTeamStore = require('../../../stores/LeagueTeamStore');
 var LeagueFacilityStore = require('../../../stores/LeagueFacilityStore');
 
+
 var TeamStore = require('../../../stores/TeamStore');
 var FacilityStore = require('../../../stores/FacilityStore');
 var LeagueActions = require('../../../actions/LeagueActions');
+var LeagueStore = require('../../../stores/LeagueStore');
+
+
+var AvailabilityActions = require('../../../actions/AvailabilityActions');
+
 
 var AddToComponent = require('../../navigation/AddToComponent');
 var GameDatesInput = require('../../newPages/GameDatesInput');
@@ -19,8 +25,8 @@ var LeagueShowDetail = React.createClass({
       teams: LeagueTeamStore.teams(this.props.item.id),
       facilities: LeagueFacilityStore.facilities(this.props.item.id),
       gameDates: {
-        specific: this.props.item.specificAvailabilities,
-        general:  this.props.item.generalAvailabilities
+        specific: this.props.item.specificAvailabilities || [],
+        general:  this.props.item.generalAvailabilities || []
       }
     };
   },
@@ -28,12 +34,14 @@ var LeagueShowDetail = React.createClass({
   componentDidMount: function(){
     this.leagueTeamListener = LeagueTeamStore.addListener(this.leagueTeamStoreChange);
     this.leagueFacilityListener = LeagueFacilityStore.addListener(this.leagueFacilityStoreChange);
-
+    this.leagueListener = LeagueStore.addListener(this.leagueChange);
   },
 
   componentWillUnmount: function(){
     this.leagueTeamListener.remove();
     this.leagueFacilityListener.remove();
+    this.leagueListener.remove();
+
   },
 
   leagueTeamStoreChange: function(){
@@ -46,6 +54,19 @@ var LeagueShowDetail = React.createClass({
     this.setState({
       facilities: LeagueFacilityStore.facilities(this.props.item.id)
     });
+  },
+
+  leagueChange: function(){
+
+    var updatedLeague = LeagueStore.find(this.props.item.id);
+
+    this.setState({
+      gameDates: {
+        specific: updatedLeague.specificAvailabilities || [],
+        general: updatedLeague.generalAvailabilities || []
+      }
+    });
+
   },
 
   addTeam: function(teamId){
@@ -64,9 +85,30 @@ var LeagueShowDetail = React.createClass({
     LeagueActions.destroyLeagueFacility(this.props.item.id, facilityId);
   },
 
-  render: function() {
+  addNewGameDate: function(newGameDate){
 
-    debugger;
+    AvailabilityActions.attemptCreateAvailability(
+      newGameDate,
+      'League',
+      this.props.item.id
+    );
+  },
+
+  removeGameDate: function(dateType, index){
+
+    var gameDates = this.state.gameDates;
+    var dateToRemove;
+
+    if (dateType === 'SPECIFIC') {
+      dateToRemoveId = gameDates.specific[index].id;
+        } else{
+      dateToRemoveId = gameDates.general[index].id;
+    }
+
+    AvailabilityActions.attemptDestroyAvailability(dateType, dateToRemoveId)
+  },
+
+  render: function() {
 
     var league = this.props.item;
 
@@ -111,8 +153,6 @@ var LeagueShowDetail = React.createClass({
         return FacilityStore.find(facilityId);
       });
 
-      debugger;
-
     return (
 
       <div className="show-detail clear">
@@ -149,6 +189,13 @@ var LeagueShowDetail = React.createClass({
             item={'facilities'} />
         </div>
 
+        <GameDatesInput
+          dates={this.state.gameDates}
+          update={this.addNewGameDate}
+          remove={this.removeGameDate}
+          weeklyPlus={'Weekly game dates'}
+          specificPlus={'Specific additions'}
+          specificMinus={'Specific exceptions'}/>
 
       </div>
     );
