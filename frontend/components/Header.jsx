@@ -16,7 +16,7 @@ var Header = React.createClass({
     this.setState({user: UserStore.currentUser()});
   },
 
-  componentWillDismount: function(){
+  componentWillUnmount: function(){
     this.userListener.remove();
   },
 

@@ -33,11 +33,6 @@ var NavBar = React.createClass({
 
   render: function() {
 
-    // var divHeight = ((this.props.dims.height-(NavConstants.OPTIONS_HEIGHT + NavConstants.HEADER_HEIGHT_LOGGED_IN + 28))/6)-14;
-    // if (divHeight > NavConstants.MAX_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MAX_NAVBAR_TAB_HEIGHT; }
-    // if (divHeight < NavConstants.MIN_NAVBAR_TAB_HEIGHT) { divHeight = NavConstants.MIN_NAVBAR_TAB_HEIGHT; }
-    // divHeight = 100;
-
     var totalHeight = (this.props.dims.height-NavConstants.HEADER_HEIGHT_LOGGED_IN);
     var eachTabHeight = ((totalHeight - NavConstants.OPTIONS_HEIGHT[this.state.tab]) / 6)-5;
 

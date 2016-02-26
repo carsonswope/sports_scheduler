@@ -15,7 +15,7 @@ var LeaguesOptions = React.createClass({
 
   render: function() {
     return (
-      <div className="navbar-expanded"
+      <div className="navbar-expanded clear"
         style={{height: NavConstants.OPTIONS_HEIGHT}}>
         <SearchBar takeFocus={true} tab={'LEAGUES'} option={'nameSearch'} />
         <NewButton tab={'LEAGUES'} name={'Add a league'} />

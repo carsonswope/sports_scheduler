@@ -63,7 +63,8 @@ var NavTab = React.createClass({
 
 
     var name=(
-      <div className={this.props.selectedTab === this.props.name ? 'navbar-tab-title-selected' : 'navbar-tab-title'}>
+      <div className={this.props.selectedTab === this.props.name ?
+          'navbar-tab-title navbar-tab-title-selected' : 'navbar-tab-title'}>
         {this.props.screenName}
       </div>
     );

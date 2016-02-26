@@ -1,10 +1,10 @@
 .navbar-main {
   margin: 0px;
-  width: 220px;
+  width: 215px;
   display: inline-block;
   position: relative;
-  float: left;
   background-color: #f6f1ed;
+  z-index: 1;
 }
 
 .logo-bar {
@@ -17,72 +17,67 @@
 }
 
 .navbar-option {
-
-/*   position: relative; */
-  border: 2px solid #d8bfd8;
-  border-left: 0px;
-  border-right: 0px;
-/*   margin: auto; */
-  margin-bottom: -2px;
-  margin-top: -2px;
-  margin-right: 0px;
-  text-align: center;
-/*   left: 10px; */
   width: 180px;
-  height: 40px;
-
-
-}
-
-.navbar-option-selected {
-  border: 2px solid black;
-  border-left: 0px;
-  width: 197px;
-  border-right: 3px solid #f6f1ed;
   height: 40px;
 }
 
 .navbar-tab-main {
   position: relative;
-  left: 17px;
-  width: 205px;
-  margin: auto;
+  left: 18px;
+  width: 182px;
+
   background-color: transparent;
+/*   background-color: green; */
+
+  border: 2px solid #963019;
+  border-left: 0px;
+  border-right: 0px;
+  margin-bottom: -2px;
+  margin-top: -2px;
 }
 
 .navbar-tab-main-selected {
+  border: 2px solid #16174f;
+  border-left: 0px;
+/*   width: 197px; */
+  border-right: 2px solid #f6f1ed;
+
   z-index: 2;
+  width: 204px;
+
+/*   background-color: black; */
 }
 
-/* .navbar-expanded {
+.navbar-expanded {
   margin-right: 10px;
-  margin-top: 0px;
+  background-color: transparent;
+  width: 180px;
+  z-index: 0;
+/*   border-top: 2px solid #16174f; */
+  position: relative;
 }
- */
+
 .navbar-tab-title {
   margin: auto;
   top: 12px;
   position: absolute;
-  left: 25px;
+  left: 35px;
   font-size: 18px;
   /* http://stackoverflow.com/questions/6900124/how-to-make-certain-text-not-selectable-with-css */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  color: #3fb0ac;
+  color: #963019;
 
 }
 
-.navbar-tab-title-selected {
-  margin: auto;
-  top: 12px;
-  position: absolute;
-  left: 25px;
+.navbar-option:hover {
   font-weight: 700;
-  font-size: 18px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+}
+
+.navbar-tab-title-selected {
+  font-weight: 900;
+  color: #16174f;
 }
 
 .navbar-expand-button {
@@ -112,48 +107,71 @@
   outline: none;
   font-size: 17px;
   text-align: right 2px;
-  border-bottom: 3px solid black;
+  display: inline-block;
 }
 
 .navbar-options-search-box{
   position: relative;
-  top: -12px;
+/*   top: -12px; */
   /*margin: auto;*/
-  width: 125px;
+  bottom: -5px;
+  background-color: transparent;
+  width: 120px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #667467;
   z-index: 4;
   display: inline-block;
 }
 
 .navbar-options-clear-icon{
   position: relative;
-  top: -7px;
+  bottom: -7px;
+  margin-left: 3px;
   left: 5px;
-  font-size: 22px;
+  width: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 2;
   background-color: transparent;
-  color: #777;
+  color: #667467;
   display: inline-block;
 }
 
 .navbar-options-clear-icon:hover{
-  color: black;
+  color: #16174f;
 }
 
 .navbar-options-search-bar{
   position: relative;
 }
 
-.navbar-options-new-button{
-  position: relative;
-  top: 20px;
-  left: 19px;
-  border-radius: 9px;
-  text-align: center;
-  height: 28px;
-  border: 4px solid green;
-  width: 140px;
-  font-size: 16px;
-}
-
 .navbar-options-new-button:hover{
   background-color: #eee;
+}
+
+.navbar-options-element {
+  border-top: 2px solid #667467;
+  color: #667467;
+  width: 160px;
+  position: relative;
+  left: 35px;
+  height: 26px;
+  font-size: 14px;
+  background-color: transparent;
+}
+
+.navbar-options-element-text {
+  position: relative;
+/*   left: 15px; */
+  background-color: transparent;
+  bottom: -5px;
+  width: 100%;
+  display: inline-block;
+
+}
+
+.navbar-options-element-text:hover {
+  font-weight: 700;
 }

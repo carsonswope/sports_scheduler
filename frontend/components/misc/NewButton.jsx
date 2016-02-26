@@ -10,9 +10,11 @@ var NewButton = React.createClass({
 
   render: function() {
     return (
-      <div className="navbar-options-new-button"
-        onClick={this.followButton} >
-        {this.props.name}
+      <div className="navbar-options-element">
+        <div className="navbar-options-element-text"
+          onClick={this.followButton} >
+          {this.props.name}
+        </div>
       </div>
     );
   }

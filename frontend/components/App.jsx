@@ -59,15 +59,28 @@ var App = React.createClass({
     var content = this.state.user ?
       <Content dims={this.state.dimensions}/> : null;
 
+    if (this.state.user) {
+      var toScreen =(
+        <div>
+          <NavBar dims={this.state.dimensions} />
+          <div className='content-main'>
+            <Header dims={this.state.dimensions} user={this.state.user} />
+            <Content dims={this.state.dimensions} />
+          </div>
+        </div>
+      );
+    } else {
+      var toScreen =(
+        <div>
+          <Header dims={this.state.dimensions} user={this.state.user} />
+        </div>
+      );
+    }
+
     return (
       <div>
-        {navbar}
-
-        <div className='content-main'>
-        {header}
-        {content}
-        </div>
-    </div>
+        {toScreen}
+      </div>
     );
   }
 
