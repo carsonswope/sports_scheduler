@@ -1,7 +1,9 @@
 .header-main {
   border-bottom: 2px solid #16174f;
-  height: 100px;
+  height: 110px;
   margin: 2px;
+  margin-bottom: 0px;
+  margin-left: 20px;
   display: block;
 }
 

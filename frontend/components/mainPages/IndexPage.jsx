@@ -157,7 +157,9 @@ var IndexPage = React.createClass({
     }
 
     return (
-      <div>{content}</div>
+      <div>
+        {content}
+      </div>
     );
   }
 

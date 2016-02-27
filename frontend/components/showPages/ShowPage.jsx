@@ -24,18 +24,16 @@ var ShowPage = React.createClass({
       var DetailPage = NavConstants.SHOW_DETAILS[this.props.tabName];
       detail = <DetailPage item={this.props.item} />
     }
-    
+
     var BetterHeader = <Header item={this.props.item}
       itemType={this.props.tabName}
       toggleFocus={this.props.toggleFocus} />
 
     return (
-      <div>
-        <div className="show-main" onClick={this.callToggle}>
-          {BetterHeader}
-        </div>
+      <div className="show-item clear" onClick={this.callToggle}>
+        {BetterHeader}
         {detail}
-      </ div>
+      </div>
     );
 
   }

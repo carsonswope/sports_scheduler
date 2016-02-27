@@ -139,7 +139,7 @@ exports.destroyActions = {
 // exports.OPTIONS_HEIGHT = 110;
 exports.MAX_NAVBAR_TAB_HEIGHT = 40;
 exports.MIN_NAVBAR_TAB_HEIGHT = 27;
-exports.HEADER_HEIGHT_LOGGED_IN = 96;
+exports.HEADER_HEIGHT_LOGGED_IN = 106;
 exports.HEADER_HEIGHT_LOGGED_OUT = 220;
 
 exports.OPTIONS_HEIGHT = {

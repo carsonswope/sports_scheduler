@@ -27,13 +27,13 @@ var Header = React.createClass({
 
   render: function() {
 
-    var w = this.props.dims.width-12;
+    var w = this.props.dims.width-280;
     var estilo;
     var middleElement;
 
     if (this.state.user) {
       estilo = {
-        width: 1000,
+        width: w,
         height: NavConstants.HEADER_HEIGHT_LOGGED_IN
       }
       middleElement =(

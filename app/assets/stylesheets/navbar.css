@@ -3,7 +3,7 @@
   width: 215px;
   display: inline-block;
   position: relative;
-  background-color: #f6f1ed;
+  background-color: transparent;
   z-index: 1;
 }
 
@@ -45,7 +45,7 @@
   z-index: 2;
   width: 204px;
 
-/*   background-color: black; */
+  background-color: #f6f1ed;
 }
 
 .navbar-expanded {

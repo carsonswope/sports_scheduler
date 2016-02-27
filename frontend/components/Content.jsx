@@ -42,8 +42,8 @@ var Content = React.createClass({
 
       <div className="content-body"
         style={{
-          height: this.props.dims.height - 130,
-          width: this.props.dims.width - 240
+          height: this.props.dims.height - 153,
+          width: this.props.dims.width - 225
         }}>
 
         {ToRender}
