@@ -19,8 +19,6 @@ exports.receiveFetch = function(leagues) {
 
 exports.createLeague = function(league) {
 
-  debugger;
-
   var l = league['league']
 
   var leagueParams = {
@@ -43,8 +41,6 @@ exports.createLeague = function(league) {
     leagueParams.game_dates['specific'] =
       AvailabilityHelper.specificDatesMap(l.gameDates.specific);
   }
-
-  debugger;
 
   LeagueApi.attemptCreateLeague(leagueParams);
 };
