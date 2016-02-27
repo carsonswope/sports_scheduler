@@ -31,7 +31,8 @@ var ShowPage = React.createClass({
       <div className={itemStyle} >
         <Header item={this.props.item}
           itemType={this.props.tabName}
-          toggleFocus={this.callToggle} />
+          toggleFocus={this.callToggle}
+          focused={this.props.focused}/>
         {detail}
       </div>
     );

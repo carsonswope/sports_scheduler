@@ -4,7 +4,7 @@ var PropTypes = React.PropTypes;
 var NavStore = require('../../stores/NavStore');
 var NavActions = require('../../actions/NavActions');
 
-var SearchBar = require('../misc/SearchBar');
+var LocalSearchBar = require('../misc/LocalSearchBar');
 
 var AddToComponent = React.createClass({
 
@@ -50,6 +50,7 @@ var AddToComponent = React.createClass({
   handleClick: function(id){
     if (this.state.confirming === id) {
       this.props.makeAdd(id)
+      this.setState({confirming: null});
     } else {
       this.setState({confirming: id});
     }
@@ -69,6 +70,11 @@ var AddToComponent = React.createClass({
 
   },
 
+  touchMove: function(e){
+
+    e.preventDefault();
+  },
+
   render: function() {
 
     if (this.state.adding) {
@@ -79,21 +85,52 @@ var AddToComponent = React.createClass({
 
       var remainingResultsList = remainingResults.map(function(league){
         var className = "add-component-option";
-        var style = this.state.confirming === league.id ? " selected-option" : ""
-        className += style;
-        return <div className={className} key={league.id} onClick={this.handleClick.bind(this, league.id)}>{league.name}</div>;
+        var style = this.state.confirming === league.id ? "add-component-selected-option " : ""
+        className = style + className;
+
+        var textStyle = "info-stat-text ";
+        textStyle += this.state.confirming === league.id ?
+          "add-component-selected-option" : "add-component-option-text";
+
+        return(
+          <div className={className}
+            key={league.id}
+            onClick={this.handleClick.bind(this, league.id)}>
+              <div className={textStyle}>
+                {league.name}
+              </div>
+
+          </div>
+        );
       }, this);
 
       if (!remainingResultsList.length) {
-        remainingResultsList = <div style={{color: '#aaa'}}> no {this.props.item} </div>
+        remainingResultsList =
+          <div style={{
+              color: '#667467',
+              position: 'relative',
+              left: '21',
+              bottom: '-6'}}>
+            no {this.props.item}
+          </div>
       }
 
       var toRender =(
 
-        <div>
-          <div onClick={this.cancelAdding}> cancel adding </div>
-          <SearchBar tab={'ADD_TO_LEAGUE'} option={'nameSearch'} takeFocus={true} />
-          <div className="add-component-options-main">
+        <div className="add-to-menu">
+          <div className="add-to-search-component">
+              <LocalSearchBar
+                classInfo={"add-to-search-bar"}
+                tab={'ADD_TO_LEAGUE'}
+                option={'nameSearch'}
+                takeFocus={true}
+                message={'add a team'}
+                cancelSearch={this.cancelAdding} />
+
+
+          </div>
+          <div className="add-component-options-main"
+            onScroll={this.touchMove}>
             {remainingResultsList}
           </div>
         </div>
@@ -104,8 +141,12 @@ var AddToComponent = React.createClass({
 
       var toRender =(
 
-        <div className="begin-add-to-button" onClick={this.startAdding}>
-          {this.props.message}
+        <div className="add-to-menu">
+          <div className="add-to-search-component">
+            <div className="begin-add-to-button" onClick={this.startAdding}>
+                {this.props.message}
+            </div>
+          </div>
         </div>
 
       );

@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 
 var NavConstants = require('../../constants/NavConstants');
 var NavStore = require('../../stores/NavStore');
+var NavActions = require('../../actions/NavActions');
 var ShowPage = require('../showPages/ShowPage.jsx');
 
 var IndexPage = React.createClass({
@@ -17,7 +18,7 @@ var IndexPage = React.createClass({
 
     var items = store.getMatching(options.nameSearch);
     var focused = items.length === 1 ?
-      items[0].id : null;
+      items[0].id : options['focused'];
 
     return {
       resource: resource,
@@ -49,6 +50,7 @@ var IndexPage = React.createClass({
   resourceChange: function(){
 
     var items = this.state.store.getMatching(this.state.options.nameSearch);
+
     var focused = items.length === 1 ?
       items[0].id : this.state.focused;
 
@@ -93,6 +95,7 @@ var IndexPage = React.createClass({
       this.state.store,
       this.state.options.nameSearch
     );
+
     var focused;
 
     if (items.length === 1) {
@@ -121,6 +124,7 @@ var IndexPage = React.createClass({
     } else {
       this.updatePage();
     }
+
   },
 
 
@@ -130,6 +134,13 @@ var IndexPage = React.createClass({
     } else {
       this.setState({focused: id});
     }
+
+    // NavActions.setTabOption(
+    //   this.state.resource,
+    //   'focused',
+    //   !NavStore.options(this.state.resource)['focused']
+    // );
+
   },
 
   itemsInIndex: function(){

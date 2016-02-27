@@ -1,6 +1,8 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
 var LeagueConstants = require('../constants/LeagueConstants');
+var TeamConstants = require('../constants/TeamConstants');
+var StoreHelper = require('../util/StoreHelper');
 
 var _memberships = [];
 
@@ -27,6 +29,7 @@ LeagueTeamStore.teams = function(leagueId) {
       teams.push(membership.teamId);
     }
   });
+
   return teams;
 };
 
@@ -72,10 +75,39 @@ LeagueTeamStore.removeLeagueTeam = function(pair) {
   }
 
   _memberships.splice(i, 1);
-  
+
   LeagueTeamStore.__emitChange();
 
 }
+
+LeagueTeamStore.removeLeague = function(league) {
+
+  // _memberships = _memberships.filter(function(membership){
+  //   return membership.leagueId !== league.id;
+  // });
+
+  _memberships = StoreHelper.removeJoinTableReferences(
+    _memberships,
+    'leagueId',
+    league.id
+  )
+
+  LeagueTeamStore.__emitChange();
+
+};
+
+LeagueTeamStore.removeTeam = function(team) {
+
+  _memberships = StoreHelper.removeJoinTableReferences(
+    _memberships,
+    'teamId',
+    team.id
+  )
+
+  LeagueTeamStore.__emitChange();
+
+};
+
 
 LeagueTeamStore.__onDispatch = function(payload){
   switch (payload.actionType) {
@@ -87,6 +119,12 @@ LeagueTeamStore.__onDispatch = function(payload){
       break;
     case LeagueConstants.actions.REMOVE_LEAGUE_TEAM:
       LeagueTeamStore.removeLeagueTeam(payload.pair);
+      break;
+    case LeagueConstants.actions.REMOVE_LEAGUE:
+      LeagueTeamStore.removeLeague(payload.league);
+      break;
+    case TeamConstants.actions.REMOVE_TEAM:
+      LeagueTeamStore.removeTeam(payload.team);
       break;
   }
 };

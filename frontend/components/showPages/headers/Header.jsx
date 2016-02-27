@@ -18,15 +18,18 @@ var Header = React.createClass({
   },
 
   render: function() {
+
+    var titleStyle = 'navbar-tab-title'
+    if (this.props.focused) { titleStyle += ' navbar-tab-title-selected'}
+
     return (
         <div className='show-item-header' onClick={this.toggleFocus}>
           <div className='navbar-option'>
-            <div className='navbar-tab-title'>
-              {this.props.item.id} - {this.props.item.name}
+            <div className={titleStyle}>
+              {this.props.item.name}
             </div>
           </div>
-          <div className="delete-button-on-header"
-            style={{'float': 'right'}}
+          <div className="header-delete-button main-element-text"
             onClick={this.delete}>
             delete
           </div>

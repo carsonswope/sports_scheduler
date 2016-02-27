@@ -30,8 +30,6 @@ exports.attemptDestroyFacility = function(facilityId) {
 
 exports.receiveDestroyedFacility = function(facility) {
 
-  debugger;
-
   AppDispatcher.dispatch({
     actionType: FacilityConstants.actions.REMOVE_FACILITY,
     facility: facility

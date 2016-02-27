@@ -55,7 +55,7 @@ var SearchBar = React.createClass({
       return(
         <div className='navbar-options-element'>
           <div className='navbar-options-element-text'
-            onClick={this.startSearching}>search</div>
+            onClick={this.startSearching}>{this.props.message || 'search'}</div>
         </div>
       );
     } else {

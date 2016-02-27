@@ -8,7 +8,7 @@ var SearchIcon = require('./SearchIcon');
 //this.props.tab
 //this.props.option
 
-var SearchBar = React.createClass({
+var LocalSearchBar = React.createClass({
 
   getInitialState: function() {
     return {
@@ -39,14 +39,16 @@ var SearchBar = React.createClass({
   },
 
   clearSearch: function(e) {
-    NavActions.setTabOption(this.props.tab, this.props.option, '');
+    // NavActions.setTabOption(this.props.tab, this.props.option, '');
     this.setState({searchValue: ''});
+    if (this.props.cancelSearch) {
+      this.props.cancelSearch();
+    }
   },
 
   render: function() {
     return (
-        <div className="navbar-options-search-bar">
-          <SearchIcon />
+        <div className={this.props.classInfo}>
           <input
             ref="searchInput"
             className="text-entry-box navbar-options-search-box"
@@ -62,4 +64,4 @@ var SearchBar = React.createClass({
 
 });
 
-module.exports = SearchBar;
+module.exports = LocalSearchBar;

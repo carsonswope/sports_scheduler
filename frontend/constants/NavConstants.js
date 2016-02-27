@@ -116,7 +116,8 @@ exports.DEFAULT_OPTIONS = {
     dateEnd: null,
     teamsList: 'ALL',
     leaguesList: 'ALL',
-    facilitiesList: 'ALL'
+    facilitiesList: 'ALL',
+    focused: null
   },
 
   //options more publically accessible

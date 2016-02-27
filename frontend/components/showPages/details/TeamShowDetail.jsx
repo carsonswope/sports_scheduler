@@ -10,6 +10,8 @@ var AvailabilityActions = require('../../../actions/AvailabilityActions');
 var AddToComponent = require('../../navigation/AddToComponent');
 var GameDatesInput = require('../../newPages/GameDatesInput');
 
+var BasicInfoDiv = require('./BasicInfoDiv');
+
 var TeamShowDetail = React.createClass({
 
   getInitialState: function(){
@@ -84,6 +86,24 @@ var TeamShowDetail = React.createClass({
     AvailabilityActions.attemptDestroyAvailability(dateType, dateToRemoveId)
   },
 
+  statsList: function() {
+
+      return [{
+        label: 'team name:',
+        text: this.props.item.name
+      },{
+        label: 'contact name:',
+        text: this.props.item.contactName
+      },{
+        label: 'email:',
+        text: this.props.item.email
+      },{
+        label: 'phone:',
+        text: this.props.item.phone
+      }];
+
+  },
+
   render: function() {
 
 
@@ -112,17 +132,7 @@ var TeamShowDetail = React.createClass({
     return (
       <div className="show-detail clear">
 
-        <div className="show-basic-info">
-          <div className="info-stat">
-            {team.contactName}
-          </div>
-          <div className="info-stat">
-            {team.email}
-          </div>
-          <div className="info-stat">
-            {team.phone}
-          </div>
-        </div>
+        <BasicInfoDiv stats={this.statsList()} />
 
 
         <div className="leagues-list">

@@ -51,3 +51,9 @@ exports.removeAvailability = function(a, resourceType, resourceList) {
   }
 
 };
+
+exports.removeJoinTableReferences = function(membershipsList, keyName, removingId) {
+  return membershipsList.filter(function(membership){
+    return membership[keyName] !== removingId
+  });
+};

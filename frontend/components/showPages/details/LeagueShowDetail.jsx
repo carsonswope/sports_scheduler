@@ -13,7 +13,9 @@ var LeagueStore = require('../../../stores/LeagueStore');
 
 var AvailabilityActions = require('../../../actions/AvailabilityActions');
 
+var BasicInfoDiv = require('./BasicInfoDiv');
 
+var CurrentMembersList = require('../../navigation/CurrentMembersList');
 var AddToComponent = require('../../navigation/AddToComponent');
 var GameDatesInput = require('../../newPages/GameDatesInput');
 
@@ -95,7 +97,7 @@ var LeagueShowDetail = React.createClass({
   },
 
   removeGameDate: function(dateType, index){
-    
+
     var gameDates = this.state.gameDates;
     var dateToRemove;
 
@@ -119,15 +121,6 @@ var LeagueShowDetail = React.createClass({
       return FacilityStore.find(facilityId);
     });
 
-    var teamsList = teams.map(function(team){
-      return (
-        <div key={team.id}>
-          <span> {team.name} </span>
-          <div onClick={this.removeTeam.bind(this, team.id)}
-            className='delete-from-list-button'> X </div>
-        </div>)
-    }, this);
-
     var facilitiesList = facilities.map(function(facility){
       return (
         <div key={facility.id}>
@@ -136,9 +129,6 @@ var LeagueShowDetail = React.createClass({
             className='delete-from-list-button'> X </div>
         </div>)
     }, this);
-
-    // debugger;
-
 
     var possibleTeamsToAdd =
       TeamStore.opposite(this.state.teams).
@@ -152,23 +142,33 @@ var LeagueShowDetail = React.createClass({
         return FacilityStore.find(facilityId);
       });
 
+    var statsList = [{
+      label: 'league name:',
+      text: this.props.item.name
+    },{
+      label: 'league id:',
+      text: this.props.item.id
+    }];
+
     return (
 
       <div className="show-detail clear">
 
+        <BasicInfoDiv stats={statsList}
+          remove={this.removeTeam} />
+
+
         <div className="show-basic-info">
           <div className="info-stat">
-            {league.name}
+            <div className="info-stat-label">
+              member teams:
+            </div>
           </div>
-        </div>
+
+          <CurrentMembersList items={teams}
+            remove={this.removeTeam} />
 
 
-        <div className="leagues-list">
-          {teamsList}
-        </div>
-
-
-        <div className="add-to-menu">
           <AddToComponent
             makeAdd={this.addTeam}
             list={possibleTeamsToAdd}
