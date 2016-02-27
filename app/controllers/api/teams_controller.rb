@@ -20,10 +20,17 @@ class Api::TeamsController < ApplicationController
 
     @team.save
 
-    @team.save_availabilities(
-      params[:team][:game_dates][:specific],
-      params[:team][:game_dates][:general]
-    )
+    if params[:team].has_key?(:game_dates)
+      dates = params[:team][:game_dates]
+
+      specific = dates.has_key?(:specific) ? params[:team][:game_dates][:specific] : []
+      general = dates.has_key?(:general) ? params[:team][:game_dates][:general] : []
+
+      @team.save_availabilities(
+        specific, general
+      )
+
+    end
 
     render :show
   end

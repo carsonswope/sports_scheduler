@@ -110,16 +110,7 @@ var TeamShowDetail = React.createClass({
       });
 
     return (
-      <div style={{'height': 300, 'width': 300}}>
-
-
-      </div>
-
-    );
-
-
-    return (
-      <div>
+      <div className="show-detail clear">
 
         <div className="show-basic-info">
           <div className="info-stat">

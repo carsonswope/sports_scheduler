@@ -20,18 +20,18 @@ var ShowPage = React.createClass({
   render: function() {
 
     var detail;
+    var itemStyle = "show-item"
     if (this.props.focused) {
       var DetailPage = NavConstants.SHOW_DETAILS[this.props.tabName];
-      detail = <DetailPage item={this.props.item} />
+      detail = <DetailPage item={this.props.item} />;
+      itemStyle = itemStyle + " show-item-focused";
     }
 
-    var BetterHeader = <Header item={this.props.item}
-      itemType={this.props.tabName}
-      toggleFocus={this.props.toggleFocus} />
-
     return (
-      <div className="show-item clear" onClick={this.callToggle}>
-        {BetterHeader}
+      <div className={itemStyle} >
+        <Header item={this.props.item}
+          itemType={this.props.tabName}
+          toggleFocus={this.callToggle} />
         {detail}
       </div>
     );

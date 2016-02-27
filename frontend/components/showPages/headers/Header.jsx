@@ -13,25 +13,26 @@ var Header = React.createClass({
 
   },
 
+  toggleFocus: function(){
+    this.props.toggleFocus();
+  },
+
   render: function() {
     return (
-        <div className='show-item-header'>
-          {this.props.item.id} - {this.props.item.name}
+        <div className='show-item-header' onClick={this.toggleFocus}>
+          <div className='navbar-option'>
+            <div className='navbar-tab-title'>
+              {this.props.item.id} - {this.props.item.name}
+            </div>
+          </div>
+          <div className="delete-button-on-header"
+            style={{'float': 'right'}}
+            onClick={this.delete}>
+            delete
+          </div>
         </div>
     );
 
-    return (
-      <div>
-        <div className='navbar-tab-title'>
-          {this.props.item.id} - {this.props.item.name}
-        </div>
-        <div className="delete-button-on-header"
-          style={{'float': 'right'}}
-          onClick={this.delete}>
-          delete
-        </div>
-      </div>
-    );
   }
 
 });
