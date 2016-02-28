@@ -11,6 +11,7 @@ var AddToComponent = require('../../navigation/AddToComponent');
 var GameDatesInput = require('../../newPages/GameDatesInput');
 
 var BasicInfoDiv = require('./BasicInfoDiv');
+var MembershipsShow = require('../../navigation/MembershipsShow');
 
 var TeamShowDetail = React.createClass({
 
@@ -104,24 +105,27 @@ var TeamShowDetail = React.createClass({
 
   },
 
+  getLeaguesList: function(){
+    return this.state.leagues.map(function(leagueId){
+      return LeagueStore.find(leagueId);
+    });
+  },
+
+  getLeaguesListHeight: function(){
+    var listHeight = ((this.state.leagues.length+1) * 28);
+    if (listHeight > 250) {
+      return 250;
+    } else if (listHeight < 115) {
+      return 115;
+    } else {
+      return listHeight;
+    }
+  },
+
   render: function() {
 
 
     var team = this.props.item;
-
-    var leagues = this.state.leagues.map(function(leagueId){
-      return LeagueStore.find(leagueId);
-    });
-
-    var leaguesList = leagues.map(function(league){
-      return(
-        <div key={league.id}>
-          <span> {league.name} </span>
-          <div onClick={this.removeFromLeague.bind(this, league.id)}
-            className='delete-from-list-button'> X </div>
-        </div>);
-    }, this);
-
 
     var possibleLeaguesToAdd =
       LeagueStore.opposite(this.state.leagues).
@@ -134,20 +138,17 @@ var TeamShowDetail = React.createClass({
 
         <BasicInfoDiv stats={this.statsList()} />
 
+        <MembershipsShow
+          membershipName={'leagues list:'}
+          itemsList={this.getLeaguesList()}
+          removeItem={this.removeFromLeague}
+          addItem={this.addToLeague}
+          possibleItemsToAdd={possibleLeaguesToAdd}
+          addMessage='Add to league'
+          itemName='leagues'
+          height={this.getLeaguesListHeight()} />
 
-        <div className="leagues-list">
-          {leaguesList}
-        </div>
-
-
-        <div className="add-to-menu">
-          <AddToComponent
-            makeAdd={this.addToLeague}
-            list={possibleLeaguesToAdd}
-            message={'Add to a league'}
-            item={'leagues'} />
-        </div>
-
+      <div className='show-basic-info'>
         <GameDatesInput
           dates={this.state.gameDates}
           update={this.addNewGameDate}
@@ -155,6 +156,7 @@ var TeamShowDetail = React.createClass({
           weeklyPlus={'Weekly game dates'}
           specificPlus={'Specific additions'}
           specificMinus={'Specific exceptions'}/>
+      </div>
 
 
 

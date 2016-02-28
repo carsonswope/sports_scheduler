@@ -18,6 +18,7 @@ var BasicInfoDiv = require('./BasicInfoDiv');
 var CurrentMembersList = require('../../navigation/CurrentMembersList');
 var AddToComponent = require('../../navigation/AddToComponent');
 var GameDatesInput = require('../../newPages/GameDatesInput');
+var MembershipsShow = require('../../navigation/MembershipsShow');
 
 var LeagueShowDetail = React.createClass({
 
@@ -110,25 +111,35 @@ var LeagueShowDetail = React.createClass({
     AvailabilityActions.attemptDestroyAvailability(dateType, dateToRemoveId)
   },
 
-  render: function() {
-    var league = this.props.item;
-
-    var teams = this.state.teams.map(function(teamId){
+  getTeamsList: function(){
+    return this.state.teams.map(function(teamId){
       return TeamStore.find(teamId);
     });
+  },
 
-    var facilities = this.state.facilities.map(function(facilityId){
+  getFieldsList: function(){
+    return this.state.facilities.map(function(facilityId){
       return FacilityStore.find(facilityId);
     });
+  },
 
-    var facilitiesList = facilities.map(function(facility){
-      return (
-        <div key={facility.id}>
-          <span> {facility.name} </span>
-          <div onClick={this.removeFacility.bind(this, facility.id)}
-            className='delete-from-list-button'> X </div>
-        </div>)
-    }, this);
+  getTeamsListHeight: function(){
+    var listHeight = ((this.state.teams.length+1) * 28);
+    if (listHeight > 250) {
+      return 250;
+    } else if (listHeight < 115) {
+      return 115;
+    } else {
+      return listHeight;
+    }
+  },
+
+  getFieldsListHeight: function(){
+    return 100;
+  },
+
+  render: function() {
+    var league = this.props.item;
 
     var possibleTeamsToAdd =
       TeamStore.opposite(this.state.teams).
@@ -157,45 +168,35 @@ var LeagueShowDetail = React.createClass({
         <BasicInfoDiv stats={statsList}
           remove={this.removeTeam} />
 
+        <MembershipsShow
+          membershipName={'member teams:'}
+          itemsList={this.getTeamsList()}
+          removeItem={this.removeTeam}
+          addItem={this.addTeam}
+          possibleItemsToAdd={possibleTeamsToAdd}
+          addMessage='Add a team'
+          itemName='teams'
+          height={this.getTeamsListHeight()} />
 
-        <div className="show-basic-info">
-          <div className="info-stat">
-            <div className="info-stat-label">
-              member teams:
-            </div>
-          </div>
+        <MembershipsShow
+          membershipName={'fields list:'}
+          itemsList={this.getFieldsList()}
+          removeItem={this.removeFacility}
+          addItem={this.addFacility}
+          possibleItemsToAdd={possibleFacilitiesToAdd}
+          addMessage='Add a field'
+          itemName='facilities'
+          height={this.getFieldsListHeight()} />
 
-          <CurrentMembersList items={teams}
-            remove={this.removeTeam} />
-
-
-          <AddToComponent
-            makeAdd={this.addTeam}
-            list={possibleTeamsToAdd}
-            message={'Add a team'}
-            item={'teams'} />
+        <div className='show-basic-info'>
+          <GameDatesInput
+            dates={this.state.gameDates}
+            update={this.addNewGameDate}
+            remove={this.removeGameDate}
+            weeklyPlus={'Weekly game dates'}
+            specificPlus={'Specific additions'}
+            specificMinus={'Specific exceptions'}/>
         </div>
-
-        <div className="facilities-list">
-          {facilitiesList}
-        </div>
-
-        <div className="add-to-menu">
-          <AddToComponent
-            makeAdd={this.addFacility}
-            list={possibleFacilitiesToAdd}
-            message={'Add a facility'}
-            item={'facilities'} />
-        </div>
-
-        <GameDatesInput
-          dates={this.state.gameDates}
-          update={this.addNewGameDate}
-          remove={this.removeGameDate}
-          weeklyPlus={'Weekly game dates'}
-          specificPlus={'Specific additions'}
-          specificMinus={'Specific exceptions'}/>
-
       </div>
     );
   }

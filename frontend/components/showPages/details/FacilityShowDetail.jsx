@@ -6,6 +6,8 @@ var LeagueStore = require('../../../stores/LeagueStore');
 var LeagueFacilityStore = require('../../../stores/LeagueFacilityStore');
 var LeagueActions = require('../../../actions/LeagueActions');
 
+var BasicInfoDiv = require('./BasicInfoDiv');
+var MembershipsShow = require('../../navigation/MembershipsShow');
 var FacilityShowDetail = React.createClass({
 
 
@@ -39,21 +41,32 @@ var FacilityShowDetail = React.createClass({
     LeagueActions.destroyLeagueFacility(leagueId, this.props.item.id);
   },
 
-  render: function() {
-    var facility = this.props.item;
-
-    var leagues = this.state.leagues.map(function(leagueId){
+  getLeaguesList: function(){
+    return this.state.leagues.map(function(leagueId){
       return LeagueStore.find(leagueId);
     });
+  },
 
-    var leaguesList = leagues.map(function(league){
-      return (
-        <div key={league.id}>
-          <span> {league.name} </span>
-          <div onClick={this.removeLeague.bind(this, league.id)}
-            className='delete-from-list-button'> X </div>
-        </div>)
-    }, this);
+  statsList: function(){
+    return [{
+      label: 'field name:',
+      text: this.props.item.name
+    }];
+  },
+
+  getLeaguesListHeight: function(){
+    var listHeight = ((this.state.leagues.length+1) * 28);
+    if (listHeight > 250) {
+      return 350;
+    } else if (listHeight < 115) {
+      return 115;
+    } else {
+      return listHeight;
+    }
+  },
+
+  render: function() {
+    var facility = this.props.item;
 
     var possibleLeaguesToAdd =
       LeagueStore.opposite(this.state.leagues).
@@ -64,25 +77,17 @@ var FacilityShowDetail = React.createClass({
     return (
       <div className="show-detail clear">
 
-        <div className="show-basic-info">
-          <div className="info-stat">
-            {facility.name}
-          </div>
-        </div>
+        <BasicInfoDiv stats={this.statsList()} />
 
-
-        <div className="leagues-list">
-          {leaguesList}
-        </div>
-
-
-        <div className="add-to-menu">
-          <AddToComponent
-            makeAdd={this.addLeague}
-            list={possibleLeaguesToAdd}
-            message={'Add a league'}
-            item={'leagues'} />
-        </div>
+        <MembershipsShow
+          membershipName={'leagues list:'}
+          itemsList={this.getLeaguesList()}
+          removeItem={this.removeLeague}
+          addItem={this.addLeague}
+          possibleItemsToAdd={possibleLeaguesToAdd}
+          addMessage='Add a league'
+          itemName='leagues'
+          height={this.getLeaguesListHeight()} />
 
       </div>
     );

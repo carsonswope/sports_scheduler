@@ -115,9 +115,10 @@ var AddToComponent = React.createClass({
           </div>
       }
 
-      var toRender =(
+      return(
 
-        <div className="add-to-menu">
+        <div className="add-to-menu"
+          style={{height: this.props.height}}>
           <div className="add-to-search-component">
               <LocalSearchBar
                 classInfo={"add-to-search-bar"}
@@ -130,7 +131,8 @@ var AddToComponent = React.createClass({
 
           </div>
           <div className="add-component-options-main"
-            onScroll={this.touchMove}>
+            style={{height: this.props.height}}
+            onScroll={this.touchMove} >
             {remainingResultsList}
           </div>
         </div>
@@ -139,8 +141,7 @@ var AddToComponent = React.createClass({
 
     } else {
 
-      var toRender =(
-
+      return(
         <div className="add-to-menu">
           <div className="add-to-search-component">
             <div className="begin-add-to-button" onClick={this.startAdding}>
@@ -151,21 +152,7 @@ var AddToComponent = React.createClass({
 
       );
 
-
     }
-
-    var otherLeagues = this.props.list.map(function(league){
-      return(
-        <div>
-          {league.id}
-          {league.name}
-        </div>);
-    });
-
-
-    return (
-      <div>{toRender}</div>
-    );
   }
 
 });

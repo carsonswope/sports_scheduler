@@ -22,13 +22,14 @@ var CurrentMembersList = React.createClass({
   },
 
   removeItem: function(itemId) {
-    // debugger;
     this.props.remove(itemId);
   },
 
   render: function() {
+
     return (
-      <div className='info-stat-list'>
+      <div className='info-stat-list'
+        style={{height: this.props.height}}>
         {this.itemsList()}
       </div>
     );
