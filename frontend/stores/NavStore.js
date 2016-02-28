@@ -31,8 +31,17 @@ NavStore.reset = function() {
 };
 
 NavStore.setTab = function(tab) {
-  _currentTab = tab;
-  NavStore.__emitChange();
+
+  if (!_options) { _options = NavConstants.DEFAULT_OPTIONS; }
+
+  if (_currentTab !== tab){
+    _options[tab]['nameSearch'] = '';
+    _options[tab]['adding'] = false;
+
+    _currentTab = tab;
+    NavStore.__emitChange();
+
+  }
 };
 
 NavStore.setFocusOnElement = function(tab, element) {

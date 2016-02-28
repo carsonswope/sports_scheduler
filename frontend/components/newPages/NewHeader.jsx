@@ -2,22 +2,23 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var NavActions = require('../../actions/NavActions');
 
-var Header = React.createClass({
+var NewHeader = React.createClass({
 
   cancel: function() {
-    debugger;
     NavActions.setTabOption(this.props.tab, 'adding', false);
   },
 
   render: function() {
     return (
-      <div className="new-page-header">
-        <div className="new-page-title">
-          {this.props.title}
+      <div className='show-item-header'>
+        <div className='navbar-option'>
+          <div className='navbar-tab-title navbar-tab-title-selected'>
+            {this.props.message}
+          </div>
         </div>
-
-        <div className="new-page-cancel-button" onClick={this.cancel}>
-          X
+        <div className='header-delete-button main-element-text'
+          onClick={this.cancel}>
+          cancel
         </div>
       </div>
     );
@@ -25,4 +26,4 @@ var Header = React.createClass({
 
 });
 
-module.exports = Header;
+module.exports = NewHeader;

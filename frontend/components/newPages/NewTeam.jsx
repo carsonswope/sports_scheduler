@@ -5,7 +5,7 @@ var NewHeader = require('./NewHeader');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var TeamActions = require('../../actions/TeamActions');
 var GameDatesInput = require('./GameDatesInput');
-
+var TextEntriesInput = require('./TextEntriesInput');
 
 var NewTeam = React.createClass({
 
@@ -54,39 +54,37 @@ var NewTeam = React.createClass({
 
   },
 
+  focusEntry: function(element){
+    this.refs[element].focus();
+  },
+
+  textFields: function(){
+    return [{
+      title: 'Name:',
+      varName: 'name',
+    },{
+      title: 'Contact name:',
+      varName: 'contactName'
+    },{
+      title: 'Phone:',
+      varName: 'phone',
+    },{
+      title: 'Email:',
+      varName: 'email'
+    }];
+
+  },
+
   render: function() {
     return (
-      <div>
-        <NewHeader tab={'TEAMS'} title={'Add a team:'} />
+      <div className='show-item show-item-focused'>
+        <NewHeader tab={'TEAMS'} message={'Add a team:'} />
 
-        <form onSubmit={this.submitForm} >
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Name: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('name')} />
-          </div>
+        <form className='show-detail clear'
+          style={{paddingTop: 13}}
+          onSubmit={this.submitForm} >
 
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Contact name: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('contactName')} />
-          </div>
-
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Email: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('email')} />
-          </div>
-
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Phone: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('phone')} />
-          </div>
+          {TextEntriesInput.makeInputs(this, this.textFields())}
 
           <GameDatesInput
             dates={this.state.gameDates}

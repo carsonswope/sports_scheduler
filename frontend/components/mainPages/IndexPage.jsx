@@ -5,6 +5,7 @@ var NavConstants = require('../../constants/NavConstants');
 var NavStore = require('../../stores/NavStore');
 var NavActions = require('../../actions/NavActions');
 var ShowPage = require('../showPages/ShowPage.jsx');
+var ScheduleCriteria = require('../showPages/ScheduleCriteria.jsx');
 
 var IndexPage = React.createClass({
 
@@ -167,9 +168,17 @@ var IndexPage = React.createClass({
       content = this.itemsInIndex();
     }
 
+    if (this.state.resource === 'SCHEDULES'){
+
+      schedulesCriteria = <ScheduleCriteria />
+
+    } else {
+      schedulesCriteria = <div />
+    }
+
     return (
       <div>
-
+        {schedulesCriteria}
         {content}
       </div>
     );

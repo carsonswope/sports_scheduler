@@ -30,9 +30,19 @@ var SearchBar = React.createClass({
   },
 
   changeSearchValue: function(){
-    this.setState({
-      searchValue: NavStore.options(this.props.tab)[this.props.option]
-    });
+
+    if (NavStore.currentTab() !== this.props.tab ||
+        NavStore.options(this.props.tab)['adding'] ) {
+
+      this.setState({searchValue: '', searching: false});
+
+    } else {
+
+      this.setState({
+        searchValue: NavStore.options(this.props.tab)[this.props.option]
+      });
+
+    }
   },
 
   changeSearch: function(e) {
@@ -46,6 +56,7 @@ var SearchBar = React.createClass({
   },
 
   startSearching: function(){
+    NavActions.setTabOption(this.props.tab, 'adding', false);
     this.setState({searching: true});
   },
 

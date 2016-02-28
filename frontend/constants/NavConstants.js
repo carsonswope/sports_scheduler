@@ -112,6 +112,7 @@ exports.DEFAULT_OPTIONS = {
   SCHEDULES: {
     nameSearch: '',
     adding: false,
+    subTab: '',
     dateStart: null,
     dateEnd: null,
     teamsList: 'ALL',

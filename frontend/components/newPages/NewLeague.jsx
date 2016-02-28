@@ -9,7 +9,7 @@ var FacilitiesInput = require('./FacilitiesInput');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var LeagueActions = require('../../actions/LeagueActions');
 
-
+var TextEntriesInput = require('./TextEntriesInput');
 
 var NewLeague = React.createClass({
 
@@ -100,51 +100,18 @@ var NewLeague = React.createClass({
     }];
   },
 
-  textEntries: function(){
-
-    return this.textFields().map(function(entry, i){
-
-      return(
-        <div className='info-stat'
-          style={{width: 520}}
-          key={i}
-          onClick={this.focusEntry.bind(this, entry.varName)}>
-        <div className='info-stat-label'>
-          {entry.title}
-        </div>
-        <input className="info-stat-text text-entry-box"
-          type="text"
-          ref={entry.varName}
-          style={{bottom: -2, color: '#16174f'}}
-          valueLink={this.linkState(entry.varName)} />
-        </div>
-      );
-
-    }, this)
-
-  },
-
   render: function() {
 
     return(
       <div className='show-item show-item-focused'>
-        <div className='show-item-header'>
-          <div className='navbar-option'>
-            <div className='navbar-tab-title navbar-tab-title-selected'>
-              Create a league:
-            </div>
-          </div>
-          <div className='header-delete-button main-element-text'
-            onClick={this.cancel}>
-            cancel
-          </div>
-        </div>
+
+        <NewHeader tab={'LEAGUES'} message={'Create a league:'} />
 
         <form className='show-detail clear'
           style={{paddingTop: 13}}
           onSubmit={this.submitForm}>
 
-          {this.textEntries()}
+          {TextEntriesInput.makeInputs(this, this.textFields())}
 
           <GameDatesInput
             dates={this.state.gameDates}
@@ -166,54 +133,11 @@ var NewLeague = React.createClass({
           </div>
         </form>
 
-
       </div>
 
 
     )
-
-    return (
-      <div>
-        <NewHeader tab={'LEAGUES'} title={'Add a league:'} />
-
-        <form onSubmit={this.submitForm} >
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Name: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('name')} />
-            <label className="new-page-label"> Games per team: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('numGames')} />
-            <label className="new-page-label"> Game Duration: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('gameDuration')} />
-          </div>
-
-          <GameDatesInput
-            dates={this.state.gameDates}
-            update={this.updateGameDatesInput}
-            remove={this.removeGameDates}
-            weeklyPlus={'Weekly game dates'}
-            specificPlus={'Specific additions'}
-            specificMinus={'Specific exceptions'}/>
-
-          <FacilitiesInput
-            fields={this.state.facilities}
-            update={this.updateFacilitiesInput}
-            remove={this.removeFacilities}
-            checkAll={this.checkAllFacilities} />
-
-          <input className="new-submit-button"
-            type="submit" value="create league" />
-
-        </form>
-      </div>
-    );
   }
-
 });
 
 module.exports = NewLeague;

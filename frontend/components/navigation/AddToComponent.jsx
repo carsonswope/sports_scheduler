@@ -75,6 +75,10 @@ var AddToComponent = React.createClass({
     e.preventDefault();
   },
 
+  blurChange: function(){
+
+  },
+
   render: function() {
 
     if (this.state.adding) {
@@ -118,6 +122,7 @@ var AddToComponent = React.createClass({
       return(
 
         <div className="add-to-menu"
+          onBlur={this.blurChange}
           style={{height: this.props.height}}>
           <div className="add-to-search-component">
               <LocalSearchBar

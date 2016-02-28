@@ -4,7 +4,7 @@ var NavActions = require('../../actions/NavActions');
 var NewHeader = require('./NewHeader');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var FacilityActions = require('../../actions/FacilityActions');
-
+var TextEntriesInput = require('./TextEntriesInput');
 
 var NewFacility = React.createClass({
 
@@ -16,26 +16,36 @@ var NewFacility = React.createClass({
     };
   },
 
+  focusEntry: function(element){
+    this.refs[element].focus();
+  },
+
   submitForm: function(e) {
     e.preventDefault();
     FacilityActions.createFacility({facility: this.state});
   },
 
+  textFields: function(){
+    return [{
+      title: 'Name:',
+      varName: 'name'
+    }];
+  },
+
   render: function() {
     return (
-      <div>
-        <NewHeader tab={'FACILITIES'} title={'Add a facility:'} />
+      <div className='show-item show-item-focused'>
+        <NewHeader tab={'FACILITIES'} message={'Add a facility:'} />
 
-        <form onSubmit={this.submitForm} >
-          <div className="new-page-text-field">
-            <label className="new-page-label"> Name: </label>
-            <input className="text-entry-box new-page-entry-box"
-              type="text"
-              valueLink={this.linkState('name')} />
+        <form className='show-detail clear'
+          style={{paddingTop: 13}}
+          onSubmit={this.submitForm} >
+          {TextEntriesInput.makeInputs(this, this.textFields())}
+
+          <div className='show-item-show-item-focused'>
+            <input className=""
+              type="submit" value="create facility" />
           </div>
-
-          <input className="new-submit-button"
-            type="submit" value="create facility" />
         </form>
       </div>
     );
