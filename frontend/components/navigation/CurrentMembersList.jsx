@@ -4,6 +4,7 @@ var PropTypes = React.PropTypes;
 var CurrentMembersList = React.createClass({
 
   itemsList: function() {
+
     return this.props.items.map(function(item){
       return (
         <div key={item.id} className='add-component-option'>

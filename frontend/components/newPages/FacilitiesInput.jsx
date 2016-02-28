@@ -39,7 +39,6 @@ var FacilitiesInput = React.createClass({
             <input type='checkbox' style={{
               position: 'relative',
               bottom: 2}}
-              onChange={this.registerCheck.bind(this, field.id)}
               checked={checkedBool}/>
           </div>
         </div>);

@@ -3,6 +3,12 @@ if @league.persisted?
   json.ownerId @league.owner_id
   json.name @league.name
 
+  json.facilities @league.facilities do |facility|
+
+    json.facilityId facility.id
+
+  end
+
   json.specificAvailabilities @league.specific_availabilities do |spc_a|
 
     json.id             spc_a.id

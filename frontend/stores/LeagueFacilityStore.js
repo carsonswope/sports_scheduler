@@ -79,6 +79,20 @@ LeagueFacilityStore.removeLeagueFacility = function(pair) {
 
 }
 
+LeagueFacilityStore.addLeague = function(league) {
+
+  if (league.facilities){
+    for (var i = 0; i < league.facilities.length; i++) {
+      _memberships.push({
+        leagueId: league.id,
+        facilityId: league.facilities[i].facilityId
+      });
+    }
+    LeagueFacilityStore.__emitChange();
+  }
+
+};
+
 LeagueFacilityStore.removeLeague = function(league) {
 
   // _memberships = _memberships.filter(function(membership){
@@ -117,6 +131,9 @@ LeagueFacilityStore.__onDispatch = function(payload){
       break;
     case LeagueConstants.actions.REMOVE_LEAGUE_FACILITY:
       LeagueFacilityStore.removeLeagueFacility(payload.pair);
+      break;
+    case LeagueConstants.actions.ADD_LEAGUE:
+      LeagueFacilityStore.addLeague(payload.league);
       break;
     case LeagueConstants.actions.REMOVE_LEAGUE:
       LeagueFacilityStore.removeLeague(payload.league);
