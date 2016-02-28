@@ -74,7 +74,7 @@
 
 .show-basic-info {
 
-  width: 400px;
+  width: 520px;
   margin-top: 13px;
   margin-bottom: 13px;
   margin-right: 26px;
@@ -96,9 +96,9 @@
 
 .info-stat-label {
   display: inline-block;
-  width: 120px;
-  text-align: right;
-  padding-right: 10px;
+  width: 255px;
+  text-align: left;
+  padding-left: 21px;
   position: relative;
   font-size: 14px;
   color: #667467;

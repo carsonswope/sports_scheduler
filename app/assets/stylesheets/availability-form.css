@@ -14,3 +14,58 @@
   height: 120px;
   margin: 5px;
 }
+
+.gamedate-stat-label{
+  display: inline-block;
+  text-align: left;
+  position: relative;
+  font-size: 14px;
+  color: #667467;
+  font-weight: 400;
+  background-color: transparent;
+  padding-left: 0px;
+  bottom: -1px;
+}
+
+.gamedate-stat-info {
+  background-color: transparent;
+  position: relative;
+  font-size: 16px;
+  display: inline-block;
+  font-weight: 700;
+  bottom: -1px;
+}
+
+.button-for-add-menu {
+  border: 1px solid black;
+}
+
+.gamedate-input-form {
+  font-size: 16px;
+  font-weight: 700;
+  color: #16174f;
+  background-color: transparent;
+  border: 0;
+  position: relative;
+  bottom: -5px;
+}
+
+.gamedate-input-cancel-button {
+  color: #963019;
+  width: 259px;
+}
+
+.gamedate-input-submit-button {
+  color: #667467;
+}
+
+.gamedate-input-button {
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  bottom: -7px;
+}
+
+.gamedate-input-button:hover {
+  font-weight: 700;
+}

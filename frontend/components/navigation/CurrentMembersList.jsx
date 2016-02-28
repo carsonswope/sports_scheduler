@@ -9,7 +9,7 @@ var CurrentMembersList = React.createClass({
         <div key={item.id} className='add-component-option'>
           <div className='info-stat-text'
             style={{
-              width: 156
+              width: 214
             }}>
             {item.name}
           </div>

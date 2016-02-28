@@ -148,7 +148,6 @@ var TeamShowDetail = React.createClass({
           itemName='leagues'
           height={this.getLeaguesListHeight()} />
 
-      <div className='show-basic-info'>
         <GameDatesInput
           dates={this.state.gameDates}
           update={this.addNewGameDate}
@@ -156,7 +155,6 @@ var TeamShowDetail = React.createClass({
           weeklyPlus={'Weekly game dates'}
           specificPlus={'Specific additions'}
           specificMinus={'Specific exceptions'}/>
-      </div>
 
 
 

@@ -90,6 +90,8 @@ var LeagueShowDetail = React.createClass({
 
   addNewGameDate: function(newGameDate){
 
+    // debugger;
+
     AvailabilityActions.attemptCreateAvailability(
       newGameDate,
       'League',
@@ -135,7 +137,7 @@ var LeagueShowDetail = React.createClass({
   },
 
   getFieldsListHeight: function(){
-    return 100;
+    return 78;
   },
 
   render: function() {
@@ -188,7 +190,6 @@ var LeagueShowDetail = React.createClass({
           itemName='facilities'
           height={this.getFieldsListHeight()} />
 
-        <div className='show-basic-info'>
           <GameDatesInput
             dates={this.state.gameDates}
             update={this.addNewGameDate}
@@ -196,7 +197,6 @@ var LeagueShowDetail = React.createClass({
             weeklyPlus={'Weekly game dates'}
             specificPlus={'Specific additions'}
             specificMinus={'Specific exceptions'}/>
-        </div>
       </div>
     );
   }
