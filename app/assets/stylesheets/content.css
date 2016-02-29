@@ -24,7 +24,6 @@
   left: 18px;
 
   background-color: transparent;
-/*   background-color: green; */
 
   border: 2px solid #963019;
   border-left: 0px;
@@ -52,7 +51,7 @@
 
   height: 40px;
 /*   border: 1px solid black; */
- 
+
 }
 
 
@@ -92,8 +91,6 @@
 /*   font-size: 14px; */
   height: 26px;
   border-bottom: 2px solid #667467;
-  color: #
-  background-color: transparent;
 }
 
 .info-stat-label {
