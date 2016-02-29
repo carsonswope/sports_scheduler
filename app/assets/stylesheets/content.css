@@ -92,6 +92,8 @@
 /*   font-size: 14px; */
   height: 26px;
   border-bottom: 2px solid #667467;
+  color: #
+  background-color: transparent;
 }
 
 .info-stat-label {
@@ -115,6 +117,7 @@
   display: inline-block;
   font-weight: 700;
   bottom: -7px;
+  color: #16174f;
 }
 
 .info-stat-list {

@@ -25,7 +25,21 @@ exports.timeStringToAmPm = function(time) {
     hrs: parseInt(items[0]),
     mns: parseInt(items[1])
   })
+};
 
+exports.timeStringPrimitiveToObj = function(time) {
+
+  if (time.length === 3 ){
+    return {
+      hrs: parseInt(time.substring(0,1)),
+      mns: parseInt(time.substring(1,3))
+    };
+  } else {
+    return {
+      hrs: parseInt(time.substring(0,2)),
+      mns: parseInt(time.substring(2,4))
+    };
+  }
 
 };
 
@@ -53,3 +67,19 @@ exports.dateToString = function(dateString) {
   return month + '/' + day + '/' + year;
   return date[1] + ' ' + day + ' ' + date[3].substring(2,4);
 };
+
+exports.JSdateToInputString = function(dateString) {
+
+  var date = new Date(dateString);
+
+  var year = (date.getYear()+1900).toString();
+  var day = (date.getDate()).toString();
+  var month = (date.getMonth()+1).toString();
+  while (day.length < 2) { day = "0" + day; }
+  while (month.length < 2) { month = "0" + month; }
+
+  return year + '-' + month + '-' + day;
+
+
+
+}

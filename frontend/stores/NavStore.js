@@ -47,8 +47,8 @@ NavStore.setTab = function(tab) {
 NavStore.setFocusOnElement = function(tab, element) {
   _currentTab = tab;
   _options[tab].adding = false;
-  // _options[tab].nameSearch = element.name;
-  _options[tab].focused = element.id
+  _options[tab].nameSearch = element.name;
+  // _options[tab].focused = element.id
   NavStore.__emitChange();
 };
 

@@ -39,12 +39,13 @@ exports.SCREEN_NAMES = {
 var HomePage = require('../components/mainPages/HomePage');
 var WebpagePage = require('../components/mainPages/WebpagePage');
 var IndexPage = require('../components/mainPages/IndexPage');
+var SchedulesPage = require('../components/mainPages/SchedulesPage');
 
 exports.MAIN_PAGES = {
   HOME: HomePage,
   WEBPAGE: WebpagePage,
   FACILITIES: IndexPage,
-  SCHEDULES: IndexPage,
+  SCHEDULES: SchedulesPage,
   LEAGUES: IndexPage,
   TEAMS: IndexPage
 };
@@ -85,6 +86,8 @@ exports.ADD_PAGES = {
   FACILITIES: NewFacility
 };
 
+var DateHelper = require('../util/DateHelper');
+
 exports.DEFAULT_OPTIONS = {
   HOME: {},
   WEBPAGE: {},
@@ -112,12 +115,13 @@ exports.DEFAULT_OPTIONS = {
   SCHEDULES: {
     nameSearch: '',
     adding: false,
-    subTab: '',
-    dateStart: null,
-    dateEnd: null,
-    teamsList: 'ALL',
-    leaguesList: 'ALL',
-    facilitiesList: 'ALL',
+    subTab: 'LIST_VIEW',
+    filter: {
+      filterType: 'SHOW_ALL',
+      filterSpec: 0,
+      startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-5)),
+      endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+5))
+    },
     focused: null
   },
 

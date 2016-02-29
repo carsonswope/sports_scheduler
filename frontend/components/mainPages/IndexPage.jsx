@@ -168,17 +168,8 @@ var IndexPage = React.createClass({
       content = this.itemsInIndex();
     }
 
-    if (this.state.resource === 'SCHEDULES'){
-
-      schedulesCriteria = <ScheduleCriteria />
-
-    } else {
-      schedulesCriteria = <div />
-    }
-
     return (
       <div>
-        {schedulesCriteria}
         {content}
       </div>
     );

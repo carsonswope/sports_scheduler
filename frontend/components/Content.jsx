@@ -36,7 +36,11 @@ var Content = React.createClass({
   render: function() {
 
     var ToRender = NavConstants.MAIN_PAGES[this.state.tab]
-    ToRender = <ToRender resourceType={this.state.tab} />
+    ToRender = <ToRender resourceType={this.state.tab}
+      dims={{
+        height: this.props.dims.height - 198,
+        width: this.props.dims.width - 245
+      }}/>
 
     return (
 
