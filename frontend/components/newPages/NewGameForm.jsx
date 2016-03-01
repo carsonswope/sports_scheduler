@@ -81,9 +81,9 @@ var NewGamesForm = React.createClass({
 
     return(
       <select
-        className='gamedate-input-form'
+        className='new-game-form-input'
         value={value}
-        style={{width: 120}}
+        style={{width: 'calc(100% - 140px)'}}
         onChange={changeCallback}>
         {choiceElements}
       </select>
@@ -139,16 +139,16 @@ var NewGamesForm = React.createClass({
 
       return [
 
-        <div className='info-stat-text' key={1}
-          style={{width: 50}}>
-          {this.dayOfWeekOfNewGameDate()}
-        </div>,
-
         <input type='date' key={2}
-          className='gamedate-input-form'
+          className='new-game-form-input'
           value={this.state.newGame.date}
-          style={{width: 150}}
-          onChange={this.changeOption.bind(this, 'date')} />
+          style={{width: 'calc(100%-140px)'}}
+          onChange={this.changeOption.bind(this, 'date')} />,
+
+        <div className='info-stat-text' key={1}
+          style={{width: 30, float: 'right'}}>
+          {this.dayOfWeekOfNewGameDate()}
+        </div>
 
       ]
   },
@@ -156,7 +156,7 @@ var NewGamesForm = React.createClass({
   timeField: function(){
     return(
       <input type='time'
-        className='gamedate-input-form'
+        className='new-game-form-input'
         value={this.state.newGame.time}
         onChange={this.changeOption.bind(this, 'startTime')} />
     )
@@ -170,12 +170,18 @@ var NewGamesForm = React.createClass({
         this.state.newGame.leagueId,
         this.changeOption.bind(this, 'leagueId')
     )},{
+      title: 'date:',
+      inputField: this.dateField()
+    },{
       title: 'home team:',
       inputField: this.selectField(
         this.teamOptions('HOME'),
         this.state.newGame.team_1_id,
         this.changeOption.bind(this, 'team_1_id')
     )},{
+      title: 'time:',
+      inputField: this.timeField()
+    },{
       title: 'away team:',
       inputField: this.selectField(
         this.teamOptions('AWAY'),
@@ -187,15 +193,7 @@ var NewGamesForm = React.createClass({
         this.fieldOptions(),
         this.state.newGame.fieldId,
         this.changeOption.bind(this, 'fieldId')
-    )},{
-      title: 'date:',
-      inputField: this.dateField(),
-      style: {width: 78}
-    },{
-      title: 'time:',
-      inputField: this.timeField(),
-      style: {width: 145}
-    },];
+    )}];
   },
 
   scheduleGame: function(){
@@ -223,6 +221,25 @@ var NewGamesForm = React.createClass({
     NavActions.setTabOption('SCHEDULES', 'adding', false);
   },
 
+  validNewDate(){
+    return true;
+  },
+
+  scheduleButton: function(){
+
+    if (this.validNewDate()){
+      return (
+        <div className='new-game-form-input-line new-game-button'
+          onClick={this.scheduleGame}>
+          schedule!
+        </div>
+      );
+    } else {
+      return null;
+    }
+
+  },
+
   render: function() {
 
     if (!this.state.adding) {
@@ -231,27 +248,10 @@ var NewGamesForm = React.createClass({
 
     } else {
 
-      return(
-        <div className='new-game-form-main'>
-          <div className='new-game-form-header'>
-            <div className='schedule-criteria-title'>
-              Schedule a new game:
-            </div>
-          </div>
-        </div>
-
-
-      )
-
       var fields = this.entries().map(function(entry, i){
-
-        var textStyle = entry.style || {width: 108};
-
         return(
-          <div className='info-stat' key={i}
-            style={{width: 300, left: 103}}>
-            <div className='info-stat-label'
-              style={textStyle}>
+          <div className='new-game-form-input-line'>
+            <div className='new-game-form-label'>
               {entry.title}
             </div>
             {entry.inputField}
@@ -260,34 +260,34 @@ var NewGamesForm = React.createClass({
 
       });
 
-      return (
-        <div>
-          <div className='info-stat' key={-2}
-            style={{width: 'calc(100% - 124px)', height: 42, left: 103, borderBottom: '2px solid #16174f'}}>
-            <div className='gamedate-input-button gamedate-input-submit-button'
-              style={{fontWeight: 700, bottom: -22}}>
-              schedule a game!
+      return(
+        <div className='new-game-form-main'>
+          <div className='new-game-form-header'>
+            <div className='schedule-criteria-title'
+              style={{left: 0}}>
+              Schedule a new game:
             </div>
           </div>
 
           {fields}
 
-          <div className='info-stat' key={-3}
-            style={{width: '300', left: 103}}>
-            <div className='gamedate-input-button'
+          <div className='new-game-form-input-line'>
+            <div className='new-game-form-label new-game-button'
               onClick={this.stopAdding}
-              style={{color: '#963019', left: 21, width: 185}}>
+              style={{color: '#963019'}}>
               cancel
             </div>
-            <div className='gamedate-input-button'
-              onClick={this.scheduleGame}>
-              schedule!
-            </div>
+
+            {this.scheduleButton()}
+
           </div>
 
         </div>
+
+
       );
     }
+
   }
 
 });
