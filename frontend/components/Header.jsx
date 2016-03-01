@@ -51,8 +51,12 @@ var Header = React.createClass({
       }
       middleElement =(
         <div className="header-welcome-page">
-          <h1>Welcome to the Sports Scheduler</h1>
+          <h1>Welcome to the Sports Scheduler
 
+          </h1>
+            <div style={{position: 'relative', top: 100}}>
+              log in as 'me' with password '123456'
+            </div>
         </div>
       );
     }
