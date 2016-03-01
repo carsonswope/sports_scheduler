@@ -11,7 +11,7 @@
     font-size: 14px;
     color: #667467;
     position: relative;
-    bottom: -2px;
+    bottom: -6px;
     padding-left: 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -23,7 +23,7 @@
     border-right: 2px solid #f6f1ed;
     background-color: #667467;
     position: relative;
-    bottom: -4px;
+    bottom: -6px;
     height: 19px;
     display: inline-block;
 }
@@ -31,7 +31,7 @@
 .table-body-main {
     width: calc(100% - 22px);
     position: relative;
-    left: 22px;
+    left: 18px;
     height: calc(100% - 28px);
     overflow-y: scroll;
 }
@@ -53,5 +53,39 @@
     color: #16174f;
     overflow: hidden;
     white-space: nowrap;
+    padding-left: 10px;
+}
 
+.schedule-criteria-main {
+    height: 42px;
+    border-bottom: 2px solid #16174f;
+}
+
+.schedule-header-main {
+    margin-top: -44px;
+    height: 42px;
+    position: relative;
+    left: 18px;
+    width: calc(100% - 37px);
+}
+
+.schedule-criteria-title {
+    font-size: 18px;
+    position: relative;
+    bottom: -17px;
+    left: 25px;
+    color: #16174f;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.schedule-criteria-option {
+    position: relative;
+    left: 40px;
+    font-size: 16px;
+    bottom: -17px;
+    outline: none;
+    border: 0;
+    font-weight: 700;
+    color: #16174f;
 }

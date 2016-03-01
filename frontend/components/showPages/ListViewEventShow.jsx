@@ -23,7 +23,6 @@ var ListViewEventShow = React.createClass({
   },
 
   callToggle: function(){
-    debugger;
     this.props.toggleFocus(this.props.event.id);
   },
 
@@ -58,7 +57,7 @@ var ListViewEventShow = React.createClass({
               borderBottom: '2px solid #16174f'
             }}>
 
-          {this.detailOptions()}
+            {this.detailOptions()}
 
           </div>
         )
@@ -193,7 +192,7 @@ var ListViewEventShow = React.createClass({
   },
 
   changeNewGameTime: function(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({ newGameTime: e.target.value });
   },
 
@@ -219,150 +218,94 @@ var ListViewEventShow = React.createClass({
     })
   },
 
-  columns: function(){
-
-    if (EventHelper.isScheduled(this.props.event)){
-
-      return [{
-        width: 50,
-        text: DateConstants.DAYS_OF_WEEK[
-              new Date(this.props.event.date).getDay()
-            ]
-      },{
-        width: 100,
-        text: this.props.event.date
-      },{
-        width: 70,
-        text: DateHelper.timeAsString(
-              DateHelper.timeStringPrimitiveToObj(
-              this.props.event.startTime))
-      },{
-        width: 70,
-        text: FacilityStore.find(
-          this.props.event.facilityId
-          ).name
-      },{
-        width: 91,
-        text: LeagueStore.find(
-          this.props.event.leagueId
-          ).name
-      },{
-        width: 170,
-        text: TeamStore.find(
-          this.props.event.team_1_id
-        ).name
-      },{
-        width: 100,
-        text: TeamStore.find(
-          this.props.event.team_2_id
-        ).name
-      }];
-
-    } else {
-
-      return[{
-        width: 290,
-        color: '#963019',
-        text: 'unscheduled'
-      },{
-        width: 91,
-        text: LeagueStore.find(
-          this.props.event.leagueId
-          ).name
-      },{
-        width: 170,
-        text: TeamStore.find(
-          this.props.event.team_1_id
-        ).name
-      },{
-        width: 100,
-        text: TeamStore.find(
-          this.props.event.team_2_id
-        ).name
-      }];
-
-    }
-
-
-  },
-
-  entries: function(){
-    this.props.columns.map(function(column){
-
-
-    });
-  },
-
   getDayOfWeek: function(){
-
     return this.props.event.dayOfWeek = DateConstants.DAYS_OF_WEEK[
       new Date(this.props.event.date).getDay()
     ];
   },
 
   entryText: function(){
-    return{
-      dayOfWeek: this.getDayOfWeek(),
-      date: this.props.event.date,
-      startTime: DateHelper.timeAsString(
-        DateHelper.timeStringPrimitiveToObj(
-        this.props.event.startTime)),
-      facilityId: FacilityStore.find(
-        this.props.event.facilityId).name,
-      leagueId: LeagueStore.find(
-        this.props.event.leagueId).name,
+
+    text = {
       team_1_id: TeamStore.find(
         this.props.event.team_1_id).name,
       team_2_id: TeamStore.find(
-        this.props.event.team_2_id).name
+        this.props.event.team_2_id).name,
+      leagueId: LeagueStore.find(
+        this.props.event.leagueId).name
+    };
+
+    if (EventHelper.isScheduled(this.props.event)){
+      text['dayOfWeek'] = this.getDayOfWeek();
+      text['date'] = this.props.event.date;
+      text['startTime'] = DateHelper.timeAsString(
+        DateHelper.timeStringPrimitiveToObj(
+        this.props.event.startTime));
+      text['facilityId'] = FacilityStore.find(
+        this.props.event.facilityId).name;
     }
+
+    return text;
+  },
+
+  columnElement: function(column, i) {
+
+    var width = column.width - 10;
+    if (width < 10) { width = 10; }
+
+    return(
+      <div className='table-entry-text'
+        style={{width: width}}
+        key={i}>
+        {this.entryText()[column.varName]}
+      </div>
+    );
+
   },
 
   columnElements: function(){
 
-    var fontWeight = this.props.focused ? 700 : 400
-    var color = '#667467'
+    if (EventHelper.isScheduled(this.props.event)){
+      return this.props.columns.map(function(column, i){
+        return this.columnElement(column, i);
+      }, this);
 
-    return this.props.columns.map(function(column, i){
+    } else {
 
-      var width = column.width;
-      if (width < 16) { width = 16; }
+      var columnElements = this.props.columns.slice(4,7).map(function(column, i){
+        return this.columnElement(column, i);
+      }, this)
 
-      return(
+      var unscheduledWidth = -10;
+      this.props.columns.slice(0,4).forEach(function(column){
+        unscheduledWidth += column.width;
+      })
+
+      columnElements.unshift(
         <div className='table-entry-text'
-          style={{width: width}}
-          key={i}>
-          {this.entryText()[column.varName]}
+          style={{width: unscheduledWidth}}
+          key={-1}>
+          not currently scheduled!
         </div>
-      );
+      )
 
-    }, this);
+      return columnElements;
+
+    }
   },
 
   render: function() {
 
     return (
-      <div className='table-entry-header'
-        onClick={this.callToggle}>
-        {this.columnElements()}
-      </div>
-    );
-
-    return (
       <div>
-
-        <div className='info-stat'
-          onClick={this.callToggle}
-          style={infoStatStyle}>
-
+        <div className='table-entry-header'
+          onClick={this.callToggle}>
           {this.columnElements()}
-
         </div>
-
         {this.detail()}
-
       </div>
     );
+
   }
 
 });

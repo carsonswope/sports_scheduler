@@ -92,13 +92,11 @@ exports.dbDateFromInputString = function(inputString) {
 exports.JSdateToInputString = function(dateString) {
 
   var date = new Date(dateString);
-
   var year = (date.getYear()+1900).toString();
   var day = (date.getDate()).toString();
   var month = (date.getMonth()+1).toString();
   while (day.length < 2) { day = "0" + day; }
   while (month.length < 2) { month = "0" + month; }
-
   return year + '-' + month + '-' + day;
 
 }
@@ -106,10 +104,6 @@ exports.JSdateToInputString = function(dateString) {
 exports.todayInputString = function(){
 
   var date = new Date();
-
   return exports.JSdateToInputString(date);
-  // var yr = date.getMonth()+1;
-  // var
-  // return ('' + (1900+date.getYear()) + '-' +
-  //   (date.getMonth()+1) + '-' + date.getDate());
+
 };

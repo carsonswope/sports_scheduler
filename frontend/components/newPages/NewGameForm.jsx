@@ -5,6 +5,7 @@ var EventActions = require('../../actions/EventActions');
 
 
 var NavStore = require('../../stores/NavStore');
+var NavActions = require('../../actions/NavActions');
 var LeagueStore = require('../../stores/LeagueStore');
 var TeamStore = require('../../stores/TeamStore');
 var FacilityStore = require('../../stores/FacilityStore');
@@ -30,6 +31,20 @@ var NewGamesForm = React.createClass({
     });
 
   },
+
+  componentDidMount: function(){
+    this.navListener = NavStore.addListener(this.navChange);
+  },
+
+  componentWillUnmount: function(){
+    this.navListener.remove();
+  },
+
+  navChange: function(){
+
+  },
+
+
 
   changeLeague: function(e){
     this.setState({ leagueId: parseInt(e.target.value) });

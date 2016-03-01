@@ -7,24 +7,36 @@ var EventsListView = React.createClass({
   getInitialState: function(){
     return {
       columnWidth: {
-        dayOfWeek: 100,
-        date: 100,
-        startTime: 100,
-        facilityId: 100,
+        dayOfWeek: 50,
+        date: 105,
+        startTime: 80,
+        facilityId: 80,
         leagueId: 100,
-        team_1_id: 100,
-        team_2_id: 100
+        team_1_id: 130,
+        team_2_id: 130
       },
+
       dragging: {
         currently: null,
         oldX: null
-      }
+      },
+
+      focused: null
+
     };
+  },
+
+  toggleFocus: function(eventId){
+    if (this.state.focused === eventId){
+      this.setState({focused: null});
+    } else {
+      this.setState({focused: eventId});
+    }
   },
 
   columns: function(){
     return[{
-      title: 'Weekday',
+      title: 'Day',
       varName: 'dayOfWeek',
       width: this.state.columnWidth.dayOfWeek
     },{
@@ -71,10 +83,7 @@ var EventsListView = React.createClass({
       }
     }
 
-    newState.dragging = {
-      currently: null,
-      oldX: null
-    };
+    newState.dragging = { currently: null, oldX: null };
 
     this.setState({ newState});
   },
@@ -128,23 +137,23 @@ var EventsListView = React.createClass({
   tableEntries: function(){
 
     return this.props.games.map(function(game, i){
-
       return(
         <ListViewEventShow event={game}
           key={i}
           toggleFocus={this.toggleFocus}
-          focused={false}
+          focused={this.state.focused === game.id}
           columns={this.columns()} />
       );
-
     }, this);
-
   },
 
   render: function() {
 
     return (
       <div style={{
+          left: 20,
+          position: 'relative',
+          marginTop: 16,
           width: this.props.dims.width,
           height: this.props.dims.height
         }}>

@@ -29,225 +29,134 @@ var ScheduleCriteria = React.createClass({
 
   componentDidMount: function(){
     this.navListener = NavStore.addListener(this.navChange);
-
   },
 
-  componentWillUnmount: function(){
-    this.navListener.remove();
-  },
+  componentWillUnmount: function(){ this.navListener.remove(); },
 
   navChange: function(){
 
     var storeOptions = NavStore.options('SCHEDULES').filter;
-
     this.setState({
       filterType: storeOptions.filterType,
       filterSpec: storeOptions.filterSpec,
       startDate: storeOptions.startDate,
       endDate: storeOptions.endDate,
     });
+
   },
 
   getStartDate: function(){
-
     var date = new Date();
     date.setMonth(date.getMonth()-2);
-    return DateHelper.JSdateToInputString(date)
-
-
+    return DateHelper.JSdateToInputString(date);
   },
 
   getEndDate: function(){
     var date = new Date();
     date.setMonth(date.getMonth()+2);
-    return DateHelper.JSdateToInputString(date)
-
+    return DateHelper.JSdateToInputString(date);
   },
 
-  listViewHeader: function(){
-    return(
-      <div className='show-detail clear'
-        style={{height: 40}}>
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 105, left: 30}}>
-          Date
-        </div>
+  changeSpec: function(varName, e){
+    var filter = {
+      filterType: this.state.filterType,
+      filterSpec: this.state.filterSpec,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+    }
 
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 48}}>
-          Time
-        </div>
+    if (varName ==='filterType') {
+      if (e.target.value === 'SHOW_ALL') {
 
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 50}}>
-          Field
-        </div>
+        filter.filterSpec = -1;
 
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 70}}>
-          League
-        </div>
-
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 150}}>
-          Home Team
-        </div>
-
-        <div className='info-stat-label'
-          style={{bottom: -21, width: 80}}>
-          Away Team
-        </div>
-      </div>
-    );
-  },
-
-  calendarViewHeader: function(){
-    return(
-      <div className='show-detail clear'
-        style={{height: 40}}>
-        calendar header
-      </div>
-    );
-  },
-
-  changeFilterType: function(e){
-    e.preventDefault();
-
-    if (e.target.value === 'SHOW_ALL') {
-      this.setState({
-        filterType: e.target.value,
-        filterSpec: 0
-      });
-      NavActions.setTabOption(
-        'SCHEDULES', 'filter', {
+      } else if (this.state.filterType !== e.target.value) {
+        //defer action until spec is selected..
+        this.setState({
           filterType: e.target.value,
-          filterSpec: 0,
-          startDate: this.state.startDate,
-          endDate: this.state.endDate
-        }
-      );
-    } else if (this.state.filterType !== e.target.value) {
-      this.setState({
-        filterType: e.target.value,
-        filterSpec: 0
-      });
+          filterSpec: -1
+        });
+
+        return;
+      }
+    }
+
+    filter[varName] = e.target.value;
+
+    NavActions.setTabOption( 'SCHEDULES', 'filter', filter );
+
+  },
+
+  getFilterOptions: function(){
+
+    return {
+      SHOW_ALL: {
+        title: 'Show All',
+        choices: []
+      },
+
+      BY_LEAGUE: {
+        title: 'By League',
+        choices: LeagueStore.all().map(function(league){
+          return { title: league.name, id: league.id };
+        })
+      },
+
+      BY_TEAM: {
+        title: 'By Team',
+        choices: TeamStore.all().map(function(team){
+          return { title: team.name, id: team.id };
+        })
+      },
+
+      BY_WEEKDAY: {
+        title: 'By weekday',
+        choices: Object.keys(DateConstants.DAYS_OF_WEEK).map(function(day){
+          return { title: DateConstants.DAYS_OF_WEEK[day], id: day };
+        })
+      }
 
     };
   },
 
-  changeFilterSpec: function(e){
-    e.preventDefault();
-
-    NavActions.setTabOption(
-      'SCHEDULES', 'filter', {
-        filterType: this.state.filterType,
-        filterSpec: e.target.value,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate
-      }
-    );
-
-    console.log(this.state);
-  },
-
-  changeStartDate: function(e){
-    e.preventDefault();
-
-    NavActions.setTabOption(
-      'SCHEDULES', 'filter', {
-        filterType: this.state.filterType,
-        filterSpec: this.state.filterSpec,
-        startDate: e.target.value,
-        endDate: this.state.endDate
-      }
-    );
-  },
-
-  changeEndDate: function(e){
-    e.preventDefault();
-
-    NavActions.setTabOption(
-      'SCHEDULES', 'filter', {
-        filterType: this.state.filterType,
-        filterSpec: this.state.filterSpec,
-        startDate: this.state.startDate,
-        endDate: e.target.value
-      }
-    );
-  },
-
-  getResourceOptions: function(filter){
-
-    switch (filter) {
-      case 'SHOW_ALL':
-        return [];
-        break;
-
-      case 'BY_LEAGUE':
-        return LeagueStore.all().map(function(league){
-          return { title: league.name, id: league.id };
-        });
-        break;
-
-      case 'BY_TEAM':
-        return TeamStore.all().map(function(team){
-          return { title: team.name, id: team.id };
-        });
-        break;
-
-      case 'BY_WEEKDAY':
-        return Object.keys(DateConstants.DAYS_OF_WEEK).map(function(day){
-          return { title: DateConstants.DAYS_OF_WEEK[day], id: day };
-        });
-        break;
-    }
-
-  },
-
   criteriaOptions: function(){
 
-    var criteriaChoices = [
-      { title: 'Show All',      id: 'SHOW_ALL' },
-      { title: 'By League',     id: 'BY_LEAGUE'},
-      { title: 'By Team',       id: 'BY_TEAM'},
-      { title: 'By weekday',    id: 'BY_WEEKDAY'}
-    ];
+    var options = this.getFilterOptions();
 
-    var criteriaOptionElements = criteriaChoices.map(function(choice, i){
+    var criteriaTypeElements = Object.keys(options).map(function(filterType, i){
       return(
-        <option key={i} value={choice.id}> {choice.title} </option>
-      );
-    }, this)
+        <option key={i} value={filterType}> {options[filterType].title} </option>
+      )
+    }, this);
 
-    var criteriaSpecElements = this.getResourceOptions(this.state.filterType).map(function(choice, i){
+    var criteriaSpecElements = options[this.state.filterType].choices.map(function(choice, i){
       return( <option key={i} value={choice.id}> {choice.title} </option>
       );
-    }, this)
+    }, this);
 
-    if (criteriaSpecElements.length)
-    criteriaSpecElements.unshift(
-      <option key={-1} value={0}>
-        {''}
-      </option>
-    );
+    if (criteriaSpecElements.length){
+      criteriaSpecElements.unshift(
+        <option key={-1} value={-1}> {''} </option>
+      );
+    };
 
     var inputForms = [{
       inputType: 'select',
-      inputCallback: this.changeFilterType,
-      selectChoices: criteriaOptionElements,
+      inputCallback: this.changeSpec.bind(this, 'filterType'),
+      selectChoices: criteriaTypeElements,
       currentValue: this.state.filterType
     },{
       inputType: 'select',
-      inputCallback: this.changeFilterSpec,
+      inputCallback: this.changeSpec.bind(this, 'filterSpec'),
       selectChoices: criteriaSpecElements,
       currentValue: this.state.filterSpec
     },{
       inputType: 'date',
-      inputCallback: this.changeStartDate,
+      inputCallback: this.changeSpec.bind(this, 'startDate'),
       dateValue: this.state.startDate
     },{
       inputType: 'date',
-      inputCallback: this.changeEndDate,
+      inputCallback: this.changeSpec.bind(this, 'endDate'),
       dateValue: this.state.endDate
     }];
 
@@ -272,8 +181,8 @@ var ScheduleCriteria = React.createClass({
       if (form.inputType === 'select') {
         return(
           <select key={i}
-            className='gamedate-input-form'
-            style={styleSelect}
+            className='schedule-criteria-option'
+            style={{width: 150}}
             value={form.currentValue}
             onChange={form.inputCallback}>
             {form.selectChoices}
@@ -283,8 +192,7 @@ var ScheduleCriteria = React.createClass({
       } else {
         return(
           <input type='date' key={i}
-            className='gamedate-input-form'
-            style={styleDate}
+            className='schedule-criteria-option'
             value={form.dateValue}
             onChange={form.inputCallback} />
         );
@@ -295,6 +203,18 @@ var ScheduleCriteria = React.createClass({
   },
 
   render: function() {
+
+    return (
+      <div className='schedule-header-main'>
+        <div className='schedule-criteria-main'>
+          <div className='schedule-criteria-title'>
+            Schedules:
+          </div>
+
+          {this.criteriaOptions()}
+        </div>
+      </div>
+    );
 
     return (
       <div className='show-item show-item-focused'
@@ -317,8 +237,6 @@ var ScheduleCriteria = React.createClass({
 
             </div>
           </div>
-          {this.state.criteria.subTab === 'LIST_VIEW' ?
-            this.listViewHeader() : this.calendarViewHeader() }
         </div>
       </div>
     );

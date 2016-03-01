@@ -122,6 +122,15 @@ exports.DEFAULT_OPTIONS = {
       startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-5)),
       endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+5))
     },
+    newGame: {
+      leagueId: null,
+      team_1_id: null,
+      team_2_id: null,
+      date: null,
+      time: null,
+      fieldId: null
+    },
+
     focused: null
   },
 

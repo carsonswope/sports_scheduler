@@ -8,21 +8,25 @@ var EventsListView = require('./EventsListView');
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 var CalendarViewEventShow = require('../showPages/CalendarViewEventShow');
 
+var NavActions = require('../../actions/NavActions');
+
 var NewGameForm = require('../newPages/NewGameForm');
 
 var SchedulesPage = React.createClass({
 
   getInitialState: function(){
 
-    var filter = NavStore.options('SCHEDULES').filter
-
-    // debugger;
+    var filter = NavStore.options('SCHEDULES').filter;
 
     return({
       viewType: NavStore.options('SCHEDULES').subTab,
       filter: filter,
       games: EventStore.filteredEvents(filter),
-      selected: null
+      selected: null,
+      adding: NavStore.options('SCHEDULES').adding,
+      newGame: {
+
+      }
     });
   },
 
@@ -44,7 +48,8 @@ var SchedulesPage = React.createClass({
     this.setState({
       viewType: options.subTab,
       filter: filter,
-      games: EventStore.filteredEvents(filter)
+      games: EventStore.filteredEvents(filter),
+      adding: options.adding
     });
   },
 
@@ -53,7 +58,8 @@ var SchedulesPage = React.createClass({
     this.setState({
       games: EventStore.filteredEvents(this.state.filter),
       focused: null
-    })
+    });
+
   },
 
   toggleFocus: function(id){
@@ -65,40 +71,22 @@ var SchedulesPage = React.createClass({
   },
 
   gamesList: function(){
-    // var games = [{id: 1}, {id: 2}];
 
     if (this.state.viewType === 'LIST_VIEW'){
       return <EventsListView games={this.state.games} dims={{width: 800, height: 300}}/>
     } else {
-
+      return this.state.games.map(function(game){
+        return <CalenderViewEventShow event={game} />
+      }, this);
     }
-
-    return this.state.games.map(function(game){
-      if (this.state.viewType === 'LIST_VIEW'){
-
-        return <ListViewEventShow event={game}
-          key={game.id}
-          toggleFocus={this.toggleFocus}
-          focused={this.state.focused === game.id}/>
-
-      } else {
-
-        return <CalendarViewEventShow event={game} />
-
-      }
-    }, this)
   },
 
   getNewGameForm: function(){
-    this.setState({
-      adding: true
-    });
+    NavActions.setTabOption( 'SCHEDULES', 'adding', true );
   },
 
   hideNewGameForm: function(){
-    this.setState({
-      adding: false
-    });
+    NavActions.setTabOption( 'SCHEDULES', 'adding', false );
   },
 
   newGameForm: function(){
@@ -107,7 +95,7 @@ var SchedulesPage = React.createClass({
     } else {
       return(
         <div className='info-stat'
-          style={{width: 'calc(100% - 75px)', height: 42, left: 53}}>
+          style={{width: 'calc(100% - 75px)', backgroundColor: 'transparent', height: 42, left: 53}}>
           <div className='gamedate-input-button gamedate-input-submit-button'
             style={{left: 50, bottom: -22}}
             onClick={this.getNewGameForm}>
@@ -122,6 +110,9 @@ var SchedulesPage = React.createClass({
     return (
       <div>
         <ScheduleCriteria />
+
+        {this.newGameForm()}
+
         <div style={{
             width: this.props.dims.width,
             height: this.props.dims.height,
@@ -130,7 +121,6 @@ var SchedulesPage = React.createClass({
           }}>
 
           {this.gamesList()}
-          {this.newGameForm()}
 
         </div>
       </div>
