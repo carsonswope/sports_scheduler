@@ -1,0 +1,10 @@
+json.id @event.id
+json.ownerId @event.owner_id
+json.team_1_id @event.team_1_id
+json.team_2_id @event.team_2_id
+json.date @event.date
+json.startTime @event.start_time
+json.duration @event.duration
+json.endTime @event.time_end
+json.facilityId @event.facility_id
+json.leagueId @event.league_id

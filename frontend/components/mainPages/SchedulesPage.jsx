@@ -7,6 +7,8 @@ var NavStore = require('../../stores/NavStore');
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 var CalendarViewEventShow = require('../showPages/CalendarViewEventShow');
 
+var NewGameForm = require('../newPages/NewGameForm');
+
 var SchedulesPage = React.createClass({
 
   getInitialState: function(){
@@ -46,8 +48,10 @@ var SchedulesPage = React.createClass({
   },
 
   eventChange: function(){
+
     this.setState({
-      games: EventStore.filteredEvents(this.state.filter)
+      games: EventStore.filteredEvents(this.state.filter),
+      focused: null
     })
   },
 
@@ -77,6 +81,35 @@ var SchedulesPage = React.createClass({
     }, this)
   },
 
+  getNewGameForm: function(){
+    this.setState({
+      adding: true
+    });
+  },
+
+  hideNewGameForm: function(){
+    this.setState({
+      adding: false
+    });
+  },
+
+  newGameForm: function(){
+    if (this.state.adding) {
+      return <NewGameForm cancelAdding={this.hideNewGameForm}/>;
+    } else {
+      return(
+        <div className='info-stat'
+          style={{width: 'calc(100% - 75px)', height: 42, left: 53}}>
+          <div className='gamedate-input-button gamedate-input-submit-button'
+            style={{left: 50, bottom: -22}}
+            onClick={this.getNewGameForm}>
+            schedule a game!
+          </div>
+        </div>
+      );
+    }
+  },
+
   render: function() {
     return (
       <div>
@@ -89,6 +122,7 @@ var SchedulesPage = React.createClass({
           }}>
 
           {this.gamesList()}
+          {this.newGameForm()}
 
         </div>
       </div>

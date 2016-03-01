@@ -2,6 +2,8 @@ if @league.persisted?
   json.id @league.id
   json.ownerId @league.owner_id
   json.name @league.name
+  json.numGames @league.num_games
+  json.gameDuration @league.event_duration
 
   json.facilities @league.facilities do |facility|
 

@@ -131,6 +131,7 @@ var AddToComponent = React.createClass({
                 option={'nameSearch'}
                 takeFocus={true}
                 message={'add a team'}
+                width={217}
                 cancelSearch={this.cancelAdding} />
 
 

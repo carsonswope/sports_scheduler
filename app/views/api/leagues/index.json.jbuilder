@@ -4,6 +4,8 @@ json.array! @leagues do |league|
   json.name league.name
   json.teams league.league_team_memberships.map { |t| t.team_id }
   json.facilities league.league_facility_memberships.map { |f| f.facility_id }
+  json.numGames league.num_games
+  json.gameDuration league.event_duration
 
   json.specificAvailabilities league.specific_availabilities do |spc_a|
 

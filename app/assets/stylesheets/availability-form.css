@@ -48,6 +48,7 @@
   border: 0;
   position: relative;
   bottom: -5px;
+  outline: none;
 }
 
 .gamedate-input-cancel-button {

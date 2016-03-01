@@ -84,11 +84,38 @@ EventStore.resetEventsList = function(events){
   EventStore.__emitChange();
 };
 
+EventStore.updateEvent = function(event){
+  _events[event.id] = event;
+  EventStore.__emitChange();
+};
+
+EventStore.deleteEvent = function(event){
+
+  delete _events[event.id];
+  EventStore.__emitChange();
+};
+
+EventStore.addEvent = function(event){
+
+  _events[event.id] = event;
+
+  EventStore.__emitChange();
+};
+
 EventStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case EventConstants.actions.RESET_EVENTS_LIST:
-    EventStore.resetEventsList(payload.events);
-    break;
+      EventStore.resetEventsList(payload.events);
+      break;
+    case EventConstants.actions.UPDATE_EVENT:
+      EventStore.updateEvent(payload.event);
+      break;
+    case EventConstants.actions.DELETE_EVENT:
+      EventStore.deleteEvent(payload.event);
+      break;
+    case EventConstants.actions.ADD_EVENT:
+      EventStore.addEvent(payload.event);
+      break;
   }
 };
 

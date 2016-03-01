@@ -24,12 +24,12 @@ class Event < ActiveRecord::Base
 
   belongs_to :facility
   belongs_to :league
-  belongs_to :t_1,
-    foreign_key: :t_1_id,
+  belongs_to :team_1,
+    foreign_key: :team_1_id,
     class_name: 'Team'
 
-  belongs_to :t_2,
-    foreign_key: :t_2_id,
+  belongs_to :team_2,
+    foreign_key: :team_2_id,
     class_name: 'Team'
 
   def self.find_by_owner(owner_id)
@@ -41,8 +41,8 @@ class Event < ActiveRecord::Base
       SELECT *
       FROM teams
       WHERE
-        teams.id = #{self.t_2_id} OR
-        teams.id = #{self.t_1_id}
+        teams.id = #{self.team_2_id} OR
+        teams.id = #{self.team_1_id}
     SQL
   end
 

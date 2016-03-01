@@ -12,6 +12,7 @@ var SearchBoxElement = require('./SearchBoxElement');
 var SearchBar = React.createClass({
 
   getInitialState: function() {
+
     return {
       searching: false,
       searchValue: NavStore.options(this.props.tab)[this.props.option]
@@ -39,6 +40,7 @@ var SearchBar = React.createClass({
     } else {
 
       this.setState({
+        searching: true,
         searchValue: NavStore.options(this.props.tab)[this.props.option]
       });
 

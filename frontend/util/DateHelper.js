@@ -27,6 +27,15 @@ exports.timeStringToAmPm = function(time) {
   })
 };
 
+exports.timeInputStringToNumber = function(timeString) {
+  var items = timeString.split(':')
+  return parseInt(items[0]+items[1]);
+};
+
+exports.timeStringPrimitiveToInputString = function(time) {
+  return time.substring(0, time.length-2) + ":" + time.slice(-2);
+};
+
 exports.timeStringPrimitiveToObj = function(time) {
 
   if (time.length === 3 ){
@@ -40,6 +49,13 @@ exports.timeStringPrimitiveToObj = function(time) {
       mns: parseInt(time.substring(2,4))
     };
   }
+
+};
+
+exports.dateObjectFromInputString = function(inputString){
+  var dateObject = new Date(inputString);
+  dateObject.setDate(dateObject.getDate()+1);
+  return dateObject
 
 };
 
@@ -68,6 +84,11 @@ exports.dateToString = function(dateString) {
   return date[1] + ' ' + day + ' ' + date[3].substring(2,4);
 };
 
+exports.dbDateFromInputString = function(inputString) {
+  var components = inputString.split('-');
+  return components[1] + '/' + components[2] + '/' + components[0];
+};
+
 exports.JSdateToInputString = function(dateString) {
 
   var date = new Date(dateString);
@@ -80,6 +101,8 @@ exports.JSdateToInputString = function(dateString) {
 
   return year + '-' + month + '-' + day;
 
-
-
 }
+
+exports.todayInputString = function(){
+  return exports.JSdateToInputString(new Date());
+};

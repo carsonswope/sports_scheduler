@@ -69,7 +69,7 @@ var ScheduleCriteria = React.createClass({
       <div className='show-detail clear'
         style={{height: 40}}>
         <div className='info-stat-label'
-          style={{bottom: -21, width: 78, left: 20}}>
+          style={{bottom: -21, width: 105, left: 30}}>
           Date
         </div>
 
@@ -79,17 +79,17 @@ var ScheduleCriteria = React.createClass({
         </div>
 
         <div className='info-stat-label'
-          style={{bottom: -21, width: 70}}>
-          League
-        </div>
-
-        <div className='info-stat-label'
           style={{bottom: -21, width: 50}}>
           Field
         </div>
 
         <div className='info-stat-label'
-          style={{bottom: -21, width: 200}}>
+          style={{bottom: -21, width: 70}}>
+          League
+        </div>
+
+        <div className='info-stat-label'
+          style={{bottom: -21, width: 150}}>
           Home Team
         </div>
 
@@ -210,7 +210,7 @@ var ScheduleCriteria = React.createClass({
       { title: 'Show All',      id: 'SHOW_ALL' },
       { title: 'By League',     id: 'BY_LEAGUE'},
       { title: 'By Team',       id: 'BY_TEAM'},
-      {title: 'By weekday',    id: 'BY_WEEKDAY'}
+      { title: 'By weekday',    id: 'BY_WEEKDAY'}
     ];
 
     var criteriaOptionElements = criteriaChoices.map(function(choice, i){

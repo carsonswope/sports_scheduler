@@ -119,7 +119,7 @@ var GameDatesInput = React.createClass({
 
             <span className='gamedate-stat-info'
               style={{ width: 94 }}>
-              {DateHelper.dateToString(date.startDate)}
+              {DateHelper.dbDateFromInputString(date.startDate)}
             </span>
 
             <span className='gamedate-stat-label'
@@ -128,7 +128,7 @@ var GameDatesInput = React.createClass({
 
             <span className='gamedate-stat-info'
               style={{ width: 107 }}>
-              {DateHelper.dateToString(date.endDate)}
+              {DateHelper.dbDateFromInputString(date.endDate)}
             </span>
 
 
@@ -171,7 +171,7 @@ var GameDatesInput = React.createClass({
 
             <span className='gamedate-stat-info'
               style={{ width: 221 }}>
-              {DateHelper.dateToString(date.date)}
+              {DateHelper.dbDateFromInputString(date.date)}
             </span>
 
 

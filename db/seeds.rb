@@ -21,7 +21,7 @@ u = User.create(username: 'me', password: '123456')
 f1 = Facility.create(owner_id: u.id, name: 'east')
 f2 = Facility.create(owner_id: u.id, name: 'west')
 
-l = League.create(owner_id: u.id, name: 'mens d2' )
+l = League.create(owner_id: u.id, name: 'mens d2', num_games: 8, event_duration: 50 )
 
 specific = [
   {

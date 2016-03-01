@@ -41,8 +41,6 @@ exports.createTeam = function(team) {
       AvailabilityHelper.specificDatesMap(t.gameDates.specific);
   }
 
-  debugger;
-
   TeamApi.attemptCreateTeam(teamParams);
 };
 

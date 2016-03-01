@@ -38,17 +38,24 @@ var Content = React.createClass({
     var ToRender = NavConstants.MAIN_PAGES[this.state.tab]
     ToRender = <ToRender resourceType={this.state.tab}
       dims={{
-        height: this.props.dims.height - 198,
-        width: this.props.dims.width - 245
+        height: this.props.dims.height - 215,
+        width: this.props.dims.width - 225
       }}/>
+
+    var style={
+      height: this.props.dims.height - 153,
+      width: this.props.dims.width - 245,
+      overflowX: 'hidden'
+    }
+
+    if (this.state.tab === 'SCHEDULES') {
+      style['overflowY'] = 'hidden';
+    }
 
     return (
 
       <div className="content-body"
-        style={{
-          height: this.props.dims.height - 153,
-          width: this.props.dims.width - 245
-        }}>
+        style={style}>
 
         {ToRender}
 

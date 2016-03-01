@@ -47,12 +47,16 @@ var LocalSearchBar = React.createClass({
   },
 
   render: function() {
+
+    var style = this.props.width ? {width: this.props.width} : {};
+
     return (
         <div className={this.props.classInfo}>
           <input
             ref="searchInput"
             className="text-entry-box navbar-options-search-box"
             type="text"
+            style={style}
             id="search"
             value={this.state.searchValue}
             onChange={this.changeSearch}/>

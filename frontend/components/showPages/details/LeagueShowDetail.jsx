@@ -159,8 +159,11 @@ var LeagueShowDetail = React.createClass({
       label: 'league name:',
       text: this.props.item.name
     },{
-      label: 'league id:',
-      text: this.props.item.id
+      label: 'number of games per team:',
+      text: this.props.item.numGames
+    },{
+      label: 'game duration: ',
+      text: this.props.item.gameDuration
     }];
 
     return (
