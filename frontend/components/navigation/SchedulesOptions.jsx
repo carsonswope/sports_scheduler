@@ -10,13 +10,53 @@ var SchedulesOptions = React.createClass({
 
   getInitialState: function() {
     return {
-      nameSearch: 'hi'
+      adding: NavStore.options('SCHEDULES').adding
     };
   },
+
+  componentDidMount: function() {
+    this.navListener = NavStore.addListener(this.navChange);
+  },
+
+  componentWillUnmount: function() {
+    this.navListener.remove();
+  },
+
+  navChange: function(){
+
+
+    this.setState({
+      adding: NavStore.options('SCHEDULES').adding
+    })
+  },
+
 
   render: function() {
 
     var selectedTab = NavStore.options('SCHEDULES').subTab;
+
+    var newButton;
+
+
+    if (this.state.adding) {
+      newButton =(
+        <NewButton
+          tab={'SCHEDULES'}
+          name={'cancel adding'}
+          cancelButton={true}
+          setTabOption={{ category:
+            'adding',
+            value: false
+          }} />
+      )
+    } else {
+      newButton =(
+        <NewButton
+          tab={'SCHEDULES'}
+          name={'Add a game'}
+          selected={false} />
+      );
+    }
 
     return (
       <div className="navbar-expanded"
@@ -31,6 +71,7 @@ var SchedulesOptions = React.createClass({
           name={'Calendar View'}
           subTab={'CALENDAR_VIEW'}
           selected={selectedTab === 'CALENDAR_VIEW'} />
+        {newButton}
       </div>
     );
   }

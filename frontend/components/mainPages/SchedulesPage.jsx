@@ -80,38 +80,39 @@ var SchedulesPage = React.createClass({
       }, this);
     }
   },
-
-  getNewGameForm: function(){
-    NavActions.setTabOption( 'SCHEDULES', 'adding', true );
-  },
-
-  hideNewGameForm: function(){
-    NavActions.setTabOption( 'SCHEDULES', 'adding', false );
-  },
-
-  newGameForm: function(){
-    if (this.state.adding) {
-      return <NewGameForm cancelAdding={this.hideNewGameForm}/>;
-    } else {
-      return(
-        <div className='info-stat'
-          style={{width: 'calc(100% - 75px)', backgroundColor: 'transparent', height: 42, left: 53}}>
-          <div className='gamedate-input-button gamedate-input-submit-button'
-            style={{left: 50, bottom: -22}}
-            onClick={this.getNewGameForm}>
-            schedule a game!
-          </div>
-        </div>
-      );
-    }
-  },
+  //
+  // getNewGameForm: function(){
+  //   NavActions.setTabOption( 'SCHEDULES', 'adding', true );
+  // },
+  //
+  // hideNewGameForm: function(){
+  //   NavActions.setTabOption( 'SCHEDULES', 'adding', false );
+  // },
+  //
+  // newGameForm: function(){
+  //   if (this.state.adding) {
+  //     return <NewGameForm cancelAdding={this.hideNewGameForm}/>;
+  //   } else {
+  //     return(
+  //       <div className='info-stat'
+  //         style={{width: 'calc(100% - 75px)', backgroundColor: 'transparent', height: 42, left: 53}}>
+  //         <div className='gamedate-input-button gamedate-input-submit-button'
+  //           style={{left: 50, bottom: -22}}
+  //           onClick={this.getNewGameForm}>
+  //           schedule a game!
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // },
 
   render: function() {
     return (
-      <div>
-        <ScheduleCriteria />
+      <div className='schedule-header-main'>
 
-        {this.newGameForm()}
+        <NewGameForm />
+
+        <ScheduleCriteria />
 
         <div style={{
             width: this.props.dims.width,

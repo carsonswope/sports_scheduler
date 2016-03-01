@@ -205,7 +205,7 @@ var ScheduleCriteria = React.createClass({
   render: function() {
 
     return (
-      <div className='schedule-header-main'>
+      <div>
         <div className='schedule-criteria-main'>
           <div className='schedule-criteria-title'>
             Schedules:

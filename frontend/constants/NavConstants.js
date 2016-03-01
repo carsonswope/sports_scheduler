@@ -127,7 +127,7 @@ exports.DEFAULT_OPTIONS = {
       team_1_id: null,
       team_2_id: null,
       date: null,
-      time: null,
+      startTime: null,
       fieldId: null
     },
 

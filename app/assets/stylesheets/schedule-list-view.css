@@ -89,3 +89,17 @@
     font-weight: 700;
     color: #16174f;
 }
+
+.new-game-form-main {
+    border-bottom: 2px solid #16174f;
+    width: 100%;
+    height: 126px;
+}
+
+.new-game-form-header {
+    height: 42px;
+    border-bottom: 2px solid #667467;
+    position: relative;
+    left: 20px;
+    width: calc(100% - 20px);
+}
