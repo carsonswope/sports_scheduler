@@ -4,6 +4,7 @@ var ScheduleCriteria = require('../showPages/ScheduleCriteria');
 var EventStore = require('../../stores/EventStore');
 var NavStore = require('../../stores/NavStore');
 
+var EventsListView = require('./EventsListView');
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 var CalendarViewEventShow = require('../showPages/CalendarViewEventShow');
 
@@ -65,6 +66,13 @@ var SchedulesPage = React.createClass({
 
   gamesList: function(){
     // var games = [{id: 1}, {id: 2}];
+
+    if (this.state.viewType === 'LIST_VIEW'){
+      return <EventsListView games={this.state.games} dims={{width: 800, height: 300}}/>
+    } else {
+
+    }
+
     return this.state.games.map(function(game){
       if (this.state.viewType === 'LIST_VIEW'){
 

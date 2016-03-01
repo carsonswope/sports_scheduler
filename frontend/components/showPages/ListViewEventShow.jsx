@@ -23,6 +23,7 @@ var ListViewEventShow = React.createClass({
   },
 
   callToggle: function(){
+    debugger;
     this.props.toggleFocus(this.props.event.id);
   },
 
@@ -285,23 +286,53 @@ var ListViewEventShow = React.createClass({
 
   },
 
+  entries: function(){
+    this.props.columns.map(function(column){
+
+
+    });
+  },
+
+  getDayOfWeek: function(){
+
+    return this.props.event.dayOfWeek = DateConstants.DAYS_OF_WEEK[
+      new Date(this.props.event.date).getDay()
+    ];
+  },
+
+  entryText: function(){
+    return{
+      dayOfWeek: this.getDayOfWeek(),
+      date: this.props.event.date,
+      startTime: DateHelper.timeAsString(
+        DateHelper.timeStringPrimitiveToObj(
+        this.props.event.startTime)),
+      facilityId: FacilityStore.find(
+        this.props.event.facilityId).name,
+      leagueId: LeagueStore.find(
+        this.props.event.leagueId).name,
+      team_1_id: TeamStore.find(
+        this.props.event.team_1_id).name,
+      team_2_id: TeamStore.find(
+        this.props.event.team_2_id).name
+    }
+  },
+
   columnElements: function(){
 
     var fontWeight = this.props.focused ? 700 : 400
     var color = '#667467'
 
-    return this.columns().map(function(column, i){
+    return this.props.columns.map(function(column, i){
+
+      var width = column.width;
+      if (width < 16) { width = 16; }
+
       return(
-        <div className='info-stat-text'
-          key={i}
-          style={{
-            fontWeight: (column.fontWeight || fontWeight),
-            color: (column.color || color),
-            width: column.width
-          }}>
-
-          {column.text}
-
+        <div className='table-entry-text'
+          style={{width: width}}
+          key={i}>
+          {this.entryText()[column.varName]}
         </div>
       );
 
@@ -310,14 +341,12 @@ var ListViewEventShow = React.createClass({
 
   render: function() {
 
-    var infoStatStyle = {
-      left: 53,
-      width: 'calc(100% - 75px)'
-    };
-
-    if (this.props.focused){
-      infoStatStyle['borderBottom'] = '2px solid #16174f'
-    }
+    return (
+      <div className='table-entry-header'
+        onClick={this.callToggle}>
+        {this.columnElements()}
+      </div>
+    );
 
     return (
       <div>

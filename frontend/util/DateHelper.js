@@ -102,7 +102,11 @@ exports.JSdateToInputString = function(dateString) {
   return year + '-' + month + '-' + day;
 
 }
-
-exports.todayInputString = function(){
-  return exports.JSdateToInputString(new Date());
-};
+//
+// exports.todayInputString = function(){
+//   var date = new Date();
+//   var yr = date.getMonth()+1;
+//   var
+//   return ('' + (1900+date.getYear()) + '-' +
+//     (date.getMonth()+1) + '-' + date.getDate());
+// };
