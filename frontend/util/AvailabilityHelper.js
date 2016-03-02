@@ -63,18 +63,18 @@ exports.overlaps = function(event, eventInfo){
 
   // debugger;
 
-  date1 = new Date(event.date);
-  date2 = new Date(eventInfo.eventDate);
+  var date1 = new Date(event.date);
+  var date2 = new Date(eventInfo.eventDate);
 
   if (DateHelper.jsDateSpaceship(date1, date2)){
     return false;
   } else {
 
-    startTime1 = parseInt(event.startTime);
-    endTime1 = DateHelper.timePlusMinutes(startTime1, parseInt(event.duration));
+    var startTime1 = parseInt(event.startTime);
+    var endTime1 = DateHelper.timePlusMinutes(startTime1, parseInt(event.duration));
 
-    startTime2 = parseInt(eventInfo.eventStartTime);
-    endTime2 = DateHelper.timePlusMinutes(startTime2, parseInt(eventInfo.eventDuration));
+    var startTime2 = parseInt(eventInfo.eventStartTime);
+    var endTime2 = DateHelper.timePlusMinutes(startTime2, parseInt(eventInfo.eventDuration));
 
     return (startTime1 < endTime2 && startTime2 < endTime1);
 
