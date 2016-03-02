@@ -162,7 +162,7 @@ var EventsListView = React.createClass({
     return this.props.games.map(function(game, i){
 
       var classes={
-        header: 'table-entry-header'
+        header: this.state.focused === game.id ? 'table-entry-header-focused' : 'table-entry-header'
       };
 
       var conflicts = this.state.newGameInfo.errors.conflicts;

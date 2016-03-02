@@ -31,9 +31,13 @@
 .table-body-main {
     width: calc(100% - 22px);
     position: relative;
-    left: 18px;
+    left: 0px;
     height: calc(100% - 28px);
     overflow-y: scroll;
+}
+
+.table-entry-text:first-child {
+    padding-left: 10px;
 }
 
 .table-entry-header {
@@ -42,8 +46,19 @@
     border-bottom: 2px solid #667467;
     overflow: hidden;
     white-space: nowrap;
-
 }
+
+
+.table-entry-header-focused {
+    width: 100%;
+    height: 28px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 3;
+    border-top: 2px solid #16174f;
+    margin-top: -2px;
+}
+
 
 .table-entry-text {
     display: inline-block;
@@ -163,4 +178,45 @@
     position: relative;
     bottom: -5px;
     left: 40px;
+}
+
+.inline-reschedule-main {
+    border-bottom: 2px solid #16174f; 
+    border-top: 2px solid #16174f;
+    margin-top: -2px;
+
+    height: 110px;
+    position: relative;
+}
+
+.inline-reschedule-inner-half {
+    display: inline-block;
+    height: 100%;
+    width: calc(50% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    float: left;
+}
+
+.inline-reschedule-bottom-rule {
+    height: 0px;
+    border-bottom: 2px solid #16174f;
+    margin-top: -3px;
+    z-index: 6;
+    position: relative;
+    left: -25px;
+}
+
+.inline-reschedule-line {
+    border-bottom: 2px solid #667467;
+    height: 26px;
+    display: inline-block;
+    padding: 0px;
+    width: 100%;
+}
+
+.inline-reschedule-label {
+    font-size: 14px;
+    position: relative;
+    bottom: -5px;
 }

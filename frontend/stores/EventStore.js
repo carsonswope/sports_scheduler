@@ -1,5 +1,12 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
+
+var TeamStore = require('../stores/TeamStore');
+var LeagueStore = require('../stores/LeagueStore');
+var FacilityStore = require('../stores/FacilityStore');
+var DateHelper = require('../util/DateHelper')
+var AvailabilityHelper = require('../util/AvailabilityHelper')
+
 var EventConstants = require('../constants/EventConstants');
 var EventHelper = require('../util/EventHelper');
 
@@ -19,7 +26,7 @@ EventStore.filteredEvents = function(filter) {
 
   Object.keys(_events).forEach(function(eventId){
     var e = EventStore.find(eventId)
-    if (EventHelper.validEvent(e, filter)) {
+    if (EventStore.validEvent(e, filter)) {
       eventsList.push(_events[eventId]);
     }
   });
@@ -29,6 +36,136 @@ EventStore.filteredEvents = function(filter) {
   return eventsList;
 
 }
+
+EventStore.newGameErrors = function(newGame) {
+  var errors = [];
+  var conflictingEventsList = [];
+
+  debugger;
+
+  //check if form completed
+  if (!newGame.leagueId){
+    errors.push('select a league!');
+
+  } else if (!newGame.team_1_id
+          || !newGame.team_2_id){
+    errors.push('select teams!');
+
+  } else if (!newGame.fieldId){
+    errors.push('select a facility!');
+
+  } else if (!newGame.date){
+    errors.push('select a date!');
+
+  } else if (!newGame.startTime){
+    errors.push('select a time!');
+
+  //if not completed, then check if the proposed game date/time
+  //is conflicting with anything
+  } else {
+
+    var team1 = TeamStore.find(newGame.team_1_id);
+    var team2 = TeamStore.find(newGame.team_2_id);
+    var facility = FacilityStore.find(newGame.fieldId);
+    var league = LeagueStore.find(newGame.leagueId);
+
+    var eventInfo = {
+      eventDate: DateHelper.dbDateFromInputString(newGame.date),
+      eventStartTime: DateHelper.timeInputStringToNumber(newGame.startTime),
+      eventDuration: league.gameDuration
+    };
+
+    debugger;
+
+
+    var team_1_events = EventStore.filteredEvents({
+      filterType: 'BY_TEAM', filterSpec: team1.id
+    });
+    var team_2_events = EventStore.filteredEvents({
+      filterType: 'BY_TEAM', filterSpec: team2.id
+    });
+    var facilityEvents = EventStore.filteredEvents({
+      filterType: 'BY_FACILITY', filterSpec: facility.id
+    });
+
+
+    var conflicts = {
+      team1: AvailabilityHelper.conflicts(team_1_events, eventInfo, newGame.ownId),
+      team2: AvailabilityHelper.conflicts(team_2_events, eventInfo, newGame.ownId),
+      facility: AvailabilityHelper.conflicts(facilityEvents, eventInfo, newGame.ownId)
+    }
+
+    if (conflicts.team1.length & conflicts.team2.length) {
+      errors.push(team1.name + ' and ' + team2.name + ' already are scheduled at that time');
+    } else if (conflicts.team1.length){
+      errors.push(team1.name + ' already are scheduled at that time');
+    } else if (conflicts.team2.length){
+      errors.push(team2.name + ' already are scheduled at that time');
+    }
+
+    if (conflicts.facility.length){
+      errors.push(facility.name + ' is already booked at that time');
+    }
+
+    var conflictingEventsList =
+      conflicts.team1.concat(conflicts.team2).
+      concat(conflicts.facility).map(function(conflictingEvent){
+        return conflictingEvent.id;
+      });
+  }
+
+  return {
+    incompleteInput: errors,
+    conflicts: conflictingEventsList
+  };
+
+};
+
+EventStore.validEvent = function(event, filter){
+
+  var eventDate = new Date(event.date);
+
+  if (filter.startDate) {
+    var startDate = new Date(filter.startDate);
+    if (startDate > eventDate) {
+      return false;
+    }
+  }
+
+  if (filter.endDate) {
+    var endDate = new Date(filter.endDate);
+    endDate.setDate(endDate.getDate()+1);
+    if (endDate <= eventDate) {
+      return false;
+    }
+  }
+
+  if (parseInt(filter.filterSpec) !== -1) {
+    var spec = parseInt(filter.filterSpec)
+    if (filter.filterType === 'BY_LEAGUE') {
+      if (event.leagueId !== spec) {
+        return false;
+      }
+    } else if (filter.filterType === 'BY_TEAM') {
+      if (event.team_1_id !== spec &&
+          event.team_2_id !== spec)   {
+        return false;
+      }
+    } else if (filter.filterType === 'BY_WEEKDAY') {
+      if (eventDate.getDay() !== spec) {
+        return false;
+      }
+    } else if (filter.filterType === 'BY_FACILITY') {
+      if (event.facilityId !== spec) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
+
 
 EventStore.find = function(id) {
   return _events[id];
@@ -80,5 +217,5 @@ EventStore.__onDispatch = function(payload){
       break;
   }
 };
-
+//
 module.exports = EventStore;

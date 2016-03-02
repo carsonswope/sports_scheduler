@@ -4,6 +4,7 @@ var DateHelper = require('../../util/DateHelper');
 var DateConstants = require('../../constants/DateConstants');
 
 var EventActions = require('../../actions/EventActions');
+var EventStore = require('../../stores/EventStore');
 
 var LeagueStore = require('../../stores/LeagueStore');
 var LeagueFacilityStore = require('../../stores/LeagueFacilityStore');
@@ -14,11 +15,35 @@ var EventHelper = require('../../util/EventHelper');
 var ListViewEventShow = React.createClass({
 
   getInitialState: function(){
+
+    var newGameDate;
+    var newGameTime;
+    var newFacility;
+
+    if (EventHelper.isScheduled(this.props.event)){
+      newGameDate = DateHelper.JSdateToInputString(this.props.event.date);
+      newGameTime = DateHelper.timeStringPrimitiveToInputString(this.props.event.startTime);
+      newFacility = this.props.event.facilityId;
+    }
+
+    var newGame = {
+      leagueId: this.props.event.leagueId,
+      team_1_id: this.props.event.team_1_id,
+      team_2_id: this.props.event.team_2_id,
+      fieldId: newFacility,
+      date: newGameDate,
+      startTime: newGameTime,
+      ownId: this.props.event.id
+    };
+
+    var errors = EventStore.newGameErrors(newGame);
+
     return({
       status: null,
-      newGameDate: DateHelper.JSdateToInputString(this.props.event.date),
-      newGameTime: DateHelper.timeStringPrimitiveToInputString(this.props.event.startTime),
-      newFacility: this.props.event.facilityId
+      newGameDate: newGameDate,
+      newGameTime: newGameTime,
+      newFacility: newFacility,
+      errors: errors
     });
   },
 
@@ -28,64 +53,155 @@ var ListViewEventShow = React.createClass({
 
   detail: function(){
     if (this.props.focused){
-      if (this.state.status){
-
-        return(
-          <div
-            style={{
-              position: 'relative',
-              left: 53,
-              height: 26,
-              width: 'calc(100% - 75px)',
-              borderBottom: '2px solid #16174f'
-            }}>
-
-          {this.detailOptions()}
-
-          </div>
-        )
-
-      } else {
-
-        return(
-          <div
-            style={{
-              position: 'relative',
-              left: 53,
-              height: 26,
-              width: 'calc(100% - 75px)',
-              borderBottom: '2px solid #16174f'
-            }}>
-
-            {this.detailOptions()}
-
-          </div>
-        )
-      }
+      return(
+        <div className='inline-reschedule-main'>
+        {this.detailOptions()}
+        </div>
+      );
     }
   },
 
   detailOptions: function(){
-    switch (this.state.status) {
-      case null:
-        return this.detailChoiceList();
-      case 'RESCHEDULE':
-        return this.rescheduleForm();
-    }
+
+    return([
+      <div className='inline-reschedule-inner-half' key={1}>
+        {this.state.status ? this.rescheduleForm() : this.detailChoiceList()}
+      </div>,
+      <div className='inline-reschedule-inner-half' key={2}>
+      </div>]
+    );
+
   },
 
   detailChoiceList: function(){
+
+    var choices = [{
+      action: this.startRescheduleGame,
+      text: 'reschedule game',
+      color: '#667467'
+    },{
+      action: this.unscheduleGame,
+      text: 'unschedule game',
+      color: '#963019'
+    },{
+      action: this.deleteGame,
+      text: 'delete game',
+      color: '#963019'
+    }];
+
+    return choices.map(function(choice, i){
+      return(
+        <div className='inline-reschedule-line' key={i}>
+          <div className='navbar-options-element-text'
+            style={{color: choice.color}}
+            onClick={choice.action}>
+            {choice.text}
+          </div>
+        </div>
+      );
+
+    }, this);
+  },
+
+  rescheduleForm: function() {
+
+    var choices = [{
+      labelText: 'new date:',
+      inputForm: ([
+        <div className='info-stat-text' key={1}
+          style={{width: 47}}>{this.newDateDayOfWeek()}</div>,
+        <input type='date' className='gamedate-input-form' key={2}
+          style={{width: 150}}
+          value={this.state.newGameDate}
+          onChange={this.changeOption.bind(this, 'newGameDate')} />]
+      )
+    },{
+      labelText: 'new time:',
+      inputForm: (
+        <input type='time'
+          className='gamedate-input-form'
+          value={this.state.newGameTime}
+          onChange={this.changeOption.bind(this, 'newGameTime')} />
+      )
+    },{
+      labelText: 'new facility:',
+      inputForm: (
+        <select key={4}
+          className='gamedate-input-form'
+          style={{}}
+          value={EventHelper.isScheduled(this.props.event) ?
+            this.state.newFacility : null}
+          onChange={this.changeOption.bind(this, 'newFacility')}>
+          {this.facilityChoices()}
+        </select>
+      )
+    }];
+
+    var choiceElements = choices.map(function(choice, i){
+      return(
+        <div className='inline-reschedule-line' key={i}>
+          <div className='info-stat-label'
+            style={{width: 119}}>
+            {choice.labelText}
+          </div>
+          {choice.inputForm}
+        </div>
+      );
+    }, this);
+
+    choiceElements.push(
+      <div className='inline-reschedule-line' key={-1}
+        style={{borderBottom: 0}}>
+        <div className='gamedate-input-button'
+          style={{color: '#963019', width: 130, left: 20}}
+          onClick={this.resetOptions}>
+          cancel
+        </div>
+
+        {this.submitButton()}
+      </div>
+    )
+
+    return choiceElements;
+
     return[
-      <div className='gamedate-input-button' key={1}
-        onClick={this.startRescheduleGame}
-        style={{color: '#667467', width: 230}}> reschedule this game </div>,
-      <div className='gamedate-input-button' key={2}
-        onClick={this.unscheduleGame}
-        style={{color: '#667467', width: 230}}> unschedule this game </div>,
-      <div className='gamedate-input-button' key={3}
-        onClick={this.deleteGame}
-        style={{color: '#667467', width: 230}}> delete this game </div>,
+      <div className='gamedate-input-button' key={5}
+        onClick={this.submitReschedule}
+        style={{color: '#667467', width: 160, backgroundColor: 'transparent'}}>
+        submit reschedule
+      </div>,
+      <div className='gamedate-input-button' key={6}
+        onClick={this.resetOptions}
+        style={{color: '#963019', width: 120, backgroundColor: 'transparent'}}>
+        cancel reschedule
+      </div>
     ]
+  },
+
+  submitButton: function(){
+
+    var buttonOrMessage;
+
+    debugger;
+
+    if (this.state.errors.incompleteInput.length) {
+      buttonOrMessage=(
+        <div className='inline-reschedule-label'
+          style={{display: 'inline-block', color: '#963019', width: 100, whiteSpace: 'nowrap'}}>
+          {this.state.errors.incompleteInput[0]}
+        </div>
+      );
+
+    } else {
+      buttonOrMessage=(
+        <div className='gamedate-input-button'>
+          submit reschedule!
+        </div>
+      );
+
+    }
+
+    return buttonOrMessage;
   },
 
   startRescheduleGame: function() {
@@ -108,43 +224,6 @@ var ListViewEventShow = React.createClass({
 
   deleteGame: function() {
     EventActions.attemptDestroy(this.props.event.id);
-  },
-
-  rescheduleForm: function() {
-    return[
-      <div className='info-stat-label' key={0}
-        style={{width: 75, paddingLeft: 0}}>new date: </div>,
-      <div className='info-stat-text' key={1}
-        style={{width: 47}}>{this.newDateDayOfWeek()}</div>,
-      <input type='date' key={2}
-        className='gamedate-input-form'
-        style={{width: 150}}
-        value={this.state.newGameDate}
-        onChange={this.changeNewGameDate} />,
-      <input type='time' key={3}
-        className='gamedate-input-form'
-        style={{width: 120}}
-        value={this.state.newGameTime}
-        onChange={this.changeNewGameTime} />,
-      <select key={4}
-        className='gamedate-input-form'
-        style={{}}
-        value={EventHelper.isScheduled(this.props.event) ?
-          this.state.newFacility : null}
-        onChange={this.changeFacility}>
-        {this.facilityChoices()}
-      </select>,
-      <div className='gamedate-input-button' key={5}
-        onClick={this.submitReschedule}
-        style={{color: '#667467', width: 160, backgroundColor: 'transparent'}}>
-        submit reschedule
-      </div>,
-      <div className='gamedate-input-button' key={6}
-        onClick={this.resetOptions}
-        style={{color: '#963019', width: 120, backgroundColor: 'transparent'}}>
-        cancel reschedule
-      </div>
-    ]
   },
 
   facilityChoices: function(){
@@ -184,6 +263,31 @@ var ListViewEventShow = React.createClass({
 
   hideRescheduleMenu: function(){
     this.setState({ status: null });
+  },
+
+  changeOption: function(option, e){
+    e.preventDefault();
+
+    var state = this.state;
+    state[option] = e.target.value;
+
+    var newGame = {
+      leagueId: this.props.event.leagueId,
+      team_1_id: this.props.event.team_1_id,
+      team_2_id: this.props.event.team_2_id,
+      fieldId: state.newFacility,
+      date: state.newGameDate,
+      startTime: state.newGameTime,
+      ownId: this.props.event.id
+    };
+
+    var errors = EventStore.newGameErrors(newGame);
+
+    state.errors = errors;
+
+    debugger;
+
+    this.setState({state});
   },
 
   changeFacility: function(e){
@@ -252,10 +356,15 @@ var ListViewEventShow = React.createClass({
 
     var width = column.width - 10;
     if (width < 10) { width = 10; }
+    var leftPad = i === 0 ? 28 : 10
 
     return(
       <div className={this.props.classInfo.text}
-        style={{width: width}}
+        style={{
+          width: width,
+          fontWeight: this.props.focused ? 700 : 400,
+          paddingLeft: leftPad
+        }}
         key={i}>
         {this.entryText()[column.varName]}
       </div>
@@ -276,14 +385,17 @@ var ListViewEventShow = React.createClass({
         return this.columnElement(column, i);
       }, this)
 
-      var unscheduledWidth = -10;
+      var unscheduledWidth = -28;
       this.props.columns.slice(0,4).forEach(function(column){
         unscheduledWidth += column.width;
       })
 
       columnElements.unshift(
-        <div className={this.props.classInfo.text}
-          style={{width: unscheduledWidth}}
+        <div className={'table-entry-text-flagged'}
+          style={{width: unscheduledWidth,
+            fontWeight: this.props.focused ? 700 : 400,
+            paddingLeft: 28
+          }}
           key={-1}>
           not currently scheduled!
         </div>

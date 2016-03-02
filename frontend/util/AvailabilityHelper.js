@@ -51,17 +51,18 @@ exports.specificDate = function(spcDate){
   });
 };
 
-exports.conflicts = function(otherEventsList, eventInfo) {
+exports.conflicts = function(otherEventsList, eventInfo, ownId) {
 
   return otherEventsList.filter(function(event){
-    return exports.overlaps(event, eventInfo)
+    return exports.overlaps(event, eventInfo, ownId)
   });
 
 };
 
-exports.overlaps = function(event, eventInfo){
+exports.overlaps = function(event, eventInfo, ownId){
 
   // debugger;
+  if (ownId && event.id === ownId) { return false; }
 
   var date1 = new Date(event.date);
   var date2 = new Date(eventInfo.eventDate);

@@ -2,6 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 var EventActions = require('../../actions/EventActions');
+var EventHelper = require('../../util/EventHelper');
 
 var EventStore = require('../../stores/EventStore');
 
@@ -78,7 +79,8 @@ var NewGamesForm = React.createClass({
       newGameOptions['team_2_id'] = null;
     }
 
-    var errors = this.newGameErrors(newGameOptions);
+    // var errors = this.newGameErrors(newGameOptions);
+    var errors = EventStore.newGameErrors(newGameOptions);
 
     newGameOptions.errors = errors;
 
