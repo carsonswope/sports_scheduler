@@ -44,6 +44,18 @@ NavStore.setTab = function(tab) {
   }
 };
 
+NavStore.setTabOptions = function(values){
+
+  var value;
+  for (var i = 0; i < values.length; i++) {
+    value = values[i];
+    _options[value.tab][value.category] = value.newValue;
+  }
+
+  NavStore.__emitChange();
+
+};
+
 NavStore.setFocusOnElement = function(tab, element) {
   _currentTab = tab;
   _options[tab].adding = false;
@@ -59,6 +71,9 @@ NavStore.__onDispatch = function(payload) {
       break;
     case NavConstants.actions.SET_TAB_OPTION:
       NavStore.setTabOption(payload.option);
+      break;
+    case NavConstants.actions.SET_TAB_OPTIONS:
+      NavStore.setTabOptions(payload.values);
       break;
     case TeamConstants.actions.ADD_TEAM:
       NavStore.setFocusOnElement('TEAMS', payload.team);

@@ -22,17 +22,17 @@ var NewGamesForm = React.createClass({
 
     var adding = NavStore.options('SCHEDULES').adding;
     var newGame = NavStore.options('SCHEDULES').newGame;
-    var newGameErrors = {
-      incompleteInput: null,
-      conflicts: null
-    };
-
-    if (adding) { newGameErrors = this.newGameErrors(newGame); }
+    // var newGameErrors = {
+    //   incompleteInput: null,
+    //   conflicts: null
+    // };
+    //
+    // if (adding) { newGameErrors = this.newGameErrors(newGame); }
 
     return({
       adding:   adding,
-      newGame:  newGame,
-      newGameErrors: newGameErrors
+      newGame:  newGame
+      // newGameErrors: newGameErrors
     });
   },
 
@@ -48,17 +48,21 @@ var NewGamesForm = React.createClass({
 
     var adding = NavStore.options('SCHEDULES').adding;
     var newGame = NavStore.options('SCHEDULES').newGame;
-    var newGameErrors = {
-      incompleteInput: null,
-      conflicts: null
-    };
 
-    if (adding) { newGameErrors = this.newGameErrors(newGame); }
+    // debugger;
+    // var newGameErrors = {
+    //   incompleteInput: null,
+    //   conflicts: null
+    // };
+
+    debugger;
+
+    // if (adding) { newGameErrors = this.newGameErrors(newGame); }
 
     this.setState({
       adding:   adding,
-      newGame:  newGame,
-      newGameErrors: newGameErrors
+      newGame:  newGame
+      // newGameErrors: newGameErrors
     });
   },
 
@@ -68,6 +72,15 @@ var NewGamesForm = React.createClass({
 
     var newGameOptions = this.state.newGame;
     newGameOptions[category] = e.target.value;
+
+    if (category === 'leagueId') {
+      newGameOptions['team_1_id'] = null;
+      newGameOptions['team_2_id'] = null;
+    }
+
+    var errors = this.newGameErrors(newGameOptions);
+
+    newGameOptions.errors = errors;
 
     NavActions.setTabOption(
       'SCHEDULES', 'newGame', newGameOptions
@@ -220,7 +233,33 @@ var NewGamesForm = React.createClass({
 
     EventActions.attemptCreate(event);
 
-    this.stopAdding();
+    this.resetForm();
+
+  },
+
+  resetForm: function(){
+
+    var newGame = this.state.newGame;
+
+    newGame['team_1_id'] = -1;
+    newGame['team_2_id'] = -1;
+    // newGame['date'] = null;
+    // newGame['startTime'] = null;
+    newGame['fieldId'] = -1;
+    newGame['errors'] = {
+      incompleteInput: ['select teams!'],
+      conficts: []
+    };
+
+    this.setState({
+      newGame: newGame
+    });
+
+    NavActions.setTabOptions([{
+      tab: 'SCHEDULES',
+      category: 'newGame',
+      newValue: newGame
+    }]);
 
   },
 
@@ -229,13 +268,42 @@ var NewGamesForm = React.createClass({
   },
 
   stopAdding: function(){
-    NavActions.setTabOption('SCHEDULES', 'adding', false);
+
+    var newGame = this.state.newGame;
+
+    newGame['team_1_id'] = null;
+    newGame['team_2_id'] = null;
+    // newGame['date'] = null;
+    // newGame['startTime'] = null;
+    newGame['fieldId'] = null;
+    newGame['errors'] = {
+      incompleteInput: ['select teams!'],
+      conficts: []
+    };
+
+    this.setState({
+      newGame: newGame
+    });
+
+    NavActions.setTabOptions([{
+      tab: 'SCHEDULES',
+      category: 'newGame',
+      newValue: newGame
+    },{
+      tab: 'SCHEDULES',
+      category: 'adding',
+      newValue: false
+    }]);
+    // NavActions.setTabOption('SCHEDULES', 'newGame', newGame);
+    // NavActions.setTabOption('SCHEDULES', 'adding', false);
   },
 
   newGameErrors(newGame){
 
     var errors = [];
     var conflictingEventsList = [];
+
+    debugger;
 
     //check if form completed
     if (!newGame.leagueId){
@@ -288,7 +356,7 @@ var NewGamesForm = React.createClass({
       }
 
       if (conflicts.team1.length & conflicts.team2.length) {
-        errors.push(team1.name + ' and ' team2.name + ' already are scheduled at that time');
+        errors.push(team1.name + ' and ' + team2.name + ' already are scheduled at that time');
       } else if (conflicts.team1.length){
         errors.push(team1.name + ' already are scheduled at that time');
       } else if (conflicts.team2.length){
@@ -314,10 +382,10 @@ var NewGamesForm = React.createClass({
 
   scheduleButton: function(){
 
-    if (this.state.newGameErrors.incompleteInput.length) {
+    if (this.state.newGame.errors.incompleteInput.length) {
       return (
         <div className='new-game-form-error-message'>
-          {this.state.newGameErrors.incompleteInput[0]}
+          {this.state.newGame.errors.incompleteInput[0]}
         </div>
       );
 

@@ -18,3 +18,13 @@ exports.setTabOption = function(tab, category, newValue) {
     }
   });
 };
+
+exports.setTabOptions = function(newValues){
+  debugger;
+
+
+  AppDispatcher.dispatch({
+    actionType: NavConstants.actions.SET_TAB_OPTIONS,
+    values: newValues
+  });
+}

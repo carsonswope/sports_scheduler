@@ -254,7 +254,7 @@ var ListViewEventShow = React.createClass({
     if (width < 10) { width = 10; }
 
     return(
-      <div className='table-entry-text'
+      <div className={this.props.classInfo.text}
         style={{width: width}}
         key={i}>
         {this.entryText()[column.varName]}
@@ -282,7 +282,7 @@ var ListViewEventShow = React.createClass({
       })
 
       columnElements.unshift(
-        <div className='table-entry-text'
+        <div className={this.props.classInfo.text}
           style={{width: unscheduledWidth}}
           key={-1}>
           not currently scheduled!
@@ -298,7 +298,7 @@ var ListViewEventShow = React.createClass({
 
     return (
       <div>
-        <div className='table-entry-header'
+        <div className={this.props.classInfo.header}
           onClick={this.callToggle}>
           {this.columnElements()}
         </div>

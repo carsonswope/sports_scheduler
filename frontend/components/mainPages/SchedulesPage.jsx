@@ -24,9 +24,6 @@ var SchedulesPage = React.createClass({
       games: EventStore.filteredEvents(filter),
       selected: null,
       adding: NavStore.options('SCHEDULES').adding,
-      newGame: {
-
-      }
     });
   },
 

@@ -56,6 +56,17 @@
     padding-left: 10px;
 }
 
+.table-entry-text-flagged {
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    bottom: -7px;
+    color: #963019;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
 .schedule-criteria-main {
     height: 42px;
     border-bottom: 2px solid #16174f;

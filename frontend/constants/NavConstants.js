@@ -10,7 +10,8 @@ exports.tabs = {
 
 exports.actions = {
   SET_TAB: 'SET_TAB',
-  SET_TAB_OPTION: 'SET_TAB_OPTION'
+  SET_TAB_OPTION: 'SET_TAB_OPTION',
+  SET_TAB_OPTIONS: 'SET_TAB_OPTIONS'
 };
 
 var TeamsOptions = require('../components/navigation/TeamsOptions.jsx');
@@ -128,7 +129,11 @@ exports.DEFAULT_OPTIONS = {
       team_2_id: null,
       date: null,
       startTime: null,
-      fieldId: null
+      fieldId: null,
+      errors: {
+        incompleteInput: ['select a league!'],
+        conficts: []
+      }
     },
 
     focused: null

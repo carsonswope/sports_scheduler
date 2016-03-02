@@ -1,5 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var NavStore = require('../../stores/NavStore');
+
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 
 var EventsListView = React.createClass({
@@ -21,9 +23,27 @@ var EventsListView = React.createClass({
         oldX: null
       },
 
+      newGameInfo: NavStore.options('SCHEDULES').newGame,
+
       focused: null
 
     };
+  },
+
+  componentDidMount: function(){
+    this.navListener = NavStore.addListener(this.navChange);
+  },
+
+  componentWillUnmount: function(){
+    this.navListener.remove();
+  },
+
+  navChange: function(){
+    var newGameInfo = NavStore.options('SCHEDULES').newGame;
+
+    this.setState({
+      newGameInfo: newGameInfo
+    });
   },
 
   toggleFocus: function(eventId){
@@ -136,9 +156,23 @@ var EventsListView = React.createClass({
 
   tableEntries: function(){
 
+    // var conflicts = this.state.newGameInfo.errors.conflicts;
+
+
     return this.props.games.map(function(game, i){
+
+      var classes={
+        header: 'table-entry-header'
+      };
+
+      var conflicts = this.state.newGameInfo.errors.conflicts;
+
+      classes.text = conflicts && conflicts.indexOf(game.id) > -1 ?
+        'table-entry-text-flagged' : 'table-entry-text'
+
       return(
         <ListViewEventShow event={game}
+          classInfo={classes}
           key={i}
           toggleFocus={this.toggleFocus}
           focused={this.state.focused === game.id}
