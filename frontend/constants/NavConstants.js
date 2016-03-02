@@ -1,3 +1,4 @@
+var DateHelper = require('../util/DateHelper');
 
 exports.tabs = {
   HOME: 'HOME',
@@ -86,8 +87,6 @@ exports.ADD_PAGES = {
   TEAMS: NewTeam,
   FACILITIES: NewFacility
 };
-
-var DateHelper = require('../util/DateHelper');
 
 exports.DEFAULT_OPTIONS = {
   HOME: {},
