@@ -1,4 +1,4 @@
-DateHelper = require('./DateHelper');
+var DateHelper = require('./DateHelper');
 
 exports.generalDatesMap = function(genDates) {
 
