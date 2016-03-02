@@ -219,10 +219,7 @@ var ListViewEventShow = React.createClass({
   },
 
   startRescheduleGame: function() {
-
-    this.setState({
-      status: 'RESCHEDULE'
-    });
+    this.setState({ status: 'RESCHEDULE' });
   },
 
   unscheduleGame: function() {
@@ -237,8 +234,6 @@ var ListViewEventShow = React.createClass({
       start_time: null,
       date: null
     });
-
-
   },
 
   deleteGame: function() {
