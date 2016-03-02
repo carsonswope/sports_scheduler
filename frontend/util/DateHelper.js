@@ -16,7 +16,31 @@ exports.timeAsString = function(time){
 
   return hours + ":" + minutes + type;
 
-}
+};
+
+exports.timeObjToMilitaryNumber = function(time){
+  var hrs = time.hrs.toString();
+  var mns = time.mns.toString();
+
+  while (hrs.length < 2) { hrs = "0" + hrs; }
+  while (mns.length < 2) { mns = "0" + mns; }
+
+  return parseInt(hrs + mns);
+};
+
+exports.timePlusMinutes = function(time, minutes){
+  var timeObj = exports.timeStringPrimitiveToObj(time.toString());
+
+  timeObj.mns += minutes;
+
+  while (timeObj.mns > 60) {
+    timeObj.mns -= 60;
+    timeObj.hrs += 1;
+  }
+
+  return exports.timeObjToMilitaryNumber(timeObj);
+
+};
 
 exports.timeStringToAmPm = function(time) {
 
@@ -105,5 +129,17 @@ exports.todayInputString = function(){
 
   var date = new Date();
   return exports.JSdateToInputString(date);
+
+};
+
+exports.jsDateSpaceship = function(date1, date2) {
+
+  if (date1 > date2) {
+    return 1;
+  } else if (date1 < date2) {
+    return -1;
+  } else {
+    return 0;
+  }
 
 };

@@ -144,3 +144,12 @@
 .new-game-button:hover {
     font-weight: 700;
 }
+
+.new-game-form-error-message {
+    color: #963019;
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
+    bottom: -5px;
+    left: 40px;
+}

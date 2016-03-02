@@ -72,39 +72,21 @@ var SchedulesPage = React.createClass({
 
   gamesList: function(){
 
-    if (this.state.viewType === 'LIST_VIEW'){
-      return <EventsListView games={this.state.games} dims={{width: 800, height: 300}}/>
+    var height = this.props.dims.height
+
+    if (NavStore.options('SCHEDULES').adding) {
+      height -= 140;
     } else {
-      return this.state.games.map(function(game){
-        return <CalenderViewEventShow event={game} />
-      }, this);
+      height -= 40;
+    }
+
+    if (this.state.viewType === 'LIST_VIEW'){
+
+      return <EventsListView games={this.state.games} dims={{width: 800, height: height}}/>
+    } else {
+      return null;
     }
   },
-  //
-  // getNewGameForm: function(){
-  //   NavActions.setTabOption( 'SCHEDULES', 'adding', true );
-  // },
-  //
-  // hideNewGameForm: function(){
-  //   NavActions.setTabOption( 'SCHEDULES', 'adding', false );
-  // },
-  //
-  // newGameForm: function(){
-  //   if (this.state.adding) {
-  //     return <NewGameForm cancelAdding={this.hideNewGameForm}/>;
-  //   } else {
-  //     return(
-  //       <div className='info-stat'
-  //         style={{width: 'calc(100% - 75px)', backgroundColor: 'transparent', height: 42, left: 53}}>
-  //         <div className='gamedate-input-button gamedate-input-submit-button'
-  //           style={{left: 50, bottom: -22}}
-  //           onClick={this.getNewGameForm}>
-  //           schedule a game!
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // },
 
   render: function() {
     return (
@@ -117,7 +99,6 @@ var SchedulesPage = React.createClass({
         <div style={{
             width: this.props.dims.width,
             height: this.props.dims.height,
-            overflowY: 'scroll',
             overflowX: 'hidden'
           }}>
 

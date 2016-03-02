@@ -1,3 +1,5 @@
+DateHelper = require('./DateHelper');
+
 exports.generalDatesMap = function(genDates) {
 
   return genDates.map(function(genDate){
@@ -47,4 +49,35 @@ exports.specificDate = function(spcDate){
     // positive: true
     positive: spcDate.positive
   });
+};
+
+exports.conflicts = function(otherEventsList, eventInfo) {
+
+  return otherEventsList.filter(function(event){
+    return exports.overlaps(event, eventInfo)
+  });
+
+};
+
+exports.overlaps = function(event, eventInfo){
+
+  // debugger;
+
+  date1 = new Date(event.date);
+  date2 = new Date(eventInfo.eventDate);
+
+  if (DateHelper.jsDateSpaceship(date1, date2)){
+    return false;
+  } else {
+
+    startTime1 = parseInt(event.startTime);
+    endTime1 = DateHelper.timePlusMinutes(startTime1, parseInt(event.duration));
+
+    startTime2 = parseInt(eventInfo.eventStartTime);
+    endTime2 = DateHelper.timePlusMinutes(startTime2, parseInt(eventInfo.eventDuration));
+
+    return (startTime1 < endTime2 && startTime2 < endTime1);
+
+  }
+
 };
