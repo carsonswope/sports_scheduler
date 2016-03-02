@@ -117,11 +117,11 @@ var NewGamesForm = React.createClass({
   teamOptions: function(teamSlot){
 
     if (this.state.newGame.leagueId){
-      leagueId = parseInt(this.state.newGame.leagueId)
-      teamIds = LeagueTeamStore.teams(leagueId)
+      var leagueId = parseInt(this.state.newGame.leagueId);
+      var teamIds = LeagueTeamStore.teams(leagueId);
       var teamToSkip = teamSlot === 'HOME' ?
         parseInt(this.state.newGame.team_2_id) :
-        parseInt(this.state.newGame.team_1_id)
+        parseInt(this.state.newGame.team_1_id);
       teamIds = teamIds.filter(function(teamId){
         return teamId !== teamToSkip;});
 
@@ -137,8 +137,8 @@ var NewGamesForm = React.createClass({
   fieldOptions: function(){
 
     if (this.state.newGame.leagueId){
-      leagueId = parseInt(this.state.newGame.leagueId)
-      facilityIds = LeagueFacilityStore.facilities(leagueId)
+      var leagueId = parseInt(this.state.newGame.leagueId)
+      var facilityIds = LeagueFacilityStore.facilities(leagueId)
 
       return facilityIds.map(function(facilityId){
         return FacilityStore.find(facilityId);
