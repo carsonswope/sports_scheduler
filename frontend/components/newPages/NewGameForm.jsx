@@ -239,16 +239,23 @@ var NewGamesForm = React.createClass({
 
     //check if form completed
     if (!newGame.leagueId){
-      errors.push('select a league!')
+      errors.push('select a league!');
+
     } else if (!newGame.team_1_id
             || !newGame.team_2_id){
-      errors.push('select teams!')
+      errors.push('select teams!');
+
     } else if (!newGame.fieldId){
-      errors.push('select a facility!')
+      errors.push('select a facility!');
+
     } else if (!newGame.date){
-      errors.push('select a date!')
+      errors.push('select a date!');
+
     } else if (!newGame.startTime){
-      errors.push('select a time!')
+      errors.push('select a time!');
+
+    //if not completed, then check if the proposed game date/time
+    //is conflicting with anything
     } else {
 
       var team1 = TeamStore.find(newGame.team_1_id);
@@ -280,12 +287,11 @@ var NewGamesForm = React.createClass({
         facility: AvailabilityHelper.conflicts(facilityEvents, eventInfo)
       }
 
-
-      if (conflicts.team1.length){
+      if (conflicts.team1.length & conflicts.team2.length) {
+        errors.push(team1.name + ' and ' team2.name + ' already are scheduled at that time');
+      } else if (conflicts.team1.length){
         errors.push(team1.name + ' already are scheduled at that time');
-      }
-
-      if (conflicts.team2.length){
+      } else if (conflicts.team2.length){
         errors.push(team2.name + ' already are scheduled at that time');
       }
 
