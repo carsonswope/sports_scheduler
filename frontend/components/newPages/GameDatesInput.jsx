@@ -41,7 +41,7 @@ var GameDatesInput = React.createClass({
 
   submit: function(){
 
-    params = {
+    var params = {
       startTime: this.state.startTime,
       endTime: this.state.endTime,
       availType: this.state.adding,

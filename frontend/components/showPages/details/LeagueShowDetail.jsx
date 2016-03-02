@@ -10,6 +10,7 @@ var FacilityStore = require('../../../stores/FacilityStore');
 var LeagueActions = require('../../../actions/LeagueActions');
 var LeagueStore = require('../../../stores/LeagueStore');
 
+var LeagueStatus = require('../LeagueStatus');
 
 var AvailabilityActions = require('../../../actions/AvailabilityActions');
 
@@ -102,7 +103,7 @@ var LeagueShowDetail = React.createClass({
   removeGameDate: function(dateType, index){
 
     var gameDates = this.state.gameDates;
-    var dateToRemove;
+    var dateToRemoveId;
 
     if (dateType === 'SPECIFIC') {
       dateToRemoveId = gameDates.specific[index].id;
@@ -172,6 +173,8 @@ var LeagueShowDetail = React.createClass({
 
         <BasicInfoDiv stats={statsList}
           remove={this.removeTeam} />
+
+        <LeagueStatus league={league} />
 
         <MembershipsShow
           membershipName={'member teams:'}
