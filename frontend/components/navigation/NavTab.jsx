@@ -59,7 +59,7 @@ var NavTab = React.createClass({
       )
     }
 
-    options = this.state.expanded ? <OptionsTab name={this.props.name} /> : null
+    var options = this.state.expanded ? <OptionsTab name={this.props.name} /> : null
 
 
     var name=(
