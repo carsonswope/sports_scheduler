@@ -50,7 +50,7 @@ exports.validEvent = function(event, filter){
     }
   }
 
-  if (parseInt(filter.filterSpec) !== -1) {
+  if (parseInt(filter.filterSpec)) {
     spec = parseInt(filter.filterSpec)
     if (filter.filterType === 'BY_LEAGUE') {
       if (event.leagueId !== spec) {
