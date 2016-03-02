@@ -17,6 +17,7 @@ exports.receiveFetch = function(events) {
 };
 
 exports.attemptReschedule = function(event) {
+
   EventApi.attemptPatch(event);
 };
 

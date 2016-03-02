@@ -46,6 +46,10 @@ var EventsListView = React.createClass({
     });
   },
 
+  removeFocus: function(){
+    this.setState({focused: null})
+  },
+
   toggleFocus: function(eventId){
     if (this.state.focused === eventId){
       this.setState({focused: null});
@@ -175,6 +179,7 @@ var EventsListView = React.createClass({
           classInfo={classes}
           key={i}
           toggleFocus={this.toggleFocus}
+          removeFocus={this.removeFocus}
           focused={this.state.focused === game.id}
           columns={this.columns()} />
       );

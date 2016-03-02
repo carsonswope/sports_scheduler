@@ -26,15 +26,10 @@ var ListViewEventShow = React.createClass({
       newFacility = this.props.event.facilityId;
     }
 
-    var newGame = {
-      leagueId: this.props.event.leagueId,
-      team_1_id: this.props.event.team_1_id,
-      team_2_id: this.props.event.team_2_id,
-      fieldId: newFacility,
-      date: newGameDate,
-      startTime: newGameTime,
-      ownId: this.props.event.id
-    };
+    var newGame = this.newGameObject();
+    newGame.fieldId = newFacility;
+    newGame.date = newGameDate;
+    newGame.startTime = newGameTime;
 
     var errors = EventStore.newGameErrors(newGame);
 
@@ -59,6 +54,37 @@ var ListViewEventShow = React.createClass({
         </div>
       );
     }
+  },
+
+  componentWillReceiveProps: function(newProps){
+
+    if (!newProps.focused) {
+      var newGameDate;
+      var newGameTime;
+      var newFacility;
+
+      if (EventHelper.isScheduled(this.props.event)){
+        newGameDate = DateHelper.JSdateToInputString(this.props.event.date);
+        newGameTime = DateHelper.timeStringPrimitiveToInputString(this.props.event.startTime);
+        newFacility = this.props.event.facilityId;
+      }
+
+      var newGame = this.newGameObject();
+      newGame.fieldId = newFacility;
+      newGame.date = newGameDate;
+      newGame.startTime = newGameTime;
+
+      var errors = EventStore.newGameErrors(newGame);
+
+      this.setState({
+        status: null,
+        newGameDate: newGameDate,
+        newGameTime: newGameTime,
+        newFacility: newFacility,
+        errors: errors
+      });
+    }
+
   },
 
   detailOptions: function(){
@@ -154,35 +180,22 @@ var ListViewEventShow = React.createClass({
         style={{borderBottom: 0}}>
         <div className='gamedate-input-button'
           style={{color: '#963019', width: 130, left: 20}}
-          onClick={this.resetOptions}>
+          onClick={this.resetAndHideRescheduleMenu}>
           cancel
         </div>
 
         {this.submitButton()}
+
       </div>
     )
 
     return choiceElements;
 
-    return[
-      <div className='gamedate-input-button' key={5}
-        onClick={this.submitReschedule}
-        style={{color: '#667467', width: 160, backgroundColor: 'transparent'}}>
-        submit reschedule
-      </div>,
-      <div className='gamedate-input-button' key={6}
-        onClick={this.resetOptions}
-        style={{color: '#963019', width: 120, backgroundColor: 'transparent'}}>
-        cancel reschedule
-      </div>
-    ]
   },
 
   submitButton: function(){
 
     var buttonOrMessage;
-
-    debugger;
 
     if (this.state.errors.incompleteInput.length) {
       buttonOrMessage=(
@@ -194,7 +207,8 @@ var ListViewEventShow = React.createClass({
 
     } else {
       buttonOrMessage=(
-        <div className='gamedate-input-button'>
+        <div className='gamedate-input-button'
+          onClick={this.submitReschedule}>
           submit reschedule!
         </div>
       );
@@ -205,6 +219,7 @@ var ListViewEventShow = React.createClass({
   },
 
   startRescheduleGame: function() {
+
     this.setState({
       status: 'RESCHEDULE'
     });
@@ -212,7 +227,9 @@ var ListViewEventShow = React.createClass({
 
   unscheduleGame: function() {
 
-    this.resetOptions();
+    this.resetOptionsAfterUnschedule();
+
+    this.props.removeFocus();
 
     EventActions.attemptReschedule({
       id: this.props.event.id,
@@ -220,6 +237,8 @@ var ListViewEventShow = React.createClass({
       start_time: null,
       date: null
     });
+
+
   },
 
   deleteGame: function() {
@@ -248,21 +267,75 @@ var ListViewEventShow = React.createClass({
 
   submitReschedule: function(){
 
-    var date = DateHelper.dbDateFromInputString(this.state.newGameDate);
-
     EventActions.attemptReschedule({
       id: this.props.event.id,
       facility_id: parseInt(this.state.newFacility),
       start_time: DateHelper.timeInputStringToNumber(this.state.newGameTime),
-      date: date
+      date: DateHelper.dbDateFromInputString(this.state.newGameDate)
     });
 
-    this.hideRescheduleMenu();
+    this.resetAndHideRescheduleMenuWithNewParams();
+  },
+
+  newGameObject(){
+    return {
+      leagueId: this.props.event.leagueId,
+      team_1_id: this.props.event.team_1_id,
+      team_2_id: this.props.event.team_2_id,
+      ownId: this.props.event.id
+    };
+  },
+
+  resetAndHideRescheduleMenuWithNewParams: function(){
+
+    var newGame = this.newGameObject();
+    newGame.fieldId = this.state.newFacility;
+    newGame.date = this.state.newGameDate;
+    newGame.startTime = this.state.newGameTime;
+
+    var errors = EventStore.newGameErrors(newGame);
+
+    this.setState({
+      status: null,
+      newGameDate: newGame.date,
+      newGameTime: newGame.startTime,
+      newFacility: newGame.fieldId,
+      errors: errors
+    });
+
+    this.props.removeFocus();
 
   },
 
-  hideRescheduleMenu: function(){
-    this.setState({ status: null });
+  resetAndHideRescheduleMenu: function(){
+
+    var newGameDate;
+    var newGameTime;
+    var newFacility;
+
+    if (EventHelper.isScheduled(this.props.event)){
+      newGameDate = DateHelper.JSdateToInputString(this.props.event.date);
+      newGameTime = DateHelper.timeStringPrimitiveToInputString(this.props.event.startTime);
+      newFacility = this.props.event.facilityId;
+    }
+
+    var newGame = this.newGameObject();
+    newGame.fieldId = newFacility;
+    newGame.date = newGameDate;
+    newGame.startTime = newGameTime;
+
+    var errors = EventStore.newGameErrors(newGame);
+
+    this.setState({
+      status: null,
+      newGameDate: newGameDate,
+      newGameTime: newGameTime,
+      newFacility: newFacility,
+      errors: errors
+    });
+
+    this.props.removeFocus();
+
   },
 
   changeOption: function(option, e){
@@ -271,55 +344,35 @@ var ListViewEventShow = React.createClass({
     var state = this.state;
     state[option] = e.target.value;
 
-    var newGame = {
-      leagueId: this.props.event.leagueId,
-      team_1_id: this.props.event.team_1_id,
-      team_2_id: this.props.event.team_2_id,
-      fieldId: state.newFacility,
-      date: state.newGameDate,
-      startTime: state.newGameTime,
-      ownId: this.props.event.id
-    };
+    var newGame = this.newGameObject();
+    newGame.fieldId = state.newFacility;
+    newGame.date = state.newGameDate;
+    newGame.startTime = state.newGameTime;
 
     var errors = EventStore.newGameErrors(newGame);
-
     state.errors = errors;
-
-    debugger;
 
     this.setState({state});
   },
 
-  changeFacility: function(e){
-    e.preventDefault();
-    this.setState({ newFacility: e.target.value });
-  },
-
-  changeNewGameTime: function(e) {
-    // e.preventDefault();
-    this.setState({ newGameTime: e.target.value });
-  },
-
-  changeNewGameDate: function(e) {
-    e.preventDefault();
-    this.setState({
-      newGameDate: e.target.value
-    });
-  },
-
   newDateDayOfWeek: function() {
-    return DateConstants.DAYS_OF_WEEK[
-      DateHelper.dateObjectFromInputString(this.state.newGameDate).getDay()
-    ];
+
+    if (this.state.newGameDate) {
+      return DateConstants.DAYS_OF_WEEK[
+        DateHelper.dateObjectFromInputString(this.state.newGameDate).getDay()
+      ];
+    }
   },
 
-  resetOptions: function() {
+  resetOptionsAfterUnschedule: function() {
     this.setState({
       status: null,
-      newGameDate: DateHelper.JSdateToInputString(this.props.event.date),
-      newGameTime: DateHelper.timeStringPrimitiveToInputString(this.props.event.startTime),
-      newFacility: this.props.event.facilityId
-    })
+      newGameDate: null,
+      newGameTime: null,
+      newFacility: null,
+      errors: {incompleteInput: ['select a facility'] }
+    });
+
   },
 
   getDayOfWeek: function(){

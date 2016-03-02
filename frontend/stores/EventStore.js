@@ -41,17 +41,15 @@ EventStore.newGameErrors = function(newGame) {
   var errors = [];
   var conflictingEventsList = [];
 
-  debugger;
-
   //check if form completed
-  if (!newGame.leagueId){
+  if (!newGame.leagueId || newGame.leagueId === -1){
     errors.push('select a league!');
 
-  } else if (!newGame.team_1_id
-          || !newGame.team_2_id){
+  } else if ((!newGame.team_1_id || newGame.team_1_id === -1)
+          || (!newGame.team_2_id || newGame.team_2_id === -1)){
     errors.push('select teams!');
 
-  } else if (!newGame.fieldId){
+  } else if (!newGame.fieldId || newGame.fieldId === -1){
     errors.push('select a facility!');
 
   } else if (!newGame.date){
@@ -74,9 +72,6 @@ EventStore.newGameErrors = function(newGame) {
       eventStartTime: DateHelper.timeInputStringToNumber(newGame.startTime),
       eventDuration: league.gameDuration
     };
-
-    debugger;
-
 
     var team_1_events = EventStore.filteredEvents({
       filterType: 'BY_TEAM', filterSpec: team1.id
@@ -185,6 +180,7 @@ EventStore.resetEventsList = function(events){
 
 EventStore.updateEvent = function(event){
   _events[event.id] = event;
+
   EventStore.__emitChange();
 };
 

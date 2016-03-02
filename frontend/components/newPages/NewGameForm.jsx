@@ -17,32 +17,28 @@ var DateConstants = require('../../constants/DateConstants');
 var DateHelper = require('../../util/DateHelper');
 var AvailabilityHelper = require('../../util/AvailabilityHelper');
 
-var NewGamesForm = React.createClass({
+var NewGameForm = React.createClass({
 
   getInitialState: function(){
 
     var adding = NavStore.options('SCHEDULES').adding;
     var newGame = NavStore.options('SCHEDULES').newGame;
-    // var newGameErrors = {
-    //   incompleteInput: null,
-    //   conflicts: null
-    // };
-    //
-    // if (adding) { newGameErrors = this.newGameErrors(newGame); }
 
     return({
       adding:   adding,
       newGame:  newGame
-      // newGameErrors: newGameErrors
     });
   },
 
   componentDidMount: function(){
     this.navListener = NavStore.addListener(this.navChange);
+    this.eventListener = EventStore.addListener(this.eventChange);
+
   },
 
   componentWillUnmount: function(){
     this.navListener.remove();
+    this.eventListener.remove();
   },
 
   navChange: function(){
@@ -50,21 +46,27 @@ var NewGamesForm = React.createClass({
     var adding = NavStore.options('SCHEDULES').adding;
     var newGame = NavStore.options('SCHEDULES').newGame;
 
-    // debugger;
-    // var newGameErrors = {
-    //   incompleteInput: null,
-    //   conflicts: null
-    // };
-
-    debugger;
-
-    // if (adding) { newGameErrors = this.newGameErrors(newGame); }
-
     this.setState({
       adding:   adding,
       newGame:  newGame
-      // newGameErrors: newGameErrors
     });
+  },
+
+  eventChange: function(){
+
+    debugger;
+
+    var newGameOptions = this.state.newGame;
+    var errors = EventStore.newGameErrors(newGameOptions);
+
+    newGameOptions.errors = errors
+
+    debugger;
+
+    this.setState({
+      errors: errors
+    });
+
   },
 
   changeOption: function(category, e){
@@ -456,4 +458,4 @@ var NewGamesForm = React.createClass({
 
 });
 
-module.exports = NewGamesForm;
+module.exports = NewGameForm;
