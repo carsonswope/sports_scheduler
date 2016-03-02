@@ -226,7 +226,7 @@ var ListViewEventShow = React.createClass({
 
   entryText: function(){
 
-    text = {
+    var text = {
       team_1_id: TeamStore.find(
         this.props.event.team_1_id).name,
       team_2_id: TeamStore.find(
