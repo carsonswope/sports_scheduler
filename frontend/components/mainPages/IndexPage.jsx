@@ -170,7 +170,19 @@ var IndexPage = React.createClass({
 
     return (
       <div>
+
+        <div className='show-item show-item-focused'
+          style={{marginTop: -4}}>
+          <div className='show-item-header'>
+            <div className='schedule-criteria-title'
+              style={{left: 30}}>
+              {NavConstants.SCREEN_NAMES[this.state.resource]}:
+            </div>
+          </div>
+        </div>
+
         {content}
+
       </div>
     );
   }

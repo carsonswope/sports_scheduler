@@ -83,12 +83,12 @@
 }
 
 .schedule-criteria-main {
-    height: 42px;
+    height: 40px;
     border-bottom: 2px solid #16174f;
 }
 
 .schedule-header-main {
-    margin-top: -44px;
+    margin-top: 0px;
     height: 42px;
     position: relative;
     left: 18px;
@@ -109,7 +109,7 @@
     position: relative;
     left: 40px;
     font-size: 16px;
-    bottom: -17px;
+    bottom: -15px;
     outline: none;
     border: 0;
     font-weight: 700;
