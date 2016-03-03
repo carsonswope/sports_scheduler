@@ -38,12 +38,12 @@ var Content = React.createClass({
     var ToRender = NavConstants.MAIN_PAGES[this.state.tab]
     ToRender = <ToRender resourceType={this.state.tab}
       dims={{
-        height: this.props.dims.height - 195,
+        height: this.props.dims.height - 199,
         width: this.props.dims.width - 225
       }}/>
 
     var style={
-      height: this.props.dims.height - 110,
+      height: this.props.dims.height - 114,
       width: this.props.dims.width - 245,
       overflowX: 'hidden'
     }

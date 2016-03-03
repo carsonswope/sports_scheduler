@@ -12,9 +12,26 @@ var UserInfo = React.createClass({
   render: function() {
     return (
       <div>
-        logged in as {UserStore.currentUser().username}
-        <input type="submit"
-          value="log out" onClick={this.initiateLogout} />
+        <div className='info-stat'
+          style={{width: '100%', position: 'relative', right: 0}}>
+          <div className='info-stat-label'
+            style={{width: 75}}>
+            logged in as
+          </div>
+          <div className='info-stat-text'>
+            {UserStore.currentUser().username}
+          </div>
+
+        </div>
+        <div className='info-stat'
+          style={{width: '100%', position: 'relative', right: 0}}>
+          <div className='new-game-form-label new-game-button'
+            style={{color: '#963019', left: 21}}
+            onClick={this.initiateLogout}>
+            log out
+          </div>
+        </div>
+
       </div>
     );
   }

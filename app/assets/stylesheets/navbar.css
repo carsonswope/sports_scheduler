@@ -1,10 +1,26 @@
-.navbar-main {
+#navbar-main {
   margin: 0px;
   width: 215px;
   display: inline-block;
   position: relative;
   background-color: transparent;
   z-index: 1;
+}
+
+#navbar-main.navbar-main-shown {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  -ms-transition: opacity 1s ease-out;
+  -moz-transition: opacity 1s ease-out;
+  -webkit-transition: opacity 1s ease-out;
+}
+
+#navbar-main.navbar-main-hidden {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  -ms-transition: opacity 1s ease-out;
+  -moz-transition: opacity 1s ease-out;
+  -webkit-transition: opacity 1s ease-out;
 }
 
 .logo-bar {
@@ -21,22 +37,35 @@
   height: 40px;
 }
 
-.navbar-tab-main {
-  position: relative;
-  left: 18px;
-  width: 182px;
-
-  background-color: transparent;
-/*   background-color: green; */
-
+#navbar-option-id {
   border: 2px solid #963019;
   border-left: 0px;
   border-right: 0px;
   margin-bottom: -2px;
   margin-top: -2px;
+    position: relative;
+  left: 18px;
+  width: 182px;
+
+  background-color: transparent;
 }
 
-.navbar-tab-main-selected {
+.navbar-tab-main {
+/*   position: relative;
+  left: 18px;
+  width: 182px;
+
+  background-color: transparent; */
+/*   background-color: green; */
+/* 
+  border: 2px solid #963019;
+  border-left: 0px;
+  border-right: 0px;
+  margin-bottom: -2px;
+  margin-top: -2px; */
+}
+
+#navbar-option-id.navbar-tab-main-selected {
   border: 2px solid #16174f;
   border-left: 0px;
 /*   width: 197px; */
@@ -46,6 +75,7 @@
   width: 204px;
 
   background-color: #f6f1ed;
+  -webkit-transition: height 2s;
 }
 
 .navbar-expanded {

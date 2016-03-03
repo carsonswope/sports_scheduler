@@ -72,7 +72,12 @@ var App = React.createClass({
     } else {
       var toScreen =(
         <div>
-          <Header dims={this.state.dimensions} user={this.state.user} />
+          <NavBar dims={this.state.dimensions} hidden={true} />
+
+          <div className='content-main'
+            style={{height: this.state.dimensions.height, width: this.state.dimensions.width-225}}>
+            <Header dims={this.state.dimensions} user={this.state.user} />
+          </div>
         </div>
       );
     }

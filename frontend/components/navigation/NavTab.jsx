@@ -71,7 +71,7 @@ var NavTab = React.createClass({
 
 
     return (
-      <div className={mainName}>
+      <div id='navbar-option-id' className={mainName}>
         <div className={className}
           onClick={this.handleClick}>
           {name}

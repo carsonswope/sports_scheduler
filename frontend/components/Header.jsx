@@ -28,11 +28,31 @@ var Header = React.createClass({
   render: function() {
 
     var w = this.props.dims.width-280;
-    var estilo;
+    var sizing;
     var middleElement;
 
+    var headerId = 'header-main-id'
+
+    var headerClass = this.state.user ? 'header-main' : 'header-main-logged-out'
+
+    var loggedInHeader=(
+      <div id='header-component' className={this.state.user ? 'in-screen' : 'off-screen'}>
+        user company name / logo here
+      </div>
+    );
+
+    var loggedOutHeader=(
+      <div id='header-welcome-page' className={this.state.user ? 'off-screen' : 'in-screen'}>
+        <h1>
+          Welcome to the Sports Scheduler
+        </h1>
+      </div>
+    );
+
     if (this.state.user) {
-      estilo = {
+      sizing = {
+        position: 'relative',
+        overflow: 'hidden',
         width: w,
         height: NavConstants.HEADER_HEIGHT_LOGGED_IN
       }
@@ -45,30 +65,31 @@ var Header = React.createClass({
 
       );
     } else {
-      estilo = {
+
+      sizing = {
+        position: 'relative',
+        overflow: 'hidden',
         width: w,
         height: NavConstants.HEADER_HEIGHT_LOGGED_OUT
       }
+
       middleElement =(
         <div className="header-welcome-page">
           <h1>Welcome to the Sports Scheduler
 
           </h1>
-            <div style={{position: 'relative', top: 100}}>
-              log in as 'me' with password '123456'
-            </div>
         </div>
       );
     }
 
-
     return (
-      <div className="header-main"
-        style={estilo} >
+      <div id={headerId} className={headerClass}
+        style={sizing} >
 
         <UserHeader user={this.props.user}/>
 
-        {middleElement}
+        {loggedInHeader}
+        {loggedOutHeader}
       </div>
     );
   }

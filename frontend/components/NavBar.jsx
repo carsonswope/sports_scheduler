@@ -52,16 +52,17 @@ var NavBar = React.createClass({
     }, this);
 
     return (
-      <div className="navbar-main"
+      <div id="navbar-main" className={this.props.hidden ? 'navbar-main-hidden' : 'navbar-main-shown'}
         style={{
-          height: this.props.dims.height - 130
+          height: this.props.dims.height - 130,
+          opacity: this.props.hidden ? 0 : 1
         }}>
 
         <div className='logo-bar'>
           logo here
         </div>
 
-        {tabs}
+        {this.props.hidden ? null : tabs}
 
       </div>
     );
