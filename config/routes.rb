@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :league_teams, only:      [:create, :destroy]
     resources :league_facilities, only: [:create, :destroy]
     resources :events, only:            [:index, :create, :destroy, :update]
-    resource :availability, only:       [:create, :destroy]
+    resources :availabilities, only:     [:create, :destroy, :show]
     resource :session, only:            [:show, :create, :destroy]
   end
 

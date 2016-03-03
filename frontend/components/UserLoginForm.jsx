@@ -60,19 +60,6 @@ var UserLoginForm = React.createClass({
         </form>
 
       </div>
-    )
-
-    return (
-
-      <div>
-        <form onSubmit={this.loginClick}>
-          <input type="text"
-            valueLink={this.linkState('username')} />
-          <input type="password"
-            valueLink={this.linkState('password')} />
-          <input type="submit" value="Log In" />
-        </form>
-    </div>
     );
   }
 

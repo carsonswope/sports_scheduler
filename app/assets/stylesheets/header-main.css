@@ -2,14 +2,14 @@
   border-bottom: 2px solid #16174f;
   height: 110px;
   margin: 2px;
-  margin-bottom: 0px;
+  margin-bottom: -3px;
   margin-left: 20px;
   display: inline-block
 }
 
 #header-main-id.header-main {
   border-top: 2px solid #f6f1ed;
-  -webkit-transition: margin-top 2s, border-top 2s;
+  -webkit-transition: margin-top 2s, border-top 2s, height 2s;
 }
 
 #header-main-id.header-main-logged-out {

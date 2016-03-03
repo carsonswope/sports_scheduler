@@ -1,5 +1,18 @@
 class Api::AvailabilitiesController < ApplicationController
 
+  def show
+
+    # if Object.const_defined?(params[:resource])
+      @available = params[:resource].constantize.find_by_id(params[:id])
+    # end
+
+    if @available
+      @time_slots = @available.calculate_availabilities
+      @item_type = params[:resource]
+    end
+
+  end
+
   def create
 
     if params[:date][:availType] == 'GENERAL'

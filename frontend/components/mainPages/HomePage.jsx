@@ -6,7 +6,17 @@ var HomePage = React.createClass({
   render: function() {
     return (
       <div>
-        home page
+        <div className='schedule-header-main'>
+          <div className='schedule-criteria-main'
+            style={{width: 'calc(100% + 20px)'}}>
+            <div className='schedule-criteria-title'>
+              Hello!
+            </div>
+
+          </div>
+          home page
+        </div>
+
       </div>
     );
   }

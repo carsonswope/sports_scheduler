@@ -43,3 +43,16 @@ exports.receiveCreatedAvailability = function(response){
   });
 
 };
+
+exports.fetchAvailableDates = function(resourceId, resourceType){
+  AvailabilityApi.fetchAvailableDates(resourceId, resourceType);
+};
+
+exports.receiveAvailabilityFetch = function(response){
+
+
+  AppDispatcher.dispatch({
+    actionType: AvailabilityConstants.actions.RECEIVE_LIST,
+    list: response
+  })
+};

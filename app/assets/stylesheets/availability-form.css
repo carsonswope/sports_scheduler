@@ -65,6 +65,7 @@
   display: inline-block;
   position: relative;
   bottom: -7px;
+  background-color: transparent;
 }
 
 .gamedate-input-button:hover {

@@ -11,12 +11,13 @@ exports.opposite = function(object, ids) {
 };
 
 exports.addAvailability = function(a, resourceType, resourceList) {
+
   if (a.resourceType === resourceType) {
 
     var resource = resourceList[a.resourceId];
 
-    delete a['resourceType']
-    delete a['resourceId']
+    // delete a['resourceType']
+    // delete a['resourceId']
 
     if (a.availType === 'GENERAL') {
       delete a['availType'];

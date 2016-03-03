@@ -147,6 +147,7 @@ var EventsListView = React.createClass({
 
     return(
       <div className='table-header-main'
+        style={{width: this.props.dims.width - 76}}
         onMouseMove={this.drag}
         onMouseLeave={this.stopDragging}
         onMouseUp={this.stopDragging}>
@@ -177,6 +178,7 @@ var EventsListView = React.createClass({
       return(
         <ListViewEventShow event={game}
           classInfo={classes}
+          width={this.props.dims.width - 76}
           key={i}
           toggleFocus={this.toggleFocus}
           removeFocus={this.removeFocus}

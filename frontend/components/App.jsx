@@ -5,6 +5,7 @@ var Header = require('./Header');
 var NavBar = require('./NavBar');
 var Content = require('./Content');
 
+var AvailabilityStore = require('../stores/AvailabilityStore');
 var NavStore = require('../stores/NavStore');
 var UserStore = require('../stores/UserStore');
 var LeagueTeamStore = require('../stores/LeagueTeamStore');

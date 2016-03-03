@@ -2,7 +2,7 @@ var AvailabilityActions = require('../actions/AvailabilityActions');
 
 exports.attemptDestroy = function(availType, id){
   $.ajax({
-    url: 'api/availability',
+    url: 'api/availabilities/' + id,
     method: 'DELETE',
     dataType: 'json',
     data: {
@@ -21,7 +21,7 @@ exports.attemptDestroy = function(availType, id){
 exports.attemptCreate = function(date){
 
   $.ajax({
-    url: 'api/availability',
+    url: 'api/availabilities',
     method: 'POST',
     dataType: 'json',
     data: { date },
@@ -31,4 +31,18 @@ exports.attemptCreate = function(date){
 
 
   });
+};
+
+exports.fetchAvailableDates = function(resourceId, resourceType){
+
+  $.ajax({
+    url: 'api/availabilities/' + resourceId.toString() + '?resource=' + resourceType,
+    method: 'GET',
+    dataType: 'json',
+    success: function(response){
+      AvailabilityActions.receiveAvailabilityFetch(response);
+    }
+  })
+
+
 };

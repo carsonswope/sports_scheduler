@@ -196,13 +196,13 @@ var LeagueShowDetail = React.createClass({
           itemName='facilities'
           height={this.getFieldsListHeight()} />
 
-          <GameDatesInput
-            dates={this.state.gameDates}
-            update={this.addNewGameDate}
-            remove={this.removeGameDate}
-            weeklyPlus={'Weekly game dates'}
-            specificPlus={'Specific additions'}
-            specificMinus={'Specific exceptions'}/>
+        <GameDatesInput
+          dates={this.state.gameDates}
+          update={this.addNewGameDate}
+          remove={this.removeGameDate}
+          weeklyPlus={'Weekly game dates'}
+          specificPlus={'Specific additions'}
+          specificMinus={'Specific exceptions'}/>
       </div>
     );
   }

@@ -49,7 +49,8 @@ var ListViewEventShow = React.createClass({
   detail: function(){
     if (this.props.focused){
       return(
-        <div className='inline-reschedule-main'>
+        <div className='inline-reschedule-main'
+          style={{width: this.props.width}}>
         {this.detailOptions()}
         </div>
       );
@@ -459,6 +460,7 @@ var ListViewEventShow = React.createClass({
     return (
       <div>
         <div className={this.props.classInfo.header}
+          style={{width: this.props.width}}
           onClick={this.callToggle}>
           {this.columnElements()}
         </div>

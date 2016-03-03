@@ -32,7 +32,7 @@
     width: calc(100% - 22px);
     position: relative;
     left: 0px;
-    height: calc(100% - 28px);
+    height: calc(100% - 5px);
     overflow-y: scroll;
 }
 
@@ -85,6 +85,8 @@
 .schedule-criteria-main {
     height: 40px;
     border-bottom: 2px solid #16174f;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .schedule-header-main {
@@ -119,7 +121,7 @@
 .new-game-form-main {
     border-bottom: 2px solid #16174f;
     width: 100%;
-    height: 182px;
+    height: 192px;
 }
 
 .new-game-form-header {
@@ -139,6 +141,8 @@
     margin-right: 20px;
     width: calc(50% - 60px);
     display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .new-game-form-label {
@@ -185,7 +189,7 @@
     border-top: 2px solid #16174f;
     margin-top: -2px;
 
-    height: 110px;
+    height: 118px;
     position: relative;
 }
 
@@ -213,6 +217,9 @@
     display: inline-block;
     padding: 0px;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: transparent;
 }
 
 .inline-reschedule-label {

@@ -4,6 +4,7 @@ var ScheduleCriteria = require('../showPages/ScheduleCriteria');
 var EventStore = require('../../stores/EventStore');
 var NavStore = require('../../stores/NavStore');
 
+var EventsCalendarView = require('./EventsCalendarView.jsx');
 var EventsListView = require('./EventsListView');
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 var CalendarViewEventShow = require('../showPages/CalendarViewEventShow');
@@ -74,14 +75,30 @@ var SchedulesPage = React.createClass({
     if (NavStore.options('SCHEDULES').adding) {
       height -= 140;
     } else {
-      height -= 40;
+      height;
     }
 
     if (this.state.viewType === 'LIST_VIEW'){
 
-      return <EventsListView games={this.state.games} dims={{width: 800, height: height}}/>
+      return(
+        <EventsListView
+          games={this.state.games}
+          dims={{
+            width: this.props.dims.width,
+            height: height
+          }}/>
+      );
+
     } else {
-      return null;
+      return(
+        <EventsCalendarView
+          games={this.state.games}
+          filter={this.state.filter}
+          dims={{
+            width: this.props.dims.width,
+            height: height
+          }}/>
+      );
     }
   },
 

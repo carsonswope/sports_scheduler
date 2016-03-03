@@ -173,7 +173,7 @@ var NewGameForm = React.createClass({
           onChange={this.changeOption.bind(this, 'date')} />,
 
         <div className='info-stat-text' key={1}
-          style={{width: 30, float: 'right'}}>
+          style={{width: 50, float: 'right'}}>
           {this.dayOfWeekOfNewGameDate()}
         </div>
 
@@ -396,7 +396,13 @@ var NewGameForm = React.createClass({
     } else {
 
       return (
-        <div className='new-game-form-input-line new-game-button'
+        <div className='new-game-button'
+          style={{
+            display: 'inline-block',
+            position: 'relative',
+            bottom: -5,
+            left: 35
+          }}
           onClick={this.scheduleGame}>
           schedule!
         </div>

@@ -1,0 +1,82 @@
+.calendar-view-main {
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+}
+
+.calendar-view-time-selector-main {
+    border: 1px solid black;
+    height: 250px;
+    width: 100px;
+    background-color: transparent;
+    display: inline-block;
+}
+
+.calendar-view-calendar-main {
+    border: 1px solid black;
+    width: calc(100% - 104px);
+    height: 250px;
+    display: inline-block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+/*     overflow: scroll; */
+}
+
+.calendar-view-time-selector-start-time-line {
+    border-bottom: 2px solid black;
+    position: absolute;
+    width: 18px;
+    left: 85px;
+    height: 18px;
+}
+
+.calendar-view-time-selector-end-time-line {
+    border-bottom: 2px solid black;
+    position: absolute;
+    width: 18px;
+    top: 258px;
+    left: 85px;
+    height: 18px;
+}
+
+.calendar-view-time-selector-end-time {
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    color: #16174f;
+    background-color: transparent;
+    top: 262px;
+    left: 7px;
+}
+
+.calendar-view-time-selector-start-time {
+    outline: none;
+    border: 0;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    color: #16174f;
+    background-color: transparent;
+    top: 48px;
+    left: 7px;
+}
+
+.calendar-single-date-main {
+    border: 1px solid black;
+    width: 150px;
+    height: calc(100% - 5px);
+    display: inline-block;
+}
+
+input[type=time]::-webkit-inner-spin-button, 
+input[type=time]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type="time"]::-webkit-clear-button {
+    display: none;
+}
