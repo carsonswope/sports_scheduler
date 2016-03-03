@@ -8,6 +8,9 @@ var DateHelper = require('../util/DateHelper')
 var AvailabilityHelper = require('../util/AvailabilityHelper')
 
 var EventConstants = require('../constants/EventConstants');
+var TeamConstants = require('../constants/TeamConstants');
+var FacilityConstants = require('../constants/FacilityConstants');
+var LeagueConstants = require('../constants/LeagueConstants');
 var EventHelper = require('../util/EventHelper');
 
 
@@ -197,6 +200,86 @@ EventStore.addEvent = function(event){
   EventStore.__emitChange();
 };
 
+EventStore.removeEventsByTeam = function(team){
+
+  var eventIds = Object.keys(_events);
+  var idsToRemove = [];
+  var event;
+
+  for (var i = 0; i < eventIds.length; i++) {
+    event = _events[eventIds[i]]
+    if (event.team_1_id === team.id || event.team_2_id === team.id) {
+      idsToRemove.push(eventIds[i]);
+    }
+  }
+
+  for (var i = 0; i < idsToRemove.length; i++) {
+    delete _events[idsToRemove[i]];
+  }
+
+  EventStore.__emitChange();
+};
+
+EventStore.removeEventsByLeague = function(league){
+  var eventIds = Object.keys(_events);
+  var idsToRemove = [];
+  var event;
+
+  for (var i = 0; i < eventIds.length; i++) {
+    event = _events[eventIds[i]]
+    if (event.leagueId === league.id) {
+      idsToRemove.push(eventIds[i]);
+    }
+  }
+
+  for (var i = 0; i < idsToRemove.length; i++) {
+    delete _events[idsToRemove[i]];
+  }
+
+  EventStore.__emitChange();
+};
+
+EventStore.removeEventsByFacility = function(facility){
+  var eventIds = Object.keys(_events);
+  var idsToRemove = [];
+  var event;
+
+  for (var i = 0; i < eventIds.length; i++) {
+    event = _events[eventIds[i]]
+    if (event.facilityId === facility.id) {
+      idsToRemove.push(eventIds[i]);
+    }
+  }
+
+  for (var i = 0; i < idsToRemove.length; i++) {
+    delete _events[idsToRemove[i]];
+  }
+
+  EventStore.__emitChange();
+};
+
+EventStore.removeEventsByLeagueTeam = function(pair){
+
+  var eventIds = Object.keys(_events);
+  var idsToRemove = [];
+  var event;
+
+  for (var i = 0; i < eventIds.length; i++) {
+    event = _events[eventIds[i]]
+    if ((event.team_1_id === pair.teamId || event.team_2_id === pair.teamId)
+          && event.leagueId === pair.leagueId) {
+      idsToRemove.push(eventIds[i]);
+    }
+  }
+
+  for (var i = 0; i < idsToRemove.length; i++) {
+    delete _events[idsToRemove[i]];
+  }
+
+  EventStore.__emitChange();
+};
+
+
 EventStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case EventConstants.actions.RESET_EVENTS_LIST:
@@ -210,6 +293,18 @@ EventStore.__onDispatch = function(payload){
       break;
     case EventConstants.actions.ADD_EVENT:
       EventStore.addEvent(payload.event);
+      break;
+    case TeamConstants.actions.REMOVE_TEAM:
+      EventStore.removeEventsByTeam(payload.team);
+      break;
+    case LeagueConstants.actions.REMOVE_LEAGUE:
+      EventStore.removeEventsByLeague(payload.league);
+      break;
+    case FacilityConstants.actions.REMOVE_FACILITY:
+      EventStore.removeEventsByFacility(payload.league);
+      break;
+    case LeagueConstants.actions.REMOVE_LEAGUE_TEAM:
+      EventStore.removeEventsByLeagueTeam(payload.pair);
       break;
   }
 };

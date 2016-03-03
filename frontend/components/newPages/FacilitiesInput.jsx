@@ -24,8 +24,7 @@ var FacilitiesInput = React.createClass({
   render: function() {
     var checked;
     var facilityOptions = this.state.facilityOptions.map(function(field, i){
-
-      checkedBool = this.props.fields.indexOf(parseInt(field.id)) !== -1;
+    var checkedBool = this.props.fields.indexOf(parseInt(field.id)) !== -1;
 
       return(
         <div key={i} className='add-component-option'

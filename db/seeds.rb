@@ -52,8 +52,13 @@ general = [
 
 t1 = Team.create(owner_id: u.id, name: 'goons', contact_name: 'bill', email: 'bill@gmail.com', phone: '503-555-5555')
 t2 = Team.create(owner_id: u.id, name: 'borbs', contact_name: 'bob', email: 'bob@gmail.com', phone: '503-999-9999')
+t3 = Team.create(owner_id: u.id, name: 'poops', contact_name: 'george', email: 'george@gmail.com', phone: '503-222-2222')
+t4 = Team.create(owner_id: u.id, name: 'worms', contact_name: 'tom', email: 'tom@gmail.com', phone: '503-888-2222')
+t5 = Team.create(owner_id: u.id, name: 'octopus', contact_name: 'ooba', email: 'ooba@gmail.com', phone: '503-222-9874')
+t6 = Team.create(owner_id: u.id, name: 'blobs', contact_name: 'b. blob', email: 'ooaa@gmail.com', phone: '503-221-1234')
 
-l.save_team_memberships([t1.id, t2.id])
+l.save_team_memberships([t1.id, t2.id, t3.id, t4.id, t5.id, t6.id])
+
 l.save_facility_memberships([f1.id, f2.id])
 
 Event.create(
@@ -63,7 +68,7 @@ Event.create(
   team_1_id: t1.id,
   team_2_id: t2.id,
   facility_id: f1.id,
-  date: '7/5/2016',
+  date: '07/05/2016',
   start_time: '1915',
   duration: '50'
 )
@@ -75,7 +80,7 @@ Event.create(
   team_1_id: t1.id,
   team_2_id: t2.id,
   facility_id: f1.id,
-  date: '7/5/2016',
+  date: '07/05/2016',
   start_time: '2005',
   duration: '50'
 )
