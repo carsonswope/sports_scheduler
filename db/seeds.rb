@@ -14,31 +14,26 @@ f1 = Facility.create(owner_id: u.id, name: 'east')
 f2 = Facility.create(owner_id: u.id, name: 'west')
 
 l = League.create(owner_id: u.id, name: 'mens d2', num_games: 8, event_duration: 50 )
-
-specific = [
-  {
-    date: '5/5/2016',
-    time_start: '1625',
-    time_end: '2055',
-    positive: true
-  },
-  {
-    date: '10/5/2016',
-    time_start: '1000',
-    time_end: '1900',
-    positive: false
-  }
-]
-general = [
-  {
-    day_of_week: 2,
-    first_date: '1/5/2016',
-    last_date: '5/7/2016',
-    time_start: '1625',
-    time_end: '2240',
-    positive: true
-  }
-]
+#
+# general = [
+#   [0, {
+#     day_of_week: 1,
+#     first_date: '03/14/2016',
+#     last_date: '04/25/2016',
+#     time_start: '1625',
+#     time_end: '2240',
+#     positive: true
+#     }]
+# ]
+#
+# specific = [
+#   [0, {
+#     positive: true,
+#     date: '03/16/2016',
+#     time_start: '1625',
+#     time_end: '2055'
+#     }]
+# ]
 
 # l.save_availabilities(specific, general)
 

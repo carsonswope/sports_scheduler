@@ -65,8 +65,6 @@ var EventsCalendarView = React.createClass({
 
   componentWillReceiveProps: function(newProps){
 
-    debugger;
-
     if (this.leagueSelectedForOverlay(newProps)){
 
       var slots = AvailabilityStore.findTimeSlots(
@@ -263,8 +261,6 @@ var EventsCalendarView = React.createClass({
           'table-entry-header-focused' : 'table-entry-header',
         text: 'table-entry-text'
       };
-
-      // debugger;
 
       return(
         <ListViewEventShow event={event}

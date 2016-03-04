@@ -55,8 +55,6 @@ FacilityStore.addFacility = function(facility) {
 
 FacilityStore.removeFacility = function(facility) {
 
-  debugger;
-
   delete _facilities[facility.id];
   FacilityStore.__emitChange();
 };

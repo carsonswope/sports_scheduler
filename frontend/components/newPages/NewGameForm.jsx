@@ -303,8 +303,6 @@ var NewGameForm = React.createClass({
     var errors = [];
     var conflictingEventsList = [];
 
-    debugger;
-
     //check if form completed
     if (!newGame.leagueId){
       errors.push('select a league!');
