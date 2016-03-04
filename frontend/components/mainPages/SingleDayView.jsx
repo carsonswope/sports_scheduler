@@ -53,13 +53,26 @@ var SingleDayView = React.createClass({
 
       if (game.facilityId === field.id) {
 
-        var gameStartTime = DateHelper.timeInputStringToNumber(game.startTime)
-        var gameEndTime = gameStartTime + parseInt(game.duration);
+
+        var gameStartTime = game.startTime;
+        var gameEndTime = game.endTime;
 
         debugger;
 
-        var timeDuration = 100 * (gameEndTime - gameStartTime) / (tableEndTime - tableStartTime);
-        var startPos = 100 * (gameStartTime - tableStartTime) / (tableEndTime - tableStartTime);
+        var positions = DateHelper.startAndEndPositionsFromTimeStrings(
+          tableStartTime.toString(),
+          tableEndTime.toString(),
+          gameStartTime,
+          gameEndTime
+        );
+
+        debugger;
+
+        var timeDuration = positions.timeDuration;
+        var startPos = positions.startPos;
+
+        //var timeDuration = 100 * (gameEndTime - gameStartTime) / (tableEndTime - tableStartTime);
+        //var startPos = 100 * (gameStartTime - tableStartTime) / (tableEndTime - tableStartTime);
 
         if (startPos >= 100 || (startPos + timeDuration) <= 0) {
           //dont display
@@ -69,7 +82,7 @@ var SingleDayView = React.createClass({
           if (startPos + timeDuration > 100) { timeDuration = 100 - startPos; }
 
           events.push(
-            <div className='calendar-single-date-column-entry-overlay' key={1 + i}
+            <div className='calendar-single-date-column-entry-event' key={1 + i}
               style={{height: '' + timeDuration + '%', top: '' + startPos + '%'}}>
             </div>
           );

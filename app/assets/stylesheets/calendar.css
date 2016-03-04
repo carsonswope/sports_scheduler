@@ -117,7 +117,14 @@ border-bottom: 2px solid #667467;
     border: 1px solid #f6f1ed;
     box-sizing: border-box;
     background-color: rgba(117, 179, 93, 0.2);
+}
 
+.calendar-single-date-column-entry-event {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #f6f1ed;
+    box-sizing: border-box;
+    background-color: rgba(161, 141, 67, 0.6);
 }
 
 input[type=time]::-webkit-inner-spin-button, 

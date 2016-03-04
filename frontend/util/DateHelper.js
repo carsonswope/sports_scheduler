@@ -150,3 +150,22 @@ exports.jsDateSpaceship = function(date1, date2) {
   }
 
 };
+
+exports.startAndEndPositionsFromTimeStrings = function(tableStart, tableEnd, eventStart, eventEnd){
+
+  var tableStartObj = exports.timeStringPrimitiveToObj(tableStart);
+  var tableEndObj = exports.timeStringPrimitiveToObj(tableEnd);
+  var eventStartObj = exports.timeStringPrimitiveToObj(eventStart);
+  var eventEndObj = exports.timeStringPrimitiveToObj(eventEnd);
+
+  var tStartNumber = (tableStartObj.hrs * 60) + tableStartObj.mns;
+  var tEndNumber = (tableEndObj.hrs * 60) + tableEndObj.mns;
+  var eStartNumber = (eventStartObj.hrs * 60) + eventStartObj.mns;
+  var eEndNumber = (eventEndObj.hrs * 60) + eventEndObj.mns;
+
+  return {
+    timeDuration: 100 * (eEndNumber - eStartNumber) / (tEndNumber - tStartNumber),
+    startPos: 100 * (eStartNumber - tStartNumber) / (tEndNumber - tStartNumber)
+  };
+
+}
