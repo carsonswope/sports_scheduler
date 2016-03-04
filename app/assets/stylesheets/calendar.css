@@ -131,6 +131,23 @@ border-bottom: 2px solid #667467;
     background-color: rgba(161, 141, 67, 0.6);
 }
 
+.calendar-single-date-column-entry-event-hover {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #f6f1ed;
+    box-sizing: border-box;
+    background-color: rgba(134, 49, 158, 0.6);
+
+}
+
+.calendar-single-date-column-entry-event-focus {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #f6f1ed;
+    box-sizing: border-box;
+    background-color: rgba(49, 131, 158, 0.6);
+}
+
 input[type=time]::-webkit-inner-spin-button, 
 input[type=time]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 

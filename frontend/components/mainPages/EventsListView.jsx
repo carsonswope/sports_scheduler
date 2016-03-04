@@ -179,7 +179,7 @@ var EventsListView = React.createClass({
         <ListViewEventShow event={game}
           classInfo={classes}
           width={this.props.dims.width - 76}
-          key={i}
+          key={game.id}
           toggleFocus={this.toggleFocus}
           removeFocus={this.removeFocus}
           focused={this.state.focused === game.id}

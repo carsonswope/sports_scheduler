@@ -7,6 +7,9 @@ var LeagueStore = require('../../stores/LeagueStore');
 var FacilityStore = require('../../stores/FacilityStore');
 var DateHelper = require('../../util/DateHelper');
 
+var ListViewEventShow = require('../showPages/ListViewEventShow');
+var EventStore = require('../../stores/EventStore');
+
 var SingleDayView = require('./SingleDayView');
 
 var AvailabilityActions = require('../../actions/AvailabilityActions');
@@ -24,7 +27,12 @@ var EventsCalendarView = React.createClass({
       overlay: {
         dates: []
       },
-      fields: FacilityStore.all()
+      fields: FacilityStore.all(),
+      focusedEvent: {
+        id: null,
+        focusType: 'NONE'
+        //type is either 'HOVER' or 'FOCUS'
+      }
     }
 
   },
@@ -144,6 +152,135 @@ var EventsCalendarView = React.createClass({
     });
   },
 
+  startHover: function(eventId){
+    if (this.state.focusedEvent.focusType !== 'FOCUS') {
+
+      this.setState({
+        focusedEvent: {
+          focusType: 'HOVER',
+          id: eventId
+        }
+      });
+
+    }
+  },
+
+  stopHover: function(eventId){
+    if (this.state.focusedEvent.focusType !== 'FOCUS') {
+
+      this.setState({
+        focusedEvent: {
+          focusType: 'NONE',
+          id: null
+        }
+      });
+
+    }
+  },
+
+  removeFocus: function(eventId){
+    this.setState({
+      focusType: 'NONE',
+      id: null
+    });
+
+  },
+
+  toggleFocus: function(eventId){
+    if (this.state.focusedEvent.focusType !== 'FOCUS') {
+
+      this.setState({
+        focusedEvent: {
+          focusType: 'FOCUS',
+          id: eventId
+        }
+      });
+
+    } else {
+
+      if (this.state.focusedEvent.id === eventId) {
+
+        this.setState({
+          focusedEvent: {
+            focusType: 'HOVER',
+            id: eventId
+          }
+        });
+
+      } else {
+
+        this.setState({
+          focusedEvent: {
+            focusType: 'FOCUS',
+            id: eventId
+          }
+        });
+
+      }
+    }
+  },
+
+  columns: function(){
+    return[{
+      title: 'Day',
+      varName: 'dayOfWeek',
+      width: 50
+    },{
+      title: 'Date',
+      varName: 'date',
+      width: 100
+    },{
+      title: 'Time',
+      varName: 'startTime',
+      width: 95
+    },{
+      title: 'Field',
+      varName: 'facilityId',
+      width: 50
+    },{
+      title: 'League',
+      varName: 'leagueId',
+      width: 75
+    },{
+      title: 'Home Team',
+      varName: 'team_1_id',
+      width: 150
+    },{
+      title: 'Away Team',
+      varName: 'team_2_id',
+      width: 150
+    }];
+  },
+
+  focusedElement: function(){
+
+    if (this.state.focusedEvent.focusType !== 'NONE') {
+
+      var event = EventStore.find(this.state.focusedEvent.id);
+
+      var classes = {
+        header: this.state.focusType === 'FOCUS' ?
+          'table-entry-header-focused' : 'table-entry-header',
+        text: 'table-entry-text'
+      };
+
+      // debugger;
+
+      return(
+        <ListViewEventShow event={event}
+          classInfo={classes}
+          width={750}
+          toggleFocus={this.toggleFocus}
+          removeFocus={this.removeFocus}
+          focused={this.state.focusedEvent.focusType === 'FOCUS'}
+          columns={this.columns()} />
+
+      );
+
+    }
+
+  },
+
   render: function() {
 
     var allDates = {};
@@ -187,6 +324,10 @@ var EventsCalendarView = React.createClass({
           endTime={this.state.endTime}
           games={allDates[date].events}
           fields={this.state.fields}
+          startHover={this.startHover}
+          stopHover={this.stopHover}
+          focusedEvent={this.state.focusedEvent}
+          toggleFocus={this.toggleFocus}
           overlay={allDates[date].overlays[0]}
           overlays={allDates[date].overlays} />
       );
@@ -219,8 +360,9 @@ var EventsCalendarView = React.createClass({
 
         </div>
 
-        <div className='calendar-view-detail-section'>
-          here
+        <div>
+
+          {this.focusedElement()}
         </div>
       </div>
     );

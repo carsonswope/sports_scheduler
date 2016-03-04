@@ -42,6 +42,22 @@ var SingleDayView = React.createClass({
 
   },
 
+  startHover: function(id){
+    this.props.startHover(id);
+
+  },
+
+  stopHover: function(id){
+
+    this.props.stopHover(id);
+  },
+
+  toggleFocus: function(id){
+
+    this.props.toggleFocus(id)
+
+  },
+
   eventData: function(field){
 
     var events = [];
@@ -77,8 +93,19 @@ var SingleDayView = React.createClass({
           if (startPos < 0) { timeDuration += startPos; startPos = 0; }
           if (startPos + timeDuration > 100) { timeDuration = 100 - startPos; }
 
+          var className='calendar-single-date-column-entry-event';
+
+          if (this.props.focusedEvent.id === game.id) {
+            className = this.props.focusedEvent.focusType === 'HOVER' ?
+              'calendar-single-date-column-entry-event-hover' :
+              'calendar-single-date-column-entry-event-focus';
+          }
+
           events.push(
-            <div className='calendar-single-date-column-entry-event' key={1 + i}
+            <div className={className} key={1 + i}
+              onMouseEnter={this.startHover.bind(this, game.id)}
+              onMouseLeave={this.stopHover.bind(this, game.id)}
+              onClick={this.toggleFocus.bind(this, game.id)}
               style={{height: '' + timeDuration + '%', top: '' + startPos + '%'}}>
             </div>
           );
