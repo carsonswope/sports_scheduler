@@ -70,6 +70,10 @@ border-bottom: 2px solid #667467;
     display: inline-block;
 }
 
+.calendar-single-date-main:last-child {
+    margin-right: -2px;
+}
+
 .calendar-single-date-inner {
     border-top: 2px solid #667467;    
     border-bottom: 2px solid #667467;
@@ -101,14 +105,14 @@ border-bottom: 2px solid #667467;
     color: #667467;
 }
 
-.calendar-single-date-facility-label:last-child {
-    border-right: 0;
-}
-
 .calendar-single-date-facility-column-main {
     display: inline-block;
     height: 100%;
     position: relative;
+}
+
+.calendar-single-date-facility-label:last-child {
+    border-right: 0;
 }
 
 .calendar-single-date-column-entry-overlay {
@@ -135,4 +139,10 @@ input[type=time]::-webkit-outer-spin-button {
 
 input[type="time"]::-webkit-clear-button {
     display: none;
+}
+
+.calendar-view-detail-section {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
 }

@@ -54,14 +54,10 @@ var NewGameForm = React.createClass({
 
   eventChange: function(){
 
-    debugger;
-
     var newGameOptions = this.state.newGame;
     var errors = EventStore.newGameErrors(newGameOptions);
 
     newGameOptions.errors = errors
-
-    debugger;
 
     this.setState({
       errors: errors

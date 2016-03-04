@@ -195,6 +195,7 @@ var ScheduleCriteria = React.createClass({
             className='schedule-criteria-option'
             value={form.dateValue}
             onChange={form.inputCallback} />
+
         );
       }
 

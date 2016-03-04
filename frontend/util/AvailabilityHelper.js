@@ -61,7 +61,6 @@ exports.conflicts = function(otherEventsList, eventInfo, ownId) {
 
 exports.overlaps = function(event, eventInfo, ownId){
 
-  // debugger;
   if (ownId && event.id === ownId) { return false; }
 
   var date1 = new Date(event.date);

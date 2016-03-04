@@ -92,6 +92,7 @@ var SchedulesPage = React.createClass({
       );
 
     } else {
+
       return(
         <EventsCalendarView
           games={this.state.games}

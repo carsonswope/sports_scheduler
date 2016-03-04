@@ -22,7 +22,6 @@ var EventsCalendarView = React.createClass({
       startTime: '10:00',
       endTime: '20:00',
       overlay: {
-        name: '',
         dates: []
       },
       fields: FacilityStore.all()
@@ -33,6 +32,7 @@ var EventsCalendarView = React.createClass({
   componentDidMount: function() {
 
     this.availabilityListener = AvailabilityStore.addListener(this.availabilityChange);
+    this.navListener = NavStore.addListener(this.navChange);
 
     if (this.leagueSelectedForOverlay()){
 
@@ -57,11 +57,13 @@ var EventsCalendarView = React.createClass({
 
   componentWillReceiveProps: function(newProps){
 
+    debugger;
+
     if (this.leagueSelectedForOverlay(newProps)){
 
       var slots = AvailabilityStore.findTimeSlots(
         'League',
-        this.props.filter.filterSpec
+        newProps.filter.filterSpec
       );
 
       if (slots){
@@ -69,6 +71,11 @@ var EventsCalendarView = React.createClass({
       } else {
         this.fetchAvailableDatesForOverlay(newProps);
       }
+
+    } else {
+
+      this.setStateWithNewOverlay([]);
+
     }
   },
 
@@ -83,9 +90,9 @@ var EventsCalendarView = React.createClass({
   },
 
   setStateWithNewOverlay: function(slots) {
+
     this.setState({
       overlay: {
-        name: LeagueStore.find(this.props.filter.filterSpec).name,
         dates: slots
       }
     });
@@ -117,6 +124,10 @@ var EventsCalendarView = React.createClass({
         this.fetchAvailableDatesForOverlay();
       }
     }
+  },
+
+  navChange: function(){
+
   },
 
   changeStartTime: function(e){
@@ -167,8 +178,6 @@ var EventsCalendarView = React.createClass({
 
     var datesList = Object.keys(allDates).sort(DateHelper.dateStringSpaceship);
 
-    debugger;
-
     var dates = datesList.map(function(date, i){
 
       return(
@@ -208,6 +217,10 @@ var EventsCalendarView = React.createClass({
 
           {dates}
 
+        </div>
+
+        <div className='calendar-view-detail-section'>
+          here
         </div>
       </div>
     );

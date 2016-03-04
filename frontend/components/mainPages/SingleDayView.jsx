@@ -57,16 +57,12 @@ var SingleDayView = React.createClass({
         var gameStartTime = game.startTime;
         var gameEndTime = game.endTime;
 
-        debugger;
-
         var positions = DateHelper.startAndEndPositionsFromTimeStrings(
           tableStartTime.toString(),
           tableEndTime.toString(),
           gameStartTime,
           gameEndTime
         );
-
-        debugger;
 
         var timeDuration = positions.timeDuration;
         var startPos = positions.startPos;
@@ -104,8 +100,6 @@ var SingleDayView = React.createClass({
 
     data = data.concat(this.overlayData(field));
     data = data.concat(this.eventData(field));
-
-    debugger;
 
     return data;
   },
