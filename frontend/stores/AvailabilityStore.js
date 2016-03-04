@@ -17,8 +17,6 @@ AvailabilityStore.receive = function(availabilitiesList){
   var itemId = availabilitiesList.itemId;
   var list = availabilitiesList.availabilities;
 
-  debugger;
-
   _availabilities[itemType][itemId] = list;
 
   AvailabilityStore.__emitChange();

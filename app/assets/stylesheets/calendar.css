@@ -1,19 +1,18 @@
 .calendar-view-main {
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
+    padding-top: 20px
 }
 
 .calendar-view-time-selector-main {
-    border: 1px solid black;
     height: 250px;
     width: 100px;
     background-color: transparent;
     display: inline-block;
+    position: relative;
 }
 
 .calendar-view-calendar-main {
-    border: 1px solid black;
+    border-left: 2px solid #16174f;
+    border-right: 2px solid #16174f;
     width: calc(100% - 104px);
     height: 250px;
     display: inline-block;
@@ -24,20 +23,22 @@
 }
 
 .calendar-view-time-selector-start-time-line {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #667467;
+    background-color: transparent;
     position: absolute;
     width: 18px;
-    left: 85px;
+    left: 82px;
     height: 18px;
 }
 
 .calendar-view-time-selector-end-time-line {
-    border-bottom: 2px solid black;
+border-bottom: 2px solid #667467;
     position: absolute;
     width: 18px;
-    top: 258px;
-    left: 85px;
-    height: 18px;
+    background-color: transparent;
+    /* top: 230px; */
+    left: 82px;
+    height: 210px;
 }
 
 .calendar-view-time-selector-end-time {
@@ -48,8 +49,7 @@
     position: absolute;
     color: #16174f;
     background-color: transparent;
-    top: 262px;
-    left: 7px;
+    top: 197px;
 }
 
 .calendar-view-time-selector-start-time {
@@ -60,15 +60,63 @@
     position: absolute;
     color: #16174f;
     background-color: transparent;
-    top: 48px;
-    left: 7px;
+    top: 5px;
 }
 
 .calendar-single-date-main {
-    border: 1px solid black;
+    border-right: 2px solid #16174f;
     width: 150px;
     height: calc(100% - 5px);
     display: inline-block;
+}
+
+.calendar-single-date-inner {
+    border-top: 2px solid #667467;    
+    border-bottom: 2px solid #667467;
+    height: 190px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 1px;
+ 
+}
+
+.calendar-single-date-date {
+    text-align: center;
+    /* font-weight: 700; */
+    color: #667467;
+    font-size: 14px;
+}
+
+.calendar-single-date-facility-labels-main {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 21px;
+}
+
+.calendar-single-date-facility-label {
+    height: 100%;
+    text-align: center;
+    display: inline-block;
+    border-right: 2px solid #667467;
+    color: #667467;
+}
+
+.calendar-single-date-facility-label:last-child {
+    border-right: 0;
+}
+
+.calendar-single-date-facility-column-main {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+}
+
+.calendar-single-date-column-entry {
+    position: absolute;
+    width: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+
 }
 
 input[type=time]::-webkit-inner-spin-button, 
