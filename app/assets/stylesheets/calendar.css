@@ -111,11 +111,12 @@ border-bottom: 2px solid #667467;
     position: relative;
 }
 
-.calendar-single-date-column-entry {
+.calendar-single-date-column-entry-overlay {
     position: absolute;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid #f6f1ed;
     box-sizing: border-box;
+    background-color: rgba(117, 179, 93, 0.2);
 
 }
 

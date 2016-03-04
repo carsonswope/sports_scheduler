@@ -132,6 +132,13 @@ exports.todayInputString = function(){
 
 };
 
+exports.dateStringSpaceship = function(date1, date2) {
+  return exports.jsDateSpaceship(
+    new Date(date1),
+    new Date(date2)
+  );
+};
+
 exports.jsDateSpaceship = function(date1, date2) {
 
   if (date1 > date2) {

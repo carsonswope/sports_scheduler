@@ -78,6 +78,8 @@ var SchedulesPage = React.createClass({
       height;
     }
 
+    var newGame = NavStore.options('SCHEDULES').newGame;
+
     if (this.state.viewType === 'LIST_VIEW'){
 
       return(
@@ -94,6 +96,7 @@ var SchedulesPage = React.createClass({
         <EventsCalendarView
           games={this.state.games}
           filter={this.state.filter}
+          newGame={newGame}
           dims={{
             width: this.props.dims.width,
             height: height

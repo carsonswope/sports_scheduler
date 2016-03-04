@@ -5,35 +5,94 @@ var DateHelper = require('../../util/DateHelper');
 
 var SingleDayView = React.createClass({
 
-  columnData: function(field){
+  overlayData: function(field){
+
+    var overlays = [];
 
     var tableStartTime = DateHelper.timeInputStringToNumber(this.props.startTime)
     var tableEndTime = DateHelper.timeInputStringToNumber(this.props.endTime)
 
+    this.props.overlays.forEach(function(overlay, i){
+      var overlayStartTime = DateHelper.timeInputStringToNumber(overlay.startTime)
+      var overlayEndTime = DateHelper.timeInputStringToNumber(overlay.endTime)
+
+      var timeDuration = 100 * (overlayEndTime - overlayStartTime) / (tableEndTime - tableStartTime);
+      var startPos = 100 * (overlayStartTime - tableStartTime) / (tableEndTime - tableStartTime);
+
+      if (startPos >= 100 || (startPos + timeDuration) <= 0) {
+        //dont display
+      } else {
+
+        if (startPos < 0) { timeDuration += startPos; startPos = 0; }
+        if (startPos + timeDuration > 100) { timeDuration = 100 - startPos; }
+
+        overlays.push(
+          <div className='calendar-single-date-column-entry-overlay' key={-1 - i}
+            style={{height: '' + timeDuration + '%', top: '' + startPos + '%'}}>
+          </div>
+        );
+
+      }
+
+    });
+
+
+
+    return overlays;
+
+  },
+
+  eventData: function(field){
+
+    var events = [];
+
+    var tableStartTime = DateHelper.timeInputStringToNumber(this.props.startTime)
+    var tableEndTime = DateHelper.timeInputStringToNumber(this.props.endTime)
+
+    this.props.games.forEach(function(game, i){
+
+      if (game.facilityId === field.id) {
+
+        var gameStartTime = DateHelper.timeInputStringToNumber(game.startTime)
+        var gameEndTime = gameStartTime + parseInt(game.duration);
+
+        debugger;
+
+        var timeDuration = 100 * (gameEndTime - gameStartTime) / (tableEndTime - tableStartTime);
+        var startPos = 100 * (gameStartTime - tableStartTime) / (tableEndTime - tableStartTime);
+
+        if (startPos >= 100 || (startPos + timeDuration) <= 0) {
+          //dont display
+        } else {
+
+          if (startPos < 0) { timeDuration += startPos; startPos = 0; }
+          if (startPos + timeDuration > 100) { timeDuration = 100 - startPos; }
+
+          events.push(
+            <div className='calendar-single-date-column-entry-overlay' key={1 + i}
+              style={{height: '' + timeDuration + '%', top: '' + startPos + '%'}}>
+            </div>
+          );
+
+        }
+      }
+
+    }, this);
+
+    return events;
+
+
+  },
+
+  columnData: function(field){
+
+
     var data = [];
 
-    if (this.props.overlay){
-      var overlayStartTime = DateHelper.timeInputStringToNumber(this.props.overlay.startTime)
-      var overlayEndTime = DateHelper.timeInputStringToNumber(this.props.overlay.endTime)
-    }
+    data = data.concat(this.overlayData(field));
+    data = data.concat(this.eventData(field));
 
-    var timeDuration = 100 * (overlayEndTime - overlayStartTime) / (tableEndTime - tableStartTime);
-    var startPos = 100 * (overlayStartTime - tableStartTime) / (tableEndTime - tableStartTime);
-
-    if (startPos >= 100 || (startPos + timeDuration) <= 0) {
-      //dont display
-    } else {
-
-      if (startPos < 0) { timeDuration += startPos; startPos = 0; }
-      if (startPos + timeDuration > 100) { timeDuration = 100 - startPos; }
-
-      data.push(
-        <div className='calendar-single-date-column-entry' key={data.length}
-          style={{height: '' + timeDuration + '%', top: '' + startPos + '%'}}>
-        </div>
-      );
-
-    }
+    debugger;
 
     return data;
   },
@@ -81,7 +140,7 @@ var SingleDayView = React.createClass({
     return (
       <div className='calendar-single-date-main' >
         <div className='calendar-single-date-date'>
-          {DateHelper.dbDateFromInputString(this.props.date)}
+          {this.props.date}
         </div>
         <div className='calendar-single-date-inner'>
 

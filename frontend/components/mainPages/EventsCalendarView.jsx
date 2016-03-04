@@ -5,6 +5,7 @@ var NavStore = require('../../stores/NavStore');
 var AvailabilityStore = require('../../stores/AvailabilityStore');
 var LeagueStore = require('../../stores/LeagueStore');
 var FacilityStore = require('../../stores/FacilityStore');
+var DateHelper = require('../../util/DateHelper');
 
 var SingleDayView = require('./SingleDayView');
 
@@ -33,27 +34,17 @@ var EventsCalendarView = React.createClass({
 
     this.availabilityListener = AvailabilityStore.addListener(this.availabilityChange);
 
-    if (this.props.filter.filterType === 'BY_LEAGUE' &&
-        this.props.filter.filterSpec && this.props.filter.filterSpec > -1){
+    if (this.leagueSelectedForOverlay()){
 
-      var slots = AvailabilityStore.findTimeSlots('League', this.props.filter.filterSpec);
+      var slots = AvailabilityStore.findTimeSlots(
+        'League',
+        this.props.filter.filterSpec
+      );
 
       if (slots){
-
-        var overlay = {
-          name: LeagueStore.find(this.props.filter.filterSpec),
-          dates: slots
-        };
-
-        this.setState({overlay: overlay})
-
+        this.setStateWithNewOverlay(slots);
       } else {
-
-        AvailabilityActions.fetchAvailableDates(
-          this.props.filter.filterSpec,
-          'League'
-        );
-
+        this.fetchAvailableDatesForOverlay();
       }
 
     }
@@ -66,58 +57,66 @@ var EventsCalendarView = React.createClass({
 
   componentWillReceiveProps: function(newProps){
 
-    if (newProps.filter.filterType === 'BY_LEAGUE' &&
-        newProps.filter.filterSpec && parseInt(this.props.filter.filterSpec) > -1){
+    if (this.leagueSelectedForOverlay(newProps)){
 
-      var slots = AvailabilityStore.findTimeSlots('League', this.props.filter.filterSpec);
+      var slots = AvailabilityStore.findTimeSlots(
+        'League',
+        this.props.filter.filterSpec
+      );
 
       if (slots){
-
-        var overlay = {
-          name: LeagueStore.find(this.props.filter.filterSpec),
-          dates: slots
-        };
-
-        this.setState({overlay: overlay})
+        this.setStateWithNewOverlay(slots);
       } else {
-
-        AvailabilityActions.fetchAvailableDates(
-          newProps.filter.filterSpec,
-          'League'
-        );
-
+        this.fetchAvailableDatesForOverlay(newProps);
       }
-
     }
+  },
+
+  leagueSelectedForOverlay: function(newProps){
+    var props = newProps || this.props;
+
+    return (props.filter.filterType === 'BY_LEAGUE' &&
+            props.filter.filterSpec &&
+            parseInt(props.filter.filterSpec) > -1)
+
+
+  },
+
+  setStateWithNewOverlay: function(slots) {
+    this.setState({
+      overlay: {
+        name: LeagueStore.find(this.props.filter.filterSpec).name,
+        dates: slots
+      }
+    });
+  },
+
+  fetchAvailableDatesForOverlay: function(newProps){
+    var props = newProps || this.props;
+
+    AvailabilityActions.fetchAvailableDates(
+      props.filter.filterSpec,
+      'League'
+    );
 
   },
 
   availabilityChange: function(){
 
-    if (this.props.filter.filterType === 'BY_LEAGUE' &&
-        this.props.filter.filterSpec  && parseInt(this.props.filter.filterSpec) > -1){
+    if (this.leagueSelectedForOverlay()){
 
-      var slots = AvailabilityStore.findTimeSlots('League', this.props.filter.filterSpec);
+      var slots = AvailabilityStore.findTimeSlots(
+        'League', this.props.filter.filterSpec
+      );
 
       if (slots){
-
-        var overlay = {
-          name: LeagueStore.find(this.props.filter.filterSpec).name,
-          dates: slots
-        };
-
-        this.setState({overlay: overlay})
+        this.setStateWithNewOverlay(slots);
 
       } else {
 
-        AvailabilityActions.fetchAvailableDates(
-          this.props.filter.filterSpec,
-          'League'
-        );
-
+        this.fetchAvailableDatesForOverlay();
       }
     }
-
   },
 
   changeStartTime: function(e){
@@ -136,38 +135,51 @@ var EventsCalendarView = React.createClass({
 
   render: function() {
 
-    var overlayList = this.state.overlay.dates.map(function(date, i){
-      return(
-        <div key={i}>
-          {date.date}
-          {date.startTime}
-          {date.endTime}
-        </div>
-      );
-    });
+    var allDates = {};
 
-    var gamesList = this.props.games.map(function(game, i){
-      return(
-        <div key={-1 - i}>
-          game
-        </div>
-      );
-    })
+    this.props.games.forEach(function(game){
 
-    var allDates = this.state.overlay.dates.map(function(date){
-      return date.date;
-    });
+      if (!allDates[game.date]){
+        allDates[game.date] = {
+          overlays: [],
+          events: []
+        };
+      };
 
-    var dates = this.state.overlay.dates.map(function(date,i){
+      allDates[game.date].events.push(game);
+
+    }, this);
+
+    this.state.overlay.dates.forEach(function(overlay){
+
+      var date = DateHelper.dbDateFromInputString(overlay.date);
+
+      if (!allDates[date]){
+        allDates[date] = {
+          overlays: [],
+          events: []
+        };
+      };
+
+      allDates[date].overlays.push(overlay);
+
+    }, this);
+
+    var datesList = Object.keys(allDates).sort(DateHelper.dateStringSpaceship);
+
+    debugger;
+
+    var dates = datesList.map(function(date, i){
 
       return(
         <SingleDayView key={i}
-          date={date.date}
+          date={date}
           startTime={this.state.startTime}
           endTime={this.state.endTime}
-          games={null}
+          games={allDates[date].events}
           fields={this.state.fields}
-          overlay={date} />
+          overlay={allDates[date].overlays[0]}
+          overlays={allDates[date].overlays} />
       );
 
     }, this);
