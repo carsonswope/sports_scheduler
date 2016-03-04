@@ -22,8 +22,8 @@ var EventsCalendarView = React.createClass({
     //this.props.games
 
     return {
-      startTime: '10:00',
-      endTime: '20:00',
+      startTime: '15:00',
+      endTime: '23:00',
       overlay: {
         dates: []
       },
