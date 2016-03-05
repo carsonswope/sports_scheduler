@@ -5,15 +5,14 @@
 #  id                 :integer          not null, primary key
 #  league_id          :integer          not null
 #  num_teams_involved :integer          not null
-#  t_1_id             :integer
-#  t_2_id             :integer
-#  facility_id        :integer          not null
+#  facility_id        :integer
 #  owner_id           :integer          not null
 #  date               :string
 #  start_time         :string
 #  duration           :string
+#  team_1_id          :integer
+#  team_2_id          :integer
 #
-
 
 class Event < ActiveRecord::Base
 

@@ -26,6 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'annotate'
 gem 'pry-rails'
 gem 'newrelic_rpm'
+gem 'faker', '~> 1.4', '>= 1.4.3'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

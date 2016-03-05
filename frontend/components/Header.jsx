@@ -36,7 +36,9 @@ var Header = React.createClass({
     var headerClass = this.state.user ? 'header-main' : 'header-main-logged-out'
 
     var loggedInHeader=(
-      <div id='header-component' className={this.state.user ? 'in-screen' : 'off-screen'}>
+      <div key={1}
+        id='header-component'
+        className={this.state.user ? 'in-screen' : 'off-screen'}>
         user company name / logo here
       </div>
     );
@@ -56,14 +58,7 @@ var Header = React.createClass({
         width: w,
         height: NavConstants.HEADER_HEIGHT_LOGGED_IN
       }
-      middleElement =(
 
-
-        <div className="header-component header-center">
-          user company name / logo here
-        </div>
-
-      );
     } else {
 
       sizing = {
@@ -73,13 +68,6 @@ var Header = React.createClass({
         height: NavConstants.HEADER_HEIGHT_LOGGED_OUT
       }
 
-      middleElement =(
-        <div className="header-welcome-page">
-          <h1>Welcome to the Sports Scheduler
-
-          </h1>
-        </div>
-      );
     }
 
     return (
@@ -87,6 +75,8 @@ var Header = React.createClass({
         style={sizing} >
 
         <UserHeader user={this.props.user}/>
+
+
 
         {loggedInHeader}
         {loggedOutHeader}

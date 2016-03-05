@@ -26,15 +26,11 @@ exports.logOut = function() {
 exports.getCurrentUser = function() {
   UserApi.getCurrentUser();
 }
-//
-// exports.fetch = function() {
-//   AppDispatcher.dispatch({
-//     actionType: UserConstants.LOAD_USER_INFO
-//   });
-// }
-//
-// exports.clear = function() {
-//   AppDispatcher.dispatch({
-//     actionType: UserConstants.CLEAR_USER_INFO
-//   });
-// }
+
+exports.loginDemoAccount = function() {
+  UserApi.loginDemoAccount();
+}
+
+exports.createAccount = function(user){
+  UserApi.createAccount(user);
+}

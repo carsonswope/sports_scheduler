@@ -31,11 +31,14 @@ var ScheduleCriteria = React.createClass({
     this.navListener = NavStore.addListener(this.navChange);
   },
 
-  componentWillUnmount: function(){ this.navListener.remove(); },
+  componentWillUnmount: function(){
+    this.navListener.remove();
+  },
 
   navChange: function(){
 
     var storeOptions = NavStore.options('SCHEDULES').filter;
+
     this.setState({
       filterType: storeOptions.filterType,
       filterSpec: storeOptions.filterSpec,

@@ -174,8 +174,6 @@ var LeagueShowDetail = React.createClass({
         <BasicInfoDiv stats={statsList}
           remove={this.removeTeam} />
 
-        <LeagueStatus league={league} />
-
         <MembershipsShow
           membershipName={'member teams:'}
           itemsList={this.getTeamsList()}
@@ -185,6 +183,8 @@ var LeagueShowDetail = React.createClass({
           addMessage='Add a team'
           itemName='teams'
           height={this.getTeamsListHeight()} />
+
+        <LeagueStatus league={league} />
 
         <MembershipsShow
           membershipName={'fields list:'}

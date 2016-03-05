@@ -2,7 +2,7 @@ var DateHelper = require('../util/DateHelper');
 
 exports.tabs = {
   HOME: 'HOME',
-  WEBPAGE: 'WEBPAGE',
+  // WEBPAGE: 'WEBPAGE',
   SCHEDULES: 'SCHEDULES',
   TEAMS: 'TEAMS',
   LEAGUES: 'LEAGUES',
@@ -119,8 +119,8 @@ exports.DEFAULT_OPTIONS = {
     filter: {
       filterType: 'SHOW_ALL',
       filterSpec: 0,
-      startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-5)),
-      endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+5))
+      startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-8)),
+      endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+8))
     },
     newGame: {
       leagueId: null,

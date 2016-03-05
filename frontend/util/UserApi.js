@@ -34,3 +34,28 @@ exports.getCurrentUser = function() {
     }
   });
 }
+
+exports.loginDemoAccount = function(){
+  $.ajax({
+    url: '/api/users?demo=true',
+    type: 'POST',
+    dataType: 'json',
+    success: function(user) {
+      UserActions.logIn(user);
+    }
+  });
+
+}
+
+exports.createAccount = function(user){
+  $.ajax({
+    url: '/api/users?demo=false',
+    type: 'POST',
+    dataType: 'json',
+    data: {user: user},
+    success: function(user) {
+      UserActions.logIn(user);
+    }
+  });
+
+}

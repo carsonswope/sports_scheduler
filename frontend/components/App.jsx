@@ -5,11 +5,20 @@ var Header = require('./Header');
 var NavBar = require('./NavBar');
 var Content = require('./Content');
 
+var Joyride = require('react-joyride');
+
+var NavActions = require('../actions/NavActions');
+
 var AvailabilityStore = require('../stores/AvailabilityStore');
 var NavStore = require('../stores/NavStore');
 var UserStore = require('../stores/UserStore');
 var LeagueTeamStore = require('../stores/LeagueTeamStore');
+var LeagueStore = require('../stores/LeagueStore');
+var TeamStore = require('../stores/TeamStore');
 var LeagueFacilityStore = require('../stores/LeagueFacilityStore');
+var FacilityStore = require('../stores/FacilityStore');
+
+var Tour = require('../tour/steps');
 
 var UserActions = require('../actions/UserActions');
 
@@ -22,7 +31,13 @@ var App = React.createClass({
         height: window.innerHeight
       },
 
-      user: UserStore.currentUser()
+      user: UserStore.currentUser(),
+
+      joyrideOverlay: false,
+      joyrideType: 'continuous',
+      ready: false,
+
+      steps: Tour.steps
 
     };
   },
@@ -52,6 +67,75 @@ var App = React.createClass({
     if (!this.state.user) { NavStore.reset(); }
   },
 
+  _addStep: function(newStep){
+    var steps = this.state.steps;
+    steps.push(newStep);
+    this.setState({steps: steps});
+  },
+
+  _stepCallback: function(step){
+
+    console.log('uag');
+
+    if (step.number === 6){
+
+      var league = LeagueStore.all()[0];
+      var teams = LeagueTeamStore.teams(league.id);
+      var facilities = LeagueFacilityStore.facilities(league.id);
+      var team_1 = teams[0];
+      var team_2 = teams[1];
+      var facility = facilities[0];
+
+      NavActions.setTabOption('SCHEDULES', 'newGame', {
+        leagueId: league.id,
+        team_1_id: team_1.id,
+        team_2_id: team_2.id,
+        date: '2016-10-10',
+        startTime: '17:00',
+        fieldId: facility.id,
+        errors: {
+          incompleteInput: [],
+          conflicts: []
+        }
+      });
+
+      NavActions.setTabOption('SCHEDULES', 'newGame', {
+        leagueId: league.id,
+        team_1_id: team_1.id,
+        team_2_id: team_2.id,
+        date: '2016-10-10',
+        startTime: '17:00',
+        fieldId: facility.id,
+        errors: {
+          incompleteInput: [],
+          conflicts: []
+        }
+      });
+
+    } else {
+
+      Tour.stepActions[step.number]();
+
+    }
+
+
+
+  },
+
+  _completeCallback: function(){
+    var step = this.state.steps[0];
+    var steps = [step]
+    this.setState({
+      steps: steps
+    });
+
+    this.refs.joyride.reset();
+  },
+
+  startTour: function(){
+    this.refs.joyride.start(true);
+  },
+
   render: function() {
 
     var header = <Header dims={this.state.dimensions} user={this.state.user} />;
@@ -65,7 +149,10 @@ var App = React.createClass({
         <div>
           <NavBar dims={this.state.dimensions} />
           <div className='content-main'>
-            <Header dims={this.state.dimensions} user={this.state.user} />
+            <Header
+              dims={this.state.dimensions}
+              user={this.state.user}
+              startTour={this.startTour} />
             <Content dims={this.state.dimensions} />
           </div>
         </div>
@@ -85,6 +172,23 @@ var App = React.createClass({
 
     return (
       <div>
+        <Joyride
+          debug={true}
+          ref='joyride'
+          steps={this.state.steps}
+          type={this.state.joyrideType}
+          showOverlay={this.state.joyrideOverlay}
+          locale={{
+            close: 'Close',
+            next: 'Next',
+            last: 'End',
+            skip: 'Exit Tour'
+          }}
+          showSkipButton={true}
+          stepCallback={this._stepCallback}
+          completeCallback={this._completeCallback}
+          scrollToSteps={false} />
+
         {toScreen}
       </div>
     );

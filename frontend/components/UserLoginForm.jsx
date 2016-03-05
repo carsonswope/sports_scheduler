@@ -15,6 +15,7 @@ var UserLoginForm = React.createClass({
   },
 
   loginClick: function(e) {
+
     e.preventDefault();
     UserActions.attemptLogIn(
       {
@@ -23,6 +24,22 @@ var UserLoginForm = React.createClass({
       }
     );
     this.setState({password: ''});
+  },
+
+  demoLoginClick: function(e) {
+    e.preventDefault();
+    UserActions.loginDemoAccount();
+  },
+
+  signUpClick: function(e) {
+    e.preventDefault();
+    UserActions.createAccount(
+      {
+        username: this.state.username,
+        password: this.state.password
+      }
+    );
+    this.setState({password: ''})
   },
 
   render: function() {
@@ -55,7 +72,19 @@ var UserLoginForm = React.createClass({
             style={{width: '100%', position: 'relative', right: 0}}>
             <input type='submit' className='new-game-form-label new-game-button'
               style={{outline: 'none', border: 0, position: 'relative', left: -5}} value='log in' />
+            <div className='new-game-form-label new-game-button'
+              onClick={this.signUpClick}>
+              sign up
+            </div>
+          </div>
 
+          <div className='info-stat'
+            style={{width: '100%', position: 'relative', right: 0, height: 108}}>
+            <div className='new-game-form-label new-game-button'
+              onClick={this.demoLoginClick}
+              style={{top: 88, width: 220}}>
+              new? sign in with a demo account
+            </div>
           </div>
         </form>
 

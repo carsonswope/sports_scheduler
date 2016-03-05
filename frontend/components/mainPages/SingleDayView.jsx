@@ -13,8 +13,19 @@ var SingleDayView = React.createClass({
     var tableEndTime = DateHelper.timeInputStringToNumber(this.props.endTime)
 
     this.props.overlays.forEach(function(overlay, i){
+
       var overlayStartTime = DateHelper.timeInputStringToNumber(overlay.startTime)
       var overlayEndTime = DateHelper.timeInputStringToNumber(overlay.endTime)
+
+      var positions = DateHelper.startAndEndPositionsFromTimeStrings(
+        tableStartTime.toString(),
+        tableEndTime.toString(),
+        overlayStartTime.toString(),
+        overlayEndTime.toString()
+      );
+
+      var timeDuration = positions.timeDuration;
+      var startPos = positions.startPos;
 
       var timeDuration = 100 * (overlayEndTime - overlayStartTime) / (tableEndTime - tableStartTime);
       var startPos = 100 * (overlayStartTime - tableStartTime) / (tableEndTime - tableStartTime);
@@ -44,18 +55,14 @@ var SingleDayView = React.createClass({
 
   startHover: function(id){
     this.props.startHover(id);
-
   },
 
   stopHover: function(id){
-
     this.props.stopHover(id);
   },
 
   toggleFocus: function(id){
-
     this.props.toggleFocus(id)
-
   },
 
   eventData: function(field){
@@ -69,22 +76,15 @@ var SingleDayView = React.createClass({
 
       if (game.facilityId === field.id) {
 
-
-        var gameStartTime = game.startTime;
-        var gameEndTime = game.endTime;
-
         var positions = DateHelper.startAndEndPositionsFromTimeStrings(
           tableStartTime.toString(),
           tableEndTime.toString(),
-          gameStartTime,
-          gameEndTime
+          game.startTime,
+          game.endTime
         );
 
         var timeDuration = positions.timeDuration;
         var startPos = positions.startPos;
-
-        //var timeDuration = 100 * (gameEndTime - gameStartTime) / (tableEndTime - tableStartTime);
-        //var startPos = 100 * (gameStartTime - tableStartTime) / (tableEndTime - tableStartTime);
 
         if (startPos >= 100 || (startPos + timeDuration) <= 0) {
           //dont display

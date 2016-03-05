@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229212056) do
+ActiveRecord::Schema.define(version: 20160305215109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20160229212056) do
     t.integer  "event_duration"
   end
 
-  add_index "leagues", ["name"], name: "index_leagues_on_name", unique: true, using: :btree
+  add_index "leagues", ["name", "owner_id"], name: "index_leagues_on_name_and_owner_id", unique: true, using: :btree
   add_index "leagues", ["owner_id"], name: "index_leagues_on_owner_id", using: :btree
 
   create_table "specific_availabilities", force: :cascade do |t|
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20160229212056) do
     t.string   "email"
   end
 
-  add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
+  add_index "teams", ["name", "owner_id"], name: "index_teams_on_name_and_owner_id", unique: true, using: :btree
   add_index "teams", ["owner_id"], name: "index_teams_on_owner_id", using: :btree
 
   create_table "users", force: :cascade do |t|

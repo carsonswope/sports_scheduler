@@ -1,6 +1,9 @@
 var AppDispatcher = require('../dispatcher/Dispatcher');
 var Store = require('flux/utils').Store;
+
+var DateHelper = require('../util/DateHelper');
 var NavConstants = require('../constants/NavConstants');
+var UserConstants = require('../constants/UserConstants');
 var TeamConstants = require('../constants/TeamConstants');
 var LeagueConstants = require('../constants/LeagueConstants');
 var FacilityConstants = require('../constants/FacilityConstants');
@@ -27,7 +30,52 @@ NavStore.setTabOption = function(option){
 
 NavStore.reset = function() {
   _currentTab = NavConstants.tabs.HOME;
-  _options = NavConstants.DEFAULT_OPTIONS;
+
+  _options.HOME = {};
+
+  _options.TEAMS = {
+    nameSearch: '',
+    adding: false,
+    focused: null
+  };
+  _options.LEAGUES = {
+    nameSearch: '',
+    adding: false,
+    focused: null
+  };
+
+  _options.FACILITIES = {
+    nameSearch: '',
+    adding: false,
+    focused: null
+  };
+
+  _options.SCHEDULES = {
+    nameSearch: '',
+    adding: false,
+    subTab: 'LIST_VIEW',
+    filter: {
+      filterType: 'SHOW_ALL',
+      filterSpec: 0,
+      startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-8)),
+      endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+8))
+    },
+    newGame: {
+      leagueId: null,
+      team_1_id: null,
+      team_2_id: null,
+      date: null,
+      startTime: null,
+      fieldId: null,
+      errors: {
+        incompleteInput: ['select a league!'],
+        conficts: []
+      }
+    },
+    focused: null
+  };
+
+  NavStore.__emitChange();
 };
 
 NavStore.setTab = function(tab) {
@@ -83,6 +131,9 @@ NavStore.__onDispatch = function(payload) {
       break;
     case FacilityConstants.actions.ADD_FACILITY:
       NavStore.setFocusOnElement('FACILITIES', payload.facility);
+      break;
+    case UserConstants.LOG_OUT_USER:
+      NavStore.reset();
       break;
   }
 
