@@ -17,6 +17,6 @@ Rails.application.routes.draw do
     resource :session, only:            [:show, :create, :destroy]
   end
 
-  resources :schedules, defaults: { format: :json }, only: [:show]
+  resources :schedules, only: [:show]
 
 end

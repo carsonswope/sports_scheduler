@@ -35,9 +35,12 @@ class SchedulesController < ApplicationController
       end
     end
 
-
-
-  render '/schedules/show.html.erb'
+    #
+    if params[:format] == 'json'
+      render 'schedules/show'
+    else
+      render '/schedules/show.html.erb'
+    end
 
   end
 

@@ -14,8 +14,6 @@ var SingleDayView = React.createClass({
 
     this.props.overlays.forEach(function(overlay, i){
 
-      debugger;
-
       var overlayStartTime = DateHelper.timeInputStringToNumber(overlay.startTime)
       var overlayEndTime = DateHelper.timeInputStringToNumber(overlay.endTime)
 
