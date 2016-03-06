@@ -9,7 +9,7 @@ The Sport Scheduler is a web application for which makes it easy for managers of
 
 ### API endpoints for implementing schedules into another website
 
-The main root page of the Sport Scheduler is merely the editor portion of the Scheduler. Any schedule that is created can be retrieved with an http request to the dedicated 'schedules api'. For example, if your username is 'fun_leagues', and you have a league called 'winter_adult_season', you can make a direct request for that schedule in JSON or just plain html:
+The main root page of the Sport Scheduler is merely the editor page, where users can edit their schedules. However, any schedule that is created can be retrieved with an http request to the dedicated 'schedules api'. For example, if your username is 'fun_leagues', and you have a league called 'winter_adult_season', you can make a direct request for that schedule in JSON or a table in plain html:
 
 ```sh
   http://www.thesportscheduler/schedules/fun_leagues?league=winter_adult_season
@@ -32,7 +32,7 @@ There are two ways to view schedules, List View and Calendar View. The list view
 
 ## Features still to come
 
-The Sport Scheduler is still in the MVP stage, and is being constantly upgraded with features on features. Coming soon is an auto-schedule feature, which can either make suggestions for new games in unscheduled leagues in a one-by-one or day-by-day format, or simply automatically generate the schedule for a given league or leagues given a set of game dates.  
+The Sport Scheduler is still in the MVP stage, and is being constantly upgraded with features on features. Coming soon is an auto-schedule feature, which can either make suggestions for new games in unscheduled leagues in a one-by-one or day-by-day format, or simply automatically generate the schedule for a given league or leagues given a set of game dates. Shortly after that is implemented, you can expect a 'Webpage' tab to appear, where users will be able to design a custom website around their schedules for their customers to visit, complete with announcements, contact info, and everything else the manager of a sports league would want on their website. 
 
 ## Technology
 
