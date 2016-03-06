@@ -79,10 +79,15 @@ var App = React.createClass({
   },
 
   _stepCallback: function(step){
+
+      var league = LeagueStore.all()[0];
+      var teams = LeagueTeamStore.teams(league.id);
+      var facilities = LeagueFacilityStore.facilities(league.id);
+
       var info = {
-        league: LeagueStore.all()[0],
-        teams: LeagueTeamStore.teams(league.id),
-        facilities: LeagueFacilityStore.facilities(league.id)
+        league: league,
+        teams: teams,
+        facilities: facilities
       }
       step.preAction(info);
   },
