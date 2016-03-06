@@ -13,6 +13,8 @@ class Api::UsersController < ApplicationController
 
       log_in!(@user)
 
+      @demo = true
+
       @user.make_seed_data_for_demo_user
 
     else
@@ -25,6 +27,8 @@ class Api::UsersController < ApplicationController
       if @user.save
         log_in!(@user)
       end
+
+      @demo = false
 
     end
 

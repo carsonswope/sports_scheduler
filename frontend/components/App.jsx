@@ -27,7 +27,6 @@ var App = React.createClass({
 
   getInitialState: function() {
 
-    this.toursTaken = 0;
 
     return {
       dimensions: {
@@ -41,7 +40,9 @@ var App = React.createClass({
       joyrideType: 'continuous',
       ready: false,
 
-      steps: Tour.steps
+      steps: Tour.steps,
+
+      toursTaken: 0
 
     };
   },
@@ -83,7 +84,6 @@ var App = React.createClass({
   },
 
   _stepCallback: function(step){
-
       var league = LeagueStore.all()[0];
       var teams = LeagueTeamStore.teams(league.id);
       var facilities = LeagueFacilityStore.facilities(league.id);
@@ -93,12 +93,14 @@ var App = React.createClass({
         teams: teams,
         facilities: facilities
       }
-      step.preAction(info, this.toursTaken);
+      step.preAction(info, this.state.toursTaken);
   },
 
   _completeCallback: function(){
-
-    this.toursTaken += 1;
+    var toursTaken = this.state.toursTaken + 1;
+    this.setState({
+      toursTaken: toursTaken
+    });
     this.refs.joyride.reset();
   },
 
@@ -122,9 +124,10 @@ var App = React.createClass({
             <Header
               dims={this.state.dimensions}
               user={this.state.user}
-              startTour={this.startTour} />
-            <Content dims={this.state.dimensions}
-              startTour={this.startTour} />
+              takeTour={this.startTour}
+              tourNumber={this.state.toursTaken}/>
+
+            <Content dims={this.state.dimensions} />
           </div>
         </div>
       );

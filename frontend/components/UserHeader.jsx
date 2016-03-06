@@ -12,7 +12,8 @@ var UserHeader = React.createClass({
 
     // debugger;
     var contents = (UserStore.currentUser()) ?
-      <UserInfo /> : <UserLoginForm />;
+      <UserInfo takeTour={this.props.takeTour}
+        tourNumber={this.props.tourNumber}/> : <UserLoginForm />;
 
     return (
       <div className="header-component header-user">

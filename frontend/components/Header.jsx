@@ -74,7 +74,9 @@ var Header = React.createClass({
       <div id={headerId} className={headerClass}
         style={sizing} >
 
-        <UserHeader user={this.props.user}/>
+        <UserHeader user={this.props.user}
+          takeTour={this.props.takeTour}
+          tourNumber={this.props.tourNumber}/>
 
 
 
