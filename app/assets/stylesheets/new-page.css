@@ -24,6 +24,8 @@
 .new-page-cancel-button:hover{
   color: black;
   z-index: 4;
+  cursor: pointer;
+
 }
 
 .new-page-text-field{

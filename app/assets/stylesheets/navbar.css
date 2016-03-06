@@ -57,7 +57,7 @@
 
   background-color: transparent; */
 /*   background-color: green; */
-/* 
+/*
   border: 2px solid #963019;
   border-left: 0px;
   border-right: 0px;
@@ -102,6 +102,7 @@
 
 .navbar-option:hover {
   font-weight: 700;
+  cursor: pointer;
 }
 
 .navbar-tab-title-selected {
@@ -170,6 +171,8 @@
 
 .navbar-options-clear-icon:hover{
   color: #16174f;
+  cursor: pointer;
+
 }
 
 .navbar-options-search-bar{
@@ -178,6 +181,8 @@
 
 .navbar-options-new-button:hover{
   background-color: #eee;
+  cursor: pointer;
+
 }
 
 .navbar-options-element {
@@ -203,4 +208,6 @@
 
 .navbar-options-element-text:hover {
   font-weight: 700;
+  cursor: pointer;
+
 }

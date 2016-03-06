@@ -233,6 +233,7 @@
 
 .header-delete-button:hover{
   font-weight: 700;
+  cursor: pointer;
 }
 
 
@@ -259,6 +260,8 @@
 .begin-add-to-button:hover{
 /*   font-size: 300px; */
   font-weight: 700;
+  cursor: pointer;
+
 }
 
 .add-to-search-component{

@@ -46,7 +46,7 @@ var Header = React.createClass({
     var loggedOutHeader=(
       <div id='header-welcome-page' className={this.state.user ? 'off-screen' : 'in-screen'}>
         <h1>
-          Welcome to the Sports Scheduler
+          Welcome to the Sport Scheduler
         </h1>
       </div>
     );
@@ -77,8 +77,6 @@ var Header = React.createClass({
         <UserHeader user={this.props.user}
           takeTour={this.props.takeTour}
           tourNumber={this.props.tourNumber}/>
-
-
 
         {loggedInHeader}
         {loggedOutHeader}

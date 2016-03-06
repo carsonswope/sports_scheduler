@@ -70,4 +70,5 @@
 
 .gamedate-input-button:hover {
   font-weight: 700;
+  cursor: pointer;
 }

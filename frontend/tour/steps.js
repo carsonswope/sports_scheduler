@@ -89,7 +89,7 @@ exports.steps = [{
       NavActions.setTabOption('SCHEDULES', 'newGame', newGame); }
 },{
   title: 'Schedule a game',
-  text: 'A little better, but if we change the schedule filter to \'By League\' and then select our league, we can see the games with an overlay of the league\'s typical game dates',
+  text: 'A little better, but if we change the schedule filter to \'By League\' and then select our league, we can see an overlay of the league\'s typical game dates',
   selector: '#editor',
   position: 'right',
   preAction: NavActions.setTabOption.bind(this, 'SCHEDULES', 'subTab', 'CALENDAR_VIEW')

@@ -28,6 +28,10 @@
     display: inline-block;
 }
 
+.table-header-draggable:hover {
+  cursor: col-resize;
+}
+
 .table-body-main {
     width: calc(100% - 22px);
     position: relative;
@@ -173,6 +177,8 @@
 
 .new-game-button:hover {
     font-weight: 700;
+    cursor: pointer;
+
 }
 
 .new-game-form-error-message {
@@ -185,7 +191,7 @@
 }
 
 .inline-reschedule-main {
-    border-bottom: 2px solid #16174f; 
+    border-bottom: 2px solid #16174f;
     border-top: 2px solid #16174f;
     margin-top: -2px;
 

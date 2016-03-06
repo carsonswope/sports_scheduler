@@ -14,6 +14,8 @@ var SingleDayView = React.createClass({
 
     this.props.overlays.forEach(function(overlay, i){
 
+      debugger;
+
       var overlayStartTime = DateHelper.timeInputStringToNumber(overlay.startTime)
       var overlayEndTime = DateHelper.timeInputStringToNumber(overlay.endTime)
 
@@ -26,9 +28,6 @@ var SingleDayView = React.createClass({
 
       var timeDuration = positions.timeDuration;
       var startPos = positions.startPos;
-
-      var timeDuration = 100 * (overlayEndTime - overlayStartTime) / (tableEndTime - tableStartTime);
-      var startPos = 100 * (overlayStartTime - tableStartTime) / (tableEndTime - tableStartTime);
 
       if (startPos >= 100 || (startPos + timeDuration) <= 0) {
         //dont display
