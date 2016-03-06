@@ -32,7 +32,17 @@ There are two ways to view schedules, List View and Calendar View. The list view
 
 ## Features still to come
 
-The Sport Scheduler is still in the MVP stage, and is being constantly upgraded with features on features. Coming soon is an auto-schedule feature, which can either make suggestions for new games in unscheduled leagues in a one-by-one or day-by-day format, or simply automatically generate the schedule for a given league or leagues given a set of game dates. Shortly after that is implemented, you can expect a 'Webpage' tab to appear, where users will be able to design a custom website around their schedules for their customers to visit, complete with announcements, contact info, and everything else the manager of a sports league would want on their website. 
+The Sport Scheduler is still in the MVP stage, and is being constantly upgraded with features on features. Some deficiencies in the current implementation are:
+
+- The time range of the Calendar View always defaults from 3:00 PM to 11:00 PM, regardless of when the games being displayed actually take place. This should eventually dynamically update to display all the games in range.
+
+- The date range filter in the Schedules View is guilty of a similar assumption: It defaults to 8 months before now to 8 months after now, when it really ought to dynamically update based on the games being displayed - while giving the user the option to override the time filter.
+
+- Right now there is no distinction between 'current' leagues and ones which have already taken place. If a user has several years worth of leagues stored, and is only concerned with the current league, it would improve the performance of the site to only automatically load and cache the currently relevant leagues, with the option available of looking at older leagues.
+
+Aside from these fixes, coming soon is an auto-schedule feature, which can either make suggestions for new games of unscheduled leagues in a one-by-one or day-by-day format, or simply automatically generate the schedule for a given league or leagues given a set of game dates.
+
+Next, you can expect a 'Webpage' tab to appear, where users will be able to design a custom website around their schedules that their customers will be able to visit, complete with announcements, contact info, and everything else the manager of a sports league would want on their website.
 
 ## Technology
 
