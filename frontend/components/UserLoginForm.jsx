@@ -3,6 +3,9 @@ var PropTypes = React.PropTypes;
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var UserActions = require('../actions/UserActions');
 
+var FlashStore = require('../stores/FlashStore');
+var FlashMessage = require('../components/misc/FlashMessage.jsx');
+
 var UserLoginForm = React.createClass({
 
   mixins: [LinkedStateMixin],
@@ -10,7 +13,29 @@ var UserLoginForm = React.createClass({
   getInitialState: function() {
     return {
       username: '',
-      password: ''
+      password: '',
+      flash: null
+    };
+  },
+
+  componentDidMount: function() {
+    this.flashListener = FlashStore.addListener(this.flashChange);
+  },
+
+  componentWillUnmount: function() {
+    this.flashListener.remove();
+  },
+
+  flashChange: function() {
+    var flash = FlashStore.currentFlash();
+    if (flash.category === 'USERS') {
+      this.setState({flash: flash.message});
+    }
+  },
+
+  flash: function() {
+    if (this.state.flash) {
+      return <FlashMessage time={1000} message={this.state.flash[0]}/>;
     };
   },
 
@@ -23,11 +48,13 @@ var UserLoginForm = React.createClass({
         password: this.state.password
       }
     );
-    this.setState({password: ''});
+    this.setState({ flash: null, password: '' });
+
   },
 
   demoLoginClick: function(e) {
     e.preventDefault();
+    this.setState({ flash: null });
     UserActions.loginDemoAccount();
   },
 
@@ -39,7 +66,8 @@ var UserLoginForm = React.createClass({
         password: this.state.password
       }
     );
-    this.setState({password: ''})
+    this.setState({ flash: null, password: '' });
+
   },
 
   render: function() {
@@ -77,6 +105,8 @@ var UserLoginForm = React.createClass({
               sign up
             </div>
           </div>
+
+          {this.flash()}
 
           <div className='info-stat'
             style={{width: '100%', position: 'relative', right: 0, height: 108}}>

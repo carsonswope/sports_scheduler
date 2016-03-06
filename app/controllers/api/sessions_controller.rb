@@ -4,14 +4,18 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
+
     user = User.find_by_credentials(
       params[:user][:username],
       params[:user][:password]
     )
 
-    log_in!(user) if user
-
-    render :show
+    if user
+      log_in!(user) if user
+      render :show
+    else
+      render json: ['Incorrect login credentials'], status: 422
+    end
   end
 
   def destroy

@@ -17,6 +17,7 @@ var LeagueStore = require('../stores/LeagueStore');
 var TeamStore = require('../stores/TeamStore');
 var LeagueFacilityStore = require('../stores/LeagueFacilityStore');
 var FacilityStore = require('../stores/FacilityStore');
+var FlashStore = require('../stores/FlashStore');
 
 var Tour = require('../tour/steps');
 

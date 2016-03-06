@@ -29,7 +29,13 @@ gem 'pry-rails'
 gem 'newrelic_rpm'
 gem 'faker', '~> 1.4', '>= 1.4.3'
 
-gem 'rails_12factor'
+gem 'thin'
+
+group :production do
+
+  gem 'rails_12factor'
+
+end
 
 # Use Unicorn as the app server
 # gem 'unicorn'

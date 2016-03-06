@@ -1,0 +1,30 @@
+.flash-message-visible {
+    color: #963019;
+    opacity: 1;
+    border-bottom: 2px solid #667467;
+    height: 26px;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.flash-message-text {
+    position: relative;
+    left: 25px;
+    top: 7px;
+    font-size: 14px;
+}
+
+.flash-message-invisible {
+    color: #963019;
+    border-bottom: 2px solid #667467;
+    height: 26px;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    opacity: 0;
+   transition: opacity 3s ease-out;
+  -ms-transition: opacity 3s ease-out;
+  -moz-transition: opacity 3s ease-out;
+  -webkit-transition: opacity 3s ease-out;
+}

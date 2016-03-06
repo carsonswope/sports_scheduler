@@ -8,6 +8,9 @@ exports.attemptLogIn = function(user) {
     data: {user: user},
     success: function(user) {
       UserActions.logIn(user)
+    },
+    error: function(response) {
+      UserActions.handleFailedLogin(response);
     }
 
   })
@@ -55,6 +58,9 @@ exports.createAccount = function(user){
     data: {user: user},
     success: function(user) {
       UserActions.logIn(user);
+    },
+    error: function(response) {
+      UserActions.handleFailedCreation(response);
     }
   });
 

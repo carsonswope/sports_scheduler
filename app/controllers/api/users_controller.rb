@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
 
   def create
+
     if params[:demo] === 'true'
 
       username = User.new_random_name
@@ -26,6 +27,14 @@ class Api::UsersController < ApplicationController
 
       if @user.save
         log_in!(@user)
+      else
+
+        if @user.errors.full_messages[0].start_with?('Password is too short')
+          render json: ['Password must be 6 characters'], status: 422
+        else
+          render json: @user.errors.full_messages, status: 422
+        end
+        
       end
 
       @demo = false
