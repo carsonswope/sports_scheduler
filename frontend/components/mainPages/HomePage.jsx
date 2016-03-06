@@ -3,6 +3,8 @@ var PropTypes = React.PropTypes;
 
 var HomePage = React.createClass({
 
+  //this.props.startTour
+
   render: function() {
     return (
       <div>
@@ -15,6 +17,9 @@ var HomePage = React.createClass({
 
           </div>
           home page
+          <div onClick={this.props.startTour}>
+            start tour!
+          </div>
         </div>
 
       </div>

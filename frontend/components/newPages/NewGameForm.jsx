@@ -180,7 +180,7 @@ var NewGameForm = React.createClass({
     return(
       <input type='time'
         className='new-game-form-input'
-        value={this.state.newGame.time}
+        value={this.state.newGame.startTime}
         onChange={this.changeOption.bind(this, 'startTime')} />
     )
   },

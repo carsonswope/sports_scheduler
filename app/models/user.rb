@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def self.new_random_name
-    names = ['messi', 'balotelli', 'neymar', 'valeri', 'zlatan', 'nagbe']
+    names = ['messi', 'balotelli', 'skrtyl', 'valeri', 'zlatan', 'nagbe', 'busquets']
     name = names.sample + rand(1000).to_s
 
     until !self.find_by_username(name)

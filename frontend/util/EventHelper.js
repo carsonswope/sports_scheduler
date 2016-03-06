@@ -8,10 +8,12 @@ var DateHelper = require('./DateHelper')
 exports.isScheduled = function(event) {
 
   return (
+    event &&
     event.facilityId &&
     event.date.length &&
     event.startTime.length
   );
+
 };
 
 exports.eventStartSpaceship = function(event1, event2){

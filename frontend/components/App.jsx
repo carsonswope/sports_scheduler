@@ -64,7 +64,12 @@ var App = React.createClass({
 
   userChange: function() {
     this.setState({ user: UserStore.currentUser() });
-    if (!this.state.user) { NavStore.reset(); }
+    if (!this.state.user) {
+      NavStore.reset();
+
+      this.refs.joyride.reset(false);
+    }
+
   },
 
   _addStep: function(newStep){
@@ -74,52 +79,12 @@ var App = React.createClass({
   },
 
   _stepCallback: function(step){
-
-    console.log('uag');
-
-    if (step.number === 6){
-
-      var league = LeagueStore.all()[0];
-      var teams = LeagueTeamStore.teams(league.id);
-      var facilities = LeagueFacilityStore.facilities(league.id);
-      var team_1 = teams[0];
-      var team_2 = teams[1];
-      var facility = facilities[0];
-
-      NavActions.setTabOption('SCHEDULES', 'newGame', {
-        leagueId: league.id,
-        team_1_id: team_1.id,
-        team_2_id: team_2.id,
-        date: '2016-10-10',
-        startTime: '17:00',
-        fieldId: facility.id,
-        errors: {
-          incompleteInput: [],
-          conflicts: []
-        }
-      });
-
-      NavActions.setTabOption('SCHEDULES', 'newGame', {
-        leagueId: league.id,
-        team_1_id: team_1.id,
-        team_2_id: team_2.id,
-        date: '2016-10-10',
-        startTime: '17:00',
-        fieldId: facility.id,
-        errors: {
-          incompleteInput: [],
-          conflicts: []
-        }
-      });
-
-    } else {
-
-      Tour.stepActions[step.number]();
-
-    }
-
-
-
+      var info = {
+        league: LeagueStore.all()[0],
+        teams: LeagueTeamStore.teams(league.id),
+        facilities: LeagueFacilityStore.facilities(league.id)
+      }
+      step.preAction(info);
   },
 
   _completeCallback: function(){
@@ -153,7 +118,8 @@ var App = React.createClass({
               dims={this.state.dimensions}
               user={this.state.user}
               startTour={this.startTour} />
-            <Content dims={this.state.dimensions} />
+            <Content dims={this.state.dimensions}
+              startTour={this.startTour} />
           </div>
         </div>
       );
@@ -180,7 +146,7 @@ var App = React.createClass({
           showOverlay={this.state.joyrideOverlay}
           locale={{
             close: 'Close',
-            next: 'Next',
+            next: 'Continue',
             last: 'End',
             skip: 'Exit Tour'
           }}

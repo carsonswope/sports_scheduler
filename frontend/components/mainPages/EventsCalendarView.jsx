@@ -256,6 +256,16 @@ var EventsCalendarView = React.createClass({
 
       var event = EventStore.find(this.state.focusedEvent.id);
 
+      if (!event) {
+
+        this.setState({
+          focusedEvent: {
+            focusType: 'NONE',
+            id: null}
+          });
+        return null;
+      }
+
       var classes = {
         header: this.state.focusType === 'FOCUS' ?
           'table-entry-header-focused' : 'table-entry-header',

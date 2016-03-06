@@ -34,7 +34,7 @@ exports.SCREEN_NAMES = {
   WEBPAGE: 'Webpage',
   TEAMS: 'Teams',
   LEAGUES: 'Leagues',
-  FACILITIES: 'Facilities',
+  FACILITIES: 'Fields',
   SCHEDULES: 'Schedules'
 };
 

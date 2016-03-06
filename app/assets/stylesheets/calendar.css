@@ -19,7 +19,6 @@
     overflow-x: scroll;
     white-space: nowrap;
     overflow-y: hidden;
-/*     overflow: scroll; */
 }
 
 .calendar-view-time-selector-start-time-line {
@@ -75,13 +74,13 @@ border-bottom: 2px solid #667467;
 }
 
 .calendar-single-date-inner {
-    border-top: 2px solid #667467;    
+    border-top: 2px solid #667467;
     border-bottom: 2px solid #667467;
     height: 190px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 1px;
- 
+
 }
 
 .calendar-single-date-date {
@@ -148,10 +147,10 @@ border-bottom: 2px solid #667467;
     background-color: rgba(49, 131, 158, 0.6);
 }
 
-input[type=time]::-webkit-inner-spin-button, 
-input[type=time]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=time]::-webkit-inner-spin-button,
+input[type=time]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="time"]::-webkit-clear-button {

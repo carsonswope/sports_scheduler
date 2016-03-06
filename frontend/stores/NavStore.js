@@ -31,6 +31,8 @@ NavStore.setTabOption = function(option){
 NavStore.reset = function() {
   _currentTab = NavConstants.tabs.HOME;
 
+  _options = {};
+
   _options.HOME = {};
 
   _options.TEAMS = {
@@ -38,6 +40,7 @@ NavStore.reset = function() {
     adding: false,
     focused: null
   };
+
   _options.LEAGUES = {
     nameSearch: '',
     adding: false,
@@ -60,6 +63,7 @@ NavStore.reset = function() {
       startDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()-8)),
       endDate: DateHelper.JSdateToInputString(new Date().setMonth(new Date().getMonth()+8))
     },
+
     newGame: {
       leagueId: null,
       team_1_id: null,
@@ -72,7 +76,13 @@ NavStore.reset = function() {
         conficts: []
       }
     },
+
     focused: null
+
+  };
+
+  _options.ADD_TO_LEAGUE = {
+    nameSearch: ''
   };
 
   NavStore.__emitChange();
