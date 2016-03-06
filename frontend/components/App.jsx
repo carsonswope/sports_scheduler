@@ -24,7 +24,11 @@ var UserActions = require('../actions/UserActions');
 
 var App = React.createClass({
 
+
   getInitialState: function() {
+
+    this.toursTaken = 0;
+
     return {
       dimensions: {
         width: window.innerWidth,
@@ -89,16 +93,12 @@ var App = React.createClass({
         teams: teams,
         facilities: facilities
       }
-      step.preAction(info);
+      step.preAction(info, this.toursTaken);
   },
 
   _completeCallback: function(){
-    var step = this.state.steps[0];
-    var steps = [step]
-    this.setState({
-      steps: steps
-    });
 
+    this.toursTaken += 1;
     this.refs.joyride.reset();
   },
 
@@ -144,7 +144,7 @@ var App = React.createClass({
     return (
       <div>
         <Joyride
-          debug={true}
+          debug={false}
           ref='joyride'
           steps={this.state.steps}
           type={this.state.joyrideType}
@@ -152,7 +152,7 @@ var App = React.createClass({
           locale={{
             close: 'Close',
             next: 'Continue',
-            last: 'End',
+            last: 'Finish',
             skip: 'Exit Tour'
           }}
           showSkipButton={true}

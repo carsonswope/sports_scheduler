@@ -10,6 +10,25 @@ var LeagueTeamStore = require('../stores/LeagueTeamStore');
 
 var DateHelper = require('../util/DateHelper');
 
+var _games = [{
+  team_1_index: 2,
+  team_2_index: 4,
+  field_index: 0,
+  date: '2016-06-15',
+  time: '19:15'
+},{
+  team_1_index: 0,
+  team_2_index: 5,
+  field_index: 1,
+  date: '2016-06-15',
+  time: '19:15'
+},{
+  team_1_index: 1,
+  team_2_index: 3,
+  field_index: 0,
+  date: '2016-06-15',
+  time: '20:05'
+}];
 
 exports.steps = [{
   title: 'Welcome to the Sports Scheduler',
@@ -56,14 +75,16 @@ exports.steps = [{
   text: 'Oh man, that\'s a pretty good matchup. But when should it be? We can look for a gap in the schedule visually when we go to Calendar View',
   selector: '#editor',
   position: 'right',
-  preAction: function(info){
+  preAction: function(info, tourNumber){
 
-    // debugger;
+      var t1 = _games[tourNumber].team_1_index;
+      var t2 = _games[tourNumber].team_2_index;
+      var f = _games[tourNumber].field_index;
 
       var newGame = NavStore.options('SCHEDULES').newGame;
-      newGame.team_1_id = info.teams[2];
-      newGame.team_2_id = info.teams[4];
-      newGame.fieldId = info.facilities[0];
+      newGame.team_1_id = info.teams[t1];
+      newGame.team_2_id = info.teams[t2];
+      newGame.fieldId = info.facilities[f];
       newGame.errors = EventStore.newGameErrors(newGame);
       NavActions.setTabOption('SCHEDULES', 'newGame', newGame); }
 },{
@@ -90,11 +111,14 @@ exports.steps = [{
   text: 'Everything seems in order, let\'s schedule it then!...',
   selector: '#editor',
   position: 'right',
-  preAction: function(info){
+  preAction: function(info, tourNumber){
+
+      var date = _games[tourNumber].date;
+      var time = _games[tourNumber].time;
 
       var newGame = NavStore.options('SCHEDULES').newGame;
-      newGame.date = '2016-06-15';
-      newGame.startTime = '19:15';
+      newGame.date = date;
+      newGame.startTime = time;
       newGame.errors = EventStore.newGameErrors(newGame);
       NavActions.setTabOption('SCHEDULES', 'newGame', newGame); }
 },{
