@@ -101,6 +101,9 @@ var App = React.createClass({
     this.setState({
       toursTaken: toursTaken
     });
+
+    NavActions.setTabOption('SCHEDULES', 'adding', false);
+
     this.refs.joyride.reset();
   },
 
