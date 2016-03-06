@@ -1,0 +1,33 @@
+<h1>
+
+  <% @params.each do |name, value| %>
+
+    <%= name %>: <%= value %>
+
+  <% end %>
+
+</h1>
+
+<table>
+
+  <th>
+    <td> Date </td>
+    <td> Time </td>
+    <td> Field </td>
+    <td> Home team </td>
+    <td> Away team </td>
+  </th>
+
+  <% @events.each do |event| %>
+    <tr>
+      <td></td>
+      <td><%= event.date %></td>
+      <td><%= to_view_string(event.start_time) %></td>
+      <td><%= event.facility.name %></td>
+      <td><%= event.team_1.name %></td>
+      <td><%= event.team_2.name %></td>
+    </tr>
+
+  <% end %>
+
+</table>
