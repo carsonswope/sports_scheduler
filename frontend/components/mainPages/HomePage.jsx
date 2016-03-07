@@ -30,14 +30,14 @@ var HomePage = React.createClass({
 
       return(
         <div>
-          If you're not sure where to begin, why not
+          Not sure where to begin?
           <div className='new-game-form-label new-game-button'
             onClick={this.props.takeTour}
             style={{
               left: 5,
               bottom: 0,
               color: '#963019'
-            }}>take the tour?</div>
+            }}>Take the tour</div>
           <br /><br/>
         </div>
       )
