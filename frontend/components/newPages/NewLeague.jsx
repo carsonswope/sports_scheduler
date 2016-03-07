@@ -95,10 +95,10 @@ var NewLeague = React.createClass({
       title: 'Name:',
       varName: 'name',
     },{
-      title: 'Number of games:',
+      title: 'Number of games per team:',
       varName: 'numGames'
     },{
-      title: 'Duration of games:',
+      title: 'Duration of games (minutes):',
       varName: 'gameDuration'
     }];
   },

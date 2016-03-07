@@ -184,8 +184,6 @@ var LeagueShowDetail = React.createClass({
           itemName='teams'
           height={this.getTeamsListHeight()} />
 
-        <LeagueStatus league={league} />
-
         <MembershipsShow
           membershipName={'fields list:'}
           itemsList={this.getFieldsList()}
@@ -203,6 +201,10 @@ var LeagueShowDetail = React.createClass({
           weeklyPlus={'Weekly game dates'}
           specificPlus={'Specific additions'}
           specificMinus={'Specific exceptions'}/>
+
+
+        <LeagueStatus league={league} />
+        
       </div>
     );
   }

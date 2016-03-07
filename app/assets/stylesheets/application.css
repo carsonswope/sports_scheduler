@@ -148,3 +148,8 @@ hr {
 .submit-button:hover {
   font-size: 18px;
 }
+
+.link {
+  color: #16174f;
+  white-space: nowrap;
+}

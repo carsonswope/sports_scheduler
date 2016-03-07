@@ -133,6 +133,16 @@ var TeamShowDetail = React.createClass({
         return LeagueStore.find(leagueId);
       });
 
+    //removed for mvp but ready to be returned:
+
+    //  <GameDatesInput
+    //    dates={this.state.gameDates}
+    //    update={this.addNewGameDate}
+    //    remove={this.removeGameDate}
+    //    weeklyPlus={'Weekly game dates'}
+    //    specificPlus={'Specific additions'}
+    //    specificMinus={'Specific exceptions'}/>
+
     return (
       <div className="show-detail clear">
 
@@ -147,14 +157,6 @@ var TeamShowDetail = React.createClass({
           addMessage='Add to league'
           itemName='leagues'
           height={this.getLeaguesListHeight()} />
-
-        <GameDatesInput
-          dates={this.state.gameDates}
-          update={this.addNewGameDate}
-          remove={this.removeGameDate}
-          weeklyPlus={'Weekly game dates'}
-          specificPlus={'Specific additions'}
-          specificMinus={'Specific exceptions'}/>
 
 
 

@@ -70,11 +70,12 @@ var HomePage = React.createClass({
         {this.tourButton()}
 
           The app you are visiting now is just the schedule editor. Account holders are the only ones who
-          who can access this page. The schedules that you make can also be accessed publically in either
-          HTML or JSON formats by visiting www.thesportscheduler.com/schedules/{UserStore.currentUser().username}.
+          who can access the editor. Your username is '{this.state.user.username}', so your schedules can also be accessed publically in either
+          HTML or JSON by visiting
+          <span className='link'> www.thesportscheduler.com/schedules/{this.state.user.username}?format=json </span><br /><br />
           If you had a league named 'first_division', you could access that schedule by visiting
-          www.thesportschedules.com/schedules/{UserStore.currentUser().username}?league=first_division. This
-          allows you to easily transfer the schedules to whatever website you already use to deliver schedules to your
+          <span className='link'> www.thesportschedules.com/schedules/{this.state.user.username}?format=json&league=first_division </span><br /><br />
+          This API allows you to easily embed the schedules you make here into the website you already use to deliver schedules to your
           customers. <br /> <br />
 
         Thanks for visiting, enjoy the site!

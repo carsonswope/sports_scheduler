@@ -107,7 +107,7 @@ var LeagueStatus = React.createClass({
         <div className='add-component-option' key={i}
           style={{width: 'calc(100% - 20px)'}}>
           <div className='info-stat-text'
-            style={{width: 100, overflow: 'hidden'}}>
+            style={{width: 130, overflow: 'hidden'}}>
             {team.name}
           </div>
           <div className='info-stat-text'
@@ -240,8 +240,8 @@ var LeagueStatus = React.createClass({
       <div className='show-basic-info'>
         <div className='info-stat'>
           <div className='info-stat-label'
-            style={{width: 80}}>
-            stats:
+            style={{width: 110}}>
+            matchup analysis:
           </div>
           <div className='info-stat-label'
             style={{width: 80}}>
