@@ -39,15 +39,20 @@ var Header = React.createClass({
       <div key={1}
         id='header-component'
         className={this.state.user ? 'in-screen' : 'off-screen'}>
-        user company name / logo here
+
       </div>
     );
 
     var loggedOutHeader=(
       <div id='header-welcome-page' className={this.state.user ? 'off-screen' : 'in-screen'}>
-        <h1>
-          Welcome to the Sport Scheduler
-        </h1>
+        <img src='/assets/logo.png'
+          style={{
+            width: 309,
+            position: 'relative',
+            top: -46,
+            left: 0
+
+          }}/>
       </div>
     );
 

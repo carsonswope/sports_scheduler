@@ -13,11 +13,13 @@ var HomePage = React.createClass({
           <div className='schedule-criteria-main'
             style={{width: 'calc(100% + 20px)'}}>
             <div className='schedule-criteria-title'>
-              Hello!
+              Welcome
             </div>
-
           </div>
-          home page
+
+        </div>
+        <div className='home-page-description-main'>
+          This is the Sport Scheduler.
         </div>
 
       </div>

@@ -59,7 +59,14 @@ var NavBar = React.createClass({
         }}>
 
         <div className='logo-bar'>
-          logo here
+          <img src='/assets/logo.png'
+            style={{
+              width: '85%',
+              position: 'relative',
+              top: -21,
+              left: 12
+
+            }}/>
         </div>
 
         {this.props.hidden ? null : tabs}

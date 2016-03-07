@@ -23,7 +23,7 @@
   height: 217px;
   background-color: transparent;
   position: absolute;
-  -webkit-transition: -webkit-transform 1s; 
+  -webkit-transition: -webkit-transform 2s;
 
 }
 
@@ -32,7 +32,7 @@
   height: 217px;
   background-color: transparent;
   position: absolute;
-  -webkit-transition: -webkit-transform 1s;
+  -webkit-transition: -webkit-transform 2s;
 }
 
 #header-component.on-screen {
@@ -46,11 +46,11 @@
 
 #header-welcome-page.on-screen {
 
- 
+
 }
 
 #header-welcome-page.off-screen {
-  -webkit-transform: translateY(-220px);
+  -webkit-transform: translateY(-260px);
 }
 
 .header-logo {
