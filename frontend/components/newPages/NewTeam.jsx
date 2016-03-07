@@ -75,6 +75,16 @@ var NewTeam = React.createClass({
 
   },
 
+  //taken away for MVP deploy but still very much present:
+
+  //    <GameDatesInput
+  //      dates={this.state.gameDates}
+  //      update={this.updateGameDatesInput}
+  //      remove={this.removeGameDates}
+  //      weeklyPlus={'Weekly game dates'}
+  //      specificPlus={'Specific additions'}
+  //      specificMinus={'Specific exceptions'}/>
+
   render: function() {
     return (
       <div className='show-item show-item-focused'>
@@ -86,16 +96,13 @@ var NewTeam = React.createClass({
 
           {TextEntriesInput.makeInputs(this, this.textFields())}
 
-          <GameDatesInput
-            dates={this.state.gameDates}
-            update={this.updateGameDatesInput}
-            remove={this.removeGameDates}
-            weeklyPlus={'Weekly game dates'}
-            specificPlus={'Specific additions'}
-            specificMinus={'Specific exceptions'}/>
-
-          <input className="new-submit-button"
-            type="submit" value="create team" />
+            <div className='show-basic-info'>
+              <div className='info-stat'
+                style={{textAlign: 'center'}}>
+                <input className="submit-button"
+                  type="submit" value="Create Team!" />
+              </div>
+            </div>
         </form>
       </div>
     );

@@ -130,9 +130,12 @@ var NewLeague = React.createClass({
             remove={this.removeFacilities}
             checkAll={this.checkAllFacilities} />
 
-          <div className='show-item-show-item-focused'>
-            <input className=""
-              type="submit" value="create league" />
+          <div className='show-basic-info'>
+            <div className='info-stat'
+              style={{textAlign: 'center'}}>
+              <input className="submit-button"
+                type="submit" value="Create League!" />
+            </div>
           </div>
         </form>
 

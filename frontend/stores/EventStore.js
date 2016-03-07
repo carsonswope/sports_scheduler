@@ -240,6 +240,8 @@ EventStore.removeEventsByLeague = function(league){
 };
 
 EventStore.removeEventsByFacility = function(facility){
+  debugger;
+
   var eventIds = Object.keys(_events);
   var idsToRemove = [];
   var event;
@@ -301,7 +303,7 @@ EventStore.__onDispatch = function(payload){
       EventStore.removeEventsByLeague(payload.league);
       break;
     case FacilityConstants.actions.REMOVE_FACILITY:
-      EventStore.removeEventsByFacility(payload.league);
+      EventStore.removeEventsByFacility(payload.facility);
       break;
     case LeagueConstants.actions.REMOVE_LEAGUE_TEAM:
       EventStore.removeEventsByLeagueTeam(payload.pair);

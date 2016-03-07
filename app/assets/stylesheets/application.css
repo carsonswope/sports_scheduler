@@ -133,3 +133,18 @@ hr {
   border-top: 3px solid #9DB198;
   padding: 0;
 }
+
+.submit-button {
+  color: #16174f;
+  border: none;
+  font-size: 16px;
+  position: relative;
+  bottom: -5px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.submit-button:hover {
+  font-size: 18px;
+}

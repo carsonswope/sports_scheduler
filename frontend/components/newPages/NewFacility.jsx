@@ -42,10 +42,14 @@ var NewFacility = React.createClass({
           onSubmit={this.submitForm} >
           {TextEntriesInput.makeInputs(this, this.textFields())}
 
-          <div className='show-item-show-item-focused'>
-            <input className=""
-              type="submit" value="create facility" />
+          <div className='show-basic-info'>
+            <div className='info-stat'
+              style={{textAlign: 'center'}}>
+              <input className="submit-button"
+                type="submit" value="Create Field!" />
+            </div>
           </div>
+
         </form>
       </div>
     );
