@@ -70,7 +70,7 @@ var HomePage = React.createClass({
         {this.tourButton()}
 
           The app you are visiting now is just the schedule editor. Account holders are the only ones who
-          who can access the editor. Your username is '{this.state.user.username}', so your schedules can also be accessed publically in JSON by visiting
+          who can access the editor. Your {this.state.user.demo ? 'guest' : ''} username is '{this.state.user.username}', so your schedules can also be accessed publically in JSON by visiting
           <a href={'/schedules/' + this.state.user.username + '?format=json'} target='_blank' className='link'> www.thesportscheduler.com/schedules/{this.state.user.username}?format=json </a><br /><br />
 
         If you had a league named 'coed d3', you could access that schedule by visiting
