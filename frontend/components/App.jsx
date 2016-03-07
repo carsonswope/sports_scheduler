@@ -131,7 +131,9 @@ var App = React.createClass({
               takeTour={this.startTour}
               tourNumber={this.state.toursTaken}/>
 
-            <Content dims={this.state.dimensions} />
+            <Content dims={this.state.dimensions}
+              takeTour={this.startTour}
+              tourNumber={this.state.toursTaken}/>
           </div>
         </div>
       );

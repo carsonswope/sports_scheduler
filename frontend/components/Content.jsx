@@ -37,6 +37,8 @@ var Content = React.createClass({
 
     var ToRender = NavConstants.MAIN_PAGES[this.state.tab]
     ToRender = <ToRender resourceType={this.state.tab}
+      takeTour={this.props.takeTour}
+      tourNumber={this.props.tourNumber}
       dims={{
         height: this.props.dims.height - 199,
         width: this.props.dims.width - 225

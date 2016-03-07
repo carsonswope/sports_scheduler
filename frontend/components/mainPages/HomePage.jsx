@@ -1,10 +1,54 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
+var UserStore = require('../../stores/UserStore');
 
 var HomePage = React.createClass({
 
-  //this.props.startTour
+  getInitialState: function(){
+    return({
+      user: UserStore.currentUser()
+    });
+  },
+
+  componentDidMount: function() {
+    this.userListener = UserStore.addListener(this.userChange);
+
+  },
+
+  componentWillUnmount: function() {
+    this.userListener.remove();
+  },
+
+  userChange: function() {
+    this.setState({ user: UserStore.currentUser() });
+  },
+
+  tourButton: function(){
+
+    if (this.state.user.demo && this.props.tourNumber < 3){
+
+      return(
+        <div>
+          If you're not sure where to begin, why not
+          <div className='new-game-form-label new-game-button'
+            onClick={this.props.takeTour}
+            style={{
+              left: 5,
+              bottom: 0,
+              color: '#963019'
+            }}>take the tour?</div>
+          <br /><br/>
+        </div>
+      )
+
+
+
+    } else {
+      return null;
+    }
+
+  },
 
   render: function() {
     return (
@@ -19,7 +63,23 @@ var HomePage = React.createClass({
 
         </div>
         <div className='home-page-description-main'>
-          This is the Sport Scheduler.
+          If you are the manager of a sports league, you can use this site
+          to handle the scheduling process. Just create a league, fill it with teams,
+          give it a field or two to play on, and then schedule games! <br /><br />
+
+        {this.tourButton()}
+
+          The app you are visiting now is just the schedule editor. Account holders are the only ones who
+          who can access this page. The schedules that you make can also be accessed publically in either
+          HTML or JSON formats by visiting www.thesportscheduler.com/schedules/{UserStore.currentUser().username}.
+          If you had a league named 'first_division', you could access that schedule by visiting
+          www.thesportschedules.com/schedules/{UserStore.currentUser().username}?league=first_division. This
+          allows you to easily transfer the schedules to whatever website you already use to deliver schedules to your
+          customers. <br /> <br />
+
+        Thanks for visiting, enjoy the site!
+
+
         </div>
 
       </div>

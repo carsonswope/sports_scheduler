@@ -51,7 +51,6 @@ var Header = React.createClass({
             position: 'relative',
             top: -46,
             left: 0
-
           }}/>
       </div>
     );
