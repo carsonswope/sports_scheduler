@@ -59,13 +59,12 @@ var NavBar = React.createClass({
         }}>
 
         <div className='logo-bar'>
-          <img src='/assets/logo.png'
+          <div className='logo-image'
+            onClick={NavActions.setTab.bind(this, 'HOME')}
             style={{
-              width: '85%',
-              position: 'relative',
-              top: -21,
-              left: 12
-
+              width: 160,
+              top: -30,
+              height: 150
             }}/>
         </div>
 
