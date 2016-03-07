@@ -190,6 +190,9 @@ EventStore.updateEvent = function(event){
 EventStore.deleteEvent = function(event){
 
   delete _events[event.id];
+
+  debugger
+
   EventStore.__emitChange();
 };
 

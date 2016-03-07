@@ -53,8 +53,10 @@ var SchedulesPage = React.createClass({
 
   eventChange: function(){
 
+    var games = EventStore.filteredEvents(this.state.filter);
+
     this.setState({
-      games: EventStore.filteredEvents(this.state.filter),
+      games: games,
       focused: null
     });
 
@@ -74,8 +76,6 @@ var SchedulesPage = React.createClass({
 
     if (NavStore.options('SCHEDULES').adding) {
       height -= 140;
-    } else {
-      height;
     }
 
     var newGame = NavStore.options('SCHEDULES').newGame;

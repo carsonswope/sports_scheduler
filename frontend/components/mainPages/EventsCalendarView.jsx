@@ -41,6 +41,7 @@ var EventsCalendarView = React.createClass({
 
     this.availabilityListener = AvailabilityStore.addListener(this.availabilityChange);
     this.navListener = NavStore.addListener(this.navChange);
+    this.eventListener = EventStore.addListener(this.eventChange);
 
     if (this.leagueSelectedForOverlay()){
 
@@ -61,6 +62,8 @@ var EventsCalendarView = React.createClass({
 
   componentWillUnmount: function(){
     this.availabilityListener.remove();
+    this.navListener.remove();
+    this.eventListener.remove();
   },
 
   componentWillReceiveProps: function(newProps){
@@ -250,38 +253,56 @@ var EventsCalendarView = React.createClass({
     }];
   },
 
+  eventChange: function(){
+
+    var event = EventStore.find(this.state.focusedEvent.id);
+
+    if (!event) {
+
+      this.setState({
+        focusedEvent: {
+          focusType: 'NONE',
+          id: null}
+        }
+      )
+    }
+
+  },
+
   focusedElement: function(){
 
     if (this.state.focusedEvent.focusType !== 'NONE') {
 
       var event = EventStore.find(this.state.focusedEvent.id);
 
-      if (!event) {
+      if (event) {
+        // if (!event) {
+        //
+        //   this.setState({
+        //     focusedEvent: {
+        //       focusType: 'NONE',
+        //       id: null}
+        //     });
+        //   return null;
+        // }
 
-        this.setState({
-          focusedEvent: {
-            focusType: 'NONE',
-            id: null}
-          });
-        return null;
+        var classes = {
+          header: this.state.focusType === 'FOCUS' ?
+            'table-entry-header-focused' : 'table-entry-header',
+          text: 'table-entry-text'
+        };
+
+        return(
+          <ListViewEventShow event={event}
+            classInfo={classes}
+            width={750}
+            toggleFocus={this.toggleFocus}
+            removeFocus={this.removeFocus}
+            focused={this.state.focusedEvent.focusType === 'FOCUS'}
+            columns={this.columns()} />
+
+        );
       }
-
-      var classes = {
-        header: this.state.focusType === 'FOCUS' ?
-          'table-entry-header-focused' : 'table-entry-header',
-        text: 'table-entry-text'
-      };
-
-      return(
-        <ListViewEventShow event={event}
-          classInfo={classes}
-          width={750}
-          toggleFocus={this.toggleFocus}
-          removeFocus={this.removeFocus}
-          focused={this.state.focusedEvent.focusType === 'FOCUS'}
-          columns={this.columns()} />
-
-      );
 
     }
 
