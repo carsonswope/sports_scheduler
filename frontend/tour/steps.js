@@ -31,8 +31,8 @@ var _games = [{
 }];
 
 exports.steps = [{
-  title: 'Welcome to the Sports Scheduler',
-  text: "The Sports Scheduler is your all-in-one tool for scheduling sports leagues",
+  title: 'Welcome to the Sport Scheduler',
+  text: "The Sport Scheduler is your all-in-one tool for scheduling sports leagues",
   selector: '#editor',
   position: 'right',
   preAction: NavActions.setTab.bind(this, 'HOME')

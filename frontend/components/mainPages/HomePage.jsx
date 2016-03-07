@@ -55,7 +55,7 @@ var HomePage = React.createClass({
       <div>
         <div className='schedule-header-main'>
           <div className='schedule-criteria-main'
-            style={{width: 'calc(100% + 20px)'}}>
+            style={{width: 'calc(100% + 5px)'}}>
             <div className='schedule-criteria-title'>
               Welcome
             </div>
@@ -70,12 +70,12 @@ var HomePage = React.createClass({
         {this.tourButton()}
 
           The app you are visiting now is just the schedule editor. Account holders are the only ones who
-          who can access the editor. Your username is '{this.state.user.username}', so your schedules can also be accessed publically in either
-          HTML or JSON by visiting
-          <span className='link'> www.thesportscheduler.com/schedules/{this.state.user.username}?format=json </span><br /><br />
-          If you had a league named 'first_division', you could access that schedule by visiting
-          <span className='link'> www.thesportschedules.com/schedules/{this.state.user.username}?format=json&league=first_division </span><br /><br />
-          This API allows you to easily embed the schedules you make here into the website you already use to deliver schedules to your
+          who can access the editor. Your username is '{this.state.user.username}', so your schedules can also be accessed publically in JSON by visiting
+          <a href={'/schedules/' + this.state.user.username + '?format=json'} target='_blank' className='link'> www.thesportscheduler.com/schedules/{this.state.user.username}?format=json </a><br /><br />
+
+        If you had a league named 'coed d3', you could access that schedule by visiting
+          <a href={'/schedules/' + this.state.user.username + '?format=json&league=coed d3'} target='_blank' className='link'> www.thesportschedules.com/schedules/{this.state.user.username}?format=json&league=coed d3 </a><br /><br />
+          This API works with league, team, and facility criteria, which allows you to easily embed the schedules you make here into the website you already use to deliver schedules to your
           customers. <br /> <br />
 
         Thanks for visiting, enjoy the site!

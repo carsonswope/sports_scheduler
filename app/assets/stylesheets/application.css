@@ -152,4 +152,12 @@ hr {
 .link {
   color: #16174f;
   white-space: nowrap;
+  -webkit-user-select: text;
+ -moz-user-select: text;
+ -ms-user-select: text;
+ text-decoration: none;
+}
+
+.link:hover {
+  font-weight: 700;
 }
