@@ -6,6 +6,8 @@ var AvailabilityStore = require('../../stores/AvailabilityStore');
 var LeagueStore = require('../../stores/LeagueStore');
 var FacilityStore = require('../../stores/FacilityStore');
 var DateHelper = require('../../util/DateHelper');
+var EventHelper = require('../../util/EventHelper');
+
 
 var ListViewEventShow = require('../showPages/ListViewEventShow');
 var EventStore = require('../../stores/EventStore');
@@ -314,15 +316,18 @@ var EventsCalendarView = React.createClass({
 
     this.props.games.forEach(function(game){
 
-      if (!allDates[game.date]){
-        allDates[game.date] = {
-          overlays: [],
-          events: []
+      if (EventHelper.isScheduled(game)) {
+
+        if (!allDates[game.date]){
+          allDates[game.date] = {
+            overlays: [],
+            events: []
+          };
         };
-      };
 
-      allDates[game.date].events.push(game);
+        allDates[game.date].events.push(game);
 
+      }
     }, this);
 
     this.state.overlay.dates.forEach(function(overlay){
