@@ -36,6 +36,8 @@ var HomePage = React.createClass({
             style={{
               left: 5,
               bottom: 0,
+              width: 100,
+              fontSize: 16,
               color: '#963019'
             }}>Take the tour</div>
           <br /><br/>
