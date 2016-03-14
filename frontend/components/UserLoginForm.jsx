@@ -71,7 +71,7 @@ var UserLoginForm = React.createClass({
   },
 
   setFocus: function(ref) {
-    // this.refs[ref].focus();
+    this.refs[ref].focus();
   },
 
   render: function() {
