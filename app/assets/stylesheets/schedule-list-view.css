@@ -52,6 +52,10 @@
     white-space: nowrap;
 }
 
+.table-entry-header:hover {
+    background-color: #E2DDCF;
+}
+
 
 .table-entry-header-focused {
     width: 100%;
@@ -61,6 +65,7 @@
     z-index: 3;
     border-top: 2px solid #16174f;
     margin-top: -2px;
+    background-color: #E2DDCF;
 }
 
 
@@ -73,6 +78,7 @@
     overflow: hidden;
     white-space: nowrap;
     padding-left: 10px;
+    background-color: transparent;
 }
 
 .table-entry-text-flagged {
