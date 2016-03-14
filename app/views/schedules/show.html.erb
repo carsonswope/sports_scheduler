@@ -19,6 +19,7 @@
   </th>
 
   <% @events.each do |event| %>
+    <% next if event.time.length === 0 %>
     <tr>
       <td></td>
       <td><%= event.date %></td>
