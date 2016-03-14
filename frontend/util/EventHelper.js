@@ -17,6 +17,15 @@ exports.isScheduled = function(event) {
 };
 
 exports.eventStartSpaceship = function(event1, event2){
+
+  if (!event1.date.length && !event2.date.length) {
+    return 0;
+  } else if (!event1.date.length) {
+    return -1;
+  } else if (!event2.date.length) {
+    return 1;
+  }
+
   var date1 = new Date(event1.date);
   var date2 = new Date(event2.date);
 
