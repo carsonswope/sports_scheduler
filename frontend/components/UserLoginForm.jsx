@@ -70,28 +70,36 @@ var UserLoginForm = React.createClass({
 
   },
 
+  setFocus: function(ref) {
+    this.refs[ref].focus();
+  },
+
   render: function() {
     return (
       <div>
         <form onSubmit={this.loginClick}>
           <div className='info-stat'
+            onClick={this.setFocus.bind(this, 'usernameField')}
             style={{width: '100%', position: 'relative', right: 0, marginTop: 4}}>
             <div className='info-stat-label'
               style={{width: 80}}>
               username:
             </div>
             <input type='text' className='info-stat-text text-entry-box'
+              ref='usernameField'
               style={{width: 148, position: 'relative', bottom: -5}}
               valueLink={this.linkState('username')} />
           </div>
 
           <div className='info-stat'
+            onClick={this.setFocus.bind(this, 'passwordField')}
             style={{width: '100%', position: 'relative', right: 0}}>
             <div className='info-stat-label'
               style={{width: 80}}>
               password:
             </div>
             <input type='password' className='info-stat-text text-entry-box'
+              ref='passwordField'
               style={{width: 148, position: 'relative', bottom: -5}}
               valueLink={this.linkState('password')} />
           </div>
