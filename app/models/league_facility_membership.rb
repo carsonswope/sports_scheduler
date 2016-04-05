@@ -15,14 +15,12 @@ class LeagueFacilityMembership < ActiveRecord::Base
   belongs_to :league
 
   def self.find_from_league_and_facility(params)
-
     LeagueFacilityMembership.where(
       'league_facility_memberships.league_id = ? AND
        league_facility_memberships.facility_id = ?',
        params[:league_id],
        params[:facility_id]
     )
-
   end
 
 end
