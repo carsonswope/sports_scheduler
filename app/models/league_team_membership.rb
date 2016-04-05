@@ -16,14 +16,13 @@ class LeagueTeamMembership < ActiveRecord::Base
 
   def self.find_from_league_and_team(params)
 
-    LeagueTeamMembership.find_by_sql(<<-SQL)
-      SELECT *
-      FROM league_team_memberships
-      WHERE
-        league_team_memberships.league_id = #{params[:league_id]} AND
-        league_team_memberships.team_id = #{params[:team_id]}
+    LeagueTeamMembership.where(
+      'league_team_memberships.league_id = ? AND
+       league_team_memberships.team_id = ?',
+       params[:league_id],
+       params[:team_id]
+    )
 
-    SQL
   end
 
 end

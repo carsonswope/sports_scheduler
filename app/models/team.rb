@@ -41,13 +41,14 @@ class Team < ActiveRecord::Base
   end
 
   def events
-    Event.find_by_sql(<<-SQL)
-      SELECT *
-      FROM events
-      WHERE
-        events.team_1_id = #{self.id} OR
-        events.team_2_id = #{self.id}
-    SQL
+
+    Event.where(
+      'events.team_1_id = ? OR
+       events.team_2_id = ?',
+       self.id,
+       self.id
+    )
+
   end
 
   def save_league_memberships(league_ids)

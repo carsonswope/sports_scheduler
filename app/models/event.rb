@@ -36,13 +36,14 @@ class Event < ActiveRecord::Base
   end
 
   def participating_teams
-    Team.find_by_sql(<<-SQL)
-      SELECT *
-      FROM teams
-      WHERE
-        teams.id = #{self.team_2_id} OR
-        teams.id = #{self.team_1_id}
-    SQL
+
+    Team.where(
+     'teams.id = ? OR
+      teams.id = ?',
+      self.team_2_id,
+      self.team_1_id
+    )
+
   end
 
   def time_end
