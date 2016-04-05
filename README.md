@@ -42,7 +42,7 @@ The Sport Scheduler is still in the MVP stage, and is being constantly upgraded 
 
 Aside from these fixes, one big new feature coming soon is an auto-schedule feature, which can either make suggestions for new games of unscheduled leagues in a one-by-one or day-by-day format, or simply automatically generate the schedule for a given league or leagues given a set of game dates.
 
-Next, you can expect a 'Webpage' tab to appear, where users will be able to design a custom website around their schedules that their customers will be able to visit, complete with announcements, contact info, and everything else that the manager of a sports league would want on their website.
+Next, you can expect a 'Webpage' tab to appear, where users will be able to design a custom website around their schedules that their customers will be able to visit, complete with announcements, contact info, and everything else that the manager of a sports league might want on their website.
 
 ## Technology
 
