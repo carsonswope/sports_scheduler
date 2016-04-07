@@ -16,10 +16,8 @@ class LeagueFacilityMembership < ActiveRecord::Base
 
   def self.find_from_league_and_facility(params)
     LeagueFacilityMembership.where(
-      'league_facility_memberships.league_id = ? AND
-       league_facility_memberships.facility_id = ?',
-       params[:league_id],
-       params[:facility_id]
+      league_id: params[:league_id],
+      facility_id: params[:facility_id]
     )
   end
 
